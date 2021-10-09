@@ -720,7 +720,6 @@ textarea::-webkit-scrollbar {
   background: #8B0000FF; 
 }
 
-
 input[id$="Score"] {
     width: 25px !important;
 }
@@ -782,82 +781,25 @@ div .col-xs-12{
 
 }
 
-.slider {
-
-  width: 100%;
-    height: 12px;
-  border-radius: 10px;
-  background: #d3d3d3;
-
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-
-    
-}
-
-input[type='range'].hpSlide::-webkit-slider-runnable-track{
-    background-color: #8B0000;
-}
-
-
-input[type='range'].strainSlide::-webkit-slider-runnable-track{
-    padding:0;
-    border:0;
-
-    background-color: green;
-}
-
-.slider:hover {
-  opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-  border-radius: 5px;
-  appearance: none;
-  width: 25px;
-
-
-  background: url('https://image.flaticon.com/icons/png/512/61/61410.png');
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 23px;
-
-  border:none;
-  background: url('https://image.flaticon.com/icons/png/512/61/61410.png');
-  cursor: pointer;
-
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    input[type='range'] {
-      overflow: hidden;
-      -webkit-appearance: none;
-    }
-    
-    input[type='range']::-webkit-slider-runnable-track {
-        height: 100%;
-        width: 110%;
-        padding: 0px;
-        margin:0px;
-    }
-    
-    input[type='range']::-webkit-slider-thumb {
-      width: 10px;
-        height: 100%;
-
-
-      background:url('https://image.flaticon.com/icons/png/512/61/61410.png');
-
-      
-    }
-    
-    input.hpSlide[type='range']::-webkit-slider-thumb{
+ input.hpSlide[type='range']::-webkit-slider-thumb{
         box-shadow: -2005px 0 0 2000px green;
     }
     
    input.strainSlide[type='range']::-webkit-slider-thumb{
         box-shadow: -2005px 0 0 2000px purple;
     }
+input[type="range"] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+input[type="range"]::-webkit-slider-thumb { appearance: none; width: 12px; height: 12px; background: black; border-radius: 6px;}
+input[type="range"]::-webkit-slider-runnable-track { background: red; }
+input[type="range"]::-moz-range-track { background: red; border-radius: 10px;}
+input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: black; border-radius: 5px; }
+input[type='range'].strainSlide::-webkit-slider-runnable-track{
+    background-color: green;
 }
