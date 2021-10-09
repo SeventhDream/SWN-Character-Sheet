@@ -4240,7 +4240,6 @@ function activateChildren(){
 
 // Initialise page on ready.
 $(document).ready(function () {
-    console.log("PING");
     $('.ibtnDel').click(function(e){e.preventDefault();}).click();
     $('.tablinks').click(function(e){e.preventDefault();}).click();
     
