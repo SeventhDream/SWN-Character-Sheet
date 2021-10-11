@@ -203,6 +203,7 @@ function addItemRow(){
 }
 function resizeTextarea(){
     $('textarea').each(function(){
+        $(this).height(0);
         $(this).height($(this)[0].scrollHeight );
     });
 }
@@ -259,6 +260,7 @@ function removeItemRow(deleteButtonID,id){
     }
     rowNum--;
     }
+    resizeTextarea();
 }
 
 // Reset item quantity to '1' when a new item is selected in Equipment List.
@@ -407,6 +409,7 @@ function removeWeaponRow(deleteButtonID,id){
 
     weaponRowNum--;
     }
+    resizeTextarea();
 }
 
 // Reset weapon quantity to '1' when a new weapon is selected in weapon List.
@@ -487,6 +490,7 @@ function removeMeleeRow(deleteButtonID,id){
     calculateEncumberance();
     meleeRowNum--;
     }
+    resizeTextarea();
 }
 
 // Reset melee quantity to '1' when a new melee is selected in melee List.
@@ -569,6 +573,7 @@ function removeArmourRow(deleteButtonID,id){
     calculateEncumberance();
     armourRowNum--;
     }
+    resizeTextarea();
 }
 
 // Reset armour quantity to '1' when a new armour is selected in armour List.
@@ -698,6 +703,7 @@ function removeDroneRow(deleteButtonID,id){
     calculateEncumberance();
     droneRowNum--;
     }
+    resizeTextarea();
 }
 
 // Reset drone quantity to '1' when a new drone is selected in drone List.
@@ -748,6 +754,7 @@ function removePsiRow(deleteButtonID,id){
 
     rowNumPsi--;
     }
+    resizeTextarea();
 }
 
 
@@ -828,6 +835,7 @@ function removeRoutineRow(deleteButtonID,id){
 
     rowNumRoutine--;
     }
+    resizeTextarea();
 }
 
 // List of all psychic techniques

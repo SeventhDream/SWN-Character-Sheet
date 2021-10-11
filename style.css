@@ -127,11 +127,8 @@ datalist {
 }
 
 table {
-    background-image: url("https://i.ibb.co/4VJG4Lv/Abstract-geometric-black-background-with-triangles-3-D-rendering-3-D-illustration.jpg");
-    background-size: 480px 267px;
-    background-color: lightgrey;
-    
-
+    background-image: url("https://i.ibb.co/zF7xBtL/Black-rubber-texture-background-with-seamless-pattern.jpg");
+    background-color: black;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -139,7 +136,6 @@ table {
     min-width: fit-content;
     border: 2px solid #8B0000;
     margin: 0px !important;
-
 
 }
 
@@ -383,10 +379,9 @@ button:focus {
     outline: none;
 }
 body {
-    background-image: url("https://i.postimg.cc/YqJCLLhW/imageedit-2-9495968984.png");
+    background-image: url("https://i.ibb.co/4VJG4Lv/Abstract-geometric-black-background-with-triangles-3-D-rendering-3-D-illustration.jpg");
       font-family: 'Noto Sans', 'Helvetica';
-    color: #FF00FF;
-
+background-size: 2880px 1602px;
 }
 
 /*https://image.freepik.com/free-vector/circuit-board-vector-seamless-texture-sci-fi-electronic-background_53562-4044.jpg*/
