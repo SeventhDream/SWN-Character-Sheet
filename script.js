@@ -4131,7 +4131,9 @@ function load_character(e) {
             if ($(element).is('textarea')){
 
                  $(element).height(0);
-        $(element).height(element.scrollHeight);
+
+        $(element).attr('style', 'height: auto !important');
+
             }
             $(element.id).change();
             $(element.id).trigger("change");
@@ -4240,10 +4242,10 @@ function activateChildren(){
 
 // Initialise page on ready.
 $(document).ready(function () {
-    console.log("PING");
+
     $('.ibtnDel').click(function(e){e.preventDefault();}).click();
     $('.tablinks').click(function(e){e.preventDefault();}).click();
-    
+    hideTabs();
     typeWriter();
     var delayInMilliseconds = 4500; //1 second
  setTimeout(function() {
@@ -4498,26 +4500,33 @@ var description = this.getAttribute("data-desc");
      }, delayInMilliseconds);
 });
 
-function openCity(evt, cityName) {
-    console.log(evt.currentTarget);
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
+function hideTabs(){
+    var i;
+    // Get all elements with class="tabcontent" and hide them
+  var tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
 
   // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
+  var tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
+}
+
+function openCity(evt, cityName) {
+  // Declare all variables
+
+  hideTabs();
 
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
+    
+    $('textarea').each(function(){
+        $(this).height($(this)[0].scrollHeight );
+    });
 }
 
 // Prevent automatic form submission
@@ -4552,7 +4561,6 @@ hpSlider.oninput = function() {
   hpDisp.innerHTML = this.value;
     var deathBox = $("#deathSaveBox");
     var bleedOut = document.getElementById("deathBox1");
-    console.log(deathBox);
     if (this.value == 0){
         deathBox.show();
     }
