@@ -181,7 +181,7 @@ function addItemRow(){
         cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
         cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance();" value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
         cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance(); storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="button" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel button" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#equipmentTable").append(newRow);
          selectOptionTable(equipmentList,"#itemList" + rowNum);
@@ -190,6 +190,7 @@ function addItemRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
+    resizeTextarea();
     $("#removeItem"+rowNum).on("click", function(e) {
      e.stopImmediatePropagation();
 });
@@ -200,7 +201,11 @@ function addItemRow(){
 
     rowNum++;
 }
-
+function resizeTextarea(){
+    $('textarea').each(function(){
+        $(this).height($(this)[0].scrollHeight );
+    });
+}
 // Shift rows up in queue from deleted row by overwriting each consecutive row.
 function overwriteRows(deleteRowIndex,id,targetRow,targetRemove,targetStorage,targetRowCount){
 
@@ -346,15 +351,11 @@ function populateItem(id){
 // Change
 function storageColour(idNum){
 
-var color = $("option:selected",idNum).text().trim().toLowerCase() == "readied" ? "#00660088" : $("option:selected",idNum).text().trim().toLowerCase() == "backpack" ? "#8B000088" :
-$("option:selected",idNum).text().trim().toLowerCase() == "grafted" ? "#0437F288" :
-$("option:selected",idNum).text().trim().toLowerCase() == "storage" ? "#60606088" : "black";
+var color = $("option:selected",idNum).text().trim().toLowerCase() == "readied" ? "#00660055" : $("option:selected",idNum).text().trim().toLowerCase() == "backpack" ? "#8B000055" :
+$("option:selected",idNum).text().trim().toLowerCase() == "grafted" ? "#0437F255" :
+$("option:selected",idNum).text().trim().toLowerCase() == "storage" ? "#60606055" : "transparent";
 $(idNum).closest("tr").css("background-color",color,0.5);
     
-    $('textarea').on('keyup keypress click', function() {
-        $(this).height(0);
-        $(this).height(this.scrollHeight);
-    });
 }
 
 // ================================================================================
@@ -377,7 +378,7 @@ function addWeaponRow(){
         cols += '<td><input type="string"  id="weaponPrice' + weaponRowNum + '"/></td>';
         cols += '<td><input type="number" id="weaponWeight' + weaponRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="weaponStorage' + weaponRowNum + '" onchange="calculateEncumberance(); storageColour(weaponStorage'+weaponRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="button" id="removeWeapon'+weaponRowNum+'" class="ibtnDel button" data-rownum="'+weaponRowNum+'" onclick="removeWeaponRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeWeapon'+weaponRowNum+'" class="ibtnDel" data-rownum="'+weaponRowNum+'" onclick="removeWeaponRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#weaponTable").append(newRow);
     
@@ -393,6 +394,8 @@ function addWeaponRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
+    resizeTextarea();
+    
 }
 
 function removeWeaponRow(deleteButtonID,id){
@@ -457,7 +460,7 @@ function addMeleeRow(){
         cols += '<td><input type="string"  id="meleePrice' + meleeRowNum + '"/></td>';
         cols += '<td><input type="number" id="meleeWeight' + meleeRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="meleeStorage' + meleeRowNum + '" onchange="calculateEncumberance(); storageColour(meleeStorage'+meleeRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="button" id="removeMelee'+meleeRowNum+'" class="ibtnDel button" data-rownum="'+meleeRowNum+'" onclick="removeMeleeRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeMelee'+meleeRowNum+'" class="ibtnDel" data-rownum="'+meleeRowNum+'" onclick="removeMeleeRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#meleeTable").append(newRow);
     
@@ -473,6 +476,7 @@ function addMeleeRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
+    resizeTextarea();
 }
 
 function removeMeleeRow(deleteButtonID,id){
@@ -538,7 +542,7 @@ function addArmourRow(){
         cols += '<td><input type="string"  id="armourPrice' + armourRowNum + '"/></td>';
         cols += '<td><input type="number" id="armourWeight' + armourRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="armourStorage' + armourRowNum + '" onchange="calculateEncumberance(); updateAC(); storageColour(armourStorage'+armourRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="button" id="removeArmour'+armourRowNum+'" class="ibtnDel button" data-rownum="'+armourRowNum+'" onclick="removeArmourRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeArmour'+armourRowNum+'" class="ibtnDel" data-rownum="'+armourRowNum+'" onclick="removeArmourRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#armourTable").append(newRow);
     
@@ -554,6 +558,7 @@ function addArmourRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
+    resizeTextarea();
 }
 
 function removeArmourRow(deleteButtonID,id){
@@ -666,7 +671,7 @@ function addDroneRow(){
     
         
         cols += '<td><select id="droneStorage' + droneRowNum + '" onchange="calculateEncumberance(); storageColour(droneStorage'+droneRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
-        cols += '<td><input type="button" id="removeDrone'+droneRowNum+'" class="ibtnDel button" data-rownum="'+droneRowNum+'" onclick="removeDroneRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeDrone'+droneRowNum+'" class="ibtnDel" data-rownum="'+droneRowNum+'" onclick="removeDroneRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#droneTable").append(newRow);
     
@@ -682,6 +687,7 @@ function addDroneRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
+    resizeTextarea();
 }
 
 function removeDroneRow(deleteButtonID,id){
@@ -794,7 +800,7 @@ function addPsiRow(){
         cols += '<td><input type="number" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiCommit' + rowNumPsi + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
         
-        cols += '<td><input type="button" id="removePsi'+rowNumPsi+'" class="ibtnDel button" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#psiTable").append(newRow);
         
@@ -988,6 +994,7 @@ function addShellRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
+    resizeTextarea();
 }
 
 function removeShellRow(deleteButtonID,id){
@@ -4247,9 +4254,9 @@ $(document).ready(function () {
     $('.tablinks').click(function(e){e.preventDefault();}).click();
     hideTabs();
     typeWriter();
-    var delayInMilliseconds = 4500; //1 second
+    var delayInMilliseconds = 4500; //4.5 seconds
  setTimeout(function() {
-  //your code to be executed after 1 second
+  //your code to be executed after delay second
      $('#loading').hide();
      
     $(".message").text("WECOME BACK USER#404\n---\nARE YOU READY TO BEGIN?");
