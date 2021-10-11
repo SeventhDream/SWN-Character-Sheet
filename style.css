@@ -40,7 +40,7 @@ body {
     height: 1.3em;
     background-color: grey;
     border-radius: 50%;
-    vertical-align: middle;
+    vertical-align: middle !important;
     border: 2px solid black;
     appearance: none;
     -webkit-appearance: none;
