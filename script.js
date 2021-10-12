@@ -4275,7 +4275,7 @@ $(document).ready(function () {
 document.getElementById("defaultOpen").click();
     
 updateBaseSkills();
-
+charImage("https://i.ibb.co/jHgWhVR/Silhouette-woman-portrait-concept-of-unknown-anonymous-unnamed-etc.jpg");
 $('textarea').on('keyup keypress click', function() {
         $(this).height(0);
         $(this).height(this.scrollHeight);
