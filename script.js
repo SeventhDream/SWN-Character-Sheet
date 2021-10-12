@@ -200,7 +200,6 @@ function addItemRow(){
         $("[name='counterItem']").val(rowNum);
     
     rowNum++;
-    console.log(rowNum + " vs. " + $("[name='counterItem']").val());
 }
 
 function resizeTextarea(){
@@ -263,7 +262,6 @@ function removeItemRow(deleteButtonID,id){
     rowNum--;
     }
     resizeTextarea();
-    console.log(rowNum + " vs. " + $("[name='counterItem']").val());
 }
 
 // Reset item quantity to '1' when a new item is selected in Equipment List.
