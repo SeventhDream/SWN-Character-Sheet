@@ -240,7 +240,7 @@ select {
     font-weight: bold !important;
 }
 
-h2 { 
+h2,h4 { 
     margin-left: auto;
     margin-right: auto;
 }
