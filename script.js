@@ -186,7 +186,7 @@ function addItemRow(){
         $("#equipmentTable").append(newRow);
          selectOptionTable(equipmentList,"#itemList" + rowNum);
         activateRow();
-    $('textarea').on('keyup keypress click', function() {
+    $('textarea').on('keyup keypress click', function() { 
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
@@ -194,13 +194,15 @@ function addItemRow(){
     $("#removeItem"+rowNum).on("click", function(e) {
      e.stopImmediatePropagation();
 });
+    
 
         document.getElementById("equipmentTable").setAttribute("data-counter",rowNum);
         $("[name='counterItem']").val(rowNum);
-        
-
+    
     rowNum++;
+    console.log(rowNum + " vs. " + $("[name='counterItem']").val());
 }
+
 function resizeTextarea(){
     $('textarea').each(function(){
         $(this).height(0);
@@ -253,7 +255,7 @@ function removeItemRow(deleteButtonID,id){
        
         
     document.getElementById("itemRow"+parseInt(rowNum-1)).remove();
-    $("[name='counterItem']").val(parseInt(rowNum-1));
+    $("[name='counterItem']").val(parseInt(rowNum-2));
     calculateEncumberance();
         if (rowNum > 2){
 
@@ -261,6 +263,7 @@ function removeItemRow(deleteButtonID,id){
     rowNum--;
     }
     resizeTextarea();
+    console.log(rowNum + " vs. " + $("[name='counterItem']").val());
 }
 
 // Reset item quantity to '1' when a new item is selected in Equipment List.
@@ -404,7 +407,7 @@ function removeWeaponRow(deleteButtonID,id){
     if(weaponRowNum > 1){
         overwriteRows(deleteButtonID,id,"weaponRow","removeWeapon","#weaponStorage",weaponRowNum);
     document.getElementById("weaponRow"+parseInt(weaponRowNum-1)).remove();
-    $("[name='counterWeapon']").val(parseInt(weaponRowNum-1));
+    $("[name='counterWeapon']").val(parseInt(weaponRowNum-2));
     calculateEncumberance();
 
     weaponRowNum--;
@@ -486,7 +489,7 @@ function removeMeleeRow(deleteButtonID,id){
     if(meleeRowNum > 1){
         overwriteRows(deleteButtonID,id,"meleeRow","removeMelee","#meleeStorage",meleeRowNum);
     document.getElementById("meleeRow"+parseInt(meleeRowNum-1)).remove();
-    $("[name='counterMelee']").val(parseInt(meleeRowNum-1));
+    $("[name='counterMelee']").val(parseInt(meleeRowNum-2));
     calculateEncumberance();
     meleeRowNum--;
     }
@@ -569,7 +572,7 @@ function removeArmourRow(deleteButtonID,id){
     if(armourRowNum > 1){
          overwriteRows(deleteButtonID,id,"armourRow","removeArmour","#armourStorage",armourRowNum);
     document.getElementById("armourRow"+parseInt(armourRowNum-1)).remove();
-    $("[name='counterArmour']").val(parseInt(armourRowNum-1));
+    $("[name='counterArmour']").val(parseInt(armourRowNum-2));
     calculateEncumberance();
     armourRowNum--;
     }
@@ -699,7 +702,7 @@ function removeDroneRow(deleteButtonID,id){
     if(droneRowNum > 1){
         overwriteRows(deleteButtonID,id,"droneRow","removeDrone","#droneStorage",droneRowNum);
     document.getElementById("droneRow"+parseInt(droneRowNum-1)).remove();
-    $("[name='counterDrone']").val(parseInt(droneRowNum-1));
+    $("[name='counterDrone']").val(parseInt(droneRowNum-2));
     calculateEncumberance();
     droneRowNum--;
     }
@@ -749,7 +752,7 @@ function removePsiRow(deleteButtonID,id){
     if(rowNumPsi > 1){
         overwriteRows(deleteButtonID,id,"psiRow","removePsi","#psiStorage",rowNumPsi);
     document.getElementById("psiRow"+parseInt(rowNumPsi-1)).remove();
-    $("[name='counterPsi']").val(parseInt(rowNumPsi-1));
+    $("[name='counterPsi']").val(parseInt(rowNumPsi-2));
     calculateEncumberance();
 
     rowNumPsi--;
@@ -830,7 +833,7 @@ function removeRoutineRow(deleteButtonID,id){
     if(rowNumRoutine > 1){
         overwriteRows(deleteButtonID,id,"routineRow","removeRoutine","",rowNumRoutine);
     document.getElementById("routineRow"+parseInt(rowNumRoutine-1)).remove();
-    $("[name='counterRoutine']").val(parseInt(rowNumRoutine-1));
+    $("[name='counterRoutine']").val(parseInt(rowNumRoutine-2));
     calculateEncumberance();
 
     rowNumRoutine--;
@@ -1009,7 +1012,7 @@ function removeShellRow(deleteButtonID,id){
     if(shellRowNum > 1){
         overwriteRows(deleteButtonID,id,"shellRow","removeShell","#shellStorage",shellRowNum);
     document.getElementById("shellRow"+parseInt(shellRowNum-1)).remove();
-    $("[name='counterShell']").val(parseInt(shellRowNum-1));
+    $("[name='counterShell']").val(parseInt(shellRowNum-2));
     calculateEncumberance();
 
     shellRowNum--;
@@ -4275,7 +4278,7 @@ $(document).ready(function () {
 document.getElementById("defaultOpen").click();
     
 updateBaseSkills();
-charImage("https://cdn.pixabay.com/photo/2021/04/27/17/33/woman-6212036__340.jpg");
+charImage("https://www.womanthology.co.uk/wp-content/uploads/2017/06/facescan.gif");
 $('textarea').on('keyup keypress click', function() {
         $(this).height(0);
         $(this).height(this.scrollHeight);
