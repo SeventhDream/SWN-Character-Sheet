@@ -158,6 +158,7 @@ var armourRowNum = 1; // Armour table row ID incrementer.
 var droneRowNum = 1; // Drone table row ID incrementer.
 var rowNumPsi = 1; // Psi Technique table row ID incrementer.
 var rowNumRoutine = 1; // Peripheral routine table row ID incrementer.
+var shellRowNum = 1; // Artificial Shell table row ID incrementer.
 
 // Shift rows up in queue from deleted row by overwriting each consecutive row.
 function overwriteRows(deleteRowIndex,id,targetRow,targetRemove,targetStorage,targetRowCount){
@@ -914,7 +915,7 @@ function addRoutineRow(){
         cols += '<td><input type="number" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineCommit' + rowNumRoutine + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineAction' + rowNumRoutine + '" readonly/></td>';
         
-        cols += '<td><input type="button" id="removeRoutine'+rowNumRoutine+'" class="ibtnDel button" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#routineTable").append(newRow);
         
@@ -962,7 +963,7 @@ function updateCoreRoutines(){
 //#endregion
 
 //#region 2.7 Shell Inventory Automation
-var shellRowNum = 1;
+
 
 // Add one row to Shell inventory table.
 function addShellRow(){
@@ -980,7 +981,7 @@ function addShellRow(){
     
         cols += '<td><input type="string"  id="shellPrice' + shellRowNum + '"/></td>';
         cols += '<td><select id="shellStorage' + shellRowNum + '" onchange="updateAC(); updateShellStats(); storageColour(shellStorage'+shellRowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
-        cols += '<td><input type="button" id="removeShell'+shellRowNum+'" class="ibtnDel button" data-rownum="'+shellRowNum+'" onclick="removeShellRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeShell'+shellRowNum+'" class="ibtnDel" data-rownum="'+shellRowNum+'" onclick="removeShellRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#shellTable").append(newRow);
     
@@ -4232,6 +4233,14 @@ document.getElementById('buttonload').addEventListener('change', load_character)
 
 //#region 15. Slider Automation
 
+//Slider Automation
+var hpSlider = document.getElementById("hpRange");
+var hpDisp = document.getElementById("currentHP");
+var strainSlider = document.getElementById("strainRange");
+var strainDisp = document.getElementById("currentStrain");
+hpDisp.innerHTML = hpSlider.value;
+strainDisp.innerHTML = strainSlider.value;
+
 // Update slider maximum value to match input max value.
 function update(value,target,disp){
     var targetSlider = document.getElementById(target);
@@ -4262,13 +4271,7 @@ strainSlider.oninput = function() {
   strainDisp.innerHTML = this.value;
 };
 
-//Slider Automation
-var hpSlider = document.getElementById("hpRange");
-var hpDisp = document.getElementById("currentHP");
-var strainSlider = document.getElementById("strainRange");
-var strainDisp = document.getElementById("currentStrain");
-hpDisp.innerHTML = hpSlider.value;
-strainDisp.innerHTML = strainSlider.value;
+
 
 // Update max strain value to match Con Score.
 function updateStrainMax(val){
