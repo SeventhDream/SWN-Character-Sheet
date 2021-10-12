@@ -1,6 +1,5 @@
-// ================================================================================
-// 1. Attribute Automation
-// ================================================================================
+
+//#region 1. Attribute Automation
 
 // Convert attribute scores into modifiers.
 function updateModifiers(attributeID) {
@@ -30,7 +29,7 @@ function updateModifiers(attributeID) {
     updateAC();
 }
 
-// Only allow one growth checkbox option to be ticked per row.
+// Only allow one growth checkbox option to be ticked per row  (Character Creation).
 function checkGrowthBonus(checkID, bonusVal) {
     if (bonusVal === 1) {
         document.getElementById("growthPlusTwo" + checkID).checked = false;
@@ -145,140 +144,64 @@ function updateBaseStats() {
     updateModifiers(attrList[i]); // Call update to associated modifier.
 }
 }
+//#endregion
 
 // ================================================================================
-// 2.1 Inventory Automation
-// ================================================================================
 
-// Link function to info button located inside newly created table row.
-function activateRow(){
-    // Assign function to element with specified class.
-    $(".interactInfo").click(function () {
-var description = this.getAttribute("data-desc");
-        if (description !== ""){
-                $(".message").text(description);
-                $(".messageHeader").text(this.getAttribute("data-name") + ":");
-                $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                $(".customAlert").css("display", "inline");
-        }
-    });
-    
-   
+//#region 2. Inventory & Ability Automation
 
-}
 // Global variables
-var rowNum = 1; // #No. of item table rows.
+var rowNum = 1; // Item table row ID incrementer.
+var weaponRowNum = 1; // Weapon table row ID incrementer.
+var meleeRowNum = 1; // Melee table row ID incrementer.
+var armourRowNum = 1; // Armour table row ID incrementer.
+var droneRowNum = 1; // Drone table row ID incrementer.
+var rowNumPsi = 1; // Psi Technique table row ID incrementer.
+var rowNumRoutine = 1; // Peripheral routine table row ID incrementer.
 
-// Generate a new item table row.
-function addItemRow(){
-     var newRow = $("<tr id='itemRow"+rowNum+"' value ='"+rowNum+"'>");
-    var newChild =  $("<tr id='itemChildRow"+rowNum+"'>");
-        var cols = "";
-
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" /></td>';
-        cols += '<td><input value="-" id="minusOne'+rowNum+'" readonly class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
-        cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
-        cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance();" value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
-        cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance(); storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
-        newRow.append(cols);
-        $("#equipmentTable").append(newRow);
-         selectOptionTable(equipmentList,"#itemList" + rowNum);
-        activateRow();
-    $('textarea').on('keyup keypress click', function() { 
-        $(this).height(0);
-        $(this).height(this.scrollHeight);
-    });
-    resizeTextarea();
-    $("#removeItem"+rowNum).on("click", function(e) {
-     e.stopImmediatePropagation();
-});
-    
-
-        document.getElementById("equipmentTable").setAttribute("data-counter",rowNum);
-        $("[name='counterItem']").val(rowNum);
-    
-    rowNum++;
-}
-
-function resizeTextarea(){
-    $('textarea').each(function(){
-        $(this).height(0);
-        $(this).height($(this)[0].scrollHeight );
-    });
-}
 // Shift rows up in queue from deleted row by overwriting each consecutive row.
 function overwriteRows(deleteRowIndex,id,targetRow,targetRemove,targetStorage,targetRowCount){
 
-     //Cycle through all rows starting from mark (exceptt last row).
-        for(var rowIndex = parseInt(deleteRowIndex); rowIndex < targetRowCount-1; rowIndex++){
-            var oldRow = document.getElementById(targetRow+rowIndex); // Get table row element to overwrite.
-            var oldData = oldRow.childNodes; // Get all data elements of old row.
-            var nextRow = document.getElementById(targetRow+parseInt(rowIndex+1));
-            var nextData = nextRow.childNodes;
-            oldData[0].childNodes[0].setAttribute('data-name',nextData[0].childNodes[0].getAttribute('data-name'));
-            oldData[0].childNodes[0].setAttribute('data-info',nextData[0].childNodes[0].getAttribute('data-info'));
-            // Cycle through each <td> element.
-            for(var i = 0; i < oldData.length; i++){
-                var oldElements = oldData[i].childNodes; // Get all child elements of prev <td> element.
-                var nextElements = nextData[i].childNodes; // Get all child elements of next <td> element.
-                // Cycle through each <td> child element.
-                for(var j = 0; j < oldElements.length; j++){
-                    // Check if value is defined
-                    
-                    if (oldElements[j].type == 'checkbox') {
+    //Cycle through all rows starting from mark (exceptt last row).
+       for(var rowIndex = parseInt(deleteRowIndex); rowIndex < targetRowCount-1; rowIndex++){
+           var oldRow = document.getElementById(targetRow+rowIndex); // Get table row element to overwrite.
+           var oldData = oldRow.childNodes; // Get all data elements of old row.
+           var nextRow = document.getElementById(targetRow+parseInt(rowIndex+1));
+           var nextData = nextRow.childNodes;
+           oldData[0].childNodes[0].setAttribute('data-name',nextData[0].childNodes[0].getAttribute('data-name'));
+           oldData[0].childNodes[0].setAttribute('data-info',nextData[0].childNodes[0].getAttribute('data-info'));
+           // Cycle through each <td> element.
+           for(var i = 0; i < oldData.length; i++){
+               var oldElements = oldData[i].childNodes; // Get all child elements of prev <td> element.
+               var nextElements = nextData[i].childNodes; // Get all child elements of next <td> element.
+               // Cycle through each <td> child element.
+               for(var j = 0; j < oldElements.length; j++){
+                   // Check if value is defined
+                   
+                   if (oldElements[j].type == 'checkbox') {
+                      
+                       if ($("#"+nextElements[j].id).prop('checked')){
+                       oldElements[j].checked = true;
+                       } else {
+                           oldElements[j].checked = false;
+                       }
+                   } else if ((oldElements[j].value != undefined) && (oldElements[j].id != targetRemove+deleteRowIndex)){
+                                     oldElements[j].innerHTML = nextElements[j].innerHTML;
+                        oldElements[j].value = nextElements[j].value;
+         
                        
-                        if ($("#"+nextElements[j].id).prop('checked')){
-                        oldElements[j].checked = true;
-                        } else {
-                            oldElements[j].checked = false;
-                        }
-                    } else if ((oldElements[j].value != undefined) && (oldElements[j].id != targetRemove+deleteRowIndex)){
-                                      oldElements[j].innerHTML = nextElements[j].innerHTML;
-                         oldElements[j].value = nextElements[j].value;
-          
-                        
-                    }
-                }
-            }
-            storageColour(targetStorage+rowIndex);
-        }
+                   }
+               }
+           }
+           storageColour(targetStorage+rowIndex);
+       }
 }
 
-// Remove one item table row.
-function removeItemRow(deleteButtonID,id){
-    if(rowNum > 1){
-        var deleteRowIndex = deleteButtonID; // get row number marked for deletion/overwrite.
-        overwriteRows(deleteRowIndex,id,"itemRow","removeItem","#itemStorage",rowNum);
-       
-        
-    document.getElementById("itemRow"+parseInt(rowNum-1)).remove();
-    $("[name='counterItem']").val(parseInt(rowNum-2));
-    calculateEncumberance();
-        if (rowNum > 2){
-
-    }
-    rowNum--;
-    }
-    resizeTextarea();
-}
-
-// Reset item quantity to '1' when a new item is selected in Equipment List.
-function addOneItem(id){
-    document.getElementById("itemQuantity" + id).value = 1;
-}
-
-// Unkown Purpose?
-function clearSelection(){
- if (window.getSelection) {window.getSelection().removeAllRanges();}
- else if (document.selection) {document.selection.empty();}
-}
-
-// Update readied and stowed item limit
+// Update readied and stowed and grafted item limit
 function updateMaxCarry(strVal){
     document.getElementById("maxReady").value = parseInt(Math.floor(strVal/2));
-    document.getElementById("maxGrafted").value = parseInt(Math.floor(strVal/2));
+    var graftLimit = document.getElementById("maxGrafted");
+    graftLimit.value = parseInt(Math.floor(strVal/2));
     document.getElementById("maxStowed").value = parseInt(strVal);
 }
 
@@ -329,6 +252,92 @@ function calculateEncumberance(){
     document.getElementById("currentGrafted").value = weight[2];
 }
 
+// Change colour of item row based on slected storage option.
+function storageColour(idNum){
+
+    var color = $("option:selected",idNum).text().trim().toLowerCase() == "readied" ? "#00660055" : $("option:selected",idNum).text().trim().toLowerCase() == "backpack" ? "#8B000055" :
+    $("option:selected",idNum).text().trim().toLowerCase() == "grafted" ? "#0437F255" :
+    $("option:selected",idNum).text().trim().toLowerCase() == "storage" ? "#60606055" : "transparent";
+    $(idNum).closest("tr").css("background-color",color,0.5);
+        
+    }
+    
+    // Link a function to info button located inside newly created table row to display item description on click.
+    function activateRow(){
+        // Assign function to element with specified class.
+        $(".interactInfo").click(function () {
+    var description = this.getAttribute("data-desc");
+            if (description !== ""){
+                    $(".message").text(description);
+                    $(".messageHeader").text(this.getAttribute("data-name") + ":");
+                    $(".customAlert").css("animation", "fadeIn 0.3s linear");
+                    $(".customAlert").css("display", "inline");
+            }
+        });
+        
+       
+    
+    }
+
+//#region 2.1 Item Inventory Automation
+
+
+// Generate a new item table row.
+function addItemRow(){
+     var newRow = $("<tr id='itemRow"+rowNum+"' value ='"+rowNum+"'>");
+    var newChild =  $("<tr id='itemChildRow"+rowNum+"'>");
+        var cols = "";
+
+        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" /></td>';
+        cols += '<td><input value="-" id="minusOne'+rowNum+'" readonly class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
+        cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
+        cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance();" value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
+        cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance(); storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
+        newRow.append(cols);
+        $("#equipmentTable").append(newRow);
+         selectOptionTable(equipmentList,"#itemList" + rowNum);
+        activateRow();
+    $('textarea').on('keyup keypress click', function() { 
+        $(this).height(0);
+        $(this).height(this.scrollHeight);
+    });
+    resizeTextarea();
+    $("#removeItem"+rowNum).on("click", function(e) {
+     e.stopImmediatePropagation();
+});
+    
+
+        document.getElementById("equipmentTable").setAttribute("data-counter",rowNum);
+        $("[name='counterItem']").val(rowNum);
+    
+    rowNum++;
+}
+
+// Remove one item table row.
+function removeItemRow(deleteButtonID,id){
+    if(rowNum > 1){
+        var deleteRowIndex = deleteButtonID; // get row number marked for deletion/overwrite.
+        overwriteRows(deleteRowIndex,id,"itemRow","removeItem","#itemStorage",rowNum);
+       
+        
+    document.getElementById("itemRow"+parseInt(rowNum-1)).remove();
+    $("[name='counterItem']").val(parseInt(rowNum-2));
+    calculateEncumberance();
+        if (rowNum > 2){
+
+    }
+    rowNum--;
+    }
+    resizeTextarea();
+}
+
+// Reset item quantity to '1' when a new item is selected in Equipment List.
+function addOneItem(id){
+    document.getElementById("itemQuantity" + id).value = 1;
+}
+
 // Populate Equipment List item value fields and description.
 function populateItem(id){
     var opGroup = Object.getOwnPropertyNames(equipmentList[0]);
@@ -350,23 +359,12 @@ function populateItem(id){
         }
     }
 }
+//#endregion
 
-// Change
-function storageColour(idNum){
+//#region 2.2 Weapon Automation
 
-var color = $("option:selected",idNum).text().trim().toLowerCase() == "readied" ? "#00660055" : $("option:selected",idNum).text().trim().toLowerCase() == "backpack" ? "#8B000055" :
-$("option:selected",idNum).text().trim().toLowerCase() == "grafted" ? "#0437F255" :
-$("option:selected",idNum).text().trim().toLowerCase() == "storage" ? "#60606055" : "transparent";
-$(idNum).closest("tr").css("background-color",color,0.5);
-    
-}
 
-// ================================================================================
-// 2.2 Weapon Automation
-// ================================================================================
-
-var weaponRowNum = 1;
-
+// Add one row to the weapon inventory table.
 function addWeaponRow(){
      var newRow = $("<tr id='weaponRow"+weaponRowNum+"' value ='"+weaponRowNum+"'>");
     var newChild =  $("<tr id='weaponChildRow"+weaponRowNum+"'>");
@@ -401,6 +399,7 @@ function addWeaponRow(){
     
 }
 
+// Remove one row from the weapon inventory table.
 function removeWeaponRow(deleteButtonID,id){
     if(weaponRowNum > 1){
         overwriteRows(deleteButtonID,id,"weaponRow","removeWeapon","#weaponStorage",weaponRowNum);
@@ -444,13 +443,12 @@ function populateWeapon(id){
         }
     }
 }
+//#endregion
 
-//================================================================================
-// 2.2.1 Melee Automation
-// ================================================================================
+//#region 2.2.1 Melee Automation
 
-var meleeRowNum = 1;
 
+// Add one row to the melee weapon table.
 function addMeleeRow(){
      var newRow = $("<tr id='meleeRow"+meleeRowNum+"' value ='"+meleeRowNum+"'>");
     var newChild =  $("<tr id='meleeChildRow"+meleeRowNum+"'>");
@@ -483,6 +481,7 @@ function addMeleeRow(){
     resizeTextarea();
 }
 
+// Remove one row from the melee weapon table.
 function removeMeleeRow(deleteButtonID,id){
     if(meleeRowNum > 1){
         overwriteRows(deleteButtonID,id,"meleeRow","removeMelee","#meleeStorage",meleeRowNum);
@@ -525,15 +524,11 @@ function populateMelee(id){
         }
     }
 }
+//#endregion
 
+//#region 2.3 Armour Automation
 
-
-// ================================================================================
-// 2.3 Armour Automation
-// ================================================================================
-
-var armourRowNum = 1;
-
+// Add one row to the armour inventory table.
 function addArmourRow(){
      var newRow = $("<tr id='armourRow"+armourRowNum+"' value ='"+armourRowNum+"'>");
     var newChild =  $("<tr id='armourChildRow"+armourRowNum+"'>");
@@ -566,6 +561,7 @@ function addArmourRow(){
     resizeTextarea();
 }
 
+// Remove one row from the armour inventory table.
 function removeArmourRow(deleteButtonID,id){
     if(armourRowNum > 1){
          overwriteRows(deleteButtonID,id,"armourRow","removeArmour","#armourStorage",armourRowNum);
@@ -605,9 +601,8 @@ function populateArmour(id){
         }
     }
 }
-    
 
-
+// Update player armour class value based on 'readied' armour.
 function updateAC(){
     var armourRows = parseInt($("[name='counterArmour']").val());
     var shellRows = parseInt($("[name='counterShell']").val());
@@ -651,13 +646,11 @@ function updateAC(){
         $("#ACBonus").val(ac + shieldBonus + parseInt(document.getElementById("dexMod").value));
     }
 }
+//#endregion
 
-// ================================================================================
-// 2.4 Drone Inventory Automation
-// ================================================================================
+//#region 2.4 Drone Inventory Automation
 
-var droneRowNum = 1;
-
+// Add one row to the drone inventory table.
 function addDroneRow(){
      var newRow = $("<tr id='droneRow"+droneRowNum+"' value ='"+droneRowNum+"'>");
     var newChild =  $("<tr id='droneChildRow"+droneRowNum+"'>");
@@ -696,6 +689,7 @@ function addDroneRow(){
     resizeTextarea();
 }
 
+// Remove one row from the drone inventory table.
 function removeDroneRow(deleteButtonID,id){
     if(droneRowNum > 1){
         overwriteRows(deleteButtonID,id,"droneRow","removeDrone","#droneStorage",droneRowNum);
@@ -738,12 +732,9 @@ function populateDrone(id){
         }
     }
 }
+//#endregion
 
-// ================================================================================
-// 3.1 Psi Automation
-// ================================================================================
-
-var rowNumPsi = 1;
+//#region 2.5 Psi Automation
 
 // Remove Psi Technique Row
 function removePsiRow(deleteButtonID,id){
@@ -757,8 +748,6 @@ function removePsiRow(deleteButtonID,id){
     }
     resizeTextarea();
 }
-
-
 
 // Populate Psi Abilities technique value fields and description.
 function populatePsi(id){
@@ -784,7 +773,7 @@ function populatePsi(id){
     }
 }
 
-// Adjust Maximum Effort Pool
+// Adjust Maximum Psionic Effort pool value.
 function updateMaxEffort(){
     var maxEffort = Math.max(parseInt($("#metapsiScore").val()),0);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#precogScore").val()),0));
@@ -800,6 +789,7 @@ function updateMaxEffort(){
     }
 }
 
+// Add one row to the Psi Technique Table.
 function addPsiRow(){
      var newRow = $("<tr id='psiRow"+rowNumPsi+"' value ='"+rowNumPsi+"'>");
         var cols = "";
@@ -819,12 +809,10 @@ function addPsiRow(){
 
     rowNumPsi++;
 }
+//#endregion
 
-// ================================================================================
-// 3.2 AI Routine Automation
-// ================================================================================
 
-var rowNumRoutine = 1;
+//#region 2.6 AI Routine Automation
 
 // Remove Routine Technique Row
 function removeRoutineRow(deleteButtonID,id){
@@ -917,6 +905,7 @@ function updateMaxProcessing(){
     $("#maxPP").val(maxProcessing);
 }
 
+// Add one row to the peripheral routine table.
 function addRoutineRow(){
      var newRow = $("<tr id='routineRow"+rowNumRoutine+"' value ='"+rowNumRoutine+"'>");
         var cols = "";
@@ -938,6 +927,7 @@ function addRoutineRow(){
     rowNumRoutine++;
 }
 
+// Update available Core Routines based one player level and class.
 function updateCoreRoutines(){
     if ($("#playerClass").val() === "trueAI"){
     for (var i = 0; i < 12; i++){
@@ -969,9 +959,12 @@ function updateCoreRoutines(){
     } 
     }
 }
+//#endregion
 
+//#region 2.7 Shell Inventory Automation
 var shellRowNum = 1;
 
+// Add one row to Shell inventory table.
 function addShellRow(){
      var newRow = $("<tr id='shellRow"+shellRowNum+"' value ='"+shellRowNum+"'>");
     var newChild =  $("<tr id='shellChildRow"+shellRowNum+"'>");
@@ -1006,6 +999,7 @@ function addShellRow(){
     resizeTextarea();
 }
 
+// Remove one row from Shell inventory table.
 function removeShellRow(deleteButtonID,id){
     if(shellRowNum > 1){
         overwriteRows(deleteButtonID,id,"shellRow","removeShell","#shellStorage",shellRowNum);
@@ -1015,12 +1009,6 @@ function removeShellRow(deleteButtonID,id){
 
     shellRowNum--;
     }
-}
-
-// Update readied and stowed shell limit
-function updateMaxCarry(strVal){
-    document.getElementById("maxReady").value = parseInt(Math.floor(strVal/2));
-    document.getElementById("maxStowed").value = parseInt(strVal);
 }
 
 // Populate shell List shell value fields and description.
@@ -1046,13 +1034,8 @@ function populateShell(id){
         }
     }
 }
-    
-    function shellStorageColour(idNum){
-var color = $("option:selected","#shellStorage"+idNum).text().trim().toLowerCase() == "readied" ? "#006600" :
-$("option:selected","#shellStorage"+idNum).text().trim().toLowerCase() == "storage" ? "#606060" : "black";
-$("#shellStorage"+idNum).closest("tr").css("background-color",color);
-}
 
+// Populate selected shell with relevant stats.
 function updateShellStats(){
      
     var shellRows = parseInt($("[name='counterShell']").val());
@@ -1102,10 +1085,13 @@ function updateShellStats(){
     }
 }
 
+//#endregion
+
+//#endregion
 
 // ================================================================================
-// 4. Foci Automation
-// ================================================================================
+
+//#region 3. Foci Automation
 
 // Track how many Focus Points have been spent.
 function updateUsedFP(){
@@ -1165,10 +1151,12 @@ function focusInfo(childID, selectID) {
         }
     }
 }
+//#endregion
 
 // ================================================================================
-// 5. Skill Automation
-// ================================================================================
+
+//#region 5. Skill Automation
+
 
 // Updates learning/growth bonus skill modifiers
 function addLearnSkillBonus() {
@@ -1356,10 +1344,11 @@ function updateSkillPool() {
 
     document.getElementById("usedSP").value = attrCost + skillCost;
 }
+//#endregion
 
 // ================================================================================
-// 6. Level & XP Automation
-// ================================================================================
+
+//#region 6. Level & XP Automation
 
 // Adjust player level according to current XP.
 function updateLevel() {
@@ -1403,10 +1392,11 @@ function updateLevel() {
     focusInfo("infoF6","Foci6");
     updateCoreRoutines();
 }
+//#endregion
 
 // ================================================================================
-// 7. HP & Attack Automation
-// ================================================================================
+
+//#region 7. HP & Attack Automation
 
 // Update attack bonus based on player level.
 function updateAtkBonus() {
@@ -1426,9 +1416,41 @@ function updateAtkBonus() {
     }
 }
 
+// Enable or disable next element (for Bleed Out checkboxes).
+function enableNextElement(id,nextId){
+    var thisElement = document.getElementById(id);
+    var nextElement = document.getElementById(nextId);
+    if (thisElement.checked){
+        nextElement.disabled = false;
+        nextElement.style.opacity = "1";
+    }
+    else{
+        nextElement.checked = false;
+
+        nextElement.style.opacity = "0.5";
+        if (nextElement.getAttribute("onchange") !== null){
+            nextElement.onchange();
+        }
+        nextElement.disabled = true;
+    }
+}
+
+// Check if Player is Dead.
+function checkDeath(id){
+    
+    if(id.checked){
+         $(".message").text("YOU ARE DEAD");
+                $(".messageHeader").text("FLATLINED!" + ":");
+                $(".customAlert").css("animation", "fadeIn 0.3s linear");
+                $(".customAlert").css("display", "inline");
+    }    
+}
+
+//#endregion
+
 // ================================================================================
-// 8. Data Arrays
-// ================================================================================
+
+//#region 8. Data Arrays
 
 // List of all psychic techniques
 var psiCoreTechniques = [
@@ -1457,8 +1479,6 @@ var psiCoreTechniques = [
         desc: "The teleporter can translocate to another location they have either occupied before or can see with their unaided vision. Locations are fixed about the nearest major gravity well. For example, it is not possible to teleport to the cockpit of a distant moving vehicle they once occupied, but they can teleport to another point on a planet’s surface even though the planet has since moved far through the stellar void. The core technique allows the teleporter to move himself and any mass he can carry with his own natural strength. Resisting targets cannot be carried along, and unresisting ones must be touched. A teleporter can leave any clothing, shackles, adhesions, or other matter behind when he teleports, but he cannot leave behind matter that has been inserted into his body, such as cybernetics or shrapnel. Matter cannot be partially left behind. A teleporter will instinctively abort any apportation that would leave him embedded in a solid object or an environment of imminent physical harm. Any Committed Effort on such aborted jumps is wasted, as is any action spent triggering the power. The maximum range of Personal Apportation depends on the teleporter’s skill level. Teleporting with Personal Apportation counts as a Main Action and requires that the psychic Commit Effort for the scene. \n\n -Level-0: The psychic can teleport up to 10 meters. \n\n -Level-1: The psychic can teleport up to 100 meters. \n\n -Level-2: The psychic can teleport up to 10 kilometres. \n\n -Level-3: The psychic can teleport up to 1,000 kilometres. \n\n -Level-4: The psychic can teleport anywhere on a planet’s surface or near orbit."
     }
 ];
-
-
 
 // List of foci
 var fociList = [
@@ -2089,8 +2109,7 @@ var attrList = [
     }
 ];
 
-// List of Psychic Techniques
-
+// List of Peripheral Routines.
 var routineTechniqueList = [{
     "Select Technique":[
         {
@@ -2106,6 +2125,7 @@ var routineTechniqueList = [{
     ]
 }];
 
+// List of Psychic Techniques
 var psiTechniqueList = [{
     "Select Technique":[
         {
@@ -2817,7 +2837,7 @@ var equipmentList = [{
     ]
 }];
 
-// List of artificial shell bodies
+// List of artificial shell bodies.
 var shellList = [{
     "Pick Item":[
         {
@@ -2868,7 +2888,7 @@ var shellList = [{
     ]
 }];
 
-// List of Armours
+// List of armours.
 var armourList = [{
     "Pick Item":[
         {
@@ -3066,7 +3086,7 @@ var armourList = [{
     ]
 }];
 
-// List of weapons
+// List of ranged weapons.
 var weaponList = [{
     "Pick Weapon":[
         {
@@ -3492,7 +3512,7 @@ var weaponList = [{
     
 }];
 
-// List of melee
+// List of melee weapons.
 var meleeList = [{
     "Pick Weapon":[
         {
@@ -3719,11 +3739,13 @@ var droneList = [{
         
     
 }];
-// ================================================================================
-// 9. Select Table Population & Automation
+//#endregion
+
 // ================================================================================
 
-// Partially populate select field.
+//#region 9. Select Table Population & Automation
+
+// Partially populate select field with data from one subsection of a data array.
 function optionTablePartial(groupName, options, targetID) {
     var $optgroup = $("<optgroup>", {
         label: groupName
@@ -3739,22 +3761,11 @@ function optionTablePartial(groupName, options, targetID) {
     });
 }
 
-// Populates target selection drop-down menu with data.
+// Populates target selection drop-down menu with data from array.
 function selectOptionTable(data, targetID) {
     $.each(data, function (i, optgroups) {
         $.each(optgroups, function (groupName, options) {
-            var $optgroup = $("<optgroup>", {
-                label: groupName
-            });
-
-            $optgroup.appendTo(targetID);
-            $.each(options, function (j, option) {
-                var $option = $("<option>", {
-                    text: option.title,
-                    value: option.value
-                });
-                $option.appendTo($optgroup);
-            });
+        optionTablePartial(groupName, options, targetID);
         });
     });
 }
@@ -3770,12 +3781,13 @@ function getIndex(data, match) {
     }
     return -1;
 }
+//#endregion
 
 // ================================================================================
-// 10. Bio Automation
-// ================================================================================
 
-// Updates child row with relevant background description
+//#region 10. Bio Automation
+
+// Updates background free skill and background info.
 function BackInfo(childID, selectID) {
     
     var match = document.getElementById(selectID).value;
@@ -3800,6 +3812,7 @@ function BackInfo(childID, selectID) {
     clearSelection();
 }
 
+// Updates class abilities and associated skill points, foci points, and attack bonuses.
 function classInfo(childID, selectID) {
     var opGroup = Object.getOwnPropertyNames(classList[0]);
     var match = document.getElementById(selectID).value;
@@ -3865,13 +3878,15 @@ function classInfo(childID, selectID) {
     }
 }
 
+// Update player avatar image based on user inputted URL. 
 function charImage(imageUrl){
 $(".bounding-box").css("background-image", "url(" + imageUrl + ")");
 }
+//#endregion
 
 // ================================================================================
-// 11. Auto-Size Textarea
-// ================================================================================
+
+//#region 11. Auto-Size Textarea
 
 var observe;
 
@@ -3905,9 +3920,19 @@ function init(id) {
     resize();
 }
 
+// Resize all visible textarea elements to height of contents.
+function resizeTextarea(){
+    $('textarea').each(function(){
+        $(this).height(0);
+        $(this).height($(this)[0].scrollHeight );
+    });
+}
+
+//#endregion
+
 // ================================================================================
-// 12. Increment Buttons
-// ================================================================================
+
+//#region 12. Increment Buttons
 
 // Increment associated value.
 function increment(id) {
@@ -3943,14 +3968,15 @@ function decrement(id) {
         document.getElementById(id).onchange();
     }
 }
+//#endregion
 
 // ================================================================================
-// 13. Custom Alert Box
-// ================================================================================
+
+//#region 13. Custom Alert Box
 
 var currentCallback;
 
-// override default browser alert
+// Override default browser alert
 window.alert = function (msg, callback) {
     $(".messageHeader").text("ALERT!!!");
     $(".message").text(msg);
@@ -3962,8 +3988,9 @@ window.alert = function (msg, callback) {
     currentCallback = callback;
 };
 
+// Add listener for when our confirmation button is clicked.
 $(function () {
-    // add listener for when our confirmation button is clicked
+    
     $("#closeAlert").click(function () {
         $(".customAlert").css("animation", "fadeOut 0.3s linear");
         setTimeout(function () {
@@ -3972,11 +3999,13 @@ $(function () {
         }, 300);
     });
 });
+//#endregion
 
 // ================================================================================
-// 14. Save & Load Character Data
-// ================================================================================
 
+//#region 14. Save & Load Character Data
+
+// Save player data from all unique-ID elements to a '.swn' text file and download to local disk. 
 function save_character(){
     
     var filename = ".swn";
@@ -4195,66 +4224,114 @@ function load_character(e) {
     
 }
 
+// Attach load_character function to relevant button.
 document.getElementById('buttonload').addEventListener('change', load_character);
+//#endregion
 
 // ================================================================================
-// 15. Save & Load Session Notes
+
+//#region 15. Slider Automation
+
+// Update slider maximum value to match input max value.
+function update(value,target,disp){
+    var targetSlider = document.getElementById(target);
+    var targetDisp = document.getElementById(disp);
+    targetSlider.max = value;
+    if (parseInt(targetDisp.innerHTML)>value){
+        targetDisp.innerHTML = value;
+    }
+    
+}
+ // Update HP counter display to match HP slider value and check if character is bleeding (0HP) to reveal bleedout box.
+hpSlider.oninput = function() {
+  hpDisp.innerHTML = this.value;
+    var deathBox = $("#deathSaveBox");
+    var bleedOut = document.getElementById("deathBox1");
+    if (this.value == 0){
+        deathBox.show();
+    }
+    else{
+        bleedOut.checked = false;
+        bleedOut.onchange();
+        deathBox.hide();
+    }
+};
+
+// Update strain counter display to match Strain slider value.
+strainSlider.oninput = function() {
+  strainDisp.innerHTML = this.value;
+};
+
+//Slider Automation
+var hpSlider = document.getElementById("hpRange");
+var hpDisp = document.getElementById("currentHP");
+var strainSlider = document.getElementById("strainRange");
+var strainDisp = document.getElementById("currentStrain");
+hpDisp.innerHTML = hpSlider.value;
+strainDisp.innerHTML = strainSlider.value;
+
+// Update max strain value to match Con Score.
+function updateStrainMax(val){
+    var maxStrain = document.getElementById("strainMax");
+    maxStrain.innerHTML = val;
+    maxStrain.value = val;
+    if (maxStrain.getAttribute("onchange") != null) {
+       maxStrain.onchange();
+    }
+}
+
+//#endregion
+
 // ================================================================================
 
-function saveTextAsFile() {
-                var textToSave = document.getElementById("inputTextToSave").value;
-                var textToSaveAsBlob = new Blob([textToSave], {
-                    type: "text/plain"
-                });
-                var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-                var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
-                var downloadLink = document.createElement("a");
-                downloadLink.download = fileNameToSaveAs;
-                downloadLink.innerHTML = "Download File";
-                downloadLink.href = textToSaveAsURL;
-                downloadLink.onclick = destroyClickedElement;
-                downloadLink.style.display = "none";
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-            }
+//#region 16. Tab Automation
 
-function destroyClickedElement(event) {
-                document.body.removeChild(event.target);
-            }
+// Hide all character sheet tab contents.
+function hideTabs(){
+    var i;
+    // Get all elements with class="tabcontent" and hide them
+  var tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
 
-function loadFileAsText() {
-                var fileToLoad = document.getElementById("fileToLoad").files[0];
-                var fileReader = new FileReader();
-                fileReader.onload = function(fileLoadedEvent) {
-                    var textFromFileLoaded = fileLoadedEvent.target.result;
-                    document.getElementById("inputTextToSave").value = textFromFileLoaded;
-                };
-                fileReader.readAsText(fileToLoad, "UTF-8");
-            }
+  // Get all elements with class="tablinks" and remove the class "active"
+  var tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+}
 
-// ================================================================================
-// Initialise Page State
-// ================================================================================
+// Reveal selected tab contents and hide all other tabs' contents.
+function openTab(evt, cityName) {
 
-function activateChildren(){
-        // Toggle expand/collapse child rows
-    $('[data-toggle="toggle"]').click(function () {
-        child = $(this).parents().next(".hideTr");
-        if (child.is(":visible")) {
-            child.slideUp(1);
-            $(this).val("+");
-        } else {
-            var functionName = $(this).attr("data-function");
-            var childID = $(this).attr("data-child");
-            var selectID = $(this).attr("data-select");
-            child.slideDown(1);
-            $(this).val("-");
-            if (typeof functionName !== "undefined") {
-                window[functionName](childID, selectID);
-            }
-        }
+  hideTabs();
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+    
+  // Resize visible textareas to scroll height.
+    $('textarea').each(function(){
+        $(this).height($(this)[0].scrollHeight );
     });
 }
+//#endregion
+
+// ================================================================================
+
+//#region 17. Map Automation
+
+//Load Sector from URL
+function loadSector(url){
+    var mapUI = document.getElementById("mapUI");
+    mapUI.src = url;
+}
+//#endregion
+
+// ================================================================================
+
+//#region 18. Initialise Page State
 
 // Initialise page on ready.
 $(document).ready(function () {
@@ -4516,87 +4593,17 @@ var description = this.getAttribute("data-desc");
      }, delayInMilliseconds);
 });
 
-function hideTabs(){
-    var i;
-    // Get all elements with class="tabcontent" and hide them
-  var tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  var tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-}
-
-function openCity(evt, cityName) {
-  // Declare all variables
-
-  hideTabs();
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-    
-    $('textarea').each(function(){
-        $(this).height($(this)[0].scrollHeight );
-    });
-}
-
 // Prevent automatic form submission
 var form = document.getElementById("charsheet");
 function handleForm(event) { event.preventDefault(); } 
 form.addEventListener('submit', handleForm);
 
-//Slider Automation
-var hpSlider = document.getElementById("hpRange");
-var hpDisp = document.getElementById("currentHP");
-var strainSlider = document.getElementById("strainRange");
-var strainDisp = document.getElementById("currentStrain");
-hpDisp.innerHTML = hpSlider.value;
-strainDisp.innerHTML = strainSlider.value;
-
-function update(value,target,disp){
-var targetSlider = document.getElementById(target);
-var targetDisp = document.getElementById(disp);
-    targetSlider.max = value;
-    if (parseInt(targetDisp.innerHTML)>value){
-        targetDisp.innerHTML = value;
-    }
-    
-}
-
-function update2(value){
-document.getElementById("myRange2").max = value;
-}
-
-
-hpSlider.oninput = function() {
-  hpDisp.innerHTML = this.value;
-    var deathBox = $("#deathSaveBox");
-    var bleedOut = document.getElementById("deathBox1");
-    if (this.value == 0){
-        deathBox.show();
-    }
-    else{
-        bleedOut.checked = false;
-        bleedOut.onchange();
-        deathBox.hide();
-    }
-};
-
-strainSlider.oninput = function() {
-  strainDisp.innerHTML = this.value;
-};
-
 var i = 0;
-var txt = 'Lorem ipsum dummy text blabla.';
 var speed = 0.001;
-
+ // Load up message
 var bootMessage = 'Boot Sequence Initialised...\n|Enabling /etc/fstab swaps                              [ OK ]\n|INIT: Entering runlevel: 3                                   \n|Entering non-interactive startup                             \n|Applying Intel CPU microcode update:                   [ OK ]\n|Checking for hardware changes                          [ OK ]\n|Bringing up interface eth0:                            [ OK ]\n|Determining IP information for eth0... done.                 \n\n|Staring auditd:                                        [ OK ]\n|Starting restorecond:                                  [ OK ]\n|Starting system logger:                                [ OK ]\n|Starting kernel logger:                                [ OK ]\n|Starting irqbalance:                                   [ OK ]\n|Starting mcstransd:                                    [ OK ]\n|Starting portmap:                                      [ OK ]\n|Starting settroubleshootd:                             [ OK ]\n|Starting NFS statd:                                    [ OK ]\n|Starting mdmonitor:                                    [ OK ]\n|Starting RPC idmapd:                                   [ OK ]\n|Starting system message bus:                           [ OK ]\n|Starting Bluetooth Services:                           [ OK ]\n|Starting other filesystems:                            [ OK ]\n|Starting PC/SC smart card daemon (pcscd):              [ OK ]\n|Starting hidd:                                         [ OK ]\nBoot Sequence Successful!\nStatus:...ONLINE\n\nVERFIYING USER CREDENTIALS...\nUSER IDENTIFIED\n"WELCOME"';
 
+// Type message incrementally.
 function typeWriter() {
     var messageLength = bootMessage.length;
     var consoleText = document.getElementsByClassName("bootLang")[0];
@@ -4610,47 +4617,11 @@ function typeWriter() {
   }
 }
 
-function updateStrain(val){
-    var maxStrain = document.getElementById("strainMax");
-    maxStrain.innerHTML = val;
-    maxStrain.value = val;
-    if (maxStrain.getAttribute("onchange") != null) {
-       maxStrain.onchange();
-    }
-}
+// Deselect text on webpage (used when populating textareas - may no longer be necessary).
+function clearSelection(){
+    if (window.getSelection) {window.getSelection().removeAllRanges();}
+    else if (document.selection) {document.selection.empty();}
+   }
+   //#endregion
 
-//Load Sector
-function loadSector(url){
-    var mapUI = document.getElementById("mapUI");
-    mapUI.src = url;
-}
-
-// Enable or disable next element.
-function enableNextElement(id,nextId){
-    var thisElement = document.getElementById(id);
-    var nextElement = document.getElementById(nextId);
-    if (thisElement.checked){
-        nextElement.disabled = false;
-        nextElement.style.opacity = "1";
-    }
-    else{
-        nextElement.checked = false;
-
-        nextElement.style.opacity = "0.5";
-        if (nextElement.getAttribute("onchange") !== null){
-            nextElement.onchange();
-        }
-        nextElement.disabled = true;
-    }
-}
-
-// Check if Player is Dead.
-function checkDeath(id){
-    
-    if(id.checked){
-         $(".message").text("YOU ARE DEAD");
-                $(".messageHeader").text("FLATLINED!" + ":");
-                $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                $(".customAlert").css("display", "inline");
-    }    
-}
+// ================================================================================

@@ -31,15 +31,15 @@
     <form class="charsheet" id="charsheet">
         <div class="box">
             <div class="tab" id="tabUI">
-                <button type="button" id="defaultOpen" class="tablinks" onclick="openCity(event, 'bioTab')">Bio/Stats</button>
+                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Bio/Stats</button>
                 <!--
---><button type="button" class="tablinks" onclick="openCity(event, 'abilityTab')">Abilities</button>
+--><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button>
                 <!--
-  --><button type="button" class="tablinks" onclick="openCity(event, 'inventoryTab')">Inventory</button>
+  --><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button>
                 <!--
---><button type="button" class="tablinks" onclick="openCity(event, 'notesTab')">Notes</button>
+--><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button>
                 <!--
---><button type="button" class="tablinks" onclick="openCity(event, 'mapTab')">Map</button>
+--><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button>
 
                 <div class="saveUI">
                     <b>Autosave: </b><input type="checkbox" id="autosave"> <input value="Save Character" class="button" name="buttonsave" type="button" onclick="save_character()" style="width:100px;margin-bottom:5px; margin-right:30px;" readonly>
@@ -534,7 +534,7 @@
                                     <td>Constitution:</td>
                                     <td>
                                         <input value="-" class="button" readonly onclick="decrement(conScore.id);">
-                                        <input type="number" value="10" min="10" max="15" id="conScore" onchange="updateModifiers('con'); updateStrain(this.value)" data-bonus="0" class="growthBonus" data-growth="0" readonly>
+                                        <input type="number" value="10" min="10" max="15" id="conScore" onchange="updateModifiers('con'); updateStrainMax(this.value)" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" class="button" readonly onclick="increment(conScore.id);">
                                     </td>
                                     <td><input type="number" value="0" id="conMod" class="noWrite" readonly></td>
@@ -917,35 +917,6 @@
 
                                 </tfoot>
                             </table>
-
-                            <h2 class="isAI">Artificial Shell</h2>
-                            <table id="shellTable" class="order-list isAI" data-counter="0">
-                                <thead>
-
-                                    <tr>
-                                        <th>Shell Name</th>
-                                        <th>Shell Mods/Notes</th>
-                                        <th>STR:</th>
-                                        <th>DEX:</th>
-                                        <th>CON:</th>
-                                        <th>AC</th>
-                                        <th>Cost</th>
-                                        <th>Stowed Location</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td style="text-align: left;" colspan="9">
-                                            <input type="button" class="button" id="addrow-shell" value="+" />
-                                        </td>
-                                    </tr>
-
-                                </tfoot>
-                            </table>
                         </div>
                 </div>
             </div>
@@ -983,37 +954,7 @@
                             </tfoot>
                         </table>
 
-                        <h2>Drones</h2>
-                        <table id="droneTable" class="order-list" data-counter="0">
-                            <thead>
-                                <tr>
-                                    <th>Drone Model</th>
-                                    <th>Drone Mods/Notes</th>
-                                    <th>Cost</th>
-                                    <th>Fittings</th>
-                                    <th>AC</th>
-                                    <th>Quantity</th>
-                                    <th>Weight</th>
-                                    <th>HP</th>
-                                    <th>Range</th>
-                                    <th>Stowed Location</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td style="text-align: left;" colspan="10">
-                                        <input type="button" class="button" id="addrow-drone" value="+" />
-                                    </td>
-                                </tr>
-
-                            </tfoot>
-                        </table>
-
-                        <h2>Weapons</h2>
+                        <h2>Ranged Weapons</h2>
                         <table id="weaponTable" class="order-list" data-counter="0">
                             <thead>
                                 <tr>
@@ -1097,6 +1038,65 @@
                                 </tr>
 
                             </tfoot>
+                        </table>
+
+                        <h2>Drones</h2>
+                        <table id="droneTable" class="order-list" data-counter="0">
+                            <thead>
+                                <tr>
+                                    <th>Drone Model</th>
+                                    <th>Drone Mods/Notes</th>
+                                    <th>Cost</th>
+                                    <th>Fittings</th>
+                                    <th>AC</th>
+                                    <th>Quantity</th>
+                                    <th>Weight</th>
+                                    <th>HP</th>
+                                    <th>Range</th>
+                                    <th>Stowed Location</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td style="text-align: left;" colspan="10">
+                                        <input type="button" class="button" id="addrow-drone" value="+" />
+                                    </td>
+                                </tr>
+
+                            </tfoot>
+                        </table>
+
+                        <h2 class="isAI">Artificial Shell</h2>
+                        <table id="shellTable" class="order-list isAI" data-counter="0">
+                                <thead>
+
+                                    <tr>
+                                        <th>Shell Name</th>
+                                        <th>Shell Mods/Notes</th>
+                                        <th>STR:</th>
+                                        <th>DEX:</th>
+                                        <th>CON:</th>
+                                        <th>AC</th>
+                                        <th>Cost</th>
+                                        <th>Stowed Location</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td style="text-align: left;" colspan="9">
+                                            <input type="button" class="button" id="addrow-shell" value="+" />
+                                        </td>
+                                    </tr>
+
+                                </tfoot>
                         </table>
 
                     </div>
