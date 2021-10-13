@@ -4307,7 +4307,7 @@ function hideTabs(){
 
 // Reveal selected tab contents and hide all other tabs' contents.
 function openTab(evt, cityName) {
-
+    console.log("PING");
   hideTabs();
 
   // Show the current tab, and add an "active" class to the button that opened the tab
@@ -4473,18 +4473,18 @@ for(i=1;i<6;i++){
      window.addEventListener("beforeunload", function(evt) {
     
         // Cancel the event (if necessary)
-    evt.preventDefault();
+        evt.preventDefault();
         
-    if ($("#autosave").prop("checked") == true) {
+        if ($("#autosave").prop("checked") == true) {
 
-    save_character();
-  }
+        save_character();
+        }     
 
-    // Google Chrome requires returnValue to be set
-    evt.returnValue = '';
+        // Google Chrome requires returnValue to be set
+        evt.returnValue = '';
 
-    return null;
-});
+        return null;
+    });
      
     // Hide child rows
     $(".hideTr").slideUp(1);
@@ -4628,3 +4628,9 @@ function clearSelection(){
    //#endregion
 
 // ================================================================================
+
+function test(){
+    console.log("PONG");
+    var targetTab = document.getElementById("helpTabOpen");
+    targetTab.click();
+}
