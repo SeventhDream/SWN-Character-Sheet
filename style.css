@@ -408,7 +408,8 @@ optgroup {
 .helpPanel{
     display: inline-block;
     text-align: left !important;
-    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .helpPanel h2,h4,h6{
@@ -420,7 +421,7 @@ optgroup {
 }
 
 .helpPanel b{
-    color: red !important;
+    color: white !important;
 }
 .collapsible {
     background-color: transparent;
@@ -504,6 +505,10 @@ th {
 }
 
 .interact:hover{
+    color: red !important;
+    cursor: pointer;
+}
+#playerHP:hover{
     color: red !important;
     cursor: pointer;
 }
@@ -807,7 +812,7 @@ position: relative;
 
 }
 
-.slidecontainer h2{
+.slidecontainer h4{
     text-decoration: none;
 }
 
