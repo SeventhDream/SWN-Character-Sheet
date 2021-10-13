@@ -777,6 +777,7 @@ function populatePsi(id){
 // Adjust Maximum Psionic Effort pool value.
 function updateMaxEffort(){
     var maxEffort = Math.max(parseInt($("#metapsiScore").val()),0);
+    maxEffort = Math.max(maxEffort,Math.max(parseInt($("#biopsiScore").val()),0));
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#precogScore").val()),0));
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telekinesisScore").val()),0));
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telepathScore").val()),0));
@@ -3908,6 +3909,22 @@ function classInfo(childID, selectID) {
             }
             isGrowth("isGrowthCheck",".randomGrowth");
             
+            // Check for Expert class pick
+            if ((playerClass === "expert")){
+                document.getElementById("expertAbility").style.display = 'inline-block';
+            }
+            else{
+                document.getElementById("expertAbility").style.display = 'none';
+            }
+
+            // Check for Expert class pick
+            if ((playerClass === "warrior")){
+                document.getElementById("warriorAbility").style.display = 'inline-block';
+            }
+            else{
+                document.getElementById("warriorAbility").style.display = 'none';
+            }
+
            document.getElementById(childID).setAttribute("data-desc",info);
     document.getElementById(childID).setAttribute("data-name",title);
 

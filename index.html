@@ -192,27 +192,27 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow1">Focus 1 Skill:<select name="fociSkill1" id="initSkill10" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow1" style="display: none;">Focus 1 Skill:<select name="fociSkill1" id="initSkill10" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow2">Focus 2 Skill:<select name="fociSkill2" id="initSkill11" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow2" style="display: none;">Focus 2 Skill:<select name="fociSkill2" id="initSkill11" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow3">Focus 3 Skill:<select name="fociSkill3" id="initSkill12" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow3" style="display: none;">Focus 3 Skill:<select name="fociSkill3" id="initSkill12" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow4">Focus 4 Skill:<select name="fociSkill4" id="initSkill13" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow4" style="display: none;">Focus 4 Skill:<select name="fociSkill4" id="initSkill13" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow5">Focus 5 Skill:<select name="fociSkill5" id="initSkill14" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow5" style="display: none;">Focus 5 Skill:<select name="fociSkill5" id="initSkill14" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow6">Focus 6 Skill:<select name="fociSkill6" id="initSkill15" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow6" style="display: none;">Focus 6 Skill:<select name="fociSkill6" id="initSkill15" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -624,9 +624,15 @@
                 <div id="abilityTab" class="tabcontent">
                     <div class="row">
                         
+                        <!--Expert Ability-->
+                        <div id="expertAbility" style="display: none;"><h4>Expert Ability: Reroll Failed Skill Check</b></h4><input type="checkbox" class="checkbox-round"> <b>(1 Use per scene)</b></div>
+
+                        <!--Warrior Ability-->
+                        <div id="warriorAbility" style="display: none;"><h4>Warrior Ability: Cancel Hit/Miss During Combat</b></h4><input type="checkbox" class="checkbox-round"> <b>(1 Use per scene)</b></div>
+
                         <!--Column-->
                         <div class="col-xs-12">
-                            <!--Extendable Table Prototype-->
+                            <!--Psionic Abilities-->
                             <h2 class="isPsi">Psi Abilities</h2>
                             <table id="psiCoreTable" class="isPsi">
                                 <tr>
@@ -641,7 +647,6 @@
                                     <td> <input type="number" value="0" ; id="biopsiCoreLevel" class="noWrite" readonly> </td>
                                     <td><input type="number" value="0" ; id="biopsiCoreEffort" readonly></td>
                                 </tr>
-                                <!--BIOPSI Core Info Panel-->
                                 
                                 <tr id="metapsiCoreTechnique">
                                     <td>METAPSIONICS:</td>
@@ -680,6 +685,7 @@
                                 
                             </table>
                             <br>
+
                             <table id="psiTable" class="order-list isPsi" data-counter="0">
                                 <thead>
                                     <tr>
@@ -705,6 +711,8 @@
                                 </tfoot>
                             </table>
                             
+                            
+
                             <h2 class="isAI">AI Routines</h2>
                             <table id="routineCoreTable" class="isAI">
                                 <tr>

@@ -411,8 +411,19 @@ optgroup {
     margin-left: 20px;
     margin-right: 20px;
 }
+#expertAbility, #warriorAbility{
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    border: 5px solid #8B0000;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50% , -50%);
+}
 
-.helpPanel h2,h4,h6{
+.helpPanel h2,.helpPanel h4, .helpPanel h6{
     margin: 0px;
     text-decoration: underline;
 }
