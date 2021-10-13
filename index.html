@@ -71,7 +71,7 @@
                         <div class="col-xs-12">
                             
                             <div class="slidecontainer">
-                                <h4>HP: <b id="currentHP"></b><b>/</b><input type="number" value="10" min="0" class="slideTrack" onchange="update(this.value,'hpRange','currentHP');" id="playerHP" /></h4><input type="range" min="0" value="10" class="slider hpSlide" id="hpRange" title="Edit maximum HP value"/>
+                                <h4>HP: <b id="currentHP"></b><b>/</b><input type="number" value="10" min="0" class="slideTrack" onchange="update(this.value,'hpRange','currentHP');" id="playerHP" /></h4><input type="range" min="0" max="10" value="10" class="slider hpSlide" id="hpRange" title="Edit maximum HP value"/>
                                 
                                 <div id="deathSaveBox"><b>Bleed-Out Counter:</b><input type="checkbox" id="deathBox1" class="checkbox-round" onchange="enableNextElement(this.id,deathBox2.id);" /><input type="checkbox" id="deathBox2" class="checkbox-round" onchange="enableNextElement(this.id,deathBox3.id);" /><input type="checkbox" id="deathBox3" class="checkbox-round" onchange="enableNextElement(this.id,deathBox4.id);" /><input type="checkbox" id="deathBox4" class="checkbox-round" onchange="enableNextElement(this.id,deathBox5.id);" /><input type="checkbox" id="deathBox5" class="checkbox-round" onchange="enableNextElement(this.id,deathBox6.id);" /><input type="checkbox" id="deathBox6" class="checkbox-round" onchange="checkDeath(this);" /></div>
                                 
@@ -192,27 +192,27 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Focus 1 Skill:<select id="initSkill10" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow1">Focus 1 Skill:<select name="fociSkill1" id="initSkill10" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Focus 2 Skill:<select id="initSkill11" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow2">Focus 2 Skill:<select name="fociSkill2" id="initSkill11" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Focus 3 Skill:<select id="initSkill12" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow3">Focus 3 Skill:<select name="fociSkill3" id="initSkill12" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Focus 4 Skill:<select id="initSkill13" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow4">Focus 4 Skill:<select name="fociSkill4" id="initSkill13" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Focus 5 Skill:<select id="initSkill14" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow5">Focus 5 Skill:<select name="fociSkill5" id="initSkill14" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Focus 6 Skill:<select id="initSkill15" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow6">Focus 6 Skill:<select name="fociSkill6" id="initSkill15" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -411,14 +411,14 @@
                             <!--Foci Table-->
                             <table class="textTable">
                                 <tr>
-                                    <th colspan="2">Used Focus Points:<input type="number" value="0" id="usedFP" class="noWrite" readonly>/<input type="number" value="1" id="maxFP" class="noWrite" readonly></th>
+                                    <th colspan="2">Used Focus Points:<input type="number" value="0" id="usedFP" class="noWrite" readonly>/<input type="number" value="1" id="maxFP" class="noWrite" readonly><input type="checkbox" id="psiFocus" hidden></th>
                                 </tr>
                                 <!--Foci1-->
                                 <tr>
                                     <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF1" data-function="focusInfo" data-select="Foci1"></i><select id="Foci1" onchange="focusInfo(infoF1.id,id);"></select></td>
                                     <td>
                                         
-                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel1.id);"><input type="number" id="FociLevel1" value="0" max="3" onchange="updateUsedFP()" min="0" step="1" readonly>
+                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel1.id);"><input type="number" id="FociLevel1" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel1.id);">
                                     </td>
                                 </tr>
@@ -428,7 +428,7 @@
                                     <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF2" data-function="focusInfo" data-select="Foci2"></i><select id="Foci2" onchange="focusInfo(infoF2.id,id)"></select></td>
                                     <td>
                                         
-                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel2.id);"><input type="number" id="FociLevel2" value="0" max="3" onchange="updateUsedFP()" min="0" step="1" readonly>
+                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel2.id);"><input type="number" id="FociLevel2" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel2.id);">
                                     </td>
                                 </tr>
@@ -438,7 +438,7 @@
                                     <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF3" data-function="focusInfo" data-select="Foci3"></i><select id="Foci3" onchange="focusInfo(infoF3.id,id)"></select></td>
                                     <td>
                                         
-                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel3.id);"><input type="number" id="FociLevel3" value="0" max="3" onchange="updateUsedFP()" min="0" step="1" readonly>
+                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel3.id);"><input type="number" id="FociLevel3" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel3.id);">
                                     </td>
                                 </tr>
@@ -448,7 +448,7 @@
                                     <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF4" data-function="focusInfo" data-select="Foci4"></i><select id="Foci4" onchange="focusInfo(infoF4.id,id)"></select></td>
                                     <td>
                                         
-                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel4.id);"><input type="number" id="FociLevel4" value="0" max="3" onchange="updateUsedFP()" min="0" step="1" readonly>
+                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel4.id);"><input type="number" id="FociLevel4" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel4.id);">
                                     </td>
                                 </tr>
@@ -458,7 +458,7 @@
                                     <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF5" data-function="focusInfo" data-select="Foci5"></i><select id="Foci5" onchange="focusInfo(infoF5.id,id)"></select></td>
                                     <td>
                                         
-                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel5.id);"><input type="number" id="FociLevel5" value="0" max="3" onchange="updateUsedFP()" min="0" step="1" readonly>
+                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel5.id);"><input type="number" id="FociLevel5" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel5.id);">
                                     </td>
                                 </tr>
@@ -467,7 +467,7 @@
                                 <tr>
                                     <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF6" data-function="focusInfo" data-select="Foci6"></i><select id="Foci6" onchange="focusInfo(infoF6.id,id)"></select></td>
                                     <td>
-                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel6.id);"><input type="number" id="FociLevel6" value="0" max="3" onchange="updateUsedFP()" min="0" step="1" readonly>
+                                        Level: <input value="-" class="button" readonly onclick="decrement(FociLevel6.id);"><input type="number" id="FociLevel6" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel6.id);">
                                     </td>
                                 </tr>
@@ -1313,6 +1313,10 @@
             <input name="counterShell" id="counterShell" data-full="[]" data-free="[]" type="hidden" value="0" />
             <input name="counterDrone" id="counterDrone" data-full="[]" data-free="[]" type="hidden" value="0" />
             
+            <input id="isWildPsi" type="checked" value="false" hidden>
+            <input id="wildEffort" type="number" value="0" hidden>
+            <input id="isTrainedPsi" type="checked" hidden>
+            <input id="trainedEffort" type="number" value="0" hidden>
         </main>
         
     </form>

@@ -782,11 +782,14 @@ function updateMaxEffort(){
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telepathScore").val()),0));
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#teleportScore").val()),0));
     maxEffort = Math.max(maxEffort + 1 + Math.max($("#wisMod").val(),$("#conMod").val()),1);
-    if (parseInt($("#maxEP").attr("data-isFocus")) === 0){
-    $("#maxEP").val(maxEffort);
+    if (!document.getElementById("isWildPsi").checked){
+        var trainedBonus = parseInt(document.getElementById("trainedEffort").value);
+        $("#maxEP").val(parseInt(maxEffort + trainedBonus));
     }
     else{
-         $("#maxEP").val($("fociLevel"+$("#maxEP").attr("data-isFocus").val()));
+        var wildBonus = parseInt(document.getElementById("wildEffort").value);
+        console.log(wildBonus);
+        $("#maxEP").val(wildBonus);
     }
 }
 
@@ -1132,25 +1135,29 @@ function updateMaxFociPool(){
     
 }
 
+// Populates info interact buttons for focus field and checks for relevant skills and abilities unlocked
 function focusInfo(childID, selectID) {
-    var opGroup = Object.getOwnPropertyNames(fociList[0]);
-    var match = document.getElementById(selectID).value;
-    var index = -1;
+    var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array
+    var match = document.getElementById(selectID).value; // Get selected focus string value
+    var index = -1; // Default index -1 = null.
+    // Cycle through every foci subset.
     for (var i = 0; i < opGroup.length; i++) {
-        var groupIndex = opGroup[i];
-        index = getIndex(fociList[0][groupIndex], match);
+        var groupIndex = opGroup[i]; // Get foci array data subset.
+        index = getIndex(fociList[0][groupIndex], match); // Get array index if foci matches data array entry.
+        // Check if match index is found.
         if (index > -1) {
-            var info = fociList[0][groupIndex][index].desc;
-            var title = fociList[0][groupIndex][index].title;
-            document.getElementById(childID).setAttribute("data-desc",info);
-            document.getElementById(childID).setAttribute("data-name",title);
+            var info = fociList[0][groupIndex][index].desc; // get focus description
+            var title = fociList[0][groupIndex][index].title; // get focus title
+            document.getElementById(childID).setAttribute("data-desc",info); // Populate info description
+            document.getElementById(childID).setAttribute("data-name",title); // populate info title.
            
-
-            updateUsedFP();
-            clearSelection();
+            updateUsedFP(); // update focus pool
+            clearSelection(); // deselect text.
+            checkFoci(); // check focus skills and abilities.
             return;
         }
     }
+
 }
 //#endregion
 
@@ -1488,7 +1495,8 @@ var fociList = [
             {
                 title: "-",
                 value: "empty",
-                desc: ""
+                desc: "",
+                bonus: "empty"
             }
         ],
         Non_Combat_Foci: [
@@ -1496,79 +1504,92 @@ var fociList = [
                 title: "Alert",
                 value: "alert",
                 desc:
-                    "You are keenly aware of your surroundings and virtually impossible to take unaware. You have an instinctive alacrity of response that helps you act before less wary persons can think to move. \n\n Level 1: Gain Notice as a bonus skill. You cannot be surprised, nor can others use the Execution Attack option on you. When you roll initiative, roll twice and take the best result. \n\n Level 2: You always act first in a combat round unless someone else involved is also this Alert."
+                    "You are keenly aware of your surroundings and virtually impossible to take unaware. You have an instinctive alacrity of response that helps you act before less wary persons can think to move. \n\n Level 1: Gain Notice as a bonus skill. You cannot be surprised, nor can others use the Execution Attack option on you. When you roll initiative, roll twice and take the best result. \n\n Level 2: You always act first in a combat round unless someone else involved is also this Alert.",
+                bonus: "notice"
             },
             {
                 title: "Authority",
                 value: "authority",
                 desc:
-                    "You have an uncanny kind of charisma about you, onethat makes others instinctively follow your instructions and further your causes. At level 1, this is a knack of charm and personal magnetism, while level 2 might suggest latent telepathic influence or transhuman memetichacking augmentations. Where this focus refers to followers, it means NPCs who have voluntarily chosen to be in your service. PCs never count as followers. \n\n Level 1: Gain Lead as a bonus skill. Once per day, you can make a request from an NPC who is not openly hostile to you, rolling a Cha/Lead skill check at a difficulty of the NPC’s Morale score. If you succeed,they will comply with the request, provided it is not harmful or extremely uncharacteristic. \n\n Level 2: Those who follow you are fired with confidence.Any NPC being directly led by you gains a Morale and hit roll bonus equal to your Lead skill and a +1 bonus on all skill checks. Your followers will not act against your interests unless underextreme pressure."
+                    "You have an uncanny kind of charisma about you, onethat makes others instinctively follow your instructions and further your causes. At level 1, this is a knack of charm and personal magnetism, while level 2 might suggest latent telepathic influence or transhuman memetichacking augmentations. Where this focus refers to followers, it means NPCs who have voluntarily chosen to be in your service. PCs never count as followers. \n\n Level 1: Gain Lead as a bonus skill. Once per day, you can make a request from an NPC who is not openly hostile to you, rolling a Cha/Lead skill check at a difficulty of the NPC’s Morale score. If you succeed,they will comply with the request, provided it is not harmful or extremely uncharacteristic. \n\n Level 2: Those who follow you are fired with confidence.Any NPC being directly led by you gains a Morale and hit roll bonus equal to your Lead skill and a +1 bonus on all skill checks. Your followers will not act against your interests unless underextreme pressure.",
+                bonus: "lead"
             },
             {
                 title: "Connected",
                 value: "connected",
                 desc:
-                    "You’re remarkably gifted at making friends and forging ties with the people around you. Wherever you go, you always seem to know somebody useful to your ends. \n\n Level 1: Gain Connect as a bonus skill. If you’ve spent at least a week in a not-entirely-hostile location, you’ll have built a web of contacts willing to do favors for you that are no more than mildly illegal. You can call on one favor per game day and the GM decides how far they’ll go for you. \n\n Level 2: Once per game session, if it’s not entirely implausible, you meet someone you know who is willing to do modest favors for you. You can decide when and where you want to meet this person, but the GM decides who they are and what they can do for you."
+                    "You’re remarkably gifted at making friends and forging ties with the people around you. Wherever you go, you always seem to know somebody useful to your ends. \n\n Level 1: Gain Connect as a bonus skill. If you’ve spent at least a week in a not-entirely-hostile location, you’ll have built a web of contacts willing to do favors for you that are no more than mildly illegal. You can call on one favor per game day and the GM decides how far they’ll go for you. \n\n Level 2: Once per game session, if it’s not entirely implausible, you meet someone you know who is willing to do modest favors for you. You can decide when and where you want to meet this person, but the GM decides who they are and what they can do for you.",
+                bonus: "connect"
             },
             {
                 title: "Diplomat",
                 value: "diplomat",
                 desc:
-                    "You know how to get your way in personal negotiations, and can manipulate the attitudes of those around you. Even so, while smooth words are versatile, they’ll only work if your interlocutor is actually willing to listen to you. \n\n Level 1: Gain Talk as a bonus skill. You speak all the languages common to the sector and can learn new ones to a workable level in a week, becoming fluent in a month. Reroll 1s on any skill check dice related to negotiation or diplomacy. \n\n Level 2: Once per game session, shift an intelligent NPC’s reaction roll one step closer to friendly if you can talk to them for at least thirty seconds."
+                    "You know how to get your way in personal negotiations, and can manipulate the attitudes of those around you. Even so, while smooth words are versatile, they’ll only work if your interlocutor is actually willing to listen to you. \n\n Level 1: Gain Talk as a bonus skill. You speak all the languages common to the sector and can learn new ones to a workable level in a week, becoming fluent in a month. Reroll 1s on any skill check dice related to negotiation or diplomacy. \n\n Level 2: Once per game session, shift an intelligent NPC’s reaction roll one step closer to friendly if you can talk to them for at least thirty seconds.",
+                bonus: "talk"
             },
             {
                 title: "Hacker",
                 value: "hacker",
                 desc:
-                    "You have a considerable fluency with digital security measures and standard encryption methods. You know how to make computerized systems obey you until their automatic failsafes come down on your control. \n\n Level 1: Gain Program as a bonus skill. When attempting to hack a database or computerized system, roll 3d6 on the skill check and drop the lowest die. \n\n Level 2: Your hack duration increases to 1d4+Program skill x 10 minutes. You have an instinctive understanding of the tech; you never need to learn the data protocols for a strange system and are always treated as familiar with it."
+                    "You have a considerable fluency with digital security measures and standard encryption methods. You know how to make computerized systems obey you until their automatic failsafes come down on your control. \n\n Level 1: Gain Program as a bonus skill. When attempting to hack a database or computerized system, roll 3d6 on the skill check and drop the lowest die. \n\n Level 2: Your hack duration increases to 1d4+Program skill x 10 minutes. You have an instinctive understanding of the tech; you never need to learn the data protocols for a strange system and are always treated as familiar with it.",
+                bonus: "program"
             },
             {
                 title: "Healer",
                 value: "healer",
                 desc:
-                    "Healing comes naturally to you, and you’re particularly gifted at preventing the quick bleed-out of wounded allies and comrades. \n\n Level 1: Gain Heal as a bonus skill. You may attempt to stabilize one mortally-wounded adjacent person per round as an On Turn action. When rolling Heal skill checks, roll 3d6 and drop the lowest die. \n\n Level 2: Stims or other technological healing devices applied by you heal twice as many hit points as normal. Using only basic medical supplies, you can heal 1d6+Heal skill hit points of damage to every injured or wounded person in your group with ten minutes of first aid spread among them. Such healing can be applied to a given target only once per day."
+                    "Healing comes naturally to you, and you’re particularly gifted at preventing the quick bleed-out of wounded allies and comrades. \n\n Level 1: Gain Heal as a bonus skill. You may attempt to stabilize one mortally-wounded adjacent person per round as an On Turn action. When rolling Heal skill checks, roll 3d6 and drop the lowest die. \n\n Level 2: Stims or other technological healing devices applied by you heal twice as many hit points as normal. Using only basic medical supplies, you can heal 1d6+Heal skill hit points of damage to every injured or wounded person in your group with ten minutes of first aid spread among them. Such healing can be applied to a given target only once per day.",
+                bonus: "heal"
             },
             {
                 title: "Henchkeeper",
                 value: "henchkeeper",
                 desc:
-                    "You have a distinct knack for picking up lost souls who willingly do your bidding. You might induce them with promises of money, power, excitement, sex, or some other prize that you may or may not eventually grant. A henchman obtained with this focus will serve loyally until clearly betrayed or placed in unacceptable danger. Henchmen are not “important” people in their society and are usually marginal sorts, outcasts, the desperate, or other persons with few options. You can use more conventional payor inducements to acquire additional henchmen, but these extra hirelings are no more loyal or competent than your pay and treatment can purchase. \n\n Level 1: Gain Lead as a bonus skill. You can acquire henchmen within 24 hours of arriving in a community, assuming anyone is suitable hench material. These henchmen will not fight except to save their own lives but will escort you on adventures and risk great danger to help you. Most henchmen will be treated as Peaceful Humans from the Xenobestiary section of the book. You can have one henchman at a time for every three character levels you have, rounded up. You can release henchmen with no hard feelings at any plausible time and pick them back up later should you be without a current henchman. \n\n Level 2: Your henchmen are remarkably loyal and determined, and will fight for you against anything but clearly overwhelming odds. Whether through natural competence or their devotion to you, they’re treated as Martial Humans from the Xenobestiary section. You can make faithful henchmen out of skilled and highly-capable NPCs, but this requires that you actually have done them some favour or help that would reasonably earn such fierce loyalty."
+                    "You have a distinct knack for picking up lost souls who willingly do your bidding. You might induce them with promises of money, power, excitement, sex, or some other prize that you may or may not eventually grant. A henchman obtained with this focus will serve loyally until clearly betrayed or placed in unacceptable danger. Henchmen are not “important” people in their society and are usually marginal sorts, outcasts, the desperate, or other persons with few options. You can use more conventional payor inducements to acquire additional henchmen, but these extra hirelings are no more loyal or competent than your pay and treatment can purchase. \n\n Level 1: Gain Lead as a bonus skill. You can acquire henchmen within 24 hours of arriving in a community, assuming anyone is suitable hench material. These henchmen will not fight except to save their own lives but will escort you on adventures and risk great danger to help you. Most henchmen will be treated as Peaceful Humans from the Xenobestiary section of the book. You can have one henchman at a time for every three character levels you have, rounded up. You can release henchmen with no hard feelings at any plausible time and pick them back up later should you be without a current henchman. \n\n Level 2: Your henchmen are remarkably loyal and determined, and will fight for you against anything but clearly overwhelming odds. Whether through natural competence or their devotion to you, they’re treated as Martial Humans from the Xenobestiary section. You can make faithful henchmen out of skilled and highly-capable NPCs, but this requires that you actually have done them some favour or help that would reasonably earn such fierce loyalty.",
+                    bonus: "lead"
             },
             {
                 title: "Specialist",
                 value: "specialist",
                 desc:
-                    "You are remarkably talented at a particular skill. Whether a marvellous cat burglar, a world-famous athlete, a brilliant engineer, or some other savant, your expertise is extremely reliable. You may take this focus more than once for different skills. \n\n Level 1: Gain a non-combat, non-psychic skill as a bonus. Roll 3d6 and drop the lowest die for all skill checks in this skill. \n\n Level 2: Roll 4d6 and drop the two lowest dice for all skill checks in this skill."
+                    "You are remarkably talented at a particular skill. Whether a marvellous cat burglar, a world-famous athlete, a brilliant engineer, or some other savant, your expertise is extremely reliable. You may take this focus more than once for different skills. \n\n Level 1: Gain a non-combat, non-psychic skill as a bonus. Roll 3d6 and drop the lowest die for all skill checks in this skill. \n\n Level 2: Roll 4d6 and drop the two lowest dice for all skill checks in this skill.",
+                bonus: "anyNormal"
             },
             {
                 title: "Star Captain",
                 value: "starCaptain",
                 desc:
-                    "You have a tremendous natural talent for ship combat and can make any starship you captain a significantly more fearsome opponent. You must take the captain’s role during a fight as described on page 117 of the Ship Combat rules to benefit from this focus. \n\n  Level 1: Gain Lead as a bonus skill. Your ship gains 2 extra Command Points at the start of each turn. \n\n Level 2: A ship you captain gains bonus hit points equal to 20% of its maximum at the start of each combat. Damage is taken from these bonus points first, and they vanish at the end of the fight and do not require repairs to replenish before the next. In addition, once per engagement, you may resolve a Crisis as an Instant action by explaining how your leadership resolves the problem."
+                    "You have a tremendous natural talent for ship combat and can make any starship you captain a significantly more fearsome opponent. You must take the captain’s role during a fight as described on page 117 of the Ship Combat rules to benefit from this focus. \n\n  Level 1: Gain Lead as a bonus skill. Your ship gains 2 extra Command Points at the start of each turn. \n\n Level 2: A ship you captain gains bonus hit points equal to 20% of its maximum at the start of each combat. Damage is taken from these bonus points first, and they vanish at the end of the fight and do not require repairs to replenish before the next. In addition, once per engagement, you may resolve a Crisis as an Instant action by explaining how your leadership resolves the problem.",
+                bonus: "lead"
             },
             {
                 title: "Starfarer",
                 value: "starfarer",
                 desc:
-                    "You are an expert in the plotting and execution of interstellar spike drills. While most experienced pilots can manage conventional drills along well-charted spike routes, you have the knack for forging new drill paths and cutting courses too dangerous for lesser navigators. \n\nLevel 1: Gain Pilot as a bonus skill. You automatically succeed at all spike drill-related skill checks of difficulty 10 or less. \n\nLevel 2: Double your Pilot skill for all spike drill-related skill checks. Spike drives of ships you navigate are treated as one level higher; thus, a drive-1 is treated as a drive-2, up to a maximum of drive-7. Spike drills you personally oversee take only half the time they would otherwise require."
+                    "You are an expert in the plotting and execution of interstellar spike drills. While most experienced pilots can manage conventional drills along well-charted spike routes, you have the knack for forging new drill paths and cutting courses too dangerous for lesser navigators. \n\nLevel 1: Gain Pilot as a bonus skill. You automatically succeed at all spike drill-related skill checks of difficulty 10 or less. \n\nLevel 2: Double your Pilot skill for all spike drill-related skill checks. Spike drives of ships you navigate are treated as one level higher; thus, a drive-1 is treated as a drive-2, up to a maximum of drive-7. Spike drills you personally oversee take only half the time they would otherwise require.",
+                bonus: "pilot"
             },
             {
                 title: "Tinker",
                 value: "tinker",
                 desc:
-                    "You have a natural knack for modifying and improving equipment, as given in the rules on page 90. \n\n Level 1: Gain Fix as a bonus skill. Your Maintenance score is doubled, allowing you to maintain twice as many mods. Both ship and gear mods cost only half their usual price in credits, though pre-tech salvage requirements remain the same. \n\n Level 2: Your Fix skill is treated as one level higher for purposes of building and maintaining mods and calculating your Maintenance score. Advanced mods require one fewer pre-tech salvage part to make, down to a minimum of zero."
+                    "You have a natural knack for modifying and improving equipment, as given in the rules on page 90. \n\n Level 1: Gain Fix as a bonus skill. Your Maintenance score is doubled, allowing you to maintain twice as many mods. Both ship and gear mods cost only half their usual price in credits, though pre-tech salvage requirements remain the same. \n\n Level 2: Your Fix skill is treated as one level higher for purposes of building and maintaining mods and calculating your Maintenance score. Advanced mods require one fewer pre-tech salvage part to make, down to a minimum of zero.",
+                bonus: "fix"
             },
             {
                 title: "Unique Gift",
                 value: "uniqueGift",
                 desc:
-                    "Whether due to exotic technological augmentation, a unique transhuman background, or a remarkable human talent, you have the ability to do something that’s simply impossible for a normal human. This is a special focus that serves as a catch-all for some novel power or background perk that doesn’t have a convenient fit in the existing rules. A transhuman who can function normally in lethal environments, a nanotech-laden experimental subject with a head full of exotic sensors, or a brilliant gravitic scientist who can fly thanks to their personal tech might all take this focus to cover their special abilities. It’s up to the GM to decide what’s reasonable and fair to be covered under this gift. If an ability is particularly powerful, it might require the user to take System Strain to use it, as described on page 32. As a general rule, this ability should be better than a piece of gear the PC could buy for credits. The player is spending a very limited resource when they make this focus pick, so what they get should be good enough that they can’t just duplicate it with a fat bank account."
+                    "Whether due to exotic technological augmentation, a unique transhuman background, or a remarkable human talent, you have the ability to do something that’s simply impossible for a normal human. This is a special focus that serves as a catch-all for some novel power or background perk that doesn’t have a convenient fit in the existing rules. A transhuman who can function normally in lethal environments, a nanotech-laden experimental subject with a head full of exotic sensors, or a brilliant gravitic scientist who can fly thanks to their personal tech might all take this focus to cover their special abilities. It’s up to the GM to decide what’s reasonable and fair to be covered under this gift. If an ability is particularly powerful, it might require the user to take System Strain to use it, as described on page 32. As a general rule, this ability should be better than a piece of gear the PC could buy for credits. The player is spending a very limited resource when they make this focus pick, so what they get should be good enough that they can’t just duplicate it with a fat bank account.",
+                bonus: "empty"
             },
             {
                 title: "Wanderer",
                 value: "wanderer",
                 desc:
-                    "Your hero gets around. As part of life on the road, they’ve mastered several tricks for ensuring their mobility and surviving the inevitable difficulties of vagabond existence. \n\n Level 1: Gain Survive as a bonus skill. You can convey basic ideas in all the common languages of the sector. You can always find free transport to the desired destination for yourself and a small group of your friends provided any traffic goes to the place. Finding this transport takes no more than an hour, but it may not be a strictly legitimate means of travel and may require working passage. \n\n Level 2: You can forge, scrounge, or snag travel papers and identification for the party with 1d6 hours of work. These papers and permits will stand up to ordinary scrutiny, but require an opposed Int/ Administer versus Wis/Notice check if examined by an official while the PC is actually wanted by the state for some crime. When finding transport for the party, the transportation always makes the trip at least as fast as a dedicated charter would."
+                    "Your hero gets around. As part of life on the road, they’ve mastered several tricks for ensuring their mobility and surviving the inevitable difficulties of vagabond existence. \n\n Level 1: Gain Survive as a bonus skill. You can convey basic ideas in all the common languages of the sector. You can always find free transport to the desired destination for yourself and a small group of your friends provided any traffic goes to the place. Finding this transport takes no more than an hour, but it may not be a strictly legitimate means of travel and may require working passage. \n\n Level 2: You can forge, scrounge, or snag travel papers and identification for the party with 1d6 hours of work. These papers and permits will stand up to ordinary scrutiny, but require an opposed Int/ Administer versus Wis/Notice check if examined by an official while the PC is actually wanted by the state for some crime. When finding transport for the party, the transportation always makes the trip at least as fast as a dedicated charter would.",
+                bonus: "survive"
             }
         ],
         Combat_Foci: [
@@ -1576,61 +1597,71 @@ var fociList = [
                 title: "Armsman",
                 value: "armsman",
                 desc:
-                    "You have an unusual competence with thrown weaponsand melee attacks. This focus’ benefits do not applyto unarmed attacks or projectile weapons. For thrownweapons, you can’t use the benefits of the Armsmanfocus at the same time as Gunslinger. \n\n Level 1: Gain Stab as a bonus skill. You can draw orsheath a Stowed melee or thrown weapon as anInstant action. You may add your Stab skill level toa melee or thrown weapon’s damage roll or Shockdamage, assuming it has any to begin with.\n\n Level 2: Your primitive melee and thrown weaponscount as TL4 weapons for the purpose of overcomingadvanced armors. Even on a miss with amelee weapon, you do an unmodified 1d4 damageto the target, plus any Shock damage. This bonusdamage doesn’t apply to thrown weapons or attacksthat use the Punch skill."
+                    "You have an unusual competence with thrown weaponsand melee attacks. This focus’ benefits do not applyto unarmed attacks or projectile weapons. For thrownweapons, you can’t use the benefits of the Armsmanfocus at the same time as Gunslinger. \n\n Level 1: Gain Stab as a bonus skill. You can draw orsheath a Stowed melee or thrown weapon as anInstant action. You may add your Stab skill level toa melee or thrown weapon’s damage roll or Shockdamage, assuming it has any to begin with.\n\n Level 2: Your primitive melee and thrown weaponscount as TL4 weapons for the purpose of overcomingadvanced armors. Even on a miss with amelee weapon, you do an unmodified 1d4 damageto the target, plus any Shock damage. This bonusdamage doesn’t apply to thrown weapons or attacksthat use the Punch skill.",
+                    bonus: "stab"
             },
             {
                 title: "Assassin",
                 value: "assassin",
                 desc:
-                    "You are practised at sudden murder and have certain advantages in carrying out an Execution Attack as described in the rules on page 52. \n\n Level 1: Gain Sneak as a bonus skill. You can conceal an object no larger than a knife or pistol from anything less invasive than a strip search, including normal TL4 weapon detection devices. You can draw or produce this object as an On Turn action, and your point-blank ranged attacks made from surprise with it cannot miss the target. \n\n Level 2: You can take a Move action on the same round as you make an Execution Attack, closing rapidly with a target before you attack. You may split this Move action when making an Execution Attack, taking part of it before you murder your target and part of it afterwards. This movement happens too quickly to alert a victim or to be hindered by bodyguards, barring an actual physical wall of meat between you and your prey."
+                    "You are practised at sudden murder and have certain advantages in carrying out an Execution Attack as described in the rules on page 52. \n\n Level 1: Gain Sneak as a bonus skill. You can conceal an object no larger than a knife or pistol from anything less invasive than a strip search, including normal TL4 weapon detection devices. You can draw or produce this object as an On Turn action, and your point-blank ranged attacks made from surprise with it cannot miss the target. \n\n Level 2: You can take a Move action on the same round as you make an Execution Attack, closing rapidly with a target before you attack. You may split this Move action when making an Execution Attack, taking part of it before you murder your target and part of it afterwards. This movement happens too quickly to alert a victim or to be hindered by bodyguards, barring an actual physical wall of meat between you and your prey.",
+                    bonus: "sneak"
             },
             {
                 title: "Close Combatant",
                 value: "closeCombatant",
                 desc:
-                    "You’ve had all too much practice at close-in fighting and desperate struggles with pistol or blade. You’re extremely skilled at avoiding injury in melee combat, and at level 2 you can dodge through a melee scrum without fear of being knifed in passing. \n\n Level 1: Gain any combat skill as a bonus skill. You can use pistol-sized ranged weapons in melee without suffering penalties for the proximity of melee attackers. You ignore Shock damage from melee assailants, even if you’re unarmored at the time. \n\n Level 2: The Shock damage from your melee attacks treats all targets as if they were AC 10. The Fighting Withdrawal combat action is treated as an On Turn action for you and can be performed freely."
+                    "You’ve had all too much practice at close-in fighting and desperate struggles with pistol or blade. You’re extremely skilled at avoiding injury in melee combat, and at level 2 you can dodge through a melee scrum without fear of being knifed in passing. \n\n Level 1: Gain any combat skill as a bonus skill. You can use pistol-sized ranged weapons in melee without suffering penalties for the proximity of melee attackers. You ignore Shock damage from melee assailants, even if you’re unarmored at the time. \n\n Level 2: The Shock damage from your melee attacks treats all targets as if they were AC 10. The Fighting Withdrawal combat action is treated as an On Turn action for you and can be performed freely.",
+                    bonus:"anyCombat"
             },
             {
                 title: "Die Hard",
                 value: "dieHard",
                 desc:
-                    "You are surprisingly hard to kill. You can survive injuries or bear up under stresses that would incapacitate a less determined hero. \n\n Level 1: You gain an extra 2 maximum hit points per level. This bonus applies retroactively if you take this focus after the first level. You automatically stabilize if mortally wounded by anything smaller than a Heavy weapon. \n\n Level 2: The first time each day that you are reduced to zero hit points by an injury, you instead survive with one hit point remaining. This ability can’t save you from Heavy weapons or similar trauma."
+                    "You are surprisingly hard to kill. You can survive injuries or bear up under stresses that would incapacitate a less determined hero. \n\n Level 1: You gain an extra 2 maximum hit points per level. This bonus applies retroactively if you take this focus after the first level. You automatically stabilize if mortally wounded by anything smaller than a Heavy weapon. \n\n Level 2: The first time each day that you are reduced to zero hit points by an injury, you instead survive with one hit point remaining. This ability can’t save you from Heavy weapons or similar trauma.",
+                    bonus: "empty"
             },
             {
                 title: "Gunslinger",
                 value: "gunslinger",
                 desc:
-                    "You have a gift with a gun. While this talent most commonly applies to slugthrowers or energy weapons, it is also applicable to thrown weapons, bows, or other ranged weapons that can be used with the Shoot skill. For thrown weapons, you can’t use the benefits of the Armsman focus at the same time as Gunslinger. \n\n Level 1: Gain Shoot as a bonus skill. You can draw or holster a Stowed ranged weapon as an On Turn action. You may add your Shoot skill level to a ranged weapon’s damage roll. \n\n Level 2: Once per round, you can reload a ranged weapon as an On Turn action if it takes no more than one round to reload. Even on a miss with a Shoot attack, you do unmodified 1d4 damage."
+                    "You have a gift with a gun. While this talent most commonly applies to slugthrowers or energy weapons, it is also applicable to thrown weapons, bows, or other ranged weapons that can be used with the Shoot skill. For thrown weapons, you can’t use the benefits of the Armsman focus at the same time as Gunslinger. \n\n Level 1: Gain Shoot as a bonus skill. You can draw or holster a Stowed ranged weapon as an On Turn action. You may add your Shoot skill level to a ranged weapon’s damage roll. \n\n Level 2: Once per round, you can reload a ranged weapon as an On Turn action if it takes no more than one round to reload. Even on a miss with a Shoot attack, you do unmodified 1d4 damage.",
+                    bonus: "shoot"
             },
             {
                 title: "Ironhide",
                 value: "ironhide",
                 desc:
-                    "Ironhide Whether through uncanny reflexes, remarkable luck, gengineered skin fibres, or subtle telekinetic shielding, you have natural defences equivalent to high-quality combat armour. The benefits of this focus don’t stack with armour, though Dexterity or shield modifiers apply. \n\n Level 1: You have an innate Armor Class of 15 plus half your character level, rounded up. \n\n Level 2: Your abilities are so effective that they render you immune to unarmed attacks or primitive weaponry as if you wore powered armour."
+                    "Ironhide Whether through uncanny reflexes, remarkable luck, gengineered skin fibres, or subtle telekinetic shielding, you have natural defences equivalent to high-quality combat armour. The benefits of this focus don’t stack with armour, though Dexterity or shield modifiers apply. \n\n Level 1: You have an innate Armor Class of 15 plus half your character level, rounded up. \n\n Level 2: Your abilities are so effective that they render you immune to unarmed attacks or primitive weaponry as if you wore powered armour.",
+                bonus: "empty"
             },
             {
                 title: "Savage Fray",
                 value: "savageFray",
                 desc:
-                    "You are a whirlwind of bloody havoc in melee combat and can survive being surrounded far better than most combatants. \n\n Level 1: Gain Stab as a bonus skill. All enemies adjacent to you at the end of your turn whom you have not attacked suffer the Shock damage of your weapon if their Armor Class is not too high to be affected. \n\n Level 2: After suffering your first melee hit in a round, any further melee attacks from other assailants automatically miss you. If the attacker who hits you has multiple attacks, they may attempt all of them, but other foes around you simply miss."
+                    "You are a whirlwind of bloody havoc in melee combat and can survive being surrounded far better than most combatants. \n\n Level 1: Gain Stab as a bonus skill. All enemies adjacent to you at the end of your turn whom you have not attacked suffer the Shock damage of your weapon if their Armor Class is not too high to be affected. \n\n Level 2: After suffering your first melee hit in a round, any further melee attacks from other assailants automatically miss you. If the attacker who hits you has multiple attacks, they may attempt all of them, but other foes around you simply miss.",
+                bonus: "stab"
             },
             {
                 title: "Shocking Assault",
                 value: "shockingAssault",
                 desc:
-                    "You’re extremely dangerous to enemies around you. The ferocity of your melee attacks stresses and distracts enemies even when your blows don’t draw blood. \n\n Level 1: Gain Punch or Stab as a bonus skill. The Shock damage of your weapon treats all targets as if they were AC 10, assuming your weapon is capable of harming the target in the first place. \n\n Level 2: In addition, you gain a +2 bonus to the Shock damage rating of all melee weapons and unarmed attacks. Regular hits never do less damage than this Shock would do on a miss."
+                    "You’re extremely dangerous to enemies around you. The ferocity of your melee attacks stresses and distracts enemies even when your blows don’t draw blood. \n\n Level 1: Gain Punch or Stab as a bonus skill. The Shock damage of your weapon treats all targets as if they were AC 10, assuming your weapon is capable of harming the target in the first place. \n\n Level 2: In addition, you gain a +2 bonus to the Shock damage rating of all melee weapons and unarmed attacks. Regular hits never do less damage than this Shock would do on a miss.",
+                bonus:"anyCombat"
             },
             {
                 title: "Sniper",
                 value: "sniper",
                 desc:
-                    "You are an expert at placing a bullet or beam on an unsuspecting target. These special benefits only apply when making an Execution Attack with a firearm or bow, as described on page 52. \n\n Level 1: Gain Shoot as a bonus skill. When making a skill check for an Execution Attack or target shooting, roll 3d6 and drop the lowest die. \n\n Level 2: A target hit by your Execution Attack takes a -4 penalty on the Physical saving throw to avoid immediate mortal injury. Even if the save is successful, the target takes double the normal damage inflicted by the attack."
+                    "You are an expert at placing a bullet or beam on an unsuspecting target. These special benefits only apply when making an Execution Attack with a firearm or bow, as described on page 52. \n\n Level 1: Gain Shoot as a bonus skill. When making a skill check for an Execution Attack or target shooting, roll 3d6 and drop the lowest die. \n\n Level 2: A target hit by your Execution Attack takes a -4 penalty on the Physical saving throw to avoid immediate mortal injury. Even if the save is successful, the target takes double the normal damage inflicted by the attack.",
+                bonus: "shoot"
             },
             {
                 title: "Unarmed Combatant",
                 value: "unarmedCombatant",
                 desc:
-                    "Your empty hands are more dangerous than knives and guns in the grip of the less gifted. Your unarmed attacks are counted as melee weapons when it comes to binding up opponents wielding rifles and similar long arms, though you need at least one hand free to do so. \n\n Level 1: Gain Punch as a bonus skill. Your unarmed attacks become more dangerous as your Punch skill increases. At level-0, they do 1d6 damage. At level-1, they do 1d8 damage. At level-2 they do 1d10, level-3 does 1d12, and level-4 does 1d12+1. At Punch-1 or better, they have the Shock quality equal to your Punch skill against AC 15 or less. While you normally add your Punch skill level to any unarmed damage, don’t add it twice to this Shock damage. \n\n Level 2: You know locks and twists that use powered servos against their wearer. Your unarmed attacks count as TL4 weapons to overcome advanced armours. Even on a miss with a Punch attack, you do an unmodified 1d6 damage."
+                    "Your empty hands are more dangerous than knives and guns in the grip of the less gifted. Your unarmed attacks are counted as melee weapons when it comes to binding up opponents wielding rifles and similar long arms, though you need at least one hand free to do so. \n\n Level 1: Gain Punch as a bonus skill. Your unarmed attacks become more dangerous as your Punch skill increases. At level-0, they do 1d6 damage. At level-1, they do 1d8 damage. At level-2 they do 1d10, level-3 does 1d12, and level-4 does 1d12+1. At Punch-1 or better, they have the Shock quality equal to your Punch skill against AC 15 or less. While you normally add your Punch skill level to any unarmed damage, don’t add it twice to this Shock damage. \n\n Level 2: You know locks and twists that use powered servos against their wearer. Your unarmed attacks count as TL4 weapons to overcome advanced armours. Even on a miss with a Punch attack, you do an unmodified 1d6 damage.",
+                    bonus: "punch"
             }
         ],
         Psionic_Foci: [
@@ -1638,13 +1669,15 @@ var fociList = [
                 title: "Psychic Training",
                 value: "psychicTraining",
                 desc:
-                    "You’ve had special training in a particular psychic discipline. You must be a Psychic or have taken the Partial Psychic class option as an Adventurer to pick this focus. In the latter case, you can only take training in the discipline you initially chose as a Partial Psychic. As with most foci, this focus can be taken only once. \n\n Level 1: Gain any psychic skill as a bonus. If this improves it to level-1 proficiency, choose a free level- 1 technique from that discipline. Your maximum Effort increases by one. \n\n Level 2: When you advance a level, the bonus psychic skill you chose for the first level of the focus automatically gets one skill point put toward increasing it or purchasing a technique from it. You may save these points for later if more is required to raise the skill or buy a particular technique. These points are awarded retroactively if you take this focus level later in the game."
+                    "You’ve had special training in a particular psychic discipline. You must be a Psychic or have taken the Partial Psychic class option as an Adventurer to pick this focus. In the latter case, you can only take training in the discipline you initially chose as a Partial Psychic. As with most foci, this focus can be taken only once. \n\n Level 1: Gain any psychic skill as a bonus. If this improves it to level-1 proficiency, choose a free level- 1 technique from that discipline. Your maximum Effort increases by one. \n\n Level 2: When you advance a level, the bonus psychic skill you chose for the first level of the focus automatically gets one skill point put toward increasing it or purchasing a technique from it. You may save these points for later if more is required to raise the skill or buy a particular technique. These points are awarded retroactively if you take this focus level later in the game.",
+                    bonus: "empty"
             },
             {
-                title: "Unique Gift",
-                value: "uniqueGift",
+                title: "Wild Psychic Talent",
+                value: "wildPsi",
                 desc:
-                    "Whether due to exotic technological augmentation, a unique transhuman background, or a remarkable human talent, you have the ability to do something that’s simply impossible for a normal human. This is a special focus that serves as a catch-all for some novel power or background perk that doesn’t have a convenient fit in the existing rules. A transhuman who can function normally in lethal environments, a nanotech-laden experimental subject with a head full of exotic sensors, or a brilliant gravitic scientist who can fly thanks to their personal tech might all take this focus to cover their special abilities. It’s up to the GM to decide what’s reasonable and fair to be covered under this gift. If an ability is particularly powerful, it might require the user to take System Strain to use it, as described on page 32. As a general rule, this ability should be better than a piece of gear the PC could buy for credits. The player is spending a very limited resource when they make this focus pick, so what they get should be good enough that they can’t just duplicate it with a fat bank account."
+                    "Some men and women are born with a very limited form of MES, the mental condition that allows for the use of psychic powers. While these people are not true psychics, these “wild talents” can create one limited psychic effect. Training is not always required to develop this ability, and their MES is so mild that they don’t suffer the risk of madness or brain damage that more developed psychics risk should they use their powers without proper training. Wild talents are not treated as psychics for general purposes and cannot “torch” their powers. When relevant, they are treated as having one point of Effort. Psychics and Partial Psychics cannot take this focus.\n\n Level 1: Pick a psychic discipline. You gain an ability equivalent to the level-0 core power of that discipline. Optionally, you may instead pick a level-1 technique from that discipline, but that technique must stand alone; you can’t pick one that augments another technique or core ability. For example, you could pick the Telekinetic Armory technique from Telekinesis, because that ability does not require the use of any other Telekinesis power. You could not pick the Mastered Succor ability from Biopsionics, because that technique is meant to augment another power you don’t have.\n\n Level 2: You now have a maximum Effort of two points. You may pick a second ability according to the guidelines above. This second does not need to be a stand-alone technique if it augments the power you chose for level 1 of this focus. Thus, if your first pick was gaining the level-0 power of Psychic Succor, your second could be Mastered Succor. You still could not get the level-1 core power of Psychic Succor, however, as you’re still restricted to level-0. ",
+                    bonus: "empty"
             }
         ],
         Origin_Foci: [
@@ -1652,19 +1685,22 @@ var fociList = [
                 title: "VI Android",
                 value: "androidVI",
                 desc:
-                    "You were built as an android, a robot indistinguishable from a human without a medical-grade inspection. Most androids are “companion” bots, though other VIs with roles that involve significant human interaction may also be built as androids. Minor scuffs and cuts don’t reveal your robotic nature but are reduced to zero hit points, your unnatural innards are obvious. \n\n Level 1: Gain a bonus skill related to your intended function. You have all the usual traits and abilities of a VI robot."
+                    "You were built as an android, a robot indistinguishable from a human without a medical-grade inspection. Most androids are “companion” bots, though other VIs with roles that involve significant human interaction may also be built as androids. Minor scuffs and cuts don’t reveal your robotic nature but are reduced to zero hit points, your unnatural innards are obvious. \n\n Level 1: Gain a bonus skill related to your intended function. You have all the usual traits and abilities of a VI robot.",
+                    bonus: "anyNormal"
             },
             {
                 title: "VI Worker Bot",
                 value: "workerVI",
                 desc:
-                    "You were built for industrial or technical labour, where a human face was an unnecessary luxury. Most such VI bots are humanoid if only to more conveniently manipulate human-scale devices, but their inhuman nature is obvious. \n\n Level 1: Gain a bonus skill related to your intended function. Choose an attribute associated with your work and gain a +1 bonus to its modifier, up to a maximum of +2. You have all the usual traits and abilities of a VI robot."
+                    "You were built for industrial or technical labour, where a human face was an unnecessary luxury. Most such VI bots are humanoid if only to more conveniently manipulate human-scale devices, but their inhuman nature is obvious. \n\n Level 1: Gain a bonus skill related to your intended function. Choose an attribute associated with your work and gain a +1 bonus to its modifier, up to a maximum of +2. You have all the usual traits and abilities of a VI robot.",
+                    bonus: "anyNormal"
             },
             {
                 title: "VI Vehicle Bot",
                 value: "vehicleVI",
                 desc:
-                    "Some VIs were instantiated in actual vehicles rather than conventional humanoid bodies. Most were purely synthetic in origins, but some sectors retain the techniques for brain transplants into non-human bodies. Some policies have been known to conduct full-body cyberneticization of soldiers into tanks, warships, attack helicopters, and other military vehicles. As a vehicle, you are usually equipped with manipulator arms that can be used on adjacent objects. You may operate the individual elements of your vehicle as if they were your own limbs, attacking once per round with a mounted weapon of your choice. \n\n Level 1: Gain Pilot as a bonus skill. Pick a vehicle acceptable to the GM, usually a drone, hoverbike or grav-car. You become that vehicle. You retain your usual attributes but gain the vehicle’s Armor score. You are Armor Class 10, modified by your Dexterity score. A technician can improve your Armor Class by aftermarket modifications, adding up to three times their Fix skill to your Armor Class for 1,000 credits per point of improvement. You use the vehicle’s hit points until your own normally-rolled hit point score exceeds that number. Many VI vehicles purchase a drone or humanoid robot body to carry on board and employ for remote operation in areas unsuitable for a vehicle; you can pilot a single surrogate body in place of your own Main Action, provided there’s no ECM to jam the control transmissions."
+                    "Some VIs were instantiated in actual vehicles rather than conventional humanoid bodies. Most were purely synthetic in origins, but some sectors retain the techniques for brain transplants into non-human bodies. Some policies have been known to conduct full-body cyberneticization of soldiers into tanks, warships, attack helicopters, and other military vehicles. As a vehicle, you are usually equipped with manipulator arms that can be used on adjacent objects. You may operate the individual elements of your vehicle as if they were your own limbs, attacking once per round with a mounted weapon of your choice. \n\n Level 1: Gain Pilot as a bonus skill. Pick a vehicle acceptable to the GM, usually a drone, hoverbike or grav-car. You become that vehicle. You retain your usual attributes but gain the vehicle’s Armor score. You are Armor Class 10, modified by your Dexterity score. A technician can improve your Armor Class by aftermarket modifications, adding up to three times their Fix skill to your Armor Class for 1,000 credits per point of improvement. You use the vehicle’s hit points until your own normally-rolled hit point score exceeds that number. Many VI vehicles purchase a drone or humanoid robot body to carry on board and employ for remote operation in areas unsuitable for a vehicle; you can pilot a single surrogate body in place of your own Main Action, provided there’s no ECM to jam the control transmissions.",
+                    bonus: "pilot"
             }
         ]
     }
@@ -3791,26 +3827,27 @@ function getIndex(data, match) {
 // Updates background free skill and background info.
 function BackInfo(childID, selectID) {
     
-    var match = document.getElementById(selectID).value;
-    var data = backgroundList[0]["Select a Background"];
-    var index = getIndex(data, match);
-    var info = backgroundList[0]["Select a Background"][index].desc;
-    var title = backgroundList[0]["Select a Background"][index].title;
-    document.getElementById("initSkill4").value = "empty";
-        document.getElementById("initSkill7").value = "empty";
+    var match = document.getElementById(selectID).value; // Get selected background value.
+    var data = backgroundList[0]["Select a Background"]; // Get background data array list. 
+    var index = getIndex(data, match); // Find matching background in data array
+    var info = backgroundList[0]["Select a Background"][index].desc; // Get background description
+    var title = backgroundList[0]["Select a Background"][index].title; // Get background title
+    document.getElementById("initSkill4").value = "empty"; // Clear background skill fields.
+        document.getElementById("initSkill7").value = "empty"; //^
+        // Check if selected background allows any skill pick.
     if (backgroundList[0]["Select a Background"][index].bonus === "any") {
-        $(".backgroundSkill").show();
+        $(".backgroundSkill").show(); // Show 'any' background skill select field
     } else {
         
-        var bonusSkill = backgroundList[0]["Select a Background"][index].bonus;
-        document.getElementById("initSkill4").value = bonusSkill;
-        $(".backgroundSkill").hide();
+        var bonusSkill = backgroundList[0]["Select a Background"][index].bonus; // Get background free skill name.
+        document.getElementById("initSkill4").value = bonusSkill; // Assign free skill.
+        $(".backgroundSkill").hide(); // Hide 'any' background skill select field.
     }
-    addLearnSkillBonus();
-    document.getElementById(childID).setAttribute("data-desc",info);
-    document.getElementById(childID).setAttribute("data-name",title);
+    addLearnSkillBonus(); // Update skill bonuses
+    document.getElementById(childID).setAttribute("data-desc",info); // Store background description.
+    document.getElementById(childID).setAttribute("data-name",title); // Store backgorund title.
 
-    clearSelection();
+    clearSelection(); // clear text selection
 }
 
 // Updates class abilities and associated skill points, foci points, and attack bonuses.
@@ -3836,9 +3873,15 @@ function classInfo(childID, selectID) {
         $(".classSkill1").show();
                 $(".isPsi").show();
                 $(".classSkill2").show();
-    } else if ((playerClass === "adventurerEP")||(playerClass === "adventurerPW")||(playerClass === "adventurerPTAI")){
-        $(".classSkill1").show();
+    } else if ((playerClass === "adventurerEP")||(playerClass === "adventurerPW")||(playerClass === "adventurerPTAI")||document.getElementById("psiFocus").checked){
+
         $(".classSkill2").hide();
+        if (document.getElementById("isWildPsi").checked === false){
+            $(".classSkill1").show();
+        }
+        else{
+            $(".classSkill1").hide();
+        }
         $(".isPsi").show();
     }
             else{
@@ -4399,6 +4442,14 @@ selectOptionTable(fociList, "#Foci3");
 selectOptionTable(fociList, "#Foci4");
 selectOptionTable(fociList, "#Foci5");
 selectOptionTable(fociList, "#Foci6");
+
+selectOptionTable(skillList,"#initSkill10");
+selectOptionTable(skillList,"#initSkill11");
+selectOptionTable(skillList,"#initSkill12");
+selectOptionTable(skillList,"#initSkill13");
+selectOptionTable(skillList,"#initSkill14");
+selectOptionTable(skillList,"#initSkill15");
+selectOptionTable(skillList,"#initSkill16");
     
 // Populate Skill Learning Select Tables
 optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill1");
@@ -4435,33 +4486,7 @@ optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill9"
 optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill9");
 optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill9");
     
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill10");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill10");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill10");
     
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill11");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill11");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill11");
-    
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill12");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill12");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill12");
-    
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill13");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill13");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill13");
-    
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill14");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill14");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill14");
-    
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill15");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill15");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill15");
-    
-        optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill16");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill16");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill16");
     
 for(i=1;i<6;i++){
     var element = document.getElementById("deathBox"+i);
@@ -4635,8 +4660,91 @@ function navigateToHelpText(targetId){
     
     var target = document.getElementsByName(targetId)[0];
     target.classList.add('item-highlight');
-    console.log(target);
     //document.getElementById(targetId).addEventListener('animationend', () => {
        // document.getElementById(targetId).classList.remove('item-highlight');
     //});
 }
+
+// This function checks what foci are selected and if any abilities/skills need to be unlocked.
+function checkFoci(){
+    var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array
+    // Check every focus field (1 to 6)
+    var isPsi = false;
+    document.getElementById("isWildPsi").checked = false;
+                        document.getElementById("wildEffort").value = 0;
+                        document.getElementById("isTrainedPsi").checked = false;
+                        document.getElementById("trainedEffort").value = 0;
+    for (var num = 1; num < 7; num++){
+        var focus = document.getElementById("Foci" + num); // get the focus select field element.
+        var index = -1;
+        // Cycle through every foci subset.
+        for (var i = 0; i < opGroup.length; i++) {
+            var groupIndex = opGroup[i]; // Get foci array data subset.
+            index = getIndex(fociList[0][groupIndex], focus.value); // Get array index if foci matches data array entry.
+            
+            // Check if match index is found.
+            if (index > -1) {
+                var focusLevel = parseInt(document.getElementById("FociLevel"+num).value);
+                // Check for psi foci
+                    
+                     // Check hidden element to indicate psionic focus is present.
+                    if(focus.value==="wildPsi"){
+                        document.getElementById("isWildPsi").checked = true;
+                        document.getElementById("wildEffort").value = focusLevel;
+                        isPsi = true;
+                    }
+                    else if (focus.value === "psychicTraining"){
+                        document.getElementById("isTrainedPsi").checked = true;
+                        document.getElementById("trainedEffort").value = focusLevel;
+                        isPsi = true;
+                    }
+
+                var bonusSkill = fociList[0][groupIndex][index].bonus; // get focus description
+                var focusSkillField = document.getElementsByName("fociSkill" + num)[0];
+                var focusSkillRow = document.getElementsByName("fociSkillRow" + num)[0];
+                
+                focusSkillField.value = "empty";
+                removeOptions(focusSkillField);
+                focusSkillRow.style.display = 'table-cell';
+                if ((bonusSkill === "anyCombat") && (focusLevel > 0)){
+                    // Populate Starting Psi Skill Select Tables
+optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
+optionTablePartial("Psychic Skills",skillList[0]["Combat Skills"],"#" + focusSkillField.id);
+                }
+                else if((bonusSkill === "anyNormal") && (focusLevel > 0)){
+                    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
+                    optionTablePartial("Psychic Skills",skillList[0]["Non-Combat Skills"],"#" + focusSkillField.id);
+                }
+                else if(bonusSkill === "anyPsi"  && (focusLevel > 0)){
+                    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
+                    optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#" + focusSkillField.id);
+                }
+                else{
+                    selectOptionTable(skillList,"#" + focusSkillField.id);
+                    if (focusLevel > 0){
+                    focusSkillField.value = bonusSkill;
+                    }
+                    else{
+                        focusSkillField.value = "empty";
+                    }
+                    focusSkillRow.style.display = 'none';
+                }
+
+
+                
+
+            }
+            
+        }
+    }
+
+                document.getElementById("psiFocus").checked = isPsi;
+                classInfo("classDesc","playerClass"); // Call function to update abiltiies.
+                
+}
+ // Clear select options list.
+function removeOptions(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+ }
