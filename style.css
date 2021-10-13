@@ -241,6 +241,23 @@ select {
     overflow:auto;
 }
 
+h2{
+    width: fit-content;
+}
+.fa-question-circle {
+    font-size:24px;
+    color: white;
+    outline: none !important;
+    border: 0px;
+
+
+}
+.fa-question-circle:active,.fa-question-circle:focus{
+    outline: none !important;
+    border: 0px;
+}
+
+
 h2 { 
     margin-left: auto;
     margin-right: auto;
@@ -391,15 +408,19 @@ optgroup {
 .helpPanel{
     display: inline-block;
     text-align: left !important;
-    margin: 0px;
+    margin: 10px;
 }
 
-.helpPanel h2,h6{
+.helpPanel h2,h4,h6{
     margin: 0px;
     text-decoration: underline;
 }
 .helpPanel p {
-    color: #00FFFF;
+    color: #00FFFF !important;
+}
+
+.helpPanel b{
+    color: red !important;
 }
 .collapsible {
     background-color: transparent;
@@ -598,11 +619,6 @@ hr.pageborder {
 
 }
 
-.box p{
-    display: inline-block;
-    margin: 10px;
-}
-
 @media only screen and (max-width: 768px) {
     
     .box, textarea{
@@ -791,6 +807,10 @@ position: relative;
 
 }
 
+.slidecontainer h2{
+    text-decoration: none;
+}
+
 .slidecontainer {
   width: 100%;
   display: inline-block;
@@ -827,3 +847,19 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: b
 input[type='range'].strainSlide::-webkit-slider-runnable-track{
     background-color: green;
 }
+
+/*Yellowfade animation*/
+
+@keyframes yellowfade {
+    from {
+      background: yellow;
+    }
+    to {
+      background: transparent;
+    }
+  }
+  
+  .item-highlight {
+    animation: yellowfade 1s;
+  }
+  

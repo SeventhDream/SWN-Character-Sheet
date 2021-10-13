@@ -4307,7 +4307,6 @@ function hideTabs(){
 
 // Reveal selected tab contents and hide all other tabs' contents.
 function openTab(evt, cityName) {
-    console.log("PING");
   hideTabs();
 
   // Show the current tab, and add an "active" class to the button that opened the tab
@@ -4629,8 +4628,15 @@ function clearSelection(){
 
 // ================================================================================
 
-function test(){
-    console.log("PONG");
+// Navigate to relevant help text paragraph
+function navigateToHelpText(targetId){
     var targetTab = document.getElementById("helpTabOpen");
     targetTab.click();
+    
+    var target = document.getElementsByName(targetId)[0];
+    target.classList.add('item-highlight');
+    console.log(target);
+    //document.getElementById(targetId).addEventListener('animationend', () => {
+       // document.getElementById(targetId).classList.remove('item-highlight');
+    //});
 }

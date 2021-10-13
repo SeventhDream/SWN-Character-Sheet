@@ -86,7 +86,7 @@
                         <div class="col-xs-4">
                             
                             <!--Character Bio Panel-->
-                            <h2 onclick="test();" title="Click to navigate to Help section.">Bio</h2>
+                            <h2>Bio <a href="#bioHelp"><i class="fa fa-question-circle interact" onclick="navigateToHelpText('bioHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <div class="bounding-box" url="">
                                 
                             </div>
@@ -1264,14 +1264,24 @@
                         <div class="col-xs-12 helpPanel">
                             <h2>WORK IN PROGRESS!</h2>
                             <br>
-                            <h2>1.0 About This Sheet</h2>
-                            <p>This dynamic character sheet is designed to streamline the process of creating and managing characters for the tabletop RPG, Stars Without Number.<br>HI</p>
+                            <h2>1.0 - About This Sheet</h2>
+                            <p>This dynamic character sheet is designed to streamline the process of creating and managing characters for the tabletop RPG, Stars Without Number.
                             <br>
-                            <h2>Character Creation</h2>
-                            <p>This is a guide to chracter creation using this chaarcter sheet</p>
+                            </p>
                             <br>
-                            <h2>Bio/Stats Page</h2>
-                           
+
+                            <h2>2.0 - Character Creation Guide</h2>
+                            <p>This section explains how to use this character sheet properly when intially creating your character.</p>
+
+                            <h4>2.1 - Base Attributes</h4>
+                            <p>Roll <b>3d6</b> for each of your <b>six attributes</b> or use an array of <b>14,12,11,10,9,7</b> to obtain your attribute scores. If you choose to roll your scores you may select <b>one</b> attribute to cchange to a score of <b>14</b>.<br><br>To assign your base attribute scores open the Attribute table drop-down row in the <b>Stats</b> section (see help section X) and enter the relevant attribute scores in to the <b>STR:, DEX:, CON:, INT:, WIS:, </b>and<b> CHA:</b> input fields respectively. Each attribute modifier is calculated automatically by the sheet. (A score of <b>3 = -2</b>, <b>4-7 = -1</b>, <b>8-13 = +0</b>, <b>14-17 = +1</b>, and <b>18 = +2</b>).</p>
+
+                            <h4>2.2 - Select Background</h4>
+                            <p>Pick a background from the drop-down select menu in the <b>Bio</b> section (see help section X) best reflects your character's past experiences. You automatically gain the selected background's associated free skill at level-0.</p>
+                            
+                            <h2>3.0 - Section Details</h2>
+                            <p>This section details the various functions of each tab and their contained sections within this dynamic character sheet.</p>
+                            <a id="bioHelp"><p name="bioHelpText">This is the Bio help paragraph</p></a>
                         </div>
                     </div>
                 </div>
