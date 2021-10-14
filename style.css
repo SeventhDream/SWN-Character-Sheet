@@ -392,6 +392,8 @@ button:focus {
     outline: none;
 }
 
+
+
 body {
     background-image: url("./img/Page_Background.jpeg");
       font-family: 'Noto Sans', 'Helvetica';
@@ -516,7 +518,7 @@ th {
     border-color: red;
 }
 
-.interact:hover{
+.interact:hover, .helpLink:hover{
     color: red !important;
     cursor: pointer;
 }
@@ -641,7 +643,7 @@ hr.pageborder {
     .box, textarea{
     overflow-x: scroll !important;
 
-}
+    }
 
 }
 
@@ -650,6 +652,10 @@ div.tab{
 
     top: 0;
     z-index: 500;
+}
+
+.indent{
+    margin-left: 40px;
 }
 
 /* Style the tab */

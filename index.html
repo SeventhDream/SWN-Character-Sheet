@@ -87,7 +87,7 @@
                         <div class="col-xs-4">
                             
                             <!--Character Bio Panel-->
-                            <h2>Bio <a href="#bioHelp"><i class="fa fa-question-circle interact" onclick="navigateToHelpText('bioHelpText');" title="Click to navigate to Help section."></i></a></h2>
+                            <h2>Bio <a href="#bioHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('bioHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <div class="bounding-box" url="">
                                 
                             </div>
@@ -1271,6 +1271,7 @@
                 <div id="helpTab" class="tabcontent">
                     <div class="row">
                         <div class="col-xs-12 helpPanel">
+                            
                             <h2>WORK IN PROGRESS!</h2>
                             <br>
                             <h2>1.0 - About This Sheet</h2>
@@ -1281,9 +1282,9 @@
 
                             <h2>2.0 - Character Creation Guide</h2>
                             <p>This section explains how to use this character sheet properly when intially creating your character.</p>
-
+                            <div class="indent">
                             <h4>2.1 - Base Attributes</h4>
-                            <p>Roll <b>3d6</b> for each of your <b>six attributes</b> or use an array of <b>14,12,11,10,9,7</b> to obtain your attribute scores. If you choose to roll your scores you may select <b>one</b> attribute to cchange to a score of <b>14</b>.<br><br>To assign your base attribute scores open the Attribute table drop-down row in the <b>Stats</b> section (see help section X) and enter the relevant attribute scores in to the <b>STR:, DEX:, CON:, INT:, WIS:, </b>and<b> CHA:</b> input fields respectively. Each attribute modifier is calculated automatically by the sheet.<br>(An attribute score of <b>3 = -2</b>, <b>4-7 = -1</b>, <b>8-13 = +0</b>, <b>14-17 = +1</b>, and <b>18 = +2</b>).</p>
+                            <p>Roll <b>3d6</b> for each of your <b>six attributes</b> or use an array of <b>14,12,11,10,9,7</b> to obtain your attribute scores. If you choose to roll your scores you may select <b>one</b> attribute to cchange to a score of <b>14</b>.<br><br>To assign your base attribute scores open the Attribute table drop-down row in the <b>Stats</b> section (see help section X) and enter the relevant attribute scores in to the <b>STR:, DEX:, CON:, INT:, WIS:, </b>and<b> CHA:</b> input fields respectively. Each attribute modifier is calculated automatically by the sheet.<br>(An attribute score of <b>3 = -2</b>, <b>4-7 = -1</b>, <b>8-13 = +0</b>, <b>14-17 = +1</b>, and <b>18 = +2</b>).<br><br> Saving Throw scores are calulated automatically by the dynamic character sheet in the <b>Stats:</b> section (see help section X). (Physical = 15 - max(StrMod,ConMod), Evasion = 15 - max(IntMod,DexMod), Mental = 15 - max(WisMod,ChaMod))</p>
 
                             <h4>2.2 - Select Background</h4>
                             <p>Pick a background from the drop-down select menu in the <b>Bio</b> section (see help section X) best reflects your character's past experiences. You immediately gain the selected background's associated free level-0 skill which is automatically updated in the <b>Skill</b> table (see help section X).</p>
@@ -1295,16 +1296,37 @@
                             <p>Choose a class from the drop-down menu in the <b>Bio</b> section (see help section X), representing your character's talents. This selection will automatically include any innate class bonuses into your attack modifier and/or reveal the appropriate tables in the <b>Abilities</b> section (see help section X).</p>
 
                             <h4>2.5 - Select Foci</h4>
-                            <p>You can pick ONE <b>level-1</b> focus from the drop-down select fields in the <b>Foci</b> table (see help section X) and set its level to 1 using the adjacent +/- increment buttons. Characters with the "Expert" class or the Adventurer class with the "Partial Expert" feature may choose either to increase their selected focus to <b>level-2</b> or instead pick and <b>additional focus</b> at level-1. Associated focus skils are automatically included in the <b>Skills</b> section (see help section X).<br><br><b>Origin Foci</b> have their own special rules and cannot be increased past <b>level-1</b></p>
+                            <p>You can pick ONE <b>level-1</b> focus from the drop-down select fields in the <b>Foci</b> table (see help section X) and set its level to 1 using the adjacent +/- increment buttons. Characters with the "Expert" class or the Adventurer class with the "Partial Expert" feature may choose either to increase their selected focus to <b>level-2</b> or instead pick and <b>additional focus</b> at level-1. Associated focus skils are automatically included in the <b>Skills</b> section (see help section X).<br><br><b>Asssociated focus skills will be automatically updated in the <b>Skills:</b> table (see help section X). Origin Foci</b> have their own special rules and cannot be increased past <b>level-1</b></p>
                             
-                            <h4>Select Interest Skill</h4>
-                            <p>You may pick pick one additional <b>non-psychic</b> skill from the "Interest Skill:" field located in the <b>Skills</b> section drop-down menu (see help section X). THis reflects your character's outside interests, hobby, talent, or natural focus.</p>
+                            <h4>2.6 - Select Interest Skill</h4>
+                            <p>You may pick pick one additional <b>non-psychic</b> skill from the "Interest Skill:" field located in the <b>Skills</b> section drop-down menu (see help section X). This reflects your character's outside interests, hobby, talent, or natural focus.</p>
 
+                            <h4>2.7 - Psychic Abilities</h4>
+                            <p>Psychics can pick <b>two level-0 psychic skills</b> from the drop-down row in the <b>Skills:</b> section table (see help section X), while adventurers with the partial psychic feature can pick only <b>one</b>. If the same skill is picked twice, it is increased to <b>level-1</b> and you may select a free <b>level-1 technique</b> for that discipline from the Psi Technique table in the <b>Abilities</b> section (see help section X).<br><br>The level-0 abilities associated with your selected psychic skills will be automatically updated in the Core Psychic Techniques table in the <b>Abilties</b> section (see help section X). All psychics hav a maximum effort score equal to <b>1 + the highest psychic skill + the highest of either your Wisdom or Consititution modifier</b>.<br><br> Characters with the <b>Trained Psychic</b> focus have <b>+1 Maximum Effort</b>. Characters with the <b>Wild Psionic Talent</b> focus have a <b>Maximum Effort = Wild Psionic Talent Level #No.</b>  </p>
+
+                            <h4>2.8 HP</h4>
+                            <p>To determine maximum hit points, roll <b>1d6 + Constitution modifier per level</b>. Warriors and partial warriors have <b>+ 2 hit points per level</b>. Enter this value in the <b>HP:</b> section (see help section X) by clicking the denominator to edit the number which will update the range slider.</p>
+
+                            <h4>2.9 - Starting Equipment</h4>
+                            <p>Choose an equipment package from <b>p.25</b> in the SWN rulebook, or roll <b>2d6 * 100</b> to determine your starting equipment. Enter your starting equipment and/or starting credits into the inventory tables in the <b>Inventory</b> section (see help section X).</p>
+
+                            <h4>2.10 - Attack Bonus</h4>
+                            <p>Your attack bonus equal to your <b>(Player Level)/2</b>. Warriors and partial warriors have an attack bonus equal to their <b>Player Level.</b> This is calculated automatically by the dynamic character sheet in  the <b> Stats</b> section (see help section X).</p>
+                            
+                            <h4>2.11 - Armor Class</h4>
+                            <p> Your armor class is equal to <b>10 + Dexterity Modifier</b> + any shield or armor bonuses from equipped items. This is calculated automatically by the dynamic character sheet in  the <b> Stats</b> section (see help section X).</p>
+</div>
                             <h2>3.0 - Section Details</h2>
                             <p>This section details the various functions of each tab and their contained sections within this dynamic character sheet.</p>
-                            <a id="bioHelp"><p name="bioHelpText">This is the Bio help paragraph</p></a>
+                            <div class="indent">
+                            <a id="bioHelp">
+                                <h4>3.1 - Bio Section</h4>
+                                <p name="bioHelpText">This is the Bio help paragraph</p>
+                            </a>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
 
             </div>
