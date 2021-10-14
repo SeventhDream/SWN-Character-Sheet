@@ -747,7 +747,7 @@ button:active {
 .saveUI {
   
   float: right !important;
-    margin-right: 0;
+    margin-right: 10px;
     
 }
 
