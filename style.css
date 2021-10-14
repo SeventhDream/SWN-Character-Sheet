@@ -637,6 +637,10 @@ hr.pageborder {
     margin-right: auto;
 
 }
+.box{
+    width: 100%;
+    margin-bottom: 10px;
+}
 
 @media only screen and (max-width: 768px) {
     
@@ -673,7 +677,7 @@ div.tab{
     -webkit-outline: 0;
     outline-color: solid black;
     border-color: solid black;
-height: auto;
+height: 60px;
   box-shadow: none;
     width: 100%;
   justify-content: center;
@@ -691,8 +695,8 @@ height: auto;
   color: #e0cd67;  
 
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+
+
     -moz-outline: 0;
     -ms-outline:0;
     -o-outline: 0;
@@ -714,6 +718,7 @@ height: auto;
 .tab button.active {
   background-color: #8B0000;
     outline: none !important;
+    
 }
 
 button, button:hover, button:focus,
@@ -742,7 +747,7 @@ button:active {
 .saveUI {
   
   float: right !important;
-
+    margin-right: 0;
     
 }
 
@@ -750,6 +755,9 @@ table .order-list{
     width: fit-content !important;
 }
 
+.tabUI{
+    overflow-x: scroll;
+}
 
 textarea::-webkit-scrollbar {
     display: none;
