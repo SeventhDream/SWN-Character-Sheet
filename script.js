@@ -295,7 +295,7 @@ function addItemRow(){
         cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
         cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance();" value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
         cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance(); storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#equipmentTable").append(newRow);
          selectOptionTable(equipmentList,"#itemList" + rowNum);
@@ -380,7 +380,7 @@ function addWeaponRow(){
         cols += '<td><input type="string"  id="weaponPrice' + weaponRowNum + '"/></td>';
         cols += '<td><input type="number" id="weaponWeight' + weaponRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="weaponStorage' + weaponRowNum + '" onchange="calculateEncumberance(); storageColour(weaponStorage'+weaponRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeWeapon'+weaponRowNum+'" class="ibtnDel" data-rownum="'+weaponRowNum+'" onclick="removeWeaponRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeWeapon'+weaponRowNum+'" class="ibtnDel" data-rownum="'+weaponRowNum+'" onclick="removeWeaponRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#weaponTable").append(newRow);
     
@@ -463,7 +463,7 @@ function addMeleeRow(){
         cols += '<td><input type="string"  id="meleePrice' + meleeRowNum + '"/></td>';
         cols += '<td><input type="number" id="meleeWeight' + meleeRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="meleeStorage' + meleeRowNum + '" onchange="calculateEncumberance(); storageColour(meleeStorage'+meleeRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeMelee'+meleeRowNum+'" class="ibtnDel" data-rownum="'+meleeRowNum+'" onclick="removeMeleeRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeMelee'+meleeRowNum+'" class="ibtnDel" data-rownum="'+meleeRowNum+'" onclick="removeMeleeRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#meleeTable").append(newRow);
     
@@ -543,7 +543,7 @@ function addArmourRow(){
         cols += '<td><input type="string"  id="armourPrice' + armourRowNum + '"/></td>';
         cols += '<td><input type="number" id="armourWeight' + armourRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="armourStorage' + armourRowNum + '" onchange="calculateEncumberance(); updateAC(); storageColour(armourStorage'+armourRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeArmour'+armourRowNum+'" class="ibtnDel" data-rownum="'+armourRowNum+'" onclick="removeArmourRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeArmour'+armourRowNum+'" class="ibtnDel" data-rownum="'+armourRowNum+'" onclick="removeArmourRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#armourTable").append(newRow);
     
@@ -671,7 +671,7 @@ function addDroneRow(){
     
         
         cols += '<td><select id="droneStorage' + droneRowNum + '" onchange="calculateEncumberance(); storageColour(droneStorage'+droneRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeDrone'+droneRowNum+'" class="ibtnDel" data-rownum="'+droneRowNum+'" onclick="removeDroneRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeDrone'+droneRowNum+'" class="ibtnDel" data-rownum="'+droneRowNum+'" onclick="removeDroneRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#droneTable").append(newRow);
     
@@ -803,7 +803,7 @@ function addPsiRow(){
         cols += '<td><input type="number" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiCommit' + rowNumPsi + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
         
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#psiTable").append(newRow);
         
@@ -919,7 +919,7 @@ function addRoutineRow(){
         cols += '<td><input type="number" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineCommit' + rowNumRoutine + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineAction' + rowNumRoutine + '" readonly/></td>';
         
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#routineTable").append(newRow);
         
@@ -985,7 +985,7 @@ function addShellRow(){
     
         cols += '<td><input type="string"  id="shellPrice' + shellRowNum + '"/></td>';
         cols += '<td><select id="shellStorage' + shellRowNum + '" onchange="updateAC(); updateShellStats(); storageColour(shellStorage'+shellRowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="https://i.ibb.co/MNf31S8/imageedit-31-2623129288.png" id="removeShell'+shellRowNum+'" class="ibtnDel" data-rownum="'+shellRowNum+'" onclick="removeShellRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeShell'+shellRowNum+'" class="ibtnDel" data-rownum="'+shellRowNum+'" onclick="removeShellRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#shellTable").append(newRow);
     
@@ -4415,7 +4415,7 @@ $(document).ready(function () {
 document.getElementById("defaultOpen").click();
     
 updateBaseSkills();
-charImage("https://cdn.pixabay.com/photo/2021/04/27/17/33/woman-6212036__340.jpg");
+charImage("./img/Default_Avatar.webp");
 $('textarea').on('keyup keypress click', function() {
         $(this).height(0);
         $(this).height(this.scrollHeight);

@@ -127,7 +127,8 @@ datalist {
 }
 
 table {
-    background-image: url("https://i.ibb.co/zF7xBtL/Black-rubber-texture-background-with-seamless-pattern.jpg");
+    background-image: url("./img/Table.jpeg");
+    background-size: 1000px 670px;
     background-color: black;
     margin-left: auto;
     margin-right: auto;
@@ -392,7 +393,7 @@ button:focus {
 }
 
 body {
-    background-image: url("https://i.ibb.co/4VJG4Lv/Abstract-geometric-black-background-with-triangles-3-D-rendering-3-D-illustration.jpg");
+    background-image: url("./img/Page_Background.jpeg");
       font-family: 'Noto Sans', 'Helvetica';
 background-size: 2880px 1602px;
 }
