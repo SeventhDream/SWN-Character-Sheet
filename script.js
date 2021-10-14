@@ -4387,7 +4387,13 @@ function openTab(evt, cityName) {
 //Load Sector from URL
 function loadSector(url){
     var mapUI = document.getElementById("mapUI");
+    if(url.includes("sectorswithoutnumber")){ 
+        var mapUI = document.getElementById("mapUI");
     mapUI.src = url;
+    }
+    else{
+        document.getElementById("mapSearch").value = "PLEASE ENTER VALID 'SECTORS WITHOUT NUMBER' URL LINK"
+    }
 }
 //#endregion
 
