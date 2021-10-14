@@ -1,4 +1,3 @@
-
 //#region 1. Attribute Automation
 
 // Convert attribute scores into modifiers.
@@ -4553,8 +4552,7 @@ for(i=1;i<6;i++){
             }
         }
     });
-    
-     hpSlider.oninput();
+
      
     // Pop-up skill description.
     $(".interact").click(function () {
@@ -4576,6 +4574,7 @@ for(i=1;i<6;i++){
     });
     
     
+
     // Populate Psi Core Technique descriptions
     $("#biopsiCoreDesc").attr("data-desc",psiCoreTechniques[0].desc);
     $("#metapsiCoreDesc").attr("data-desc",psiCoreTechniques[1].desc);
@@ -4641,6 +4640,8 @@ var description = this.getAttribute("data-desc");
     });
      
      }, delayInMilliseconds);
+
+     $("#deathSaveBox").hide();
 });
 
 // Prevent automatic form submission
@@ -4652,6 +4653,7 @@ var i = 0;
 var speed = 0.001;
  // Load up message
 var bootMessage = 'Boot Sequence Initialised...\n|Enabling /etc/fstab swaps                              [ OK ]\n|INIT: Entering runlevel: 3                                   \n|Entering non-interactive startup                             \n|Applying Intel CPU microcode update:                   [ OK ]\n|Checking for hardware changes                          [ OK ]\n|Bringing up interface eth0:                            [ OK ]\n|Determining IP information for eth0... done.                 \n\n|Staring auditd:                                        [ OK ]\n|Starting restorecond:                                  [ OK ]\n|Starting system logger:                                [ OK ]\n|Starting kernel logger:                                [ OK ]\n|Starting irqbalance:                                   [ OK ]\n|Starting mcstransd:                                    [ OK ]\n|Starting portmap:                                      [ OK ]\n|Starting settroubleshootd:                             [ OK ]\n|Starting NFS statd:                                    [ OK ]\n|Starting mdmonitor:                                    [ OK ]\n|Starting RPC idmapd:                                   [ OK ]\n|Starting system message bus:                           [ OK ]\n|Starting Bluetooth Services:                           [ OK ]\n|Starting other filesystems:                            [ OK ]\n|Starting PC/SC smart card daemon (pcscd):              [ OK ]\n|Starting hidd:                                         [ OK ]\nBoot Sequence Successful!\nStatus:...ONLINE\n\nVERFIYING USER CREDENTIALS...\nUSER IDENTIFIED\n"WELCOME"';
+
 
 // Type message incrementally.
 function typeWriter() {
