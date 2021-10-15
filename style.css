@@ -975,3 +975,7 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
   .openbtn:hover {
     background-color:#444;
   }
+
+  .fa-info-circle{
+      color: white;
+  }
