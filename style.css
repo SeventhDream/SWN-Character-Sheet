@@ -205,11 +205,11 @@ input[type="string"] {
     padding: 0;
 }
 
-.icon-info-sign{
+.fa-info-circle{
     color: white !important;
 
 }
-.icon-info-sign:hover{
+.fa-info-circle:hover{
     color: red !important;
 }
 input[type="text"]{
