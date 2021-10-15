@@ -4685,9 +4685,9 @@ function navigateToHelpText(targetId){
     
     var target = document.getElementsByName(targetId)[0];
     target.classList.add('item-highlight');
-    //document.getElementById(targetId).addEventListener('animationend', () => {
-       // document.getElementById(targetId).classList.remove('item-highlight');
-    //});
+    target.addEventListener('animationend', () => {
+        target.classList.remove('item-highlight');
+    });
 }
 
 // This function checks what foci are selected and if any abilities/skills need to be unlocked.

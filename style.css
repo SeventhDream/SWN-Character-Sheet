@@ -28,7 +28,7 @@ body {
 #deathSaveBox{
  border-radius: 5px;
  border: 2px solid #8B000088;
-
+background-color: black;
     width: fit-content;
     margin-left: 0;
     padding:10px;
@@ -54,7 +54,7 @@ body {
 }
 
 .checkbox-round:checked {
-    background-color: #8B0000AA;
+    background-color: #FF0000AA;
       animation-name: shakeAnim;
     content: "X";
 }
@@ -232,7 +232,7 @@ th {
 }
 td,
 input,
-h2,h4,b,
+h2,h4,h6,b,
 select {
     border: 0;
     width: fit-content;
@@ -312,7 +312,7 @@ textarea[type="string"]{
 div .col-xs-4, div .col-xs-6, .col-xs-12{
      height: fit-content;
     min-width: fit-content;
-    width: 25vw;
+    width: 30vw;
     padding: 0px;
     text-align: center;
     box-sizing: border-box;
@@ -432,6 +432,7 @@ optgroup {
 }
 .helpPanel p {
     color: #00FFFF !important;
+    animation: none;
 }
 
 .helpPanel b{
@@ -449,7 +450,7 @@ optgroup {
     margin: auto;
 }
 .infoPanel {
-    width: 100%;
+    width: 33vw;
 }
 option:hover {
     color: black;
@@ -525,6 +526,7 @@ th {
 #playerHP:hover{
     color: red !important;
     cursor: pointer;
+    background-color: black !important;
 }
 
 tbody[id$="Child"] td {
@@ -618,10 +620,14 @@ hr.pageborder {
     overflow: hidden;
   position: relative;
     display: block;
-    width: 110vw;
 }
 
-
+.pageTitle{
+    font-size: min(max(10px, 4vw), 40px);
+    margin-left: auto;
+    margin-right: auto;
+    
+}
 
 .bounding-box {
     background-color: black;
@@ -651,7 +657,7 @@ hr.pageborder {
 
 }
 
-div.tab{
+div.tab, div.saveUI{
     position: sticky;
 
     top: 0;
@@ -677,41 +683,46 @@ div.tab{
     -webkit-outline: 0;
     outline-color: solid black;
     border-color: solid black;
-height: 60px;
+height: 120px;
   box-shadow: none;
     width: 100%;
-  justify-content: center;
-    align-items: center;
 }
 
 #closeAlert{
     float: left;    
 }
 
+.tabButtons{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    align-content: left;
+    white-space: nowrap;
+}
+
 /* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
-  float: left;
   color: #e0cd67;  
-
+    width: 16.6vw;
   cursor: pointer;
-
-
     -moz-outline: 0;
     -ms-outline:0;
     -o-outline: 0;
     -webkit-outline: 0;
     border: none;
-    margin-bottom: -1;
     outline: none !important;
   box-shadow: none;
     height: 100%;
     z-index: 900;
+    overflow: hidden;
 } 
 
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #8B0000;
+  transition: 0.3s;
 }
 
 /* Create an active/current tablink class */
@@ -745,10 +756,13 @@ button:active {
 }
 
 .saveUI {
-  
+    position: absolute;
+    right: 0;
+  height: fit-content;
   float: right !important;
     margin-right: 10px;
-    
+ margin-top: 0;   
+ width: 250px;
 }
 
 table .order-list{
@@ -796,12 +810,12 @@ input[id$="Score"] {
 
 .noteBox {
     min-height: 1em;
-    width: 30vw;
+    width: 100%;
 }
 
 #loading {
 
-position: relative;
+    position: relative;
   width: 100vw;
   height: 100vh;
   margin:auto;
@@ -891,6 +905,12 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
   }
   
   .item-highlight {
-    animation: yellowfade 1s;
+    animation: yellowfade 1.5s !important;
   }
   
+  a.anchor{
+    display: block;
+    position: relative;
+    top: -120px;
+    visibility: hidden;
+  }

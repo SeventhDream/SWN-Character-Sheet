@@ -37,23 +37,17 @@
         <div class="box">
             <!--Tab Header-->
             <div class="tab" id="tabUI">
-                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Bio/Stats</button>
-                <!--
-                --><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button>
-                <!--
-                --><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button>
-                <!--
-                --><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button>
-                <!--
-                --><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button>
-                <!--   
-                --><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button>
+                <h2 class="pageTitle">SWN Dynamic Character Sheet</h2>
+                <div class="tabButtons">
+                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button>
+                </div>
                 <div class="saveUI">
                     <b>Autosave: </b><input type="checkbox" id="autosave"> <input value="Save Character" class="button" name="buttonsave" type="button" onclick="save_character()" style="width:100px;margin-bottom:5px; margin-right:30px;" readonly>
                     <label class="custom-file-upload"><input name="buttonload" id="buttonload" value="LOAD" type="file" style="width:200px;margin-bottom:2px;" /></label>
+    
                 </div>
             </div>
-            
+
             <!--Background Image Container-->
             <div class="background">
                 <!--Custom Alert Box-->
@@ -72,11 +66,11 @@
                         <div class="col-xs-12">
                             
                             <div class="slidecontainer">
-                                <h4>HP: <b id="currentHP"></b><b>/</b><input type="number" value="10" min="0" class="slideTrack" onchange="update(this.value,'hpRange','currentHP');" id="playerHP" /></h4><input type="range" min="0" max="10" value="10" class="slider hpSlide" id="hpRange" title="Edit maximum HP value"/>
+                                <h4><a href="#hpHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('hpHelpText');" title="Click to navigate to Help section."></i></a> HP: <b id="currentHP"></b><b>/</b><input type="number" value="10" min="0" class="slideTrack" onchange="update(this.value,'hpRange','currentHP');" id="playerHP" /></h4><input type="range" min="0" max="10" value="10" class="slider hpSlide" id="hpRange" title="Edit maximum HP value"/>
                                 
                                 <div id="deathSaveBox"><b>Bleed-Out Counter:</b><input type="checkbox" id="deathBox1" class="checkbox-round" onchange="enableNextElement(this.id,deathBox2.id);" /><input type="checkbox" id="deathBox2" class="checkbox-round" onchange="enableNextElement(this.id,deathBox3.id);" /><input type="checkbox" id="deathBox3" class="checkbox-round" onchange="enableNextElement(this.id,deathBox4.id);" /><input type="checkbox" id="deathBox4" class="checkbox-round" onchange="enableNextElement(this.id,deathBox5.id);" /><input type="checkbox" id="deathBox5" class="checkbox-round" onchange="enableNextElement(this.id,deathBox6.id);" /><input type="checkbox" id="deathBox6" class="checkbox-round" onchange="checkDeath(this);" /></div>
                                 
-                                <h4>System Strain: <b id="currentStrain"></b><b>/</b><input type="number" value="10" min="0" class="slideTrack" onchange="update(this.value,'strainRange','currentStrain');" id="strainMax" readonly></h4><input type="range" min="0" max="10" value="0" class="slider strainSlide" id="strainRange">
+                                <h4><a href="#strainHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('strainHelpText');" title="Click to navigate to Help section."></i></a> System Strain: <b id="currentStrain"></b><b>/</b><input type="number" value="10" min="0" class="slideTrack" onchange="update(this.value,'strainRange','currentStrain');" id="strainMax" readonly></h4><input type="range" min="0" max="10" value="0" class="slider strainSlide" id="strainRange">
                                 
                             </div>
                         </div>
@@ -140,7 +134,7 @@
                         <div class="col-xs-4">
                             
                             
-                            <h2>Skills</h2>
+                            <h2>Skills <a href="#skillsHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('skillsHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <!--Skill Table-->
                             <table class="dataTable" border="1">
                                 <tr>
@@ -408,7 +402,7 @@
                             
                             <br>
                             
-                            <h2>Foci</h2>
+                            <h2>Foci <a href="#fociHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('fociHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <!--Foci Table-->
                             <table class="textTable">
                                 <tr>
@@ -480,7 +474,7 @@
                         
                         <!--Right Column-->
                         <div class="col-xs-4">
-                            <h2>Stats</h2>
+                            <h2>Stats <a href="#statsHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('statsHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <!--Attribute Table-->
                             <table class="dataTable">
                                 <tr>
@@ -626,15 +620,15 @@
                     <div class="row">
                         
                         <!--Expert Ability-->
-                        <div id="expertAbility" style="display: none;"><h4>Expert Ability: Reroll Failed Skill Check</b></h4><input type="checkbox" class="checkbox-round"> <b>(1 Use per scene)</b></div>
+                        <div id="expertAbility" style="display: none;"><h4>Expert Ability: Reroll Failed Skill Check <a href="#expertHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('expertHelpText');" title="Click to navigate to Help section."></i></a></b></h4><input type="checkbox" class="checkbox-round"> <b>(1 Use per scene)</b></div>
 
                         <!--Warrior Ability-->
-                        <div id="warriorAbility" style="display: none;"><h4>Warrior Ability: Cancel Hit/Miss During Combat</b></h4><input type="checkbox" class="checkbox-round"> <b>(1 Use per scene)</b></div>
+                        <div id="warriorAbility" style="display: none;"><h4>Warrior Ability: Cancel Hit/Miss During Combat <a href="#warriorHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('warriorHelpText');" title="Click to navigate to Help section."></i></a></b></h4><input type="checkbox" class="checkbox-round"> <b>(1 Use per scene)</b></div>
 
                         <!--Column-->
                         <div class="col-xs-12">
                             <!--Psionic Abilities-->
-                            <h2 class="isPsi">Psi Abilities</h2>
+                            <h2 class="isPsi">Psi Abilities <a href="#psiHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('psiHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="psiCoreTable" class="isPsi">
                                 <tr>
                                     <th>Discipline</th>
@@ -714,7 +708,7 @@
                             
                             
 
-                            <h2 class="isAI">AI Routines</h2>
+                            <h2 class="isAI">AI Routines <a href="#routineHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('routineHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="routineCoreTable" class="isAI">
                                 <tr>
                                     <th colspan="2">Core Routine</th>
@@ -943,7 +937,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <h2>Inventory</h2>
+                            <h2>Items <a href="#itemHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('itemHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="equipmentTable" class="order-list" data-counter="0">
                                 <thead>
                                     <tr>
@@ -972,7 +966,7 @@
                                 </tfoot>
                             </table>
                             
-                            <h2>Ranged Weapons</h2>
+                            <h2>Ranged Weapons <a href="#rangedHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('rangedHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="weaponTable" class="order-list" data-counter="0">
                                 <thead>
                                     <tr>
@@ -1001,7 +995,7 @@
                                 </tfoot>
                             </table>
                             
-                            <h2>Melee Weapons</h2>
+                            <h2>Melee Weapons <a href="#meleeHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('meleeHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="meleeTable" class="order-list" data-counter="0">
                                 <thead>
                                     <tr>
@@ -1029,7 +1023,7 @@
                                 </tfoot>
                             </table>
                             
-                            <h2>Armour</h2>
+                            <h2>Armour <a href="#armourHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('armourHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="armourTable" class="order-list" data-counter="0">
                                 <thead>
                                     
@@ -1058,7 +1052,7 @@
                                 </tfoot>
                             </table>
                             
-                            <h2>Drones</h2>
+                            <h2>Drones <a href="#dronesHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('dronesHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="droneTable" class="order-list" data-counter="0">
                                 <thead>
                                     <tr>
@@ -1088,7 +1082,7 @@
                                 </tfoot>
                             </table>
                             
-                            <h2 class="isAI">Artificial Shell</h2>
+                            <h2 class="isAI">Artificial Shell <a href="#shellHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('shellHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <table id="shellTable" class="order-list isAI" data-counter="0">
                                 <thead>
                                     
@@ -1316,15 +1310,94 @@
                             <p>- Your attack bonus equal to your <b>(Player Level)/2</b>.<br>- Warriors and partial warriors have an attack bonus equal to their <b>Player Level.</b> This is calculated automatically by the dynamic character sheet in  the <b> Stats</b> section (see help section X).</p>
                             
                             <h4>2.11 - Armor Class</h4>
-                            <p> Your armor class is equal to <b>10 + Dexterity Modifier</b> + any shield or armor bonuses from equipped items.<br>- This is calculated automatically by the dynamic character sheet in  the <b> Stats</b> section (see help section X).</p>
+                            <p>- Your armor class is equal to <b>10 + Dexterity Modifier</b> + any shield or armor bonuses from equipped items.<br>- This is calculated automatically by the dynamic character sheet in  the <b> Stats</b> section (see help section X).</p>
 </div>
                             <h2>3.0 - Section Details</h2>
                             <p>- This section details the various functions of each tab and their contained sections within this dynamic character sheet.</p>
                             <div class="indent">
-                            <a id="bioHelp">
-                                <h4>3.1 - Bio Section</h4>
-                                <p name="bioHelpText">- This is the Bio help paragraph</p>
-                            </a>
+                            <h4>3.1 - Profile Tab Help</h4>
+                            <div class="indent">
+                                <a class="anchor" id="hpHelp"></a>
+                                <h6>3.1.1 - Health Tracker Section</h6>
+                                <p name="hpHelpText">- This slider tracks your character's <b>Hit Points</b>.<br><br>- The number display is automatically updated to match the slider.<br>- To edit your maximum HP, click on the display denominator (it will turn red when you hover over it) and type in any number to update the slider's maximum range.<br><br>- If you reach 0 HP, your character will be incapacitated and the <b>Bleed-Out Counter</b> will appear to help you keep track of up to six rounds passing, after which your character will <b>die</b> if they have yet to receive the necessary medical (or mechanical) assistance to regain consciousness.</p>
+
+                                <a class="anchor" id="strainHelp"></a>
+                                <h6>3.1.2 - Strain Tracker Section</h6>
+                                <p name="strainHelpText">- This slider tracks the amount of strain your character's body has accumulated from biopsionic healing, cybernetic implants and powerful drugs.<br><br>- If it exeeds the maxmimum value (automatically set as your constitution score) the the action that causes the increase fails to have an effect (or inthe case of cybernetics the implant fails to work).<br><br>System Strain decreases automatically by one point after each night of rest, provided the organism is wellfed and not compromised by sickness or privation. </p>
+
+                                <a class="anchor" id="bioHelp"></a>
+                                    <h6>3.1.3 - Bio Section</h6>
+                                    <p name="bioHelpText">- This section is for name, species, origins and appearance.<br><br>- You can add an avatar for your character by inserting any image URL in the input field direcly below the image box. Links to GIFs are also accepted.<br><br>- the table below the avatar image allows you to define your character's name, species, background, class, homeworld, and employer.<br>- Your character name will appear as the name of your save file when saving your character to the downloads folder in the local directory.<br>- The selected background option will automatically update the associated free skill in the Skills table (see help section 3.1.4)<br>- The selected class option will reveal any associated active abilities in the <b>Abilities</b> tab (see help section 3.2)</p>
+                                
+                                <a class="anchor" id="skillsHelp"></a>
+                                    <h6>3.1.4 - Skills Table Section</h6>
+                                    <p name="skillsHelpText">- This section lists all the skills characters can purchase levels in during character creation or with skill points granted from levelling up.<br<br>- Skills can be levelled from 0-4.<br>- (Costs: lvl-0 = 1SP, lvl-1 = 2SP, lvl-2 = 3SP, lvl-3 = 4SP, lvl-4 = 5SP)<br> - Skill level 2 requirement: Player Level >= 3.<br> - Skill level 3 requirement: Player Level >= 6.<br> - Skill level 4 requirement: Player Level >= 9.<br>- The total amount of skill points (from levlling up or class featues) spent/available is calculated automatically and displayed at the top of the table.<br>- Skills received during character creation (from background selection) and from selected foci are excluded from this total amount.<br>- A skill's description can be seen by clicking the information icon to the left of its name in the table.<br>- Certain skill points granted by classes must be spent on specific types of skills, which must me kept track of MANUALLY.<br><br>- During character creation, click the down arrow button in the table header to reveal teh drop-down row for selecting Learn/Growth/Foci/Psi/Interest skills<br>- If you roll for your starting skills or use the quick skill options from the rulebook, tick the checkbox in the drop-down row to reveal the third Learn/Growth skill select field (and the Growth bonus fields in the <b>Stats</b> section drop-down section [see help section 3.1.6]).</p>
+                                
+                                <a class="anchor" id="fociHelp"></a>
+                                    <h6>3.1.5 - Foci Section</h6>
+                                    <p name="fociHelpText">- This section allows you to select Focus abilities for your character.<br><br>- The total amount of foci points available (from levelling up or class featues) is dispalyed at the top of the table.<br>- To see a the description of a selected focus of option and its associated level features, click the information icon to the left of the select field after selecting an option.</p>
+                                
+                                <a class="anchor" id="statsHelp"></a>
+                                    <h6>3.1.6 - Stats Section</h6>
+                                    <p name="statsHelpText">- This section is for storing the character's main attribues, earned XP, and automatically calculates your modifiers, saving throws, player level, attack bonus, and armour class.</p>
+                                
+                            </div>
+                            <h4>3.2 - Abilities Tab Help</h4>
+                            <p> This tab is for tracking class- or focus-related abilities</p>
+                            <div class="indent">
+                                <a class="anchor" id="psiHelp">
+                                    <h6>3.2.1 - Psi Abilities Section</h6></a>
+                                    <p name="psiHelpText">- This section lists any core abilities unlocked from selected psionic skills in the <b>Profile</b> tab, track maximum effort points available, allows selecting learnt/purchased psi techniques.</p>
+                                
+                                <a class="anchor" id="routinesHelp"></a>
+                                    <h6>3.2.2 - AI Routines Section</h6>
+                                    <p name="routineHelpText">- This section lists any unlocked Core routines, tracks maximum available processing points, and allows selecting learnt/purchased peripheral routines.</p>
+                                
+                                <a class="anchor" id="expertHelp">
+                                    <h6>3.2.3 - Expert Ability Section</h6></a>
+                                    <p name="expertHelpText">- This section helps keep track of whether you have used your Expert (or Partial Expert) class once-per-scene ability</p>
+                                
+                                <a class="anchor" id="warriorHelp"></a>
+                                    <h6>3.2.4 - Warrior Ability Section</h6>
+                                    <p name="warriorHelpText">- This section helps keep track of whether you have used your Warrior (or Partial Warrior) class once-per-scene ability</p>
+                                
+                            </div>
+                            <h4>3.3 - Inventory Tab Help</h4>
+                            <p> This tab is for tracking player items and equipment from the SWN rulebook (or custom items).</p>
+                            <div class="indent">
+                                <a class="anchor" id="itemHelp"></a>
+                                    <h6>3.3.1 - Item Inventory Section</h6>
+                                    <p name="itemHelpText">- This table is for storing character items.</p>
+                                
+                                <a class="anchor" id="rangedHelp"></a>
+                                    <h6>3.3.2 - Ranged Weapon Section</h6>
+                                    <p name="rangedHelpText">- This table is for storing character ranged weapons</p>
+                                
+                                <a class="anchor" id="meleeHelp"></a>
+                                    <h6>3.3.3 - Melee Weapon Section</h6>
+                                    <p name="meleeHelpText">- This table is for storing character melee weapons</p>
+                                
+                                <a class="anchor" id="armourHelp"></a>
+                                    <h6>3.3.4 - Armour Section</h6>
+                                    <p name="armourHelpText">- This table is for storing character armour</p>
+                                
+                                <a class="anchor" id="shellHelp"></a>
+                                    <h6>3.3.5 - Artificial Shell Section</h6>
+                                    <p name="shellHelpText">- This table is for the True AI (or Partial True AI) class to keep track of owned Artificial shells they can inhabit.</p>
+                                
+                                <a class="anchor" id="droneHelp"></a>
+                                    <h6>3.3.6 - Drones Section</h6>
+                                    <p name="droneHelpText">- This table is for keeping track of drones the character owns.</p>
+                                
+                            </div>
+                            <a class="anchor" id="notesTabHelp"></a>
+                                <h4>3.4 - Notes Tab Help</h4>
+                                <p name="notesTabHelpText">- This tab is for the player to store their own personal, character or session notes in or between sessions.</p>
+                            
+                            <a class="anchor" id="mapTabHelp"></a>
+                                <h4>3.5 - Map Tab Help</h4>
+                                <p name="mapTabHelpText">- This tab contains an embed intended for linking to the Sector's Without Number site for viewing your own created sectors or campaign/session sectors via a URL link<br><br>- DISCLAIMER: I did not create, nor do I own any rights to the Sectors Without Number site, and have simply included a linked embed for player convenience (A copy of the Sectors without number open license can be found in the sites files).</p>
+                            
                             </div>
                         </div>
                     </div>
