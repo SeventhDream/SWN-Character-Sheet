@@ -408,11 +408,17 @@ optgroup {
     background-color: #8b0000;
 }
 
+.helpPanel a{
+    
+    font-size: 16px;
+}
+
 .helpPanel{
     display: inline-block;
     text-align: left !important;
     margin-left: 20px;
     margin-right: 20px;
+    transition: margin-left 0.5s;
 }
 #expertAbility, #warriorAbility{
     width: fit-content;
@@ -490,6 +496,13 @@ table td {
     border: 1px solid #3A3B3C;
     text-align: center;
     margin: auto;
+}
+.openbtn{
+    position: sticky;
+    margin-left: 0 !important;
+    top: 120px;
+    width: 250px;
+    font-size: 20px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -913,4 +926,53 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     position: relative;
     top: -120px;
     visibility: hidden;
+  }
+
+  /*SidePanel Style*/
+  .sidepanel  {
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    top: 120px;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    
+  }
+  
+  .sidepanel a {
+
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    margin-left: 5px;
+  }
+  
+  .sidepanel a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color:#444;
   }

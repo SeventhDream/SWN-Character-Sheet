@@ -4773,3 +4773,14 @@ function removeOptions(parent) {
         parent.removeChild(parent.firstChild);
     }
  }
+
+ // Help tab Sidepanel Button Control Functions
+ function openNav() {
+    document.getElementById("mySidepanel").style.width = "250px";
+    document.getElementsByClassName("helpPanel")[0].style.marginLeft = "260px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
+    document.getElementsByClassName("helpPanel")[0].style.marginLeft = "10px";
+  }
