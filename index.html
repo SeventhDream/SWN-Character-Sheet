@@ -100,7 +100,7 @@
                                 </tr>
                                 <tr>
                                     <!--Player Background-->
-                                    <th><i class="icon-info-sign interactInfo" title="Get Background Info" data-name="" data-desc="" id="backDesc"></i> Background:</th>
+                                    <th><i class="fa fa-info-circle interactInfo" title="Get Background Info" data-name="" data-desc="" id="backDesc"></i> Background:</th>
                                     <td><select id="playerBackground" onchange="BackInfo(backDesc.id,id);" data-bonus=""></select></td>
                                     
                                 </tr>
@@ -109,7 +109,7 @@
                                 
                                 <!--Player Class-->
                                 <tr>
-                                    <th><i class="icon-info-sign interactInfo" title="Get Class Info" data-name="" data-desc="" id="classDesc"></i> Class:</th>
+                                    <th><i class="fa fa-info-circle interactInfo" title="Get Class Info" data-name="" data-desc="" id="classDesc"></i> Class:</th>
                                     <td><select id="playerClass" onchange="classInfo(classDesc.id,id);"></select></td>
                                 </tr>
                                 
@@ -217,20 +217,20 @@
                                     </tr>
                                 </tbody>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="admin"></i> Administer:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="admin"></i> Administer:</td>
                                     
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(adminScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="adminScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(adminScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="pilot"></i> Pilot:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="pilot"></i> Pilot:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(pilotScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="pilotScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(pilotScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="work"></i> Work:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="work"></i> Work:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(workScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="workScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
@@ -238,19 +238,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="connect"></i> Connect:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="connect"></i> Connect:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(connectScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="connectScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(connectScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="program"></i> Program:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="program"></i> Program:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(programScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="programScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(programScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="biopsi"></i> Biopsionics:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="biopsi"></i> Biopsionics:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(biopsiScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="biopsiScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="biopsi" data-bonus="-1" readonly>
@@ -258,19 +258,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="exert"></i> Exert:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="exert"></i> Exert:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(exertScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="exertScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(exertScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="punch"></i> Punch:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="punch"></i> Punch:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(punchScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="punchScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(punchScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="metapsi"></i> Metapsionics:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="metapsi"></i> Metapsionics:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(metapsiScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="metapsiScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="metapsi" data-bonus="-1" readonly>
@@ -278,19 +278,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="fix"></i> Fix:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="fix"></i> Fix:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(fixScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="fixScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(fixScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="shoot"></i> Shoot:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="shoot"></i> Shoot:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(shootScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="shootScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(shootScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="precog"></i> Precognition:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="precog"></i> Precognition:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(precogScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="precogScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="precog" data-bonus="-1" readonly>
@@ -298,19 +298,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="heal"></i> Heal:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="heal"></i> Heal:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(healScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="healScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(healScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="sneak"></i> Sneak:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="sneak"></i> Sneak:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(sneakScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="sneakScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(sneakScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="telekinesis"></i> Telekinesis:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="telekinesis"></i> Telekinesis:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(telekinesisScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="telekinesisScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="telekinesis" data-bonus="-1" readonly>
@@ -318,19 +318,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="know"></i>Know:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="know"></i>Know:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(knowScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="knowScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(knowScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="stab"></i> Stab:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="stab"></i> Stab:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(stabScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="stabScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(stabScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="telepath"></i> Telepathy:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="telepath"></i> Telepathy:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(telepathScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="telepathScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="telepath" data-bonus="-1" readonly>
@@ -338,19 +338,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="lead"></i> Lead:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="lead"></i> Lead:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(leadScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="leadScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(leadScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="survive"></i> Survive:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="survive"></i> Survive:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(surviveScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="surviveScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(surviveScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="teleport"></i> Teleportation:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="teleport"></i> Teleportation:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(teleportScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="teleportScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="teleport" data-bonus="-1" readonly>
@@ -358,13 +358,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="notice"></i> Notice:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="notice"></i> Notice:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(noticeScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="noticeScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(noticeScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="talk"></i> Talk:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="talk"></i> Talk:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(talkScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="talkScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
@@ -378,13 +378,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="perform"></i> Perform:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="perform"></i> Perform:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(performScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="performScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
                                         <input value="+" readonly class="button" onclick="increment(performScore.id)">
                                     </td>
-                                    <td><i class="icon-info-sign interact" title="Get Skill Info" id="trade"></i> Trade:</td>
+                                    <td><i class="fa fa-info-circle interact" title="Get Skill Info" id="trade"></i> Trade:</td>
                                     <td>
                                         <input value="-" readonly class="button" onclick="decrement(tradeScore.id)">
                                         <input type="number" value="-1" style="display: none;" id="tradeScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
@@ -410,7 +410,7 @@
                                 </tr>
                                 <!--Foci1-->
                                 <tr>
-                                    <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF1" data-function="focusInfo" data-select="Foci1"></i><select id="Foci1" onchange="focusInfo(infoF1.id,id);"></select></td>
+                                    <td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF1" data-function="focusInfo" data-select="Foci1"></i><select id="Foci1" onchange="focusInfo(infoF1.id,id);"></select></td>
                                     <td>
                                         
                                         Level: <input value="-" class="button" readonly onclick="decrement(FociLevel1.id);"><input type="number" id="FociLevel1" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
@@ -420,7 +420,7 @@
                                 
                                 <!--Foci2-->
                                 <tr>
-                                    <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF2" data-function="focusInfo" data-select="Foci2"></i><select id="Foci2" onchange="focusInfo(infoF2.id,id)"></select></td>
+                                    <td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF2" data-function="focusInfo" data-select="Foci2"></i><select id="Foci2" onchange="focusInfo(infoF2.id,id)"></select></td>
                                     <td>
                                         
                                         Level: <input value="-" class="button" readonly onclick="decrement(FociLevel2.id);"><input type="number" id="FociLevel2" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
@@ -430,7 +430,7 @@
                                 
                                 <!--Foci3-->
                                 <tr>
-                                    <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF3" data-function="focusInfo" data-select="Foci3"></i><select id="Foci3" onchange="focusInfo(infoF3.id,id)"></select></td>
+                                    <td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF3" data-function="focusInfo" data-select="Foci3"></i><select id="Foci3" onchange="focusInfo(infoF3.id,id)"></select></td>
                                     <td>
                                         
                                         Level: <input value="-" class="button" readonly onclick="decrement(FociLevel3.id);"><input type="number" id="FociLevel3" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
@@ -440,7 +440,7 @@
                                 
                                 <!--Foci4-->
                                 <tr>
-                                    <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF4" data-function="focusInfo" data-select="Foci4"></i><select id="Foci4" onchange="focusInfo(infoF4.id,id)"></select></td>
+                                    <td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF4" data-function="focusInfo" data-select="Foci4"></i><select id="Foci4" onchange="focusInfo(infoF4.id,id)"></select></td>
                                     <td>
                                         
                                         Level: <input value="-" class="button" readonly onclick="decrement(FociLevel4.id);"><input type="number" id="FociLevel4" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
@@ -450,7 +450,7 @@
                                 
                                 <!--Foci5-->
                                 <tr>
-                                    <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF5" data-function="focusInfo" data-select="Foci5"></i><select id="Foci5" onchange="focusInfo(infoF5.id,id)"></select></td>
+                                    <td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF5" data-function="focusInfo" data-select="Foci5"></i><select id="Foci5" onchange="focusInfo(infoF5.id,id)"></select></td>
                                     <td>
                                         
                                         Level: <input value="-" class="button" readonly onclick="decrement(FociLevel5.id);"><input type="number" id="FociLevel5" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
@@ -460,7 +460,7 @@
                                 
                                 <!--Foci6-->
                                 <tr>
-                                    <td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF6" data-function="focusInfo" data-select="Foci6"></i><select id="Foci6" onchange="focusInfo(infoF6.id,id)"></select></td>
+                                    <td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="infoF6" data-function="focusInfo" data-select="Foci6"></i><select id="Foci6" onchange="focusInfo(infoF6.id,id)"></select></td>
                                     <td>
                                         Level: <input value="-" class="button" readonly onclick="decrement(FociLevel6.id);"><input type="number" id="FociLevel6" value="0" max="3" onchange="updateUsedFP(); checkFoci();" min="0" step="1" readonly>
                                         <input value="+" class="button" readonly onclick="increment(FociLevel6.id);">
@@ -638,42 +638,42 @@
                                 </tr>
                                 <tr id="biopsiCoreTechnique">
                                     <td>BIOPSIONICS:</td>
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="Psychic Succor" data-desc="" id="biopsiCoreDesc"></i><input type="string" class="psiCore" id="biopsiCoreTechniqueName" value="Psychic Succor" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="Psychic Succor" data-desc="" id="biopsiCoreDesc"></i><input type="string" class="psiCore" id="biopsiCoreTechniqueName" value="Psychic Succor" readonly></td>
                                     <td> <input type="number" value="0" ; id="biopsiCoreLevel" class="noWrite" readonly> </td>
                                     <td><input type="number" value="0" ; id="biopsiCoreEffort" readonly></td>
                                 </tr>
                                 
                                 <tr id="metapsiCoreTechnique">
                                     <td>METAPSIONICS:</td>
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="Psychic Refinement" data-desc="" id="metapsiCoreDesc"></i><input type="string" id="metapsiCoreTechniqueName" value="Psychic Refinement" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="Psychic Refinement" data-desc="" id="metapsiCoreDesc"></i><input type="string" id="metapsiCoreTechniqueName" value="Psychic Refinement" readonly></td>
                                     <td><input type="number" value="0" ; id="metapsiCoreLevel" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="metapsiCoreEffort" readonly></td>
                                 </tr>
                                 
                                 <tr id="precogCoreTechnique">
                                     <td>PRECOGNITION:</td>
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="Oracle" data-desc="" id="precogCoreDesc"></i><input type="string" id="precogCoreTechniqueName" value="Oracle" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="Oracle" data-desc="" id="precogCoreDesc"></i><input type="string" id="precogCoreTechniqueName" value="Oracle" readonly></td>
                                     <td><input type="number" value="0" ; id="precogCoreLevel" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="precogCoreEffort" readonly></td>
                                 </tr>
                                 
                                 <tr id="telekinesisCoreTechnique">
                                     <td>TELEKINESIS:</td>
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="Telekinetic Manipulation" data-desc="" id="telekinesisCoreDesc"></i><input type="string" id="telekinesisCoreTechniqueName" value="Telekinetic Manipulation" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="Telekinetic Manipulation" data-desc="" id="telekinesisCoreDesc"></i><input type="string" id="telekinesisCoreTechniqueName" value="Telekinetic Manipulation" readonly></td>
                                     <td><input type="number" value="0" ; id="telekinesisCoreLevel" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="telekinesisCoreEffort" readonly></td>
                                 </tr>
                                 
                                 <tr id="telepathCoreTechnique">
                                     <td>TELEPATHY:</td>
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="Telepathic Contact" data-desc="" id="telepathCoreDesc"></i><input type="string" id="telepathCoreTechniqueName" value="Telepathic Contact" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="Telepathic Contact" data-desc="" id="telepathCoreDesc"></i><input type="string" id="telepathCoreTechniqueName" value="Telepathic Contact" readonly></td>
                                     <td><input type="number" value="0" ; id="telepathCoreLevel" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="telepathCoreEffort" readonly></td>
                                 </tr>
                                 
                                 <tr id="teleportCoreTechnique">
                                     <td>TELPORTATION:</td>
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="Personal Apportation" data-desc="" id="teleportCoreDesc"></i><input type="string" id="teleportCoreTechniqueName" value="Personal Apportation" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="Personal Apportation" data-desc="" id="teleportCoreDesc"></i><input type="string" id="teleportCoreTechniqueName" value="Personal Apportation" readonly></td>
                                     <td><input type="number" value="0" ; id="teleportCoreLevel" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="teleportCoreEffort" readonly></td>
                                 </tr>
@@ -716,7 +716,7 @@
                                     <th>Spent Processing</th>
                                 </tr>
                                 <tr id="CoreRoutine1">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo1"></i><input type="string" id="CoreRoutine1Name" value="Query Data" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo1"></i><input type="string" id="CoreRoutine1Name" value="Query Data" readonly></td>
                                     <td><input type="number" value="1" ; id="CoreRoutine1Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine1Processing" readonly></td>
                                 </tr>
@@ -733,7 +733,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine2">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo2"></i><input type="string" id="CoreRoutine2Name" value="Split Focus" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo2"></i><input type="string" id="CoreRoutine2Name" value="Split Focus" readonly></td>
                                     <td><input type="number" value="1" ; id="CoreRoutine2Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine2Processing" readonly></td>
                                 </tr>
@@ -750,7 +750,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine3">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo3"></i><input type="string" id="CoreRoutine3Name" value="Defeat Security" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo3"></i><input type="string" id="CoreRoutine3Name" value="Defeat Security" readonly></td>
                                     <td><input type="number" value="2" ; id="CoreRoutine3Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine3Processing" readonly></td>
                                 </tr>
@@ -767,7 +767,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine4">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo4"></i><input type="string" id="CoreRoutine4Name" value="Drone Command" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo4"></i><input type="string" id="CoreRoutine4Name" value="Drone Command" readonly></td>
                                     <td><input type="number" value="2" ; id="CoreRoutine4Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine4Processing" readonly></td>
                                 </tr>
@@ -784,7 +784,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine5">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo5"></i><input type="string" id="CoreRoutine5Name" value="Native Hacker" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo5"></i><input type="string" id="CoreRoutine5Name" value="Native Hacker" readonly></td>
                                     <td><input type="number" value="2" ; id="CoreRoutine5Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine5Processing" readonly></td>
                                 </tr>
@@ -801,7 +801,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine6">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo6"></i><input type="string" id="CoreRoutine6Name" value="Accelerated Deduction" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo6"></i><input type="string" id="CoreRoutine6Name" value="Accelerated Deduction" readonly></td>
                                     <td><input type="number" value="3" ; id="CoreRoutine6Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine6Processing" readonly></td>
                                 </tr>
@@ -818,7 +818,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine7">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo7"></i><input type="string" id="CoreRoutine7Name" value="Cognitive Boost" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo7"></i><input type="string" id="CoreRoutine7Name" value="Cognitive Boost" readonly></td>
                                     <td><input type="number" value="3" ; id="CoreRoutine7Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine7Processing" readonly></td>
                                 </tr>
@@ -835,7 +835,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine8">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo8"></i><input type="string" id="CoreRoutine8Name" value="Pierce Quantum ECM" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo8"></i><input type="string" id="CoreRoutine8Name" value="Pierce Quantum ECM" readonly></td>
                                     <td><input type="number" value="4" ; id="CoreRoutine8Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine8Processing" readonly></td>
                                 </tr>
@@ -852,7 +852,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine9">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo9"></i><input type="string" id="CoreRoutine9Name" value="Predictive Cognition" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo9"></i><input type="string" id="CoreRoutine9Name" value="Predictive Cognition" readonly></td>
                                     <td><input type="number" value="4" ; id="CoreRoutine9Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine9Processing" readonly></td>
                                 </tr>
@@ -869,7 +869,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine10">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo10"></i><input type="string" id="CoreRoutine10Name" value="Multifactor Prediction" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo10"></i><input type="string" id="CoreRoutine10Name" value="Multifactor Prediction" readonly></td>
                                     <td><input type="number" value="5" ; id="CoreRoutine10Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine10Processing" readonly></td>
                                 </tr>
@@ -886,7 +886,7 @@
                                     </tr>
                                 </tbody>
                                 <tr id="CoreRoutine11">
-                                    <td colspan="2"><i class="icon-info-sign interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo11"></i><input type="string" id="CoreRoutine11Name" value="Will of the Machine" readonly></td>
+                                    <td colspan="2"><i class="fa fa-info-circle interactInfo" title="Get Routine Info" data-name="" data-desc="" id="routineInfo11"></i><input type="string" id="CoreRoutine11Name" value="Will of the Machine" readonly></td>
                                     <td><input type="number" value="5" ; id="CoreRoutine11Level" class="noWrite" readonly></td>
                                     <td><input type="number" value="0" ; id="CoreRoutine11Processing" readonly></td>
                                 </tr>
