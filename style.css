@@ -497,13 +497,6 @@ table td {
     text-align: center;
     margin: auto;
 }
-.openbtn{
-    position: sticky;
-    margin-left: 0 !important;
-    top: 120px;
-    width: 250px;
-    font-size: 20px;
-}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -924,7 +917,7 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
   a.anchor{
     display: block;
     position: relative;
-    top: -120px;
+    top: -150px;
     visibility: hidden;
   }
 
@@ -969,8 +962,14 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     cursor: pointer;
     background-color: #111;
     color: white;
-    padding: 10px 15px;
     border: none;
+    position: sticky;
+    margin-left: 0 !important;
+    top: 120px;
+    left: -10px;
+    border-radius: 5px;
+    width: fit-content;
+    font-size: 20px;
   }
   
   .openbtn:hover {
