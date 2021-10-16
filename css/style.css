@@ -127,7 +127,7 @@ datalist {
 }
 
 table {
-    background-image: url("./img/Table.jpeg");
+    background-image: url("../img/Table.jpeg");
     background-size: 1000px 670px;
     background-color: black;
     margin-left: auto;
@@ -395,7 +395,7 @@ button:focus {
 
 
 body {
-    background-image: url("./img/Page_Background.jpeg");
+    background-image: url("../img/Page_Background.jpeg");
       font-family: 'Noto Sans', 'Helvetica';
 background-size: 2880px 1602px;
 }
@@ -496,6 +496,11 @@ table td {
     border: 1px solid #3A3B3C;
     text-align: center;
     margin: auto;
+}
+
+.skillsTable td{
+  text-align: left;
+  max-width: 120px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -628,9 +633,10 @@ hr.pageborder {
     display: block;
 }
 
+
 .pageTitle{
     font-size: min(max(10px, 4vw), 40px);
-    margin-left: auto;
+    margin-left: 0;
     margin-right: auto;
     
 }
@@ -711,7 +717,7 @@ height: 120px;
 .tab button {
   background-color: inherit;
   color: #e0cd67;  
-    width: 16.6vw;
+    width: 14.3vw;
   cursor: pointer;
     -moz-outline: 0;
     -ms-outline:0;
@@ -978,4 +984,19 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
 
   .fa-info-circle{
       color: white;
+  }
+
+  .overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+    transition: 0.3s;
   }

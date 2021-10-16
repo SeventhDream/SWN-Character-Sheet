@@ -5,9 +5,10 @@
     
     <meta charset="UTF-8">
     <title>E.I.N.S. - SWN RPG Character Sheet</title>
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="./img/Web_Icon3.jpeg">
+    <!--Prevent Cache Storage-->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -18,7 +19,8 @@
 </head>
 
 <body>
-    
+    <div class="overlay"></div>
+
     <!--Loading Screen-->
     <div id="loading">
         <!--Loading Animation-->
@@ -30,7 +32,7 @@
         </div>
         
     </div>
-    
+
     <!--Character Sheet-->
     <form class="charsheet" id="charsheet">
         <!--Container-->
@@ -39,7 +41,7 @@
             <div class="tab" id="tabUI">
                 <h2 class="pageTitle">SWN Dynamic Character Sheet</h2>
                 <div class="tabButtons">
-                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button>
+                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><a href="./login.html"><button type="button">Click Me!</button></a>
                 </div>
                 <div class="saveUI">
                     <b>Autosave: </b><input type="checkbox" id="autosave"> <input value="Save Character" class="button" name="buttonsave" type="button" onclick="save_character()" style="width:100px;margin-bottom:5px; margin-right:30px;" readonly>
@@ -136,7 +138,7 @@
                             
                             <h2>Skills <a href="#skillsHelp"><i class="fa fa-question-circle helpLink" onclick="navigateToHelpText('skillsHelpText');" title="Click to navigate to Help section."></i></a></h2>
                             <!--Skill Table-->
-                            <table class="dataTable" border="1">
+                            <table class="dataTable skillsTable" border="1">
                                 <tr>
                                     <th colspan="6"><input value="&#x25BC;" title="Show/Hide Starting Skill Menu" readonly class="button dropdown parent no-wrap" data-toggle="toggle">Used Skill Points: <input type="number" value="0" id="usedSP" class="noWrite" readonly>/<input type="number" value="0" id="maxSP" class="noWrite" readonly></th>
                                 </tr>
@@ -1510,7 +1512,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/string-format/1.0.0/string-format.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.js"></script><script  src="./script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.js"></script>
+<script  src="./js/script.js"></script>
 
 </html>

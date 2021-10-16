@@ -21,8 +21,8 @@ function updateModifiers(attributeID) {
     document.getElementById(attributeID + "Mod").value = modValue;
 
     updateSaves();
-    updateAttrBonus(attributeID);
-    updateSkillPool();
+    updateAttrBonus(attributeID); 
+    updateSkillPool(); 
     updateMaxEffort();
     updateMaxProcessing();
     updateAC();
@@ -66,6 +66,7 @@ function addGrowthAttrBonus() {
 
 // Hide/show growth/random skill/attribute fields during character creation.
 function isGrowth(id, classID) {
+    // Check if growth checkbox is checked.
     if (document.getElementById(id).checked === true) {
         $(classID).show();
     } else {
@@ -102,7 +103,7 @@ function updateAttrBonus(attributeID) {
         );
 }
 
-// Update Save values.
+// Update Saving Throw values.
 function updateSaves() {
     // Get player level and attribute modifiers.
     var playerLevel = parseInt(document.getElementById("playerLevel").value);
@@ -270,8 +271,7 @@ function storageColour(idNum){
             if (description !== ""){
                     $(".message").text(description);
                     $(".messageHeader").text(this.getAttribute("data-name") + ":");
-                    $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                    $(".customAlert").css("display", "inline");
+                    openAlert();
             }
         });
         
@@ -1169,12 +1169,12 @@ function focusInfo(childID, selectID) {
 // Updates learning/growth bonus skill modifiers
 function addLearnSkillBonus() {
     
-    $(".skillField").attr("data-learn",0);
+    $(".skillField").attr("data-learn",0); // reset the data-learn value of all skill fields.
     
-    var level = parseInt(document.getElementById("playerLevel").value);
-    var limit = Math.min(4,(1+Math.floor(level/3)));
+    var level = parseInt(document.getElementById("playerLevel").value); // Get player level
+    var limit = Math.min(4,(1+Math.floor(level/3))); // Calculate max skill level limit.
     
-    // cycle through all initial skill fields
+    // cycle through all character creation initial skill fields
     for (var skillID = 1; skillID < 17; skillID++) {
         var match = document.getElementById("initSkill" + skillID).value; // Get level value of current indexed skill field
 
@@ -1449,8 +1449,7 @@ function checkDeath(id){
     if(id.checked){
          $(".message").text("YOU ARE DEAD");
                 $(".messageHeader").text("FLATLINED!" + ":");
-                $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                $(".customAlert").css("display", "inline");
+                openAlert();
     }    
 }
 
@@ -4040,8 +4039,7 @@ var currentCallback;
 window.alert = function (msg, callback) {
     $(".messageHeader").text("ALERT!!!");
     $(".message").text(msg);
-    $(".customAlert").css("animation", "fadeIn 0.3s linear");
-    $(".customAlert").css("display", "inline");
+    openAlert();
     setTimeout(function () {
         $(".customAlert").css("animation", "none");
     }, 300);
@@ -4056,6 +4054,7 @@ $(function () {
         setTimeout(function () {
             $(".customAlert").css("animation", "none");
             $(".customAlert").css("display", "none");
+            document.getElementsByClassName("overlay")[0].style.display = "none";
         }, 300);
     });
 });
@@ -4414,8 +4413,7 @@ $(document).ready(function () {
      
     $(".message").text("WECOME BACK USER#404\n---\nARE YOU READY TO BEGIN?");
                 $(".messageHeader").text("E.I.N.S.");
-                $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                $(".customAlert").css("display", "inline");
+                openAlert();
     document.getElementById("tabUI").style.display = "flex";
 document.getElementById("defaultOpen").click();
     
@@ -4553,7 +4551,12 @@ for(i=1;i<6;i++){
         }
     });
 
-     
+    function openAlert(){
+        $(".customAlert").css("animation", "fadeIn 0.3s linear");
+        $(".customAlert").css("display", "inline");
+        document.getElementsByClassName("overlay")[0].style.display = "block";
+    } 
+
     // Pop-up skill description.
     $(".interact").click(function () {
         var opGroup = ["Select a Skill", "Non-Combat Skills", "Combat Skills", "Psychic Skills"];
@@ -4567,8 +4570,8 @@ for(i=1;i<6;i++){
                 var title = skillList[0][groupIndex][index].title;
                 $(".message").text(info);
                 $(".messageHeader").text(title + ":");
-                $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                $(".customAlert").css("display", "inline");
+                openAlert();
+                
             }
         }
     });
@@ -4627,8 +4630,7 @@ var description = this.getAttribute("data-desc");
         if (description !== ""){
                 $(".message").text(description);
                 $(".messageHeader").text(this.getAttribute("data-name") + ":");
-                $(".customAlert").css("animation", "fadeIn 0.3s linear");
-                $(".customAlert").css("display", "inline");
+                openAlert();
         }
     });
     
