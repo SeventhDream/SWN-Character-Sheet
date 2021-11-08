@@ -288,7 +288,7 @@ function addItemRow(){
     var newChild =  $("<tr id='itemChildRow"+rowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" /></td>';
         cols += '<td><input value="-" id="minusOne'+rowNum+'" readonly class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
         cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
@@ -370,7 +370,7 @@ function addWeaponRow(){
     var newChild =  $("<tr id='weaponChildRow"+weaponRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="weaponInfo'+weaponRowNum+'"></i><input type="text" id="weaponName' + weaponRowNum + '" list="weaponList' + weaponRowNum + '" data-idNum="'+ weaponRowNum + '" onchange="addOneWeapon('+weaponRowNum+'); populateWeapon('+weaponRowNum+'); calculateEncumberance();"/><datalist id="weaponList' + weaponRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="weaponInfo'+weaponRowNum+'"></i><input type="text" id="weaponName' + weaponRowNum + '" list="weaponList' + weaponRowNum + '" data-idNum="'+ weaponRowNum + '" onchange="addOneWeapon('+weaponRowNum+'); populateWeapon('+weaponRowNum+'); calculateEncumberance();"/><datalist id="weaponList' + weaponRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="weaponNotes' + weaponRowNum + '" /></td>';
     cols += '<td><input type="string" value="" id="weaponDamage'+weaponRowNum+'"></td>';
     cols += '<td><input type="number" value="0" id="weaponShortRange'+weaponRowNum+'">/<input type="number" value="0" id="weaponLongRange'+weaponRowNum+'"></td>';
@@ -454,7 +454,7 @@ function addMeleeRow(){
     var newChild =  $("<tr id='meleeChildRow"+meleeRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="meleeInfo'+meleeRowNum+'"></i><input type="text" id="meleeName' + meleeRowNum + '" list="meleeList' + meleeRowNum + '" data-idNum="'+ meleeRowNum + '" onchange="addOneMelee('+meleeRowNum+'); populateMelee('+meleeRowNum+'); calculateEncumberance();"/><datalist id="meleeList' + meleeRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="meleeInfo'+meleeRowNum+'"></i><input type="text" id="meleeName' + meleeRowNum + '" list="meleeList' + meleeRowNum + '" data-idNum="'+ meleeRowNum + '" onchange="addOneMelee('+meleeRowNum+'); populateMelee('+meleeRowNum+'); calculateEncumberance();"/><datalist id="meleeList' + meleeRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="meleeNotes' + meleeRowNum + '" /></td>';
     cols += '<td><input type="string" value="" id="meleeDamage'+meleeRowNum+'"></td>';
     cols += '<td><input type="string" value="0" id="meleeShock'+meleeRowNum+'"></td>';
@@ -534,7 +534,7 @@ function addArmourRow(){
     var newChild =  $("<tr id='armourChildRow"+armourRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="armourInfo'+armourRowNum+'"></i><input type="text" id="armourName' + armourRowNum + '" list="armourList' + armourRowNum + '" data-idNum="'+ armourRowNum + '" onchange="addOneArmour('+armourRowNum+'); populateArmour('+armourRowNum+'); calculateEncumberance(); updateAC();"/><datalist id="armourList' + armourRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="armourInfo'+armourRowNum+'"></i><input type="text" id="armourName' + armourRowNum + '" list="armourList' + armourRowNum + '" data-idNum="'+ armourRowNum + '" onchange="addOneArmour('+armourRowNum+'); populateArmour('+armourRowNum+'); calculateEncumberance(); updateAC();"/><datalist id="armourList' + armourRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="armourNotes' + armourRowNum + '" /></td>';
     cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="AC' + armourRowNum +'"></td>';
     cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="shieldBonus' + armourRowNum +'"></td>';
@@ -656,7 +656,7 @@ function addDroneRow(){
     var newChild =  $("<tr id='droneChildRow"+droneRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="droneInfo'+droneRowNum+'"></i><input type="text" id="droneName' + droneRowNum + '" list="droneList' + droneRowNum + '" data-idNum="'+ droneRowNum + '" onchange="addOneDrone('+droneRowNum+'); populateDrone('+droneRowNum+'); calculateEncumberance();"/><datalist id="droneList' + droneRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="droneInfo'+droneRowNum+'"></i><input type="text" id="droneName' + droneRowNum + '" list="droneList' + droneRowNum + '" data-idNum="'+ droneRowNum + '" onchange="addOneDrone('+droneRowNum+'); populateDrone('+droneRowNum+'); calculateEncumberance();"/><datalist id="droneList' + droneRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="droneNotes' + droneRowNum + '" /></td>';
     
     cols += '<td><input type="string"  id="dronePrice' + droneRowNum + '"/></td>';
@@ -788,7 +788,6 @@ function updateMaxEffort(){
     }
     else{
         var wildBonus = parseInt(document.getElementById("wildEffort").value);
-        console.log(wildBonus);
         $("#maxEP").val(wildBonus);
     }
 }
@@ -798,7 +797,7 @@ function addPsiRow(){
      var newRow = $("<tr id='psiRow"+rowNumPsi+"' value ='"+rowNumPsi+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+')"/><datalist id="psiList' + rowNumPsi + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+')"/><datalist id="psiList' + rowNumPsi + '"></datalist></td>';
         cols += '<td><input type="number" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiCommit' + rowNumPsi + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
         
@@ -914,7 +913,7 @@ function addRoutineRow(){
      var newRow = $("<tr id='routineRow"+rowNumRoutine+"' value ='"+rowNumRoutine+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Technique Info" data-name="" data-desc="" id="routineInfo'+rowNumRoutine+'"></i><input type="text" id="routineName' + rowNumRoutine + '" list="routineList' + rowNumRoutine + '" data-idNum="'+ rowNumRoutine + '" onchange="populateRoutine('+rowNumRoutine+')"/><datalist id="routineList' + rowNumRoutine + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="routineInfo'+rowNumRoutine+'"></i><input type="text" id="routineName' + rowNumRoutine + '" list="routineList' + rowNumRoutine + '" data-idNum="'+ rowNumRoutine + '" onchange="populateRoutine('+rowNumRoutine+')"/><datalist id="routineList' + rowNumRoutine + '"></datalist></td>';
         cols += '<td><input type="number" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineCommit' + rowNumRoutine + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineAction' + rowNumRoutine + '" readonly/></td>';
         
@@ -974,7 +973,7 @@ function addShellRow(){
     var newChild =  $("<tr id='shellChildRow"+shellRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="icon-info-sign interactInfo" title="Get Skill Info" data-name="" data-desc="" id="shellInfo'+shellRowNum+'"></i><input type="text" id="shellName' + shellRowNum + '" list="shellList' + shellRowNum + '" data-idNum="'+ shellRowNum + '" onchange="populateShell('+shellRowNum+'); updateAC();"/><datalist id="shellList' + shellRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="shellInfo'+shellRowNum+'"></i><input type="text" id="shellName' + shellRowNum + '" list="shellList' + shellRowNum + '" data-idNum="'+ shellRowNum + '" onchange="populateShell('+shellRowNum+'); updateAC();"/><datalist id="shellList' + shellRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="shellNotes' + shellRowNum + '" /></td>';
    
     cols += '<td><input type="number" value="0" onchange=" updateShellStats();" id="shellStrMod' + shellRowNum +'"></td>';
@@ -4551,12 +4550,6 @@ for(i=1;i<6;i++){
         }
     });
 
-    function openAlert(){
-        $(".customAlert").css("animation", "fadeIn 0.3s linear");
-        $(".customAlert").css("display", "inline");
-        document.getElementsByClassName("overlay")[0].style.display = "block";
-    } 
-
     // Pop-up skill description.
     $(".interact").click(function () {
         var opGroup = ["Select a Skill", "Non-Combat Skills", "Combat Skills", "Psychic Skills"];
@@ -4571,7 +4564,7 @@ for(i=1;i<6;i++){
                 $(".message").text(info);
                 $(".messageHeader").text(title + ":");
                 openAlert();
-                
+                return;
             }
         }
     });
@@ -4624,13 +4617,13 @@ for(i=1;i<6;i++){
     $("#addrow-drone").on("click", addDroneRow);
 
     // Add Alert Info box on info button click.
-$(".interactInfo").click(function () {
+    $(".interactInfo").click(function () {
 
-var description = this.getAttribute("data-desc");
+        var description = this.getAttribute("data-desc");
         if (description !== ""){
-                $(".message").text(description);
-                $(".messageHeader").text(this.getAttribute("data-name") + ":");
-                openAlert();
+            $(".message").text(description);
+            $(".messageHeader").text(this.getAttribute("data-name") + ":");
+            openAlert();
         }
     });
     
@@ -4786,3 +4779,9 @@ function removeOptions(parent) {
     document.getElementById("mySidepanel").style.width = "0";
     document.getElementsByClassName("helpPanel")[0].style.marginLeft = "10px";
   }
+
+  function openAlert(){
+    $(".customAlert").css("animation", "fadeIn 0.3s linear");
+    $(".customAlert").css("display", "inline");
+    document.getElementsByClassName("overlay")[0].style.display = "block";
+} 
