@@ -2351,6 +2351,88 @@ var psiTechniqueList = [{
             effort: 1
         }
         
+    ],
+    "Precognition":[
+        {
+            value: "Intuitive Response",
+            title: "[precognition,lvl-1]",
+            desc: "- As an Instant action, the precog can Commit Effort for the scene just before they roll the initiative.\n- Their initiative score is treated as one better than anyone else’s involved in the scene.\n- If another participant has this power or some other ability that grants automatic initiative success, roll initiative normally to determine which of them goes first, and then the rest of the combatant's act.\n- This ability cannot be used if the precog has been surprised. ",
+            lvl: 1,
+            action: "Instant Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Sense The Need",
+            title: "[precognition,lvl-1]",
+            desc: "- At some point in the recent past, the psychic had a vague but intense premonition that a particular object would be needed.\n- By triggering this power as an Instant action and Committing Effort for the day, the psychic can retroactively declare that they brought along any single object that they could have reasonably acquired and carried to this point.\n- This object must be plausible given recent events; if the psychic has just been strip-searched, very few objects could reasonably have been kept, while a psychic who’s just passed through a weapons check couldn’t still have a loaded laser pistol",
+            lvl: 1,
+            action: "Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Terminal Reflection",
+            title: "[precognition,lvl-1]",
+            desc: "- The psychic’s Oracle power automatically triggers as an Instant action moments before some unexpected danger or ambush, giving the precog a brief vision of the impending hazard.\n- This warning comes just in time to avoid springing a trap or to negate combat surprise for the precog and their companions.\n- If the psychic does not immediately Commit Effort for the day, this sense goes numb and this technique cannot be used for the rest of the day.",
+            lvl: 1,
+            action: "Augment/Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Alternate Outcome",
+            title: "[precognition,lvl-2]",
+            desc: "- The precog can sense impending failure and attempt to salvage the action.\n- As an Instant action, the precog can target a visible ally or their own self and Commit Effort for the day to allow the target to reroll a failed hit roll, saving throw, or skill check, taking the better of the two rolls.\n- This power disrupts delicate lines of probability, however, and cannot be used on any given target more than once a day.",
+            lvl: 2,
+            action: "Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Destiny's Shield",
+            title: "[precognition,lvl-2]",
+            desc: "- The precog observes an incoming injury and tries to find an alternate future in which the attack misses.\n- As an Instant action, the precog can Commit Effort for the day to force an attacker to reroll a successful hit roll.\n- This technique only works on attacks against the psychic’s person, not against attacks aimed at a vehicle they’re occupying or harm that doesn’t involve an attack roll.\n- If the rerolled attack still hits, however, the damage done is maximized.\n- This technique can be used only once per incoming attack.",
+            lvl: 2,
+            action: "Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Anguished Vision",
+            title: "[precognition,lvl-3]",
+            desc: "- The adept’s precognition is sophisticated enough to clearly foresee several seconds into the future.\n- As an Instant action, the psychic may Commit Effort for the day and declare that what they have just done or seen is a vision of the immediate future.\n- Time rolls back to the start of the initiative count in a combat turn, or six seconds earlier if out of combat.\n- Nothing that happened during that round has really come to pass yet.\n- This ability is tremendously draining, and can be used only once per day.",
+            lvl: 3,
+            action: "Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Cursed Luck",
+            title: "[precognition,lvl-3]",
+            desc: "- Negative probabilities are woven tightly around a visible animate target, including robots and animals but not including vehicles.\n- Triggering this technique requires a Main Action and Committing Effort for the scene.\n- The target must roll any attack rolls, damage rolls, skill checks, and saving throws twice and take the worst result each time.\n- Any attempts to hit the target or damage dice rolled against it may be rolled twice and the best result is taken.\n- Intelligent targets can make a Mental saving throw at the end of each round to throw off the effect; this save is not penalized by the power.",
+            lvl: 3,
+            action: "Main Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Forced Outcome",
+            title: "[precognition,lvl-3]",
+            desc: "- Through careful manipulation of probability, the adept can influence random physical events in their vicinity.\n- Triggering this technique requires a Main Action and Committing Effort for the scene.\n- Any simple, random mechanical outcome can be completely controlled for the scene, such as a roulette wheel or the order of a deck of shuffled cards.\n- Any other physical event in the area that seems not entirely implausible may be made to occur by this technique, provided it doesn’t involve more than a few objects and doesn’t require human involvement.\n- The GM decides what random events are and are not adequately possible.\n- Anything more than one unusual coincidence or chance per scene is likely impossible to produce.",
+            lvl: 3,
+            action: "Main Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Not My Time",
+            title: "[precognition,lvl-4]",
+            desc: "- The precog instinctively wrenches the lines of probability away from futures in which they are about to die.\n- This technique triggers automatically when the pre-cog is about to die, provided they can Commit Effort for the day.\n- On triggering, random events somehow conspire to leave the precog alive, even if outrageous coincidences and ridiculous luck are required.\n- Provided the precog doesn’t intentionally thrust herself back into danger, their life is secured for the next few minutes at least, though there’s no guarantee the psychic will survive intact in mind or body.\n- This technique can trigger no more often than once per week",
+            lvl: 3,
+            action: "Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Prophecy",
+            title: "[precognition,lvl-4]",
+            desc: "- The power of the precog extends to dictating future events that directly involve them.\n- As a Main Action, the precognitive PC may make one prediction involving their personal future or future condition within the next year.\n- Provided they take reasonable measures to enable this prediction, that no direct resistance is mounted by an enemy, and that the prediction doesn’t seem highly improbable to the GM, it will come to pass.\n- The adept must Commit Effort when this power is used, and the Effort remains Committed until the prophecy comes to pass or is abandoned.\n- This ability cannot be used more than once per month and only one prophecy may be active at a time",
+            lvl: 4,
+            action: "Main Action (Duration)",
+            effort: 1
+        }     
     ]
 }];
 
