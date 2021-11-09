@@ -2339,7 +2339,7 @@ var psiTechniqueList = [{
             title: "[metapsionics,lvl-4]",
             desc: "- When this technique is learned, the adept may choose one technique from any discipline they know.\n- That technique no longer requires Effort to be Committed in any way, though other techniques that augment it may still exact a cost.\n- Mastered Psychic Static, for example, can expend an effectively unlimited amount of effort.\n- If the technique has a duration based on Committed Effort then it lasts until the metapsion chooses to end it or is killed.\n- This technique may only be mastered once, though the perfected technique may be changed with a month of meditation and practice.",
             lvl: 4,
-            action: "Augment (Permanent)",
+            action: "Passive",
             effort: -1
         },
         {
@@ -2421,7 +2421,7 @@ var psiTechniqueList = [{
             value: "Not My Time",
             title: "[precognition,lvl-4]",
             desc: "- The precog instinctively wrenches the lines of probability away from futures in which they are about to die.\n- This technique triggers automatically when the pre-cog is about to die, provided they can Commit Effort for the day.\n- On triggering, random events somehow conspire to leave the precog alive, even if outrageous coincidences and ridiculous luck are required.\n- Provided the precog doesn’t intentionally thrust herself back into danger, their life is secured for the next few minutes at least, though there’s no guarantee the psychic will survive intact in mind or body.\n- This technique can trigger no more often than once per week",
-            lvl: 3,
+            lvl: 4,
             action: "Instant Action (Day)",
             effort: 1
         },
@@ -2433,6 +2433,104 @@ var psiTechniqueList = [{
             action: "Main Action (Duration)",
             effort: 1
         }     
+    ],
+    "Telekinesis":[
+        {
+            value: "Kinetic Transversal",
+            title: "[telekinesis,lvl-1]",
+            desc: "- The adept may Commit Effort as an On Turn action to move freely over vertical or overhanging surfaces as if they were flat ground, crossing any solid surface strong enough to bear five kilos of weight.\n- They can also move over liquids at their full movement rate.\n- This movement ability lasts as long as the Effort is committed ",
+            lvl: 1,
+            action: "On Turn Action (At Will)",
+            effort: 1
+        },
+        {
+            value: "Pressure Field",
+            title: "[telekinesis,lvl-1]",
+            desc: "- As an Instant action, the adept can manifest a protective force skin around their person equivalent to a vac suit, maintaining pressure and temperature even in hard vacuum conditions.\n- They can ignore temperatures at a range of plus or minus 100 degrees Celsius and automatically pressurize thin atmospheres for breathability, or filter particulates or airborne toxins.\n- By Committing Effort for the scene, they can shield up to six comrades.\n- This lasts until the user reclaims the Effort",
+            lvl: 1,
+            action: "Instant Action (At Will)",
+            effort: 1
+        },
+        {
+            value: "Telekinetic Armory",
+            title: "[telekinesis,lvl-1]",
+            desc: "- The adept may Commit Effort as an On Turn action to create both weapons and armor out of telekinetic force.\n- These weapons are treated as tech level 4 and act as a rifle or any advanced melee weapon.\n- Attack rolls can use either Dexterity, Wisdom, or Constitution modifiers, and may use the Telekinesis skill as the combat skill.\n- Armor may be created as part of this power, granting the psychic a base Armor Class equal to 15 plus their Telekinesis skill level.\n- This armor does not stack with conventional armor, but Dexterity or shields modify it as usual.\n- The gear continues to exist as long as the psychic chooses to leave the Effort committed, and they may be invisible or visible at the psychic’s discretion.",
+            lvl: 1,
+            action: "On Turn Action (At Will)",
+            effort: 1
+        },
+        {
+            value: "Impact Sump",
+            title: "[telekinesis,lvl-2]",
+            desc: "- The adept may Commit Effort for the day as an Instant action to negate a single instance of physical damage.\n- This ability is too taxing to be used more than once per day, but as an Instant action, it can be triggered even after the damage is rolled.",
+            lvl: 2,
+            action: "Instant Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Slip Field",
+            title: "[telekinesis,lvl-2]",
+            desc: "- As a Main Action, the psychic Commits Effort for the scene and decreases the friction at a point within sight.\n- Up to ten meters in diameter is affected, making it difficult for enemies to move from their current position.\n- All chosen targets must make an Evasion saving throw or fall prone, becoming unable to stand up or move more than a meter per Move action taken.\n- If used against a ground vehicle, the driver must make a Dex/Pilot skill check at a difficulty of 8 plus the adept’s Telekinesis skill or go out of control, driving directly forward for around and crashing into any obstacles.\n- Targets who save are immune to this technique for the scene. ",
+            lvl: 2,
+            action: "Main Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Telekinetic Expertise",
+            title: "[telekinesis,lvl-2]",
+            desc: "- The adept has become familiar enough with the manipulation of telekinetic force that they may now use Telekinetic Manipulation without Committing Effort.",
+            lvl: 2,
+            action: "Passive",
+            effort: 0
+        },
+        {
+            value: "Thermokinesis",
+            title: "[telekinesis,lvl-2]",
+            desc: "- Telekinetic power involves kinetic energy, but a sufficiently sophisticated grip on motion can be used to agitate the molecules of an inanimate object and cause it to melt or burst into flame.\n- Similar focus can chill or freeze such substances.\n- Applying Thermokinesis to a target requires that the adept Commit Effort for the scene as a Main Action.\n- Thermokinesis cannot affect objects larger than the adept could lift with their Telekinetic Manipulation.\n- As with other telekinetic powers, this ability does not work on objects being held or used by intelligent creatures.\n- Non-sentient robots or other objects with hit points take 1d12 damage per level of Telekinesis skill each time this technique is applied to them. ",
+            lvl: 2,
+            action: "Main Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Tangible Force Construct",
+            title: "[telekinesis,lvl-3]",
+            desc: "- Once per turn, as an On Turn action, the psychic can Commit Effort for the scene to create a telekinetic force construct at a visible point, provided it can fit within a three-meter cube.\n- The force construct can be shaped in any way the psychic wishes, and can remain fixed in its location without external supports if desired.\n- It is as sturdy as a TL4 construction and may be visible or invisible at the adept’s choice.\n- The construct lasts until the end of the scene, until the psychic dispels it, or until it is smashed with 20 points of damage against AC 15.",
+            lvl: 3,
+            action: "On Turn Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Telekinetic Ram",
+            title: "[telekinesis,lvl-3]",
+            desc: "- As a Main Action, the psychic can Commit Effort for the scene to target a tremendous, uncontrolled burst of force at a single target within sight.\n- This burst requires some time to detonate, however, and will only go off at the end of the next round.\n- Targets of this technique are aware of an oppressive, electrical tingling in the air and are apt to instinctively move; this technique is thus generally useless against any target that is not entirely immobile, as any movement of a chosen target disrupts the ram.\n- Once the ram detonates, however, it is sufficient to destroy any immobile civilian vehicle, create a five-meter hole in anything short of hardened military fortifications, or inflict 5d12 damage on anything else as if it were struck by a Heavy weapon",
+            lvl: 3,
+            action: "Main Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Reactive Telekinesis",
+            title: "[telekinesis,lvl-3]",
+            desc: "- As an Instant action, the psychic can Commit Effort for the scene whenever an assailant misses them with a physical attack.\n- The attack is then reflected back against the assailant, who must reroll the attack against their own person twice.\n- If either roll hits, the assailant suffers damage from their own attack.\n- If both rolls hit, the damage is the maximum possible.",
+            lvl: 3,
+            action: "Instant Action (Scene)",
+            effort: 1
+        },
+        {
+            value: "Force Puppetry",
+            title: "[telekinesis,lvl-4]",
+            desc: "- As a Main Action, the telekinetic can Commit Effort for the day to suborn a visible target’s mobility, whether robotic, vehicular, or human, provided it’s no larger than a ground car.\n- A sapient victim can make a Mental saving throw to resist the psychic onslaught; on a failure, they lose control of their physical actions.\n- If not piloted by the telekinetic, the target remains motionless or continues in its current direction of travel.\n- If the telekinetic spends a Main Action to control them, they can be made to perform any physical activity that is not directly suicidal, using the psychic’s skill levels and hit bonus for any attacks or skill checks they might make.\n- The puppetry lasts until the end of the scene until the target leaves the psychic’s sight, or until a sapient target believes that their action or inaction is about to get them killed.\n- The psychic’s control is fine enough to achieve even very delicate physical motions, but it is not good enough to control the target’s speech, though it can keep them silent.",
+            lvl: 4,
+            action: "Main Action (Day)",
+            effort: 1
+        },
+        {
+            value: "Telekinetic Flight",
+            title: "[telekinesis,lvl-4]",
+            desc: "- As an Instant action, the telekinetic can Commit Effort to begin flying and may extend this effect to up to a half-dozen unresisting, human-sized allies within 30 meters.\n- While flying, the psychic can move at twice their normal movement rate in any direction.\n- They can plunge earthward at up to terminal velocity without harm, and even orbital insertions are survivable with this power if a vac suit is available or the Pressure Field technique is used.\n- Allies must end their turns within 30 meters of the psychic to maintain this flight but control their own motion.\n- As an Instant, this power may be triggered in time to negate falling damage.\n- The flight lasts for as long as the Effort remains Committed. ",
+            lvl: 4,
+            action: "Instant Action (At Will)",
+            effort: 1
+        }      
     ]
 }];
 
