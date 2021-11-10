@@ -184,22 +184,6 @@ input[type="string"] {
     margin-right: auto;
 }
 
-.button {
-    background-color: black;
-    color: white;
-    border: 2px solid #609;
-    height: 20px;
-    line-height: 0;
-    padding: 5px 5px  5px 5px;
-    text-align: center !important;
-    font-size: 0.8em;
-    width: 20px;
-    cursor: pointer;
-
-}
-
-#mele
-
 .dropdown {
     width: 24px;
     padding: 0;
@@ -240,6 +224,7 @@ select {
     font-family: Calibri !important;
     font-weight: bold !important;
     overflow:auto;
+    text-align: center;
 }
 
 h2{
@@ -457,6 +442,9 @@ optgroup {
 }
 .infoPanel {
     width: 33vw;
+    text-align:center !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 option:hover {
     color: black;
@@ -499,8 +487,11 @@ table td {
 }
 
 .skillsTable td{
-  text-align: left;
   max-width: 120px;
+}
+
+.leftAlign{
+  text-align: left;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -537,7 +528,7 @@ th {
 #playerHP:hover{
     color: red !important;
     cursor: pointer;
-    background-color: black !important;
+    background-color: purple !important;
 }
 
 tbody[id$="Child"] td {
@@ -999,4 +990,23 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     z-index: 2;
     cursor: pointer;
     transition: 0.3s;
+  }
+
+  .button {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    border: 2px solid #609;
+    line-height: 5px;
+    padding: 5px 5px 5px 5px;
+    width: 20px !important;
+    height: 20px;
+    text-align: center !important;
+    cursor: pointer;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+  
   }

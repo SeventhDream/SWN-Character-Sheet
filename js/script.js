@@ -179,19 +179,20 @@ function overwriteRows(deleteRowIndex,id,targetRow,targetRemove,targetStorage,ta
                for(var j = 0; j < oldElements.length; j++){
                    // Check if value is defined
                    
-                   if (oldElements[j].type == 'checkbox') {
-                      
+                   if (oldElements[j].type == 'checkbox') {   
                        if ($("#"+nextElements[j].id).prop('checked')){
-                       oldElements[j].checked = true;
+                           oldElements[j].checked = true;
                        } else {
                            oldElements[j].checked = false;
                        }
-                   } else if ((oldElements[j].value != undefined) && (oldElements[j].id != targetRemove+deleteRowIndex)){
-                                     oldElements[j].innerHTML = nextElements[j].innerHTML;
-                        oldElements[j].value = nextElements[j].value;
-         
-                       
-                   }
+                    } else if ((oldElements[j].value != undefined) && (oldElements[j].id != targetRemove+deleteRowIndex)){
+                        oldElements[j].innerHTML = nextElements[j].innerHTML;
+                        oldElements[j].value = nextElements[j].value;    
+                        // Trigger associated 'onchange' action if exists.
+                        if (oldElements[j].getAttribute("onchange") != null) {
+                            oldElements[j].onchange();
+                        }                   
+                    }
                }
            }
            storageColour(targetStorage+rowIndex);
@@ -290,7 +291,7 @@ function addItemRow(){
 
         cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" /></td>';
-        cols += '<td><input value="-" id="minusOne'+rowNum+'" readonly class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
+        cols += '<td><input value="-" name="minusOne'+rowNum+'" readonly type="button" class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
         cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
         cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance();" value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
         cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance(); storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
@@ -375,7 +376,7 @@ function addWeaponRow(){
     cols += '<td><input type="string" value="" id="weaponDamage'+weaponRowNum+'"></td>';
     cols += '<td><input type="number" value="0" id="weaponShortRange'+weaponRowNum+'">/<input type="number" value="0" id="weaponLongRange'+weaponRowNum+'"></td>';
     cols += '<td><input type="number" value="" id="weaponAmmoCurrent'+weaponRowNum+'">/<input type="number" value="0" id="weaponAmmoMax'+weaponRowNum+'"></td>';
-        cols += '<td><input value="-" id="minusOne'+weaponRowNum+'" readonly class="button" onclick="decrement(weaponQuantity'+weaponRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateWeapon('+weaponRowNum+'); calculateEncumberance();" class="storage" id="weaponQuantity' + weaponRowNum + '"/><input value="+" readonly class="button" onclick="increment(weaponQuantity'+weaponRowNum+'.id)"></td>';
+        cols += '<td><input value="-" name="minusOne'+weaponRowNum+'" readonly type="button" class="button" onclick="decrement(weaponQuantity'+weaponRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateWeapon('+weaponRowNum+'); calculateEncumberance();" class="storage" id="weaponQuantity' + weaponRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(weaponQuantity'+weaponRowNum+'.id)"></td>';
         cols += '<td><input type="string"  id="weaponPrice' + weaponRowNum + '"/></td>';
         cols += '<td><input type="number" id="weaponWeight' + weaponRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="weaponStorage' + weaponRowNum + '" onchange="calculateEncumberance(); storageColour(weaponStorage'+weaponRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
@@ -458,7 +459,7 @@ function addMeleeRow(){
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="meleeNotes' + meleeRowNum + '" /></td>';
     cols += '<td><input type="string" value="" id="meleeDamage'+meleeRowNum+'"></td>';
     cols += '<td><input type="string" value="0" id="meleeShock'+meleeRowNum+'"></td>';
-        cols += '<td><input value="-" id="minusOne'+meleeRowNum+'" readonly class="button" onclick="decrement(meleeQuantity'+meleeRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateMelee('+meleeRowNum+'); calculateEncumberance();" class="storage" id="meleeQuantity' + meleeRowNum + '"/><input value="+" readonly class="button" onclick="increment(meleeQuantity'+meleeRowNum+'.id)"></td>';
+        cols += '<td><input value="-" name="minusOne'+meleeRowNum+'" readonly type="button" class="button" onclick="decrement(meleeQuantity'+meleeRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateMelee('+meleeRowNum+'); calculateEncumberance();" class="storage" id="meleeQuantity' + meleeRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(meleeQuantity'+meleeRowNum+'.id)"></td>';
         cols += '<td><input type="string"  id="meleePrice' + meleeRowNum + '"/></td>';
         cols += '<td><input type="number" id="meleeWeight' + meleeRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="meleeStorage' + meleeRowNum + '" onchange="calculateEncumberance(); storageColour(meleeStorage'+meleeRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
@@ -538,7 +539,7 @@ function addArmourRow(){
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="armourNotes' + armourRowNum + '" /></td>';
     cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="AC' + armourRowNum +'"></td>';
     cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="shieldBonus' + armourRowNum +'"></td>';
-        cols += '<td><input value="-" id="minusOne'+armourRowNum+'" readonly class="button" onclick="decrement(armourQuantity'+armourRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateArmour('+armourRowNum+'); calculateEncumberance();" class="storage" id="armourQuantity' + armourRowNum + '"/><input value="+" readonly class="button" onclick="increment(armourQuantity'+armourRowNum+'.id)"></td>';
+        cols += '<td><input value="-" name="minusOne'+armourRowNum+'" readonly type="button" class="button" onclick="decrement(armourQuantity'+armourRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateArmour('+armourRowNum+'); calculateEncumberance();" class="storage" id="armourQuantity' + armourRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(armourQuantity'+armourRowNum+'.id)"></td>';
         cols += '<td><input type="string"  id="armourPrice' + armourRowNum + '"/></td>';
         cols += '<td><input type="number" id="armourWeight' + armourRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
         cols += '<td><select id="armourStorage' + armourRowNum + '" onchange="calculateEncumberance(); updateAC(); storageColour(armourStorage'+armourRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
@@ -662,7 +663,7 @@ function addDroneRow(){
     cols += '<td><input type="string"  id="dronePrice' + droneRowNum + '"/></td>';
     cols += '<td><input type="number"  id="droneFittings' + droneRowNum + '"/></td>';
     cols += '<td><input type="number"  id="droneAC' + droneRowNum + '"/></td>';
-    cols += '<td><input value="-" id="minusOne'+droneRowNum+'" readonly class="button" onclick="decrement(droneQuantity'+droneRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateDrone('+droneRowNum+'); calculateEncumberance();" class="storage" id="droneQuantity' + droneRowNum + '"/><input value="+" readonly class="button" onclick="increment(droneQuantity'+droneRowNum+'.id)"></td>';
+    cols += '<td><input value="-" name="minusOne'+droneRowNum+'" readonly type="button" class="button" onclick="decrement(droneQuantity'+droneRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateDrone('+droneRowNum+'); calculateEncumberance();" class="storage" id="droneQuantity' + droneRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(droneQuantity'+droneRowNum+'.id)"></td>';
         
         cols += '<td><input type="number" id="droneWeight' + droneRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
     cols += '<td><input type="number"  id="droneHP' + droneRowNum + '"/></td>';
@@ -742,7 +743,6 @@ function removePsiRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"psiRow","removePsi","#psiStorage",rowNumPsi);
     document.getElementById("psiRow"+parseInt(rowNumPsi-1)).remove();
     $("[name='counterPsi']").val(parseInt(rowNumPsi-2));
-    calculateEncumberance();
 
     rowNumPsi--;
     }
@@ -754,7 +754,7 @@ function populatePsi(id){
     var opGroup = Object.getOwnPropertyNames(psiTechniqueList[0]);
     var psiField = document.getElementById("psiName" + id);
     var psiAction = document.getElementById("psiAction" + id);
-    var psiEffort = document.getElementById("psiCommit" + id);
+    var psiEffortCommited = document.getElementById("psiCommit" + id);
     var psiInfo = document.getElementById("psiInfo" + id);
 
     var match = psiField.value;
@@ -766,7 +766,7 @@ function populatePsi(id){
             var currentPsi = psiTechniqueList[0][opGroup[i]][index];
             psiInfo.setAttribute('data-name', psiField.value); // Store armour name
             psiInfo.setAttribute('data-desc', currentPsi.desc); // Store armour description
-            psiEffort.value = currentPsi.effort;
+            psiEffortCommited.max = currentPsi.limit;
             psiAction.value = currentPsi.action;
             return;
         }
@@ -792,19 +792,28 @@ function updateMaxEffort(){
     }
 }
 
+// Calculate remaining Psionic Effort points
+function updateEffortPool(){
+    var effortPool = document.getElementById("maxEP").value; // Reset pool to maximum value.
+    // Cycle through every psi technique row
+    for (var i = 1; i <= parseInt(document.getElementById("counterPsi").value); i++){
+        effortPool = effortPool - document.getElementById("psiCommit"+ i).value;     
+    }
+    effortPool = effortPool - (parseInt(document.getElementById("biopsiCoreEffort").value) + parseInt(document.getElementById("metapsiCoreEffort").value) + parseInt(document.getElementById("precogCoreEffort").value) + parseInt(document.getElementById("telekinesisCoreEffort").value) + parseInt(document.getElementById("telepathCoreEffort").value) + parseInt(document.getElementById("teleportCoreEffort").value));
+    document.getElementById("currentEP").value = effortPool; // update current Effort Pool.
+}
+
 // Add one row to the Psi Technique Table.
 function addPsiRow(){
      var newRow = $("<tr id='psiRow"+rowNumPsi+"' value ='"+rowNumPsi+"'>");
         var cols = "";
 
         cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+')"/><datalist id="psiList' + rowNumPsi + '"></datalist></td>';
-        cols += '<td><input type="number" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiCommit' + rowNumPsi + '" readonly/></td>';
-    cols += '<td><input type="string" value="-" min="0" onchange="populatePsi('+rowNumPsi+'); calculateEncumberance();" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
-        
+        cols += '<td><input value="-" name="minusOne'+rowNumPsi+'" readonly type="button" class="button" onclick="decrement(psiCommit'+rowNumPsi+'.id)"><input type="number" value="0" min="0" max="99" onchange="populatePsi('+rowNumPsi+'); updateEffortPool();" id="psiCommit' + rowNumPsi + '" readonly/><input value="+" readonly type="button" class="button" onclick="increment(psiCommit'+rowNumPsi+'.id)"></td>';
+        cols += '<td><input type="string" value="-" min="0" onchange="populatePsi('+rowNumPsi+');" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
         cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
-        $("#psiTable").append(newRow);
-        
+        $("#psiTable").append(newRow);      
          selectOptionTable(psiTechniqueList,"#psiList" + rowNumPsi);
         activateRow();
         document.getElementById("psiTable").setAttribute("data-counter",rowNumPsi);
