@@ -2168,7 +2168,8 @@ var psiTechniqueList = [{
             name: "empty",
             desc: "",
             lvl: "0",
-            action: "-"
+            action: "-",
+            limit: 0
     }
     ],
     "Biopsionics":[
@@ -2178,7 +2179,7 @@ var psiTechniqueList = [{
             desc: "- The biopsion has developed a sophisticated mastery of their core ability, and they no longer need to Commit Effort to activate it and may use it whenever they wish.\n- The use of additional techniques that augment Psychic Succor might still require Effort to be Committed.",
             lvl: 1,
             action: "Passive",
-            effort: 0
+            limit: 0
         },
         {
             value: "Organic Purification Protocols",
@@ -2186,7 +2187,7 @@ var psiTechniqueList = [{
             desc: "- The biopsion’s Psychic Succor now cures any poisons or diseases the subject may be suffering, albeit it requires Committing Effort for the day as an additional surcharge.\n- Biowarfare organisms, exceptionally virulent diseases, or TL5 toxins may resist this curing, requiring a Wis/Biopsionics skill check at a difficulty of at least 10.\n- Failure means that the adept cannot cure the target’s disease.\n- This technique cannot cure congenital illnesses.",
             lvl: 1,
             action: "Augment (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Remote Repair",
@@ -2194,7 +2195,7 @@ var psiTechniqueList = [{
             desc: "- Psychic Succor and other bio-psionic techniques that normally require touch contact can now be applied at a distance up to 100 meters, provided the bio-psion can see the target with their unaided vision.\n- Hostile powers that normally require a hit roll will hit automatically.\n- Each time this technique is used, Effort must be Committed for the whole scene. ",
             lvl: 1,
             action: "Augment (Scene)",
-            effort: 1
+            limit: 99
         },
          {
             value: "Invincible Stand",
@@ -2202,7 +2203,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion has mastered techniques of emergency tissue reinforcement and system stabilization.\n- As an Instant action, they can Commit Effort for the scene to keep themself or a target they can touch active even at zero hit points.\n- This technique must be used once every round on the target or they collapse at the end of the round.\n- If the target suffers hit point damage, the biopsion must Instantly Commit Effort for the scene or the target goes down immediately with a mortal wound.\n- A Heavy weapon hit on a subject of this power or similar physical dismemberment will always kill a target, regardless of this technique.",
             lvl: 2,
             action: "Intstant Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Major Organ Restoration",
@@ -2210,7 +2211,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion’s Psychic Succor can now cure congenital birth defects and regrow missing limbs and organs.\n- It can even be used to stabilize targets that have been dropped by Heavy weapons, decapitated, or otherwise dramatically dismembered, provided it’s used within one round per level of Biopsionic skill.\n- The best that can be done for such badly-mangled targets is stabilization, after which they must rest for 24 hours before any further hit points can be healed by Biopsionics, stims, or natural rest.",
             lvl: 2,
             action: "Passive",
-            effort: 0
+            limit: 0
         },
         {
             value: "Tissue Integrity Field",
@@ -2218,7 +2219,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion’s Psychic Succor may now also affect all allies within ten meters of the target.\n-  Allies can decline the healing if they don’t require it or don’t want to take the additional System Strain.\n- Each use of this technique requires that the bio-psion Commit Effort for the day in addition to the cost of the Psychic Succor.",
             lvl: 2,
             action: "Augment (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Accelerated Succor",
@@ -2226,7 +2227,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion’s Psychic Succor now can be used as an On Turn power, albeit only once per round.\n- By Committing an additional Effort for the day with each use, it can even be used as an Instant power, though it still can only be used once per round.\n- Any surcharges for augmenting the succor apply normally, such as with Tissue Integrity Field.",
             lvl: 3,
             action: "Passive",
-            effort: 0
+            limit: 0
         },
         {
             value: "Metamorph",
@@ -2234,7 +2235,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion can now shape their own or another willing target’s physical form as a Main Action, transforming a touched target into any humanoid form within 50% of their own mass.\n- Claws and other body armaments can be fashioned equivalent to Light or Medium melee weapons and innate armour equivalent to AC 13.\n- Gills and other environmental-survival alterations are also viable at the GM’s discretion, but flight is a bridge too far for this power.\n- A person can be impersonated down to the DNA level, provided a blood or hair sample is available.\n- The use of this adds one System Strain point to the target that does not recover so long as the change is in effect.\n- Applying Metamorph requires that the bio-psion Commit Effort for as long as the change is to be maintained.\n- If applied to a target other than the psychic, the power automatically ends if the psychic gets more than one hundred kilometres away.",
             lvl: 3,
             action: "Main Action",
-            effort: 1
+            limit: 99
         },
         {
             value: "Hollistic Optimization Patterning",
@@ -2242,7 +2243,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion gains the ability to drastically augment their own or a touched ally’s physical abilities as an On Turn action.\n- This boost lasts for the rest of the scene, adds two points of System Strain to the target and gives them a +2 bonus to all Strength or Dexterity skill checks, hit rolls, and damage rolls along with 20 extra hit points.\n- Any damage is taken off these temporary hit points first, and both the bonuses and any hit points in excess of the target’s maximum are lost at the end of the scene.\n- Each invocation of this technique requires the bio-psion to Commit Effort for the day, and this power cannot be used on a given target more than once per scene.",
             lvl: 4,
             action: "On Turn Action",
-            effort: 1
+            limit: 99
         },
          {
             value: "Quintessential Reconstruction",
@@ -2250,7 +2251,7 @@ var psiTechniqueList = [{
             desc: "- The bio-psion becomes extremely difficult to kill, encoding their mind in a coherent pattern of MES energy coterminous with their realspace coordinates.\n- If killed, the psychic will regenerate from the largest remaining fragment of their body over 24 hours.\n- This process maximizes their System Strain for one week.\n- If brought to zero hit points during this week, they die instantly and permanently.\n- The psychic retains a vague awareness of their surroundings while “dead” and can postpone their regeneration for up to a week in order to avoid notice, but burial or entombment may result in a very short second life.\n- Each use of this power inflicts one point of permanent attribute loss in an attribute of the bio-psion’s choice.",
             lvl: 4,
             action: "Passive",
-            effort: 0
+            limit: 0
         }
     ],
     "Metapsionics":[
@@ -2260,7 +2261,7 @@ var psiTechniqueList = [{
             desc: "- The metapsion can conceal their own psychic abilities from metapsionic senses.\n- They must Commit Effort for as long as they wish to cloak their powers.\n- While hidden, only a metapsion with equal or higher skill in Metapsionics can detect their abilities with their level-0 or level-2 Psychic Refinement abilities.\n- In such cases, an opposed Wis/Metapsionics roll is made between the metapsion and the investigator.\n- If the investigator wins, the cloak is pierced, while if the metapsion wins, the investigator’s Psychic Refinement remains oblivious. ",
             lvl: 1,
             action: "Augment (At Will)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Mindtracing",
@@ -2268,7 +2269,7 @@ var psiTechniqueList = [{
             desc: "- The metapsion can trace back the use of psionic powers they’ve noticed in their presence.\n- By Committing Effort for the scene as an Instant action, they can see and hear through the senses of a user of psychic power, gaining an intuitive awareness of their location and treating them as a visible target for purposes of their own abilities.\n- Thus, if they see someone being affected by a telepathy power with no visible source, they can use this ability to briefly share the hidden telepath’s senses.\n- If used on a target that is teleporting, they can perceive the teleporter’s view of their destination.\n- Use on a metamorphically-shaped impostor would reveal the biopsion responsible for the change, and so forth.\n- These shared senses last for only one round and do not interfere with the adept’s other actions.",
             lvl: 1,
             action: "Instant Action (Scene)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Synthetic Adaptation",
@@ -2276,7 +2277,7 @@ var psiTechniqueList = [{
             desc: "- This is a particularly esoteric technique, one that requires the adept to have at least Program-0 or Fix-0 skill in order to master.\n- With it, however, the metapsion has learned how to synergize with the quantum intelligence of a VI or True AI in order to apply Telepathy or Biopsion powers to their inanimate corpus.\n- Only intelligent machines can be affected, as the technique requires a sentient mind to catalyze the effect.\n- This synergy takes much of its force from the adept.\n- Any System Strain the powers might inflict must be paid by the adept rather than the target.",
             lvl: 1,
             action: "Passive",
-            effort: 0
+            limit: 0
         },
         {
             value: "Neural Trap",
@@ -2284,7 +2285,7 @@ var psiTechniqueList = [{
             desc: "- The metapsion allows a hostile psychic into their mental sanctum in order to gain a later advantage.\n- When targeted by a hostile psionic power that allows a save, the metapsion may Commit Effort as an Instant action and voluntarily fail the saving throw, accepting the effect.\n- The next psychic power the user targets at that assailant then allows the victim no saving throw.\n- This technique lasts until the metapsion makes their psychic attack or reclaims their Committed Effort.\n- A hostile psychic may be affected by only one Neural Trap from a given psychic at a time.",
             lvl: 2,
             action: "Instant Action (At Will)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Psychic Static",
@@ -2292,7 +2293,7 @@ var psiTechniqueList = [{
             desc: "- As an Instant action, the metapsion may Commit Effort for the day to negate a perceived psychic power.\n- The psychic responsible for the effect must Commit Effort for the day as an Instant action to resist this negation, otherwise the power ends, and any action used to trigger it is wasted.\n- The PC may then Commit Effort for the day again, with each spending and counter-spending until one runs out of Effort or chooses to stop.\n- Psychic Static can be applied only once per round to any particular power.\n- The target of the Psychic Static automatically knows the position of the interfering metapsion, though other onlookers do not have any obvious way of identifying the metapsion.",
             lvl: 2,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Suspended Manifestation",
@@ -2300,7 +2301,7 @@ var psiTechniqueList = [{
             desc: "- The metapsion is capable of “hanging” a psychic power in their brain, forming the energy patterns and then suspending them in a self-sustaining loop until it’s time to trigger their release.\n- The psychic must Commit Effort for the day to hang a power, along with the Effort normally necessary to trigger it.\n- None of this Effort can be recovered until the power is expended, after which it recovers at its usual speed.\n- Activating the power is an Instant action, or an On Turn action if it allows the target a saving throw of some kind.\n- Only one ability can be held suspended at any one time.",
             lvl: 2,
             action: "Augment (Day)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Concert of Minds",
@@ -2308,7 +2309,7 @@ var psiTechniqueList = [{
             desc: "- As an On Turn action, the metapsion may Commit Effort and form a psychic gestalt with one or more willing psychics within three meters, including up to one other psychic per Metapsion skill level.\n- This gestalt persists as long as the Effort remains committed, regardless of the subsequent distance between psychics.\n- On their own turn, any member of the gestalt may use any power or technique known by any other member, using the other member’s skill levels as necessary and paying any Effort cost from their own pool.\n- This gestalt shares only psychic power, not thoughts or senses.\n- At the end of each round in which one or more members have used some other member’s powers or abilities on their turn of action, the metapsion must Commit Effort for the scene or the gestalt drops and cannot be re-established for the rest of the scene.",
             lvl: 3,
             action: "On Turn Action (At Will)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Metadimensional Friction",
@@ -2316,7 +2317,7 @@ var psiTechniqueList = [{
             desc: "- As a Main Action, the metapsion Commits Effort for the scene to create localized MES turbulence around a visible target psychic within 200 meters.\n- Each time the target Commits Effort or an NPC initiates a psychic power, they suffer 1d8 damage per Metapsionics skill level of the adept.\n- Each time the target suffers the damage they can attempt a Mental saving throw to throw off the effect.\n- It lasts no longer than the rest of the scene at most.\n- Only one application of this friction can affect a target at once.",
             lvl: 3,
             action: "Main Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Psychic Tutelage",
@@ -2324,7 +2325,7 @@ var psiTechniqueList = [{
             desc: "- An expert metapsion can modulate and temper the metadimensional energy that surges through an untrained psychic’s mind.\n- This “safety buffer” allows the novice to experiment with their abilities and gradually develop the control they need to channel their powers without causing permanent brain damage.\n- Without this technique, it is virtually impossible to turn a normal with untapped potential into a trained psychic.\n- An adept with Metapsionics-3 skill can train up to ten pupils at once.\n- One with Metapsionics-4 can train up to one hundred.\n- It requires only a week to train a potential in ways to avoid accidentally triggering their powers and suffering the damage that follows, but actually teaching them to use their powers effectively takes anywhere from one to four years depending on their natural aptitude and the availability of other psychics willing to assist the metapsion in the training process.",
             lvl: 3,
             action: "Passive",
-            effort: 0
+            limit: 0
         },
         {
             value: "Surge Momentum",
@@ -2332,7 +2333,7 @@ var psiTechniqueList = [{
             desc: "- The metapsion’s abilities can be reinforced with a degree of metadimensional energy that would cause substantial damage to a less adept mind.\n- Particularly weak or unprepared minds might be completely crushed by the force of the adept’s augmented will.\n- The adept must Commit Effort for the day when using a power that normally grants its target a saving throw.\n- The target then suffers a penalty equal to the adept’s Metapsionics skill on any saving throw normally granted by the power.\n- If the target’s hit die total or character level is less than half the adept’s level, rounded up, they automatically fail their saving throw.",
             lvl: 3,
             action: "Augment (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Flawless Mastery",
@@ -2340,7 +2341,7 @@ var psiTechniqueList = [{
             desc: "- When this technique is learned, the adept may choose one technique from any discipline they know.\n- That technique no longer requires Effort to be Committed in any way, though other techniques that augment it may still exact a cost.\n- Mastered Psychic Static, for example, can expend an effectively unlimited amount of effort.\n- If the technique has a duration based on Committed Effort then it lasts until the metapsion chooses to end it or is killed.\n- This technique may only be mastered once, though the perfected technique may be changed with a month of meditation and practice.",
             lvl: 4,
             action: "Passive",
-            effort: -1
+            limit: 0
         },
         {
             value: "Impervious Pavis of Will",
@@ -2348,7 +2349,7 @@ var psiTechniqueList = [{
             desc: "- When this technique is learned, the metapsion must choose a discipline.\n- They then become entirely immune to unwanted powers from that discipline; they and their abilities are simply not valid targets for purposes of that discipline’s powers unless the adept chooses to be affected.\n- By Committing Effort for the day as an Instant action, they can extend this immunity for a scene to all allies within 50 meters.\n- This technique may be learned more than once, and any shared protection applies to all disciplines negated by the adept.",
             lvl: 4,
             action: "Passive + Instant Action (Day)",
-            effort: 1
+            limit: 1
         }
         
     ],
@@ -2359,7 +2360,7 @@ var psiTechniqueList = [{
             desc: "- As an Instant action, the precog can Commit Effort for the scene just before they roll the initiative.\n- Their initiative score is treated as one better than anyone else’s involved in the scene.\n- If another participant has this power or some other ability that grants automatic initiative success, roll initiative normally to determine which of them goes first, and then the rest of the combatant's act.\n- This ability cannot be used if the precog has been surprised. ",
             lvl: 1,
             action: "Instant Action (Scene)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Sense The Need",
@@ -2367,7 +2368,7 @@ var psiTechniqueList = [{
             desc: "- At some point in the recent past, the psychic had a vague but intense premonition that a particular object would be needed.\n- By triggering this power as an Instant action and Committing Effort for the day, the psychic can retroactively declare that they brought along any single object that they could have reasonably acquired and carried to this point.\n- This object must be plausible given recent events; if the psychic has just been strip-searched, very few objects could reasonably have been kept, while a psychic who’s just passed through a weapons check couldn’t still have a loaded laser pistol",
             lvl: 1,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Terminal Reflection",
@@ -2375,7 +2376,7 @@ var psiTechniqueList = [{
             desc: "- The psychic’s Oracle power automatically triggers as an Instant action moments before some unexpected danger or ambush, giving the precog a brief vision of the impending hazard.\n- This warning comes just in time to avoid springing a trap or to negate combat surprise for the precog and their companions.\n- If the psychic does not immediately Commit Effort for the day, this sense goes numb and this technique cannot be used for the rest of the day.",
             lvl: 1,
             action: "Augment/Instant Action (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Alternate Outcome",
@@ -2383,7 +2384,7 @@ var psiTechniqueList = [{
             desc: "- The precog can sense impending failure and attempt to salvage the action.\n- As an Instant action, the precog can target a visible ally or their own self and Commit Effort for the day to allow the target to reroll a failed hit roll, saving throw, or skill check, taking the better of the two rolls.\n- This power disrupts delicate lines of probability, however, and cannot be used on any given target more than once a day.",
             lvl: 2,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Destiny's Shield",
@@ -2391,7 +2392,7 @@ var psiTechniqueList = [{
             desc: "- The precog observes an incoming injury and tries to find an alternate future in which the attack misses.\n- As an Instant action, the precog can Commit Effort for the day to force an attacker to reroll a successful hit roll.\n- This technique only works on attacks against the psychic’s person, not against attacks aimed at a vehicle they’re occupying or harm that doesn’t involve an attack roll.\n- If the rerolled attack still hits, however, the damage done is maximized.\n- This technique can be used only once per incoming attack.",
             lvl: 2,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Anguished Vision",
@@ -2399,7 +2400,7 @@ var psiTechniqueList = [{
             desc: "- The adept’s precognition is sophisticated enough to clearly foresee several seconds into the future.\n- As an Instant action, the psychic may Commit Effort for the day and declare that what they have just done or seen is a vision of the immediate future.\n- Time rolls back to the start of the initiative count in a combat turn, or six seconds earlier if out of combat.\n- Nothing that happened during that round has really come to pass yet.\n- This ability is tremendously draining, and can be used only once per day.",
             lvl: 3,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Cursed Luck",
@@ -2407,7 +2408,7 @@ var psiTechniqueList = [{
             desc: "- Negative probabilities are woven tightly around a visible animate target, including robots and animals but not including vehicles.\n- Triggering this technique requires a Main Action and Committing Effort for the scene.\n- The target must roll any attack rolls, damage rolls, skill checks, and saving throws twice and take the worst result each time.\n- Any attempts to hit the target or damage dice rolled against it may be rolled twice and the best result is taken.\n- Intelligent targets can make a Mental saving throw at the end of each round to throw off the effect; this save is not penalized by the power.",
             lvl: 3,
             action: "Main Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Forced Outcome",
@@ -2415,7 +2416,7 @@ var psiTechniqueList = [{
             desc: "- Through careful manipulation of probability, the adept can influence random physical events in their vicinity.\n- Triggering this technique requires a Main Action and Committing Effort for the scene.\n- Any simple, random mechanical outcome can be completely controlled for the scene, such as a roulette wheel or the order of a deck of shuffled cards.\n- Any other physical event in the area that seems not entirely implausible may be made to occur by this technique, provided it doesn’t involve more than a few objects and doesn’t require human involvement.\n- The GM decides what random events are and are not adequately possible.\n- Anything more than one unusual coincidence or chance per scene is likely impossible to produce.",
             lvl: 3,
             action: "Main Action (Scene)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Not My Time",
@@ -2423,7 +2424,7 @@ var psiTechniqueList = [{
             desc: "- The precog instinctively wrenches the lines of probability away from futures in which they are about to die.\n- This technique triggers automatically when the pre-cog is about to die, provided they can Commit Effort for the day.\n- On triggering, random events somehow conspire to leave the precog alive, even if outrageous coincidences and ridiculous luck are required.\n- Provided the precog doesn’t intentionally thrust herself back into danger, their life is secured for the next few minutes at least, though there’s no guarantee the psychic will survive intact in mind or body.\n- This technique can trigger no more often than once per week",
             lvl: 4,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Prophecy",
@@ -2431,7 +2432,7 @@ var psiTechniqueList = [{
             desc: "- The power of the precog extends to dictating future events that directly involve them.\n- As a Main Action, the precognitive PC may make one prediction involving their personal future or future condition within the next year.\n- Provided they take reasonable measures to enable this prediction, that no direct resistance is mounted by an enemy, and that the prediction doesn’t seem highly improbable to the GM, it will come to pass.\n- The adept must Commit Effort when this power is used, and the Effort remains Committed until the prophecy comes to pass or is abandoned.\n- This ability cannot be used more than once per month and only one prophecy may be active at a time",
             lvl: 4,
             action: "Main Action (Duration)",
-            effort: 1
+            limit: 1
         }     
     ],
     "Telekinesis":[
@@ -2441,7 +2442,7 @@ var psiTechniqueList = [{
             desc: "- The adept may Commit Effort as an On Turn action to move freely over vertical or overhanging surfaces as if they were flat ground, crossing any solid surface strong enough to bear five kilos of weight.\n- They can also move over liquids at their full movement rate.\n- This movement ability lasts as long as the Effort is committed ",
             lvl: 1,
             action: "On Turn Action (At Will)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Pressure Field",
@@ -2449,7 +2450,7 @@ var psiTechniqueList = [{
             desc: "- As an Instant action, the adept can manifest a protective force skin around their person equivalent to a vac suit, maintaining pressure and temperature even in hard vacuum conditions.\n- They can ignore temperatures at a range of plus or minus 100 degrees Celsius and automatically pressurize thin atmospheres for breathability, or filter particulates or airborne toxins.\n- By Committing Effort for the scene, they can shield up to six comrades.\n- This lasts until the user reclaims the Effort",
             lvl: 1,
             action: "Instant Action (At Will)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Telekinetic Armory",
@@ -2457,7 +2458,7 @@ var psiTechniqueList = [{
             desc: "- The adept may Commit Effort as an On Turn action to create both weapons and armor out of telekinetic force.\n- These weapons are treated as tech level 4 and act as a rifle or any advanced melee weapon.\n- Attack rolls can use either Dexterity, Wisdom, or Constitution modifiers, and may use the Telekinesis skill as the combat skill.\n- Armor may be created as part of this power, granting the psychic a base Armor Class equal to 15 plus their Telekinesis skill level.\n- This armor does not stack with conventional armor, but Dexterity or shields modify it as usual.\n- The gear continues to exist as long as the psychic chooses to leave the Effort committed, and they may be invisible or visible at the psychic’s discretion.",
             lvl: 1,
             action: "On Turn Action (At Will)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Impact Sump",
@@ -2465,7 +2466,7 @@ var psiTechniqueList = [{
             desc: "- The adept may Commit Effort for the day as an Instant action to negate a single instance of physical damage.\n- This ability is too taxing to be used more than once per day, but as an Instant action, it can be triggered even after the damage is rolled.",
             lvl: 2,
             action: "Instant Action (Day)",
-            effort: 1
+            limit: 1
         },
         {
             value: "Slip Field",
@@ -2473,7 +2474,7 @@ var psiTechniqueList = [{
             desc: "- As a Main Action, the psychic Commits Effort for the scene and decreases the friction at a point within sight.\n- Up to ten meters in diameter is affected, making it difficult for enemies to move from their current position.\n- All chosen targets must make an Evasion saving throw or fall prone, becoming unable to stand up or move more than a meter per Move action taken.\n- If used against a ground vehicle, the driver must make a Dex/Pilot skill check at a difficulty of 8 plus the adept’s Telekinesis skill or go out of control, driving directly forward for around and crashing into any obstacles.\n- Targets who save are immune to this technique for the scene. ",
             lvl: 2,
             action: "Main Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Telekinetic Expertise",
@@ -2481,7 +2482,7 @@ var psiTechniqueList = [{
             desc: "- The adept has become familiar enough with the manipulation of telekinetic force that they may now use Telekinetic Manipulation without Committing Effort.",
             lvl: 2,
             action: "Passive",
-            effort: 0
+            limit: 0
         },
         {
             value: "Thermokinesis",
@@ -2489,7 +2490,7 @@ var psiTechniqueList = [{
             desc: "- Telekinetic power involves kinetic energy, but a sufficiently sophisticated grip on motion can be used to agitate the molecules of an inanimate object and cause it to melt or burst into flame.\n- Similar focus can chill or freeze such substances.\n- Applying Thermokinesis to a target requires that the adept Commit Effort for the scene as a Main Action.\n- Thermokinesis cannot affect objects larger than the adept could lift with their Telekinetic Manipulation.\n- As with other telekinetic powers, this ability does not work on objects being held or used by intelligent creatures.\n- Non-sentient robots or other objects with hit points take 1d12 damage per level of Telekinesis skill each time this technique is applied to them. ",
             lvl: 2,
             action: "Main Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Tangible Force Construct",
@@ -2497,7 +2498,7 @@ var psiTechniqueList = [{
             desc: "- Once per turn, as an On Turn action, the psychic can Commit Effort for the scene to create a telekinetic force construct at a visible point, provided it can fit within a three-meter cube.\n- The force construct can be shaped in any way the psychic wishes, and can remain fixed in its location without external supports if desired.\n- It is as sturdy as a TL4 construction and may be visible or invisible at the adept’s choice.\n- The construct lasts until the end of the scene, until the psychic dispels it, or until it is smashed with 20 points of damage against AC 15.",
             lvl: 3,
             action: "On Turn Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Telekinetic Ram",
@@ -2505,7 +2506,7 @@ var psiTechniqueList = [{
             desc: "- As a Main Action, the psychic can Commit Effort for the scene to target a tremendous, uncontrolled burst of force at a single target within sight.\n- This burst requires some time to detonate, however, and will only go off at the end of the next round.\n- Targets of this technique are aware of an oppressive, electrical tingling in the air and are apt to instinctively move; this technique is thus generally useless against any target that is not entirely immobile, as any movement of a chosen target disrupts the ram.\n- Once the ram detonates, however, it is sufficient to destroy any immobile civilian vehicle, create a five-meter hole in anything short of hardened military fortifications, or inflict 5d12 damage on anything else as if it were struck by a Heavy weapon",
             lvl: 3,
             action: "Main Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Reactive Telekinesis",
@@ -2513,7 +2514,7 @@ var psiTechniqueList = [{
             desc: "- As an Instant action, the psychic can Commit Effort for the scene whenever an assailant misses them with a physical attack.\n- The attack is then reflected back against the assailant, who must reroll the attack against their own person twice.\n- If either roll hits, the assailant suffers damage from their own attack.\n- If both rolls hit, the damage is the maximum possible.",
             lvl: 3,
             action: "Instant Action (Scene)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Force Puppetry",
@@ -2521,7 +2522,7 @@ var psiTechniqueList = [{
             desc: "- As a Main Action, the telekinetic can Commit Effort for the day to suborn a visible target’s mobility, whether robotic, vehicular, or human, provided it’s no larger than a ground car.\n- A sapient victim can make a Mental saving throw to resist the psychic onslaught; on a failure, they lose control of their physical actions.\n- If not piloted by the telekinetic, the target remains motionless or continues in its current direction of travel.\n- If the telekinetic spends a Main Action to control them, they can be made to perform any physical activity that is not directly suicidal, using the psychic’s skill levels and hit bonus for any attacks or skill checks they might make.\n- The puppetry lasts until the end of the scene until the target leaves the psychic’s sight, or until a sapient target believes that their action or inaction is about to get them killed.\n- The psychic’s control is fine enough to achieve even very delicate physical motions, but it is not good enough to control the target’s speech, though it can keep them silent.",
             lvl: 4,
             action: "Main Action (Day)",
-            effort: 1
+            limit: 99
         },
         {
             value: "Telekinetic Flight",
@@ -2529,7 +2530,105 @@ var psiTechniqueList = [{
             desc: "- As an Instant action, the telekinetic can Commit Effort to begin flying and may extend this effect to up to a half-dozen unresisting, human-sized allies within 30 meters.\n- While flying, the psychic can move at twice their normal movement rate in any direction.\n- They can plunge earthward at up to terminal velocity without harm, and even orbital insertions are survivable with this power if a vac suit is available or the Pressure Field technique is used.\n- Allies must end their turns within 30 meters of the psychic to maintain this flight but control their own motion.\n- As an Instant, this power may be triggered in time to negate falling damage.\n- The flight lasts for as long as the Effort remains Committed. ",
             lvl: 4,
             action: "Instant Action (At Will)",
-            effort: 1
+            limit: 1
+        }      
+    ],
+    "Telepathy":[
+        {
+            value: "Kinetic Transversal",
+            title: "[telekinesis,lvl-1]",
+            desc: "- The adept may Commit Effort as an On Turn action to move freely over vertical or overhanging surfaces as if they were flat ground, crossing any solid surface strong enough to bear five kilos of weight.\n- They can also move over liquids at their full movement rate.\n- This movement ability lasts as long as the Effort is committed ",
+            lvl: 1,
+            action: "On Turn Action (At Will)",
+            limit: 1
+        },
+        {
+            value: "Pressure Field",
+            title: "[telekinesis,lvl-1]",
+            desc: "- As an Instant action, the adept can manifest a protective force skin around their person equivalent to a vac suit, maintaining pressure and temperature even in hard vacuum conditions.\n- They can ignore temperatures at a range of plus or minus 100 degrees Celsius and automatically pressurize thin atmospheres for breathability, or filter particulates or airborne toxins.\n- By Committing Effort for the scene, they can shield up to six comrades.\n- This lasts until the user reclaims the Effort",
+            lvl: 1,
+            action: "Instant Action (At Will)",
+            limit: 1
+        },
+        {
+            value: "Telekinetic Armory",
+            title: "[telekinesis,lvl-1]",
+            desc: "- The adept may Commit Effort as an On Turn action to create both weapons and armor out of telekinetic force.\n- These weapons are treated as tech level 4 and act as a rifle or any advanced melee weapon.\n- Attack rolls can use either Dexterity, Wisdom, or Constitution modifiers, and may use the Telekinesis skill as the combat skill.\n- Armor may be created as part of this power, granting the psychic a base Armor Class equal to 15 plus their Telekinesis skill level.\n- This armor does not stack with conventional armor, but Dexterity or shields modify it as usual.\n- The gear continues to exist as long as the psychic chooses to leave the Effort committed, and they may be invisible or visible at the psychic’s discretion.",
+            lvl: 1,
+            action: "On Turn Action (At Will)",
+            limit: 1
+        },
+        {
+            value: "Impact Sump",
+            title: "[telekinesis,lvl-2]",
+            desc: "- The adept may Commit Effort for the day as an Instant action to negate a single instance of physical damage.\n- This ability is too taxing to be used more than once per day, but as an Instant action, it can be triggered even after the damage is rolled.",
+            lvl: 2,
+            action: "Instant Action (Day)",
+            limit: 1
+        },
+        {
+            value: "Slip Field",
+            title: "[telekinesis,lvl-2]",
+            desc: "- As a Main Action, the psychic Commits Effort for the scene and decreases the friction at a point within sight.\n- Up to ten meters in diameter is affected, making it difficult for enemies to move from their current position.\n- All chosen targets must make an Evasion saving throw or fall prone, becoming unable to stand up or move more than a meter per Move action taken.\n- If used against a ground vehicle, the driver must make a Dex/Pilot skill check at a difficulty of 8 plus the adept’s Telekinesis skill or go out of control, driving directly forward for around and crashing into any obstacles.\n- Targets who save are immune to this technique for the scene. ",
+            lvl: 2,
+            action: "Main Action (Scene)",
+            limit: 1
+        },
+        {
+            value: "Telekinetic Expertise",
+            title: "[telekinesis,lvl-2]",
+            desc: "- The adept has become familiar enough with the manipulation of telekinetic force that they may now use Telekinetic Manipulation without Committing Effort.",
+            lvl: 2,
+            action: "Passive",
+            limit: 0
+        },
+        {
+            value: "Thermokinesis",
+            title: "[telekinesis,lvl-2]",
+            desc: "- Telekinetic power involves kinetic energy, but a sufficiently sophisticated grip on motion can be used to agitate the molecules of an inanimate object and cause it to melt or burst into flame.\n- Similar focus can chill or freeze such substances.\n- Applying Thermokinesis to a target requires that the adept Commit Effort for the scene as a Main Action.\n- Thermokinesis cannot affect objects larger than the adept could lift with their Telekinetic Manipulation.\n- As with other telekinetic powers, this ability does not work on objects being held or used by intelligent creatures.\n- Non-sentient robots or other objects with hit points take 1d12 damage per level of Telekinesis skill each time this technique is applied to them. ",
+            lvl: 2,
+            action: "Main Action (Scene)",
+            limit: 1
+        },
+        {
+            value: "Tangible Force Construct",
+            title: "[telekinesis,lvl-3]",
+            desc: "- Once per turn, as an On Turn action, the psychic can Commit Effort for the scene to create a telekinetic force construct at a visible point, provided it can fit within a three-meter cube.\n- The force construct can be shaped in any way the psychic wishes, and can remain fixed in its location without external supports if desired.\n- It is as sturdy as a TL4 construction and may be visible or invisible at the adept’s choice.\n- The construct lasts until the end of the scene, until the psychic dispels it, or until it is smashed with 20 points of damage against AC 15.",
+            lvl: 3,
+            action: "On Turn Action (Scene)",
+            limit: 1
+        },
+        {
+            value: "Telekinetic Ram",
+            title: "[telekinesis,lvl-3]",
+            desc: "- As a Main Action, the psychic can Commit Effort for the scene to target a tremendous, uncontrolled burst of force at a single target within sight.\n- This burst requires some time to detonate, however, and will only go off at the end of the next round.\n- Targets of this technique are aware of an oppressive, electrical tingling in the air and are apt to instinctively move; this technique is thus generally useless against any target that is not entirely immobile, as any movement of a chosen target disrupts the ram.\n- Once the ram detonates, however, it is sufficient to destroy any immobile civilian vehicle, create a five-meter hole in anything short of hardened military fortifications, or inflict 5d12 damage on anything else as if it were struck by a Heavy weapon",
+            lvl: 3,
+            action: "Main Action (Scene)",
+            limit: 1
+        },
+        {
+            value: "Reactive Telekinesis",
+            title: "[telekinesis,lvl-3]",
+            desc: "- As an Instant action, the psychic can Commit Effort for the scene whenever an assailant misses them with a physical attack.\n- The attack is then reflected back against the assailant, who must reroll the attack against their own person twice.\n- If either roll hits, the assailant suffers damage from their own attack.\n- If both rolls hit, the damage is the maximum possible.",
+            lvl: 3,
+            action: "Instant Action (Scene)",
+            limit: 1
+        },
+        {
+            value: "Force Puppetry",
+            title: "[telekinesis,lvl-4]",
+            desc: "- As a Main Action, the telekinetic can Commit Effort for the day to suborn a visible target’s mobility, whether robotic, vehicular, or human, provided it’s no larger than a ground car.\n- A sapient victim can make a Mental saving throw to resist the psychic onslaught; on a failure, they lose control of their physical actions.\n- If not piloted by the telekinetic, the target remains motionless or continues in its current direction of travel.\n- If the telekinetic spends a Main Action to control them, they can be made to perform any physical activity that is not directly suicidal, using the psychic’s skill levels and hit bonus for any attacks or skill checks they might make.\n- The puppetry lasts until the end of the scene until the target leaves the psychic’s sight, or until a sapient target believes that their action or inaction is about to get them killed.\n- The psychic’s control is fine enough to achieve even very delicate physical motions, but it is not good enough to control the target’s speech, though it can keep them silent.",
+            lvl: 4,
+            action: "Main Action (Day)",
+            limit: 1
+        },
+        {
+            value: "Telekinetic Flight",
+            title: "[telekinesis,lvl-4]",
+            desc: "- As an Instant action, the telekinetic can Commit Effort to begin flying and may extend this effect to up to a half-dozen unresisting, human-sized allies within 30 meters.\n- While flying, the psychic can move at twice their normal movement rate in any direction.\n- They can plunge earthward at up to terminal velocity without harm, and even orbital insertions are survivable with this power if a vac suit is available or the Pressure Field technique is used.\n- Allies must end their turns within 30 meters of the psychic to maintain this flight but control their own motion.\n- As an Instant, this power may be triggered in time to negate falling damage.\n- The flight lasts for as long as the Effort remains Committed. ",
+            lvl: 4,
+            action: "Instant Action (At Will)",
+            limit: 1
         }      
     ]
 }];
