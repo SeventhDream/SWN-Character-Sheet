@@ -5057,6 +5057,22 @@ function removeOptions(parent) {
     }
  }
 
+ function menuOpen() {
+    document.getElementById("myMenuBar").style.width = "200px";
+    document.getElementsByClassName("tab")[0].style.marginLeft = "200px";
+    document.getElementsByClassName("background")[0].style.marginLeft = "200px";
+    document.getElementsByClassName("tab")[0].style.width = "calc(100% - 200px)";
+    document.getElementsByClassName("background")[0].style.width = "calc(100% - 200px)";
+  }
+  
+  function menuClose() {
+    document.getElementById("myMenuBar").style.width = "0px";
+    document.getElementsByClassName("tab")[0].style.marginLeft = "0px";
+    document.getElementsByClassName("background")[0].style.marginLeft = "0px";
+    document.getElementsByClassName("tab")[0].style.width = "100%";
+    document.getElementsByClassName("background")[0].style.width = "100%";
+  }
+
  // Help tab Sidepanel Button Control Functions
  function openNav() {
     document.getElementById("mySidepanel").style.width = "250px";

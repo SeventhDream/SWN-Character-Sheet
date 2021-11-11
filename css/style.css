@@ -2,7 +2,7 @@
 
 html,
 body {
-    width: 100vw;
+    width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -175,6 +175,10 @@ input[type="string"] {
     background-color: #8B000088;
 }
 
+#charsheet{
+  margin: 0;
+  padding: 0;
+}
 
 #charPic {
 
@@ -223,7 +227,6 @@ select {
     color: #e0cd67 !important;
     font-family: Calibri !important;
     font-weight: bold !important;
-    overflow:auto;
     text-align: center;
 }
 
@@ -297,10 +300,14 @@ textarea[type="string"]{
 div .col-xs-4, div .col-xs-6, .col-xs-12{
      height: fit-content;
     min-width: fit-content;
-    width: 30vw;
+    width: 30%;
     padding: 0px;
     text-align: center;
     box-sizing: border-box;
+}
+
+.col-xs-12{
+  width: 90%;
 }
 .order-list{
     font-size: 0.8em;
@@ -441,7 +448,7 @@ optgroup {
     margin: auto;
 }
 .infoPanel {
-    width: 33vw;
+    width: 33%;
     text-align:center !important;
   margin-left: auto;
   margin-right: auto;
@@ -626,7 +633,7 @@ hr.pageborder {
 
 
 .pageTitle{
-    font-size: min(max(10px, 4vw), 40px);
+    font-size: min(max(10px, 2vw), 40px);
     margin-left: 0;
     margin-right: auto;
     
@@ -646,9 +653,13 @@ hr.pageborder {
     margin-right: auto;
 
 }
+
 .box{
     width: 100%;
     margin-bottom: 10px;
+    margin: 0 auto;
+    padding: 0px;
+    
 }
 
 @media only screen and (max-width: 768px) {
@@ -677,7 +688,7 @@ div.tab, div.saveUI{
     display: none;
   overflow: hidden;
     outline: 0;
-  
+  margin-right: 0px;
   border: 1px  solid #8B0000;
   background-color: black;
     -moz-outline: 0;
@@ -702,13 +713,18 @@ height: 120px;
     height: 50%;
     align-content: left;
     white-space: nowrap;
+    width: 100%;
 }
 
 /* Style the buttons that are used to open the tab content */
-.tab button {
+.tab button, .menuButton {
   background-color: inherit;
+  display: inline-block;
+  width:14.3%;
+justify-content:center;
+align-items:center;
+
   color: #e0cd67;  
-    width: 14.3vw;
   cursor: pointer;
     -moz-outline: 0;
     -ms-outline:0;
@@ -722,6 +738,9 @@ height: 120px;
     overflow: hidden;
 } 
 
+.menuButton{
+  padding: 5px;
+}
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #8B0000;
@@ -768,9 +787,7 @@ button:active {
  width: 250px;
 }
 
-table .order-list{
-    width: fit-content !important;
-}
+
 
 .tabUI{
     overflow-x: scroll;
@@ -832,9 +849,12 @@ input[id$="Score"] {
 #loading-image {
 
 
-  margin:auto;
+  top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    position: absolute;
   z-index: -1;
-    width: 60%;
+    width: 80%;
     
 }
 
@@ -865,12 +885,8 @@ input[id$="Score"] {
     text-align: left !important;
 }
 
-div .col-xs-12{
-    width: 95vw;
-
-}
 .slidebox{
-    width: 100vw;
+    width: 100%;
 }
 
  input.hpSlide[type='range']::-webkit-slider-thumb{
@@ -923,17 +939,31 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     width: 0;
     position: absolute;
     z-index: 1;
-    height: 100%;
+    height: calc(100% - 120px);
     top: 120px;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    margin-left: 200px;
+  }
+
+   /*SidePanel Style*/
+   .sideMenuPanel  {
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    left: 0;
+    top: 0px;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
     
   }
   
-  .sidepanel a {
+  .sidepanel a{
 
     text-decoration: none;
     font-size: 16px;
@@ -943,17 +973,29 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     margin-left: 5px;
   }
   
-  .sidepanel a:hover {
+  .sideMenuPanel a{
+
+    text-decoration: none;
+    font-size: 32px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    margin-left: 5px;
+  }
+
+  .sidepanel a:hover, .sideMenuPanel a:hover {
     color: #f1f1f1;
   }
+
+
   
-  .sidepanel .closebtn {
+.closebtn {
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 72px;
   }
-  
+
   .openbtn {
     font-size: 20px;
     cursor: pointer;
@@ -1009,4 +1051,28 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
   
+  }
+
+  @media only screen and (min-width: 901px){
+    .sideMenuPanel{
+      width: 200px !important;
+      display:block;
+    }
+    .tab{
+      margin-left: 200px !important;
+      width: calc(100% - 200px) !important;
+    }
+    .background{
+      margin-left: 200px !important;
+      width: calc(100% - 200px) !important;
+    }
+
+    .menuButton{
+      display:none !important;
+    }
+
+    a[name="menuCloseBtn"]{
+     display: none !important;
+    }
+
   }
