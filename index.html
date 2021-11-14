@@ -41,7 +41,7 @@
         <div class="box">
             <!--Tab Header-->
             <div class="tab" id="tabUI">
-                <input type="button" class="menuButton button" onclick="menuOpen()" value="☰"><h2 class="pageTitle">SWN Dynamic Character Sheet</h2>
+                <h2 class="pageTitle">SWN Dynamic Character Sheet</h2>
                 <div class="tabButtons">
                 <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><a href="./login.html"><button type="button">Click Me!</button></a>
                 </div>
@@ -51,12 +51,15 @@
     
                 </div>
             </div>
+            <input type="button" class="menuButton button" onclick="menuOpen()" value="☰">
             <div id="myMenuBar" class="sideMenuPanel">
                 <a href="javascript:void(0)" class="closebtn" name="menuCloseBtn" onclick="menuClose()">×</a>
                 <br>
                 <br>
                 <a class="active" href="#home">Character</a>
+                <a href="#news">Signup</a>
                 <a href="#news">Login</a>
+                <a href="#news">Profile Page</a>
                 <a href="#contact">Contact</a>
                 <a href="#about">About</a>
                 </div>
