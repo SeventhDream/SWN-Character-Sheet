@@ -289,6 +289,7 @@ div {
 
 div .row{
     margin-left: 0px;
+    margin-right: 0px;
 }
 
 textarea[type="string"]{
@@ -309,6 +310,14 @@ div .col-xs-4, div .col-xs-6, .col-xs-12{
 .col-xs-12{
   width: 90%;
 }
+
+#rulesTab .col-xs-6 {
+  text-align: left !important;
+  width: 50% !important;
+  min-width: 0px;
+}
+
+
 .order-list{
     font-size: 0.8em;
 }
@@ -405,7 +414,7 @@ optgroup {
     font-size: 16px;
 }
 
-.helpPanel{
+.helpPanel {
     display: inline-block;
     text-align: left !important;
     margin-left: 20px;
@@ -424,16 +433,16 @@ optgroup {
     transform: translate(-50% , -50%);
 }
 
-.helpPanel h2,.helpPanel h4, .helpPanel h6{
+.helpPanel h2,.helpPanel h4, .helpPanel h6, .underline {
     margin: 0px;
     text-decoration: underline;
 }
-.helpPanel p {
+.helpPanel p, #rulesTab p {
     color: #00FFFF !important;
     animation: none;
 }
 
-.helpPanel b{
+.helpPanel b, #rulesTab b{
     color: white !important;
 }
 .collapsible {

@@ -43,7 +43,7 @@
             <div class="tab" id="tabUI">
                 <h2 class="pageTitle">SWN Dynamic Character Sheet</h2>
                 <div class="tabButtons">
-                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><a href="./login.html"><button type="button">Click Me!</button></a>
+                <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><button type="button" id="rulesTabOpen" class="tablinks" onclick="openTab(event, 'rulesTab')">Rules Summary</button></a>
                 </div>
                 <div class="saveUI">
                     <b>Autosave: </b><input type="checkbox" id="autosave"> <input value="Save Character" type="button" class="button" name="buttonsave" type="button" onclick="save_character()" style="width:100px;margin-bottom:5px; margin-right:30px;" readonly>
@@ -1495,6 +1495,32 @@
                         </div>
                     </div>
                     
+                </div>
+
+                <!--Rules Summary Tab-->
+                <div id="rulesTab" class="tabcontent">
+                    <div class="row">
+                        <div class="col-xs-6" name="ruleSummaryLeft">
+                            <h2>Crafting Rules</h2>
+                            <h4 class="underline">Modding Equipment</h4>
+                            <p>- Requires an appropriate TL4 workshop.<br>- Advanced mods may require TL5 salvage</p><div class="indent"><p>- 100c/day to rent.<br>- 25000c to purchase.</p></div><p>- Minimum Fix skil required to build and maintain specific mods.<br>- One week per minimum Fix skill requirement to build and install.</p><div class="indent"><p>- Time is halved if the tech does nothing but work, eat & sleep.<br>- Time is halved if an assistance is provided by another tech with at least Fix-0 skill.</p></div><p>- TL4 toolbox required to maintain existing mods.<br>- Max #no. of maintained mods (maintenance score) = IntMod + ConMod + 3*Fix skill.</p><div class="indent"><p>- Maintenance score doubled if working 16-hour work days.<br> - Mods and attched items stop working after 24 hours without maintenance.<br>- Repairing a broken mod takes 1 hour by a qualified tech.</p></div>
+                            <h4 class="underline">Building Conventional Gear</h4>
+                            <p>- Same build requirements as Modding Equipment (see above).<br>- <b>Jury-Rigged:</b> 0.25*Price & 0.5*Time.</p><div class="indent"><p>- No cost if using scrap (but 2*Time).<br>- Requires maintenance.<br>- Cannot be modded.<br>- Cannot jury-rig drugs or consumables.</p></div><p>- <b>Normal:</b> 2*Price & 1*Time.<br>- <b>Mastercrafted:</b> 10*Price & 2*Time</p><div class="indent"><p>- First installed mod requires NO maintenance.</p></div>
+                            <h2>Hacking Rules</h2>
+                            <p>- Usually requires a physical interface with the target system.</p><div class="indent"><p>- Tapping a line using a Metatool takes 1 minute.<br>- Plugging into a terminal directly is a Main Action.<br>- Unprotected wireless networks may be remotely accessed (rare).<br> High-secuirty locations require 1-3 lineshunts to be installed (requires blueprints or successful "Answer a Specific Question" Hack).</p></div><p>- Int/Program skill check required to hack the system.</p><div class="indent"><p>- Main Action if 1 hour of preparation was performed.<br>- 10 minutes if no preparation was performed.<br>- Unprepared hacks may be rushed at an additional diffuclty penalty.<br>- <b>Success: </b> Hack successful and lasts for 1d4 rounds (or until line shunts are removed).<br>- <b>Fail:</b> A second check is performed to avoid detection by security</p></div><p>- Performing hacks on the same system within 24hrs increases difficulty by +1.<br>- <b>Hacking Difficulty:</b></p><div class="indent"><p>- Answer a Specific Question: 8<br>- Get General Information: 10<br>- Complete Database Aquisition: 12<br>- Suppress a System: 8<br>- Subvert a System: 10<br>- Sabotage a System: 10<br><br>- Human Overseers Alarmed: +1<br>- Rushed Hack: +2<br>- Repeated Hacks within 24hrs: +1<br>- Sensitive System: + 1<br><br>- Ordinary Personal System: -1<br>- Small Business/Savvy Personal System: +0<br>- Minor Gov./Major Corp. System: +1<br>- Major Gov./Megacorp System: +2</p></div>
+
+                            <h2>Drone Piloting Rules</h2>
+                            <p>Rule text here</p>
+                        </div>
+                        <div class="col-xs-6" name="ruleSummaryMiddle">
+                            <h2>Action Types</h2>
+                            <p><b>Main Action:</b></p><div class="indent"><p>- One per round.<br>- May be replaced with a second Move Action.</p></div><p><b>Move Action:</b></p><div class="indent"><p>- One per round.<br>- Run up to 10 metres.<br>- Climbing, swimming & difficult terrain halve this distance.<br>- Cannot be split across turn.<br>- Actors must use the "Fighting Withdrawal" Main Afction to disengage from melee (and avoid OOP).</p></div><p><b>On Turn Action:</b></p><div class="indent"><p>- Unlimited per round.<br>- Must be performed on actor's turn.</p></div><p><b>Instant Action:</b></p><div class="indent"><p>- Unlimited per round.<br>- May be performed outside of actor's turn or after dice rolls.<br>- Some Main Actions are also instant (still only once per round).</p></div>
+                            <h2>Combat Rules</h2>
+                            <p>Rule text here</p>
+                            <h2>Healing & Repair</h2>
+                            <p>Rule text here</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
