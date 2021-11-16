@@ -669,15 +669,6 @@ hr.pageborder {
     
 }
 
-@media only screen and (max-width: 480px) {
-    
-    .box, textarea{
-    overflow-x: scroll !important;
-
-    }
-
-}
-
 div.tab, div.saveUI{
     position: sticky;
 
