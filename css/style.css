@@ -1107,10 +1107,6 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
       top: 100%;
       left: 0;
     }
-
-    .box {
-      width: 100vh;
-    }
   }
 
   @media screen and (min-width: 320px) and (max-width: 767px){
