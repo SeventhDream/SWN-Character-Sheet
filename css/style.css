@@ -130,8 +130,6 @@ table {
     background-image: url("../img/Table.jpeg");
     background-size: 1000px 670px;
     background-color: black;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     width: 100%;
     min-width: fit-content;
@@ -671,7 +669,7 @@ hr.pageborder {
     
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 480px) {
     
     .box, textarea{
     overflow-x: scroll !important;
@@ -709,6 +707,9 @@ div.tab, div.saveUI{
 height: 120px;
   box-shadow: none;
     width: 100%;
+    margin-left: 0px;
+    transition: margin-left 0.5s;
+
 }
 
 #closeAlert{
@@ -723,6 +724,7 @@ height: 120px;
     align-content: left;
     white-space: nowrap;
     width: 100%;
+    font-size: 0.8em;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -761,6 +763,11 @@ align-items:center;
   background-color: #8B0000;
     outline: none !important;
     
+}
+
+.background {
+  margin-left: 0px;
+  transition: margin-left 0.5s;
 }
 
 button, button:hover, button:focus,
@@ -1067,7 +1074,7 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
       width: 200px !important;
       display:block;
     }
-    .tab{
+    .tab {
       margin-left: 200px !important;
       width: calc(100% - 200px) !important;
       top:0;
@@ -1088,5 +1095,14 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
 
     #loading{
       margin-left: 200px !important;
+    }
+
+    #loading-image{
+      margin-left: -200px;
+    }
+    .customAlert, #loading-image {
+      top: 50%;
+      left: calc(50% + 100px);
+      transform: translate(-50%,-50%);
     }
   }
