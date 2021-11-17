@@ -11,6 +11,9 @@ body {
     overflow-x: hidden;
 
 }
+body {
+  background: green;
+}
 
 @keyframes shakeAnim {
   0% {left: 0}
@@ -174,6 +177,7 @@ input[type="string"] {
 #charsheet{
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 #charPic {
