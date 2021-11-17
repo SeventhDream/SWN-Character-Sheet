@@ -758,6 +758,7 @@ align-items:center;
 .background {
   margin-left: 0px;
   transition: margin-left 0.5s;
+  background: red;
 }
 
 button, button:hover, button:focus,
@@ -1073,7 +1074,6 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     .background{
       margin-left: 200px !important;
       width: calc(100% - 200px) !important;
-      background: red;
     }
 
     .menuButton{
