@@ -1104,8 +1104,14 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
       transform: rotate(-90deg);
       transform-origin: left top;
       position: absolute;
+      width: 100vh !important;
+      height: 100vh !important;
       top: 100%;
       left: 0;
+    }
+
+    background {
+      width: 100vh !important;
     }
   }
 
