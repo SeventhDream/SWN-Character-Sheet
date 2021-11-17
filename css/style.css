@@ -10,9 +10,7 @@ body {
     overflow-x: hidden;
 
 }
-body {
-  background: green;
-}
+
 
 @keyframes shakeAnim {
   0% {left: 0}
@@ -1045,6 +1043,21 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     transition: 0.3s;
   }
 
+  .landscape {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+    transition: 0.3s;
+  } 
+
   .button {
     display: inline-block;
     background-color: black;
@@ -1103,7 +1116,7 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
   }
 
   @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
-    html {
+    /*html {
       transform: rotate(-90deg);
       transform-origin: left top;
       position: absolute;
@@ -1111,14 +1124,12 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
       height: 5000px !important;
       top: 100%;
       left: 0;
+    }*/
+    .box {
+      display: None
     }
-
-    .background, .box, body {
-      width: 5000px !important;
-    }
-
-    #charsheet{
-      width: 5000px;
+    .landscape {
+      display: inline-block;
     }
   }
 
