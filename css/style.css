@@ -1114,8 +1114,12 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
       left: 0;
     }
 
-    background {
+    .background, .box {
       width: 5000px !important;
+    }
+
+    #charsheet{
+      width: 5000px;
     }
   }
 
