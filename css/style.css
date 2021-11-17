@@ -1054,7 +1054,13 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     z-index: 2;
     cursor: pointer;
     transition: 0.3s;
+    
   } 
+  .landscape h2 {
+    margin-top: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .button {
     display: inline-block;
