@@ -1127,7 +1127,7 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
       display: None
     }
     .landscape {
-      display: inline-block;
+      display: block;
     }
   }
 
