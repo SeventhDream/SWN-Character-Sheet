@@ -4991,7 +4991,7 @@ function checkFoci(){
             index = getIndex(fociList[0][groupIndex], focus.value); // Get array index if foci matches data array entry.
             
             // Check if match index is found.
-            if (index > -1) {
+            /*if (index > -1) {
                 var focusLevel = parseInt(document.getElementById("FociLevel"+num).value);
                 // Check for psi foci
                     
@@ -5011,8 +5011,8 @@ function checkFoci(){
                 var focusSkillField = document.getElementsByName("fociSkill" + num)[0];
                 var focusSkillRow = document.getElementsByName("fociSkillRow" + num)[0];
                 
-                focusSkillField.value = "empty";
-                removeOptions(focusSkillField);
+                focusSkillField.value = "empty"; // Remove foci skill selection
+                removeOptions(focusSkillField); // Depopulate foci skill select field options.
                 focusSkillRow.style.display = 'table-cell';
                 if ((bonusSkill === "anyCombat") && (focusLevel > 0)){
                     // Populate Starting Psi Skill Select Tables
@@ -5028,6 +5028,7 @@ optionTablePartial("Psychic Skills",skillList[0]["Combat Skills"],"#" + focusSki
                     optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#" + focusSkillField.id);
                 }
                 else{
+                    console.log(focusSkillField);
                     selectOptionTable(skillList,"#" + focusSkillField.id);
                     if (focusLevel > 0){
                     focusSkillField.value = bonusSkill;
@@ -5041,7 +5042,7 @@ optionTablePartial("Psychic Skills",skillList[0]["Combat Skills"],"#" + focusSki
 
                 
 
-            }
+            }*/
             
         }
     }
