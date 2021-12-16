@@ -4146,10 +4146,9 @@ function classInfo(childID, selectID) {
         if (index > -1) {
             var info = classList[0][opGroup[i]][index].desc;
              var title = classList[0][opGroup[i]][index].title;
-                    document.getElementById("initSkill5").value = "empty";
-                 document.getElementById("initSkill6").value = "empty";
-            document.getElementById("initSkill8").value = "empty";
-                 document.getElementById("initSkill9").value = "empty";
+                    
+            // document.getElementById("initSkill8").value = "empty"; // clear background skill
+                 
 
             
             var playerClass = classList[0][opGroup[i]][index].value; // Get selected class.
@@ -4171,6 +4170,8 @@ function classInfo(childID, selectID) {
         $(".isPsi").show();
     }
             else{
+                document.getElementById("initSkill5").value = "empty"; // clear psi skill 1
+                 document.getElementById("initSkill6").value = "empty"; // clear psi skill 2
                 $(".classSkill1").hide();
                 $(".classSkill2").hide();
                 $(".isPsi").hide();
@@ -4188,6 +4189,7 @@ function classInfo(childID, selectID) {
                 $(".isRandom").hide();
             }
             else{
+                document.getElementById("initSkill9").value = "empty"; // clear true AI skill
                 $(".isAI").hide();
                 $(".isRandom").show();
                 
@@ -4975,23 +4977,25 @@ function navigateToHelpText(targetId){
 
 // This function checks what foci are selected and if any abilities/skills need to be unlocked.
 function checkFoci(){
-    var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array
-    // Check every focus field (1 to 6)
+    var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array category names
+    
     var isPsi = false;
     document.getElementById("isWildPsi").checked = false;
-                        document.getElementById("wildEffort").value = 0;
-                        document.getElementById("isTrainedPsi").checked = false;
-                        document.getElementById("trainedEffort").value = 0;
+    document.getElementById("wildEffort").value = 0;
+    document.getElementById("isTrainedPsi").checked = false;
+    document.getElementById("trainedEffort").value = 0;
+    // Check every focus field (1 to 6)
     for (var num = 1; num < 7; num++){
         var focus = document.getElementById("Foci" + num); // get the focus select field element.
         var index = -1;
         // Cycle through every foci subset.
         for (var i = 0; i < opGroup.length; i++) {
-            var groupIndex = opGroup[i]; // Get foci array data subset.
+            var groupIndex = opGroup[i]; // Get foci array category name.
             index = getIndex(fociList[0][groupIndex], focus.value); // Get array index if foci matches data array entry.
             
             // Check if match index is found.
-            /*if (index > -1) {
+            if (index > -1) { 
+                
                 var focusLevel = parseInt(document.getElementById("FociLevel"+num).value);
                 // Check for psi foci
                     
@@ -5010,8 +5014,9 @@ function checkFoci(){
                 var bonusSkill = fociList[0][groupIndex][index].bonus; // get focus description
                 var focusSkillField = document.getElementsByName("fociSkill" + num)[0];
                 var focusSkillRow = document.getElementsByName("fociSkillRow" + num)[0];
+                var selectedOption = focusSkillField.value; // Store previously selected option value.
                 
-                focusSkillField.value = "empty"; // Remove foci skill selection
+                //focusSkillField.value = "empty"; // Remove foci skill selection
                 removeOptions(focusSkillField); // Depopulate foci skill select field options.
                 focusSkillRow.style.display = 'table-cell';
                 if ((bonusSkill === "anyCombat") && (focusLevel > 0)){
@@ -5028,29 +5033,48 @@ optionTablePartial("Psychic Skills",skillList[0]["Combat Skills"],"#" + focusSki
                     optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#" + focusSkillField.id);
                 }
                 else{
-                    console.log(focusSkillField);
                     selectOptionTable(skillList,"#" + focusSkillField.id);
                     if (focusLevel > 0){
                     focusSkillField.value = bonusSkill;
                     }
                     else{
-                        focusSkillField.value = "empty";
+                        // Remove slected option if no longer valied choice.
+                        if (!SelectHasValue(focusSkillField, selectedOption)){
+                            focusSkillField.value = "empty"; // Remove foci skill selection
+                            console.log("PING!");
+                        }
                     }
                     focusSkillRow.style.display = 'none';
                 }
-
-
+                
+                // Remove slected option if no longer valied choice.
+                if (!SelectHasValue(focusSkillField, selectedOption)){
+                    focusSkillField.value = "empty"; // Remove foci skill selection
+                    console.log("PONG!");
+                }
                 
 
-            }*/
+            }
             
         }
     }
-
+                
                 document.getElementById("psiFocus").checked = isPsi;
                 classInfo("classDesc","playerClass"); // Call function to update abiltiies.
                 
 }
+
+// Check if select field option value exists.
+function SelectHasValue(select, value) {
+    obj = select;
+
+    if (obj !== null) {
+        return (obj.innerHTML.indexOf('value="' + value + '"') > -1);
+    } else {
+        return false;
+    }
+}
+
  // Clear select options list.
 function removeOptions(parent) {
     while (parent.firstChild) {
