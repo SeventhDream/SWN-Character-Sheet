@@ -77,8 +77,8 @@ function isGrowth(id, classID) {
         document.getElementById("growthStat1").onchange();
         document.getElementById("growthStat2").onchange();
         document.getElementById("growthStat3").onchange();
-        $(classID).hide();
         document.getElementById("initSkill3").onchange();
+        $(classID).hide();
     }
 }
 
@@ -143,6 +143,7 @@ function updateBaseStats() {
     currentAttribute.setAttribute("max", attributeBase + growthBonus + 5); // Attribute cannot be incremented above basevalue + 5.
     updateModifiers(attrList[i]); // Call update to associated modifier.
 }
+    updateMaxCarry();
 }
 //#endregion
 
@@ -200,7 +201,7 @@ function overwriteRows(deleteRowIndex,id,targetRow,targetRemove,targetStorage,ta
 }
 
 // Update readied and stowed and grafted item limit
-function updateMaxCarry(strVal){
+function updateMaxCarry(){
     document.getElementById("maxReady").value = parseInt(Math.floor(strVal/2));
     var graftLimit = document.getElementById("maxGrafted");
     graftLimit.value = parseInt(Math.floor(strVal/2));
@@ -289,7 +290,7 @@ function addItemRow(){
     var newChild =  $("<tr id='itemChildRow"+rowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Item Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" /></td>';
         cols += '<td><input value="-" name="minusOne'+rowNum+'" readonly type="button" class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
         cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
@@ -371,7 +372,7 @@ function addWeaponRow(){
     var newChild =  $("<tr id='weaponChildRow"+weaponRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="weaponInfo'+weaponRowNum+'"></i><input type="text" id="weaponName' + weaponRowNum + '" list="weaponList' + weaponRowNum + '" data-idNum="'+ weaponRowNum + '" onchange="addOneWeapon('+weaponRowNum+'); populateWeapon('+weaponRowNum+'); calculateEncumberance();"/><datalist id="weaponList' + weaponRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Weapon Info" data-name="" data-desc="" id="weaponInfo'+weaponRowNum+'"></i><input type="text" id="weaponName' + weaponRowNum + '" list="weaponList' + weaponRowNum + '" data-idNum="'+ weaponRowNum + '" onchange="addOneWeapon('+weaponRowNum+'); populateWeapon('+weaponRowNum+'); calculateEncumberance();"/><datalist id="weaponList' + weaponRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="weaponNotes' + weaponRowNum + '" /></td>';
     cols += '<td><input type="string" value="" id="weaponDamage'+weaponRowNum+'"></td>';
     cols += '<td><input type="number" value="0" id="weaponShortRange'+weaponRowNum+'">/<input type="number" value="0" id="weaponLongRange'+weaponRowNum+'"></td>';
@@ -455,7 +456,7 @@ function addMeleeRow(){
     var newChild =  $("<tr id='meleeChildRow"+meleeRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="meleeInfo'+meleeRowNum+'"></i><input type="text" id="meleeName' + meleeRowNum + '" list="meleeList' + meleeRowNum + '" data-idNum="'+ meleeRowNum + '" onchange="addOneMelee('+meleeRowNum+'); populateMelee('+meleeRowNum+'); calculateEncumberance();"/><datalist id="meleeList' + meleeRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Weapon Info" data-name="" data-desc="" id="meleeInfo'+meleeRowNum+'"></i><input type="text" id="meleeName' + meleeRowNum + '" list="meleeList' + meleeRowNum + '" data-idNum="'+ meleeRowNum + '" onchange="addOneMelee('+meleeRowNum+'); populateMelee('+meleeRowNum+'); calculateEncumberance();"/><datalist id="meleeList' + meleeRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="meleeNotes' + meleeRowNum + '" /></td>';
     cols += '<td><input type="string" value="" id="meleeDamage'+meleeRowNum+'"></td>';
     cols += '<td><input type="string" value="0" id="meleeShock'+meleeRowNum+'"></td>';
@@ -535,7 +536,7 @@ function addArmourRow(){
     var newChild =  $("<tr id='armourChildRow"+armourRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="armourInfo'+armourRowNum+'"></i><input type="text" id="armourName' + armourRowNum + '" list="armourList' + armourRowNum + '" data-idNum="'+ armourRowNum + '" onchange="addOneArmour('+armourRowNum+'); populateArmour('+armourRowNum+'); calculateEncumberance(); updateAC();"/><datalist id="armourList' + armourRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Armour Info" data-name="" data-desc="" id="armourInfo'+armourRowNum+'"></i><input type="text" id="armourName' + armourRowNum + '" list="armourList' + armourRowNum + '" data-idNum="'+ armourRowNum + '" onchange="addOneArmour('+armourRowNum+'); populateArmour('+armourRowNum+'); calculateEncumberance(); updateAC();"/><datalist id="armourList' + armourRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="armourNotes' + armourRowNum + '" /></td>';
     cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="AC' + armourRowNum +'"></td>';
     cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="shieldBonus' + armourRowNum +'"></td>';
@@ -657,7 +658,7 @@ function addDroneRow(){
     var newChild =  $("<tr id='droneChildRow"+droneRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="droneInfo'+droneRowNum+'"></i><input type="text" id="droneName' + droneRowNum + '" list="droneList' + droneRowNum + '" data-idNum="'+ droneRowNum + '" onchange="addOneDrone('+droneRowNum+'); populateDrone('+droneRowNum+'); calculateEncumberance();"/><datalist id="droneList' + droneRowNum + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Drone Info" data-name="" data-desc="" id="droneInfo'+droneRowNum+'"></i><input type="text" id="droneName' + droneRowNum + '" list="droneList' + droneRowNum + '" data-idNum="'+ droneRowNum + '" onchange="addOneDrone('+droneRowNum+'); populateDrone('+droneRowNum+'); calculateEncumberance();"/><datalist id="droneList' + droneRowNum + '"></datalist></td>';
     cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="droneNotes' + droneRowNum + '" /></td>';
     
     cols += '<td><input type="string"  id="dronePrice' + droneRowNum + '"/></td>';
@@ -1177,34 +1178,36 @@ function focusInfo(childID, selectID) {
 
 
 // Updates learning/growth bonus skill modifiers
-function addLearnSkillBonus() {
-    
-    $(".skillField").attr("data-learn",0); // reset the data-learn value of all skill fields.
+function updateSkillBonus(id) {
+    clearSkillBonuses(); // Reset all skill bonuses
     
     var level = parseInt(document.getElementById("playerLevel").value); // Get player level
     var limit = Math.min(4,(1+Math.floor(level/3))); // Calculate max skill level limit.
-    
+    var selection = document.getElementById(id);
     // cycle through all character creation initial skill fields
     for (var skillID = 1; skillID < 17; skillID++) {
         var match = document.getElementById("initSkill" + skillID).value; // Get level value of current indexed skill field
 
         if (match != "empty"){
             // Set skill field value.
-            document.getElementById(match + "Score").setAttribute("data-learn",  Math.min(limit,parseInt(document.getElementById(match + "Score").getAttribute("data-learn")))+1);
+            document.getElementById(match + "BonusScore").value = parseInt(document.getElementById(match + "BonusScore").value) + 1;
         }
-        // Update memory of previously selected field 
-        document
-            .getElementById("initSkill" + skillID)
-            .setAttribute("data-previous", match);
     }
-    updateBaseSkills();
+    if(selection.value !== "empty"){
+        updateSkill(selection.value);
+    }
+    else if(selection.getAttribute("data-previous") !== "empty"){
+        updateSkill(selection.getAttribute("data-previous"));
+    }
+    
     updateMaxEffort();
+
+    selection.setAttribute("data-previous", selection.value)
+
 }
 
-//Update initial skill values during character creation.
-function updateBaseSkills() {
-    var level = parseInt(document.getElementById("playerLevel").value);
-    var limit = Math.min(4,(1+Math.floor(level/3)));
+// Reset skill bonuses.
+function clearSkillBonuses() {
     var skillList = [
         "admin",
         "connect",
@@ -1234,19 +1237,12 @@ function updateBaseSkills() {
         "custom1",
         "custom2"
     ];
+
      for (var i = 0; i < skillList.length; i++){
-         baseSkill = skillList[i];
-    var currentSkill = document.getElementById(baseSkill + "Score"); // Get current skill field.
-
-    var learnBonus = parseInt(currentSkill.getAttribute("data-learn"));
-
-    var currentValue = parseInt(currentSkill.getAttribute("data-bonus"));
-
-    currentSkill.value = Math.min(learnBonus + currentValue, limit);
-    currentSkill.setAttribute("value", currentSkill.value); // Update skill score.
-    currentSkill.setAttribute("min", learnBonus - 1); // Attribute cannot be decremented below base value.
-    currentSkill.setAttribute("max", limit);
-    updateSkill(baseSkill + "Score");
+         var baseSkill = skillList[i];
+        var currentSkill = document.getElementById(baseSkill + "Score"); // Get current skill field.
+        var currentSkillBonus = document.getElementById(baseSkill + "BonusScore");
+        currentSkillBonus.value = 0;
      }
 }
 
@@ -1260,38 +1256,44 @@ function updateSkillPoolSize() {
     document.getElementById("maxSP").value = maxSP;
 }
 
-// Hide skill input field if untrained.
+// Update Selected Player Skill Score Value.
 function updateSkill(id) {
-    var currentSkill = document.getElementById(id);
+    var currentSkill = document.getElementById(id+"Score"); // Get skill input field.
+    var skillBaseValue = parseInt(document.getElementById(id + "BaseScore").value); // Get skill Base Score
+    var skillBonusValue = parseInt(document.getElementById(id + "BonusScore").value); // Get Skill Bonus Score
+    var level = parseInt(document.getElementById("playerLevel").value);
+
+    var skillTotal = skillBaseValue + skillBonusValue;// Calculate total skill score value.
+    currentSkill.value = Math.min(4,1+Math.floor(level/3),skillTotal); // Update total skill score value.
+        // Check if max limit exceeded
+        if (skillTotal > Math.min(4,1+Math.floor(level/3))){
+            $(".message").text("WARNING: You must first increase player level before progressing this skill!");
+            $(".messageHeader").text("SKILL CAP REACHED!" + ":");
+            openAlert();
+        }
+    document.getElementById(id + "BaseScore").value = Math.max((parseInt(currentSkill.value) - skillBonusValue),-1);
+    // Check if skill is untrained.
     if (parseInt(currentSkill.value) === -1) {
-        document.getElementById(id).style.display = "none";
+        document.getElementById(id + "Score").style.display = "none";
+        // Show relevant Psi Core Techniques.
          if ((currentSkill.id === "teleportScore") || (currentSkill.id === "telepathScore") || (currentSkill.id === "telekinesisScore") || (currentSkill.id === "biopsiScore") || (currentSkill.id === "metapsiScore") || (currentSkill.id === "precogScore")){
              $("#"+currentSkill.getAttribute("data-psi") + "CoreTechnique").hide();
          }
     } else {
-        document.getElementById(id).style.display = "inline-block";
+        document.getElementById(id + "Score").style.display = "inline-block";
+        // Hide relevant Psi Core Techniques.
         if ((currentSkill.id === "teleportScore") || (currentSkill.id === "telepathScore") || (currentSkill.id === "telekinesisScore") || (currentSkill.id === "biopsiScore") || (currentSkill.id === "metapsiScore") || (currentSkill.id === "precogScore")){
             $("#"+currentSkill.getAttribute("data-psi") + "CoreTechnique").show();
             $("#"+currentSkill.getAttribute("data-psi") + "CoreLevel").val(parseInt(currentSkill.value));
             
         }
     }
-    updateSkillBonus(id);
+
     updateSkillPool();
     updateMaxEffort();
 }
 
-// Update and store the bonus value to the base attribute score.
-function updateSkillBonus(id) {
-    var skillScore = parseInt(document.getElementById(id).value);
-    var skillLearnValue = parseInt(
-        document.getElementById(id).getAttribute("data-learn")
-    );
-    document
-        .getElementById(id)
-        .setAttribute("data-bonus", skillScore - skillLearnValue);
-   
-}
+
 
 // Tracks and calculates how many skill points have been spent by the player.
 function updateSkillPool() {
@@ -1331,6 +1333,7 @@ function updateSkillPool() {
     var skillCost = 0;
     var i = 0;
     var cost = 0;
+    
     // Calculate attribute bonus SP cost.
     for (i = 0; i < attributeList.length; i++) {
         var attrBonus = parseInt(
@@ -1345,23 +1348,16 @@ function updateSkillPool() {
 
     // Calculate skill point SP cost.
     for (i = 0; i < skillList.length; i++) {
-        var skillBonus = parseInt(
-            document
-                .getElementById(skillList[i] + "Score")
-                .getAttribute("data-bonus")
-        );
-        var skillLearn = parseInt(
-            document
-                .getElementById(skillList[i] + "Score")
-                .getAttribute("data-learn")
-        );
-        for (cost = skillBonus + skillLearn; cost > skillLearn -1; cost--) {
+        var skillBaseValue = parseInt(document.getElementById(skillList[i] + "BaseScore").value);
+        for (cost = skillBaseValue; cost > -1; cost--) {
             skillCost = skillCost + cost + 1;
         }
     }
 
     document.getElementById("usedSP").value = attrCost + skillCost;
 }
+
+
 //#endregion
 
 // ================================================================================
@@ -1457,9 +1453,9 @@ function enableNextElement(id,nextId){
 function checkDeath(id){
     
     if(id.checked){
-         $(".message").text("YOU ARE DEAD");
-                $(".messageHeader").text("FLATLINED!" + ":");
-                openAlert();
+        $(".message").text("YOU ARE DEAD");
+        $(".messageHeader").text("FLATLINED!" + ":");
+        openAlert();
     }    
 }
 
@@ -4129,9 +4125,9 @@ function BackInfo(childID, selectID) {
         
         var bonusSkill = backgroundList[0]["Select a Background"][index].bonus; // Get background free skill name.
         document.getElementById("initSkill4").value = bonusSkill; // Assign free skill.
+        document.getElementById("initSkill4").onchange();
         $(".backgroundSkill").hide(); // Hide 'any' background skill select field.
     }
-    addLearnSkillBonus(); // Update skill bonuses
     document.getElementById(childID).setAttribute("data-desc",info); // Store background description.
     document.getElementById(childID).setAttribute("data-name",title); // Store backgorund title.
 
@@ -4217,7 +4213,6 @@ function classInfo(childID, selectID) {
            document.getElementById(childID).setAttribute("data-desc",info);
     document.getElementById(childID).setAttribute("data-name",title);
 
-            addLearnSkillBonus();
             updateSkillPoolSize();
             clearSelection();
             updateMaxFociPool();
@@ -4252,8 +4247,17 @@ if (window.attachEvent) {
 function init(id) {
     var text = document.getElementById(id);
     function resize() {
-        text.style.height = "auto";
-        text.style.height = text.scrollHeight + "px";
+        var scrollLeft = window.pageXOffset ||
+      (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+
+      var scrollTop  = window.pageYOffset ||
+      (document.documentElement || document.body.parentNode || document.body).scrollTop;
+
+      var prevHeight = text.style.height.slice(0, -2);
+      text.style.height = "auto";
+      var nextHeight = text.scrollHeight;
+      text.style.height = text.scrollHeight + 'px';
+      window.scrollTo(scrollLeft, scrollTop + (nextHeight - prevHeight));
     }
     /* 0-timeout to get the already changed text */
     function delayedResize() {
@@ -4415,7 +4419,7 @@ function save_character(){
 
 // Functions for reading character from disk
 function load_character(e) {
-
+    for (var repeat = 0; repeat < 2; reapeat++){
   // Autosave character
   if ($("#autosave").prop("checked") == true) {
     save_character();
@@ -4568,10 +4572,14 @@ function load_character(e) {
         "custom2"
     ];
     for (var i = 0; i < skillNameList.length; i++){
-        updateSkill(skillNameList[i]+"Score");
+        updateSkill(skillNameList[i]);
         
     }
     
+
+
+
+}
 }
 
 // Attach load_character function to relevant button.
@@ -4708,7 +4716,7 @@ $(document).ready(function () {
     document.getElementById("tabUI").style.display = "flex";
 document.getElementById("defaultOpen").click();
     
-updateBaseSkills();
+//updateBaseSkills();
 charImage("./img/Default_Avatar.webp");
 $('textarea').on('keyup keypress click', function() {
         $(this).height(0);
@@ -4979,7 +4987,6 @@ function navigateToHelpText(targetId){
 
 // This function checks what foci are selected and if any abilities/skills need to be unlocked.
 function checkFoci(){
-    console.log("STarting");
     var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array subset category names
     
     // Reset Psi booleans and effort counters.
@@ -5018,7 +5025,7 @@ function checkFoci(){
                 var focusSkillField = document.getElementsByName("fociSkill" + num)[0]; // Get focus skill select field from Skill table
                 var focusSkillRow = document.getElementsByName("fociSkillRow" + num)[0]; // Get row containing the relevant focus skill select field from Skill table
                 var selectedOption = focusSkillField.value; // Store previously selected option value.
-
+                
                 //focusSkillField.value = "empty"; // Remove foci skill selection
                 removeOptions(focusSkillField); // Depopulate foci skill select field options.
                 focusSkillRow.style.display = 'table-cell';
@@ -5051,8 +5058,7 @@ function checkFoci(){
                     }
                     focusSkillRow.style.display = 'none';
                 }
-                
-
+                updateSkillBonus(focusSkillField.id);
             }
             
         }

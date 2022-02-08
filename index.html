@@ -166,69 +166,69 @@
                                         </tr>
                                         <!--Starting Skills-->
                                         <tr id="initSkills">
-                                            <td colspan="6">Learn/Growth Skill:<select id="initSkill1" data-previous="empty" onchange="addLearnSkillBonus()"></select>
+                                            <td colspan="6">Learn/Growth Skill:<select id="initSkill1" data-previous="empty" onchange="updateSkillBonus(this.id)"></select>
                                                 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Learn/Growth Skill:<select id="initSkill2" data-previous="empty" onchange="addLearnSkillBonus()"></select>
+                                            <td colspan="6">Learn/Growth Skill:<select id="initSkill2" data-previous="empty" onchange="updateSkillBonus(this.id)"></select>
                                                 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="randomGrowth isAISkill" colspan="6">Learn/Growth Skill:<select id="initSkill3" data-previous="empty" onchange="addLearnSkillBonus()"></select>
+                                            <td class="randomGrowth isAISkill" colspan="6">Learn/Growth Skill:<select id="initSkill3" data-previous="empty" onchange="updateSkillBonus(this.id)"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" hidden>Background Skill:<select id="initSkill4" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>Level:<input type="number" value="0" id="initScore4" min="-1" max="1" step="1" onchange="addLearnSkillBonus();" readonly>
+                                            <td colspan="6" hidden>Background Skill:<select id="initSkill4" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" class="classSkill1">Psi Skill:<select id="initSkill5" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" class="classSkill1">Psi Skill:<select id="initSkill5" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" class="classSkill2">Psi Skill:<select id="initSkill6" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" class="classSkill2">Psi Skill:<select id="initSkill6" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" class="backgroundSkill">Background Skill:<select id="initSkill7" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" class="backgroundSkill">Background Skill:<select id="initSkill7" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" hidden>AI Skill:<select id="initSkill8" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" hidden>AI Skill:<select id="initSkill8" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" hidden>AI Skill:<select id="initSkill9" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" hidden>AI Skill:<select id="initSkill9" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow1" style="display: none;">Focus 1 Skill:<select name="fociSkill1" id="initSkill10" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow1" style="display: none;">Focus 1 Skill:<select name="fociSkill1" id="initSkill10" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow2" style="display: none;">Focus 2 Skill:<select name="fociSkill2" id="initSkill11" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow2" style="display: none;">Focus 2 Skill:<select name="fociSkill2" id="initSkill11" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow3" style="display: none;">Focus 3 Skill:<select name="fociSkill3" id="initSkill12" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow3" style="display: none;">Focus 3 Skill:<select name="fociSkill3" id="initSkill12" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow4" style="display: none;">Focus 4 Skill:<select name="fociSkill4" id="initSkill13" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow4" style="display: none;">Focus 4 Skill:<select name="fociSkill4" id="initSkill13" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow5" style="display: none;">Focus 5 Skill:<select name="fociSkill5" id="initSkill14" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow5" style="display: none;">Focus 5 Skill:<select name="fociSkill5" id="initSkill14" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" name="fociSkillRow6" style="display: none;">Focus 6 Skill:<select name="fociSkill6" id="initSkill15" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6" name="fociSkillRow6" style="display: none;">Focus 6 Skill:<select name="fociSkill6" id="initSkill15" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6">Interest Skill:<select id="initSkill16" value="" data-previous="empty" onchange="updateSkill(id); addLearnSkillBonus();"></select>
+                                            <td colspan="6">Interest Skill:<select id="initSkill16" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                     </tr>
@@ -238,181 +238,181 @@
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="admin"></i> Administer:</td>
                                     
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(adminScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="adminScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(adminScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(adminBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="adminScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(adminBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="pilot"></i> Pilot:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(pilotScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="pilotScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(pilotScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(pilotBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="pilotScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(pilotBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="work"></i> Work:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(workScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="workScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(workScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(workBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="workScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(workBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="connect"></i> Connect:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(connectScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="connectScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(connectScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(connectBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="connectScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(connectBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="program"></i> Program:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(programScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="programScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(programScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(programBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="programScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(programBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="biopsi"></i> Biopsionics:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(biopsiScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="biopsiScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="biopsi" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(biopsiScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(biopsiBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="biopsiScore" min="-1" max="4" step="1"  class="skillField" data-learn="0" data-psi="biopsi" data-bonus="-1" readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(biopsiBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="exert"></i> Exert:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(exertScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="exertScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(exertScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(exertBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="exertScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(exertBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="punch"></i> Punch:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(punchScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="punchScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(punchScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(punchBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="punchScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(punchBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="metapsi"></i> Metapsionics:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(metapsiScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="metapsiScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="metapsi" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(metapsiScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(metapsiBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="metapsiScore" min="-1" max="4" step="1"  class="skillField" data-learn="0" data-psi="metapsi" data-bonus="-1" readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(metapsiBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="fix"></i> Fix:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(fixScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="fixScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(fixScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(fixBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="fixScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(fixBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="shoot"></i> Shoot:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(shootScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="shootScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(shootScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(shootBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="shootScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(shootBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="precog"></i> Precognition:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(precogScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="precogScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="precog" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(precogScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(precogBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="precogScore" min="-1" max="4" step="1"  class="skillField" data-learn="0" data-psi="precog" data-bonus="-1" readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(precogBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="heal"></i> Heal:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(healScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="healScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(healScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(healBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="healScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(healBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="sneak"></i> Sneak:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(sneakScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="sneakScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(sneakScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(sneakBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="sneakScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(sneakBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="telekinesis"></i> Telekinesis:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(telekinesisScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="telekinesisScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="telekinesis" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(telekinesisScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(telekinesisBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="telekinesisScore" min="-1" max="4" step="1"  class="skillField" data-learn="0" data-psi="telekinesis" data-bonus="-1" readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(telekinesisBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="know"></i> Know:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(knowScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="knowScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(knowScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(knowBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="knowScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(knowBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="stab"></i> Stab:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(stabScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="stabScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(stabScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(stabBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="stabScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(stabBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="telepath"></i> Telepathy:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(telepathScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="telepathScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="telepath" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(telepathScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(telepathBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="telepathScore" min="-1" max="4" step="1"  class="skillField" data-learn="0" data-psi="telepath" data-bonus="-1" readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(telepathBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="lead"></i> Lead:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(leadScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="leadScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(leadScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(leadBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="leadScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(leadBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="survive"></i> Survive:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(surviveScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="surviveScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(surviveScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(surviveBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="surviveScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(surviveBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="teleport"></i> Teleportation:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(teleportScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="teleportScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-psi="teleport" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(teleportScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(teleportBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="teleportScore" min="-1" max="4" step="1"  class="skillField" data-learn="0" data-psi="teleport" data-bonus="-1" readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(teleportBaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="notice"></i> Notice:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(noticeScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="noticeScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(noticeScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(noticeBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="noticeScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(noticeBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="talk"></i> Talk:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(talkScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="talkScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(talkScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(talkBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="talkScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(talkBaseScore.id)">
                                     </td>
                                     <td><input type="string" value="" id="customSkill1"></td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(custom1Score.id)">
-                                        <input type="number" value="-1" style="display: none;" id="custom1Score" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(custom1Score.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(custom1BaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="custom1Score" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(custom1BaseScore.id)">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="perform"></i> Perform:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(performScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="performScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(performScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(performBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="performScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(performBaseScore.id)">
                                     </td>
                                     <td class="leftAlign"><i class="fa fa-info-circle interact" title="Get Skill Info" id="trade"></i> Trade:</td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(tradeScore.id)">
-                                        <input type="number" value="-1" style="display: none;" id="tradeScore" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(tradeScore.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(tradeBaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="tradeScore" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(tradeBaseScore.id)">
                                     </td>
                                     <td><input type="string" value="" id="customSkill2" step="1"></td>
                                     <td>
-                                        <input value="-" readonly type="button" class="button" onclick="decrement(custo2Score.id)">
-                                        <input type="number" value="-1" style="display: none;" id="custom2Score" min="-1" max="4" step="1" onchange="updateSkill(id)" class="skillField" data-learn="0" data-bonus="-1" readonly>
-                                        <input value="+" readonly type="button" class="button" onclick="increment(custom2Score.id)">
+                                        <input value="-" readonly type="button" class="button" onclick="decrement(custom2BaseScore.id)">
+                                        <input type="number" value="-1" style="display: none;" id="custom2Score" min="-1" max="4" step="1"  class="skillField"  readonly>
+                                        <input value="+" readonly type="button" class="button" onclick="increment(custom2BaseScore.id)">
                                     </td>
                                 </tr>
                                 
@@ -536,7 +536,7 @@
                                     <td>Strength:</td>
                                     <td>
                                         <input value="-" type="button" class="button" readonly onclick="decrement(strScore.id);">
-                                        <input type="number" value="10" min="10" max="15" id="strScore" onchange="updateModifiers('str'); updateMaxCarry(this.value)" data-bonus="0" class="growthBonus" data-growth="0" readonly>
+                                        <input type="number" value="10" min="10" max="15" id="strScore" onchange="updateModifiers('str'); updateMaxCarry()" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(strScore.id);">
                                     </td>
                                     <td><input type="number" value="0" id="strMod" class="noWrite" readonly></td>
@@ -1533,8 +1533,9 @@
             
         </div>
         
+        <!-- Hidden fields -->
         <main>
-            <!-- Hidden fields for dynamic tables -->
+            <!-- Dynamic Table Row Counters -->
             <input name="counterItem" id="counter" data-full="[]" data-free="[]" type="hidden" value="0" />
             <input name="counterPsi" id="counterPsi" data-full="[]" data-free="[]" type="hidden" value="0" />
             <input name="counterWeapon" id="counterWeapon" data-full="[]" data-free="[]" type="hidden" value="0" />
@@ -1544,10 +1545,69 @@
             <input name="counterShell" id="counterShell" data-full="[]" data-free="[]" type="hidden" value="0" />
             <input name="counterDrone" id="counterDrone" data-full="[]" data-free="[]" type="hidden" value="0" />
             
+            <!--Psi Foci Variables-->
             <input id="isWildPsi" type="checked" value="false" hidden>
             <input id="wildEffort" type="number" value="0" hidden>
             <input id="isTrainedPsi" type="checked" hidden>
             <input id="trainedEffort" type="number" value="0" hidden>
+
+            <!--Skill Table Base Score Counters-->
+            <input id="adminBaseScore"type="hidden" onchange="updateSkill('admin');" min="-1" max="4" value="-1"/>
+            <input id="connectBaseScore"type="hidden" onchange="updateSkill('connect');" min="-1" max="4" value="-1"/>
+            <input id="exertBaseScore"type="hidden" onchange="updateSkill('exert');" min="-1" max="4" value="-1"/>
+            <input id="fixBaseScore"type="hidden" onchange="updateSkill('fix');" min="-1" max="4" value="-1"/>
+            <input id="healBaseScore"type="hidden" onchange="updateSkill('heal');" min="-1" max="4" value="-1"/>
+            <input id="knowBaseScore"type="hidden" onchange="updateSkill('know');" min="-1" max="4" value="-1"/>
+            <input id="leadBaseScore"type="hidden" onchange="updateSkill('lead');" min="-1" max="4" value="-1"/>
+            <input id="noticeBaseScore"type="hidden" onchange="updateSkill('notice');" min="-1" max="4" value="-1"/>
+            <input id="performBaseScore"type="hidden" onchange="updateSkill('perform');" min="-1" max="4" value="-1"/>
+            <input id="pilotBaseScore"type="hidden" onchange="updateSkill('pilot');" min="-1" max="4" value="-1"/>
+            <input id="programBaseScore"type="hidden" onchange="updateSkill('program');" min="-1" max="4" value="-1"/>
+            <input id="punchBaseScore"type="hidden" onchange="updateSkill('punch');" min="-1" max="4" value="-1"/>
+            <input id="shootBaseScore"type="hidden" onchange="updateSkill('shoot');" min="-1" max="4" value="-1"/>
+            <input id="sneakBaseScore"type="hidden" onchange="updateSkill('sneak');" min="-1" max="4" value="-1"/>
+            <input id="stabBaseScore"type="hidden" onchange="updateSkill('stab');" min="-1" max="4" value="-1"/>
+            <input id="surviveBaseScore"type="hidden" onchange="updateSkill('survive');" min="-1" max="4" value="-1"/>
+            <input id="talkBaseScore"type="hidden" onchange="updateSkill('talk');" min="-1" max="4" value="-1"/>
+            <input id="tradeBaseScore"type="hidden" onchange="updateSkill('trade');" min="-1" max="4" value="-1"/>
+            <input id="workBaseScore"type="hidden" onchange="updateSkill('work');" min="-1" max="4" value="-1"/>
+            <input id="biopsiBaseScore"type="hidden" onchange="updateSkill('biopsi');" min="-1" max="4" value="-1"/>
+            <input id="metapsiBaseScore"type="hidden" onchange="updateSkill('metapsi');" min="-1" max="4" value="-1"/>
+            <input id="precogBaseScore"type="hidden" onchange="updateSkill('precog');" min="-1" max="4" value="-1"/>
+            <input id="telekinesisBaseScore"type="hidden" onchange="updateSkill('telekinesis');" min="-1" max="4" value="-1"/>
+            <input id="telepathBaseScore"type="hidden" onchange="updateSkill('telepath');" min="-1" max="4" value="-1"/>
+            <input id="teleportBaseScore"type="hidden" onchange="updateSkill('teleport');" min="-1" max="4" value="-1"/>
+            <input id="custom1BaseScore"type="hidden" onchange="updateSkill('custom1');" min="-1" max="4" value="-1"/>
+            <input id="custom2BaseScore"type="hidden" onchange="updateSkill('custom2');" min="-1" max="4" value="-1"/>
+
+            <!--Skill Table Bonus Score Counters-->
+            <input id="adminBonusScore"type="hidden" value="0"/>
+            <input id="connectBonusScore"type="hidden" value="0"/>
+            <input id="exertBonusScore"type="hidden" value="0"/>
+            <input id="fixBonusScore"type="hidden" value="0"/>
+            <input id="healBonusScore"type="hidden" value="0"/>
+            <input id="knowBonusScore"type="hidden" value="0"/>
+            <input id="leadBonusScore"type="hidden" value="0"/>
+            <input id="noticeBonusScore"type="hidden" value="0"/>
+            <input id="performBonusScore"type="hidden" value="0"/>
+            <input id="pilotBonusScore"type="hidden" value="0"/>
+            <input id="programBonusScore"type="hidden" value="0"/>
+            <input id="punchBonusScore"type="hidden" value="0"/>
+            <input id="shootBonusScore"type="hidden" value="0"/>
+            <input id="sneakBonusScore"type="hidden" value="0"/>
+            <input id="stabBonusScore"type="hidden" value="0"/>
+            <input id="surviveBonusScore"type="hidden" value="0"/>
+            <input id="talkBonusScore"type="hidden" value="0"/>
+            <input id="tradeBonusScore"type="hidden" value="0"/>
+            <input id="workBonusScore"type="hidden" value="0"/>
+            <input id="biopsiBonusScore"type="hidden" value="0"/>
+            <input id="metapsiBonusScore"type="hidden" value="0"/>
+            <input id="precogBonusScore"type="hidden" value="0"/>
+            <input id="telekinesisBonusScore"type="hidden" value="0"/>
+            <input id="telepathBonusScore"type="hidden" value="0"/>
+            <input id="teleportBonusScore"type="hidden" value="0"/>
+            <input id="custom1BonusScore"type="hidden" value="0"/>
+            <input id="custom2BonusScore"type="hidden" value="0"/>
         </main>
         
     </form>
