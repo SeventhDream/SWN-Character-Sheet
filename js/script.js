@@ -1107,13 +1107,15 @@ function updateShellStats(){
 
 // Track how many Focus Points have been spent.
 function updateUsedFP(){
-    var usedFP = 0;
+    var usedFP = 0; // Reset used foci points counter.
+    // Cycle through each row in the foci table.
     for (var i = 1; i<7;i++){
+        // Check if a focus has been selected for this row.
         if (document.getElementById("Foci" + i).value !== "empty"){
-            usedFP = usedFP + parseInt(document.getElementById("FociLevel" + i).value);
+            usedFP = usedFP + parseInt(document.getElementById("FociLevel" + i).value); // Add foci's level to total spent foci points
         }
     }
-    document.getElementById("usedFP").value = usedFP;
+    document.getElementById("usedFP").value = usedFP; // Update used foci points on charatcer sheet.
 }
 
 // Update maximum number of Foci allowed.
@@ -4977,29 +4979,30 @@ function navigateToHelpText(targetId){
 
 // This function checks what foci are selected and if any abilities/skills need to be unlocked.
 function checkFoci(){
-    var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array category names
+    console.log("STarting");
+    var opGroup = Object.getOwnPropertyNames(fociList[0]); // Get foci data array subset category names
     
+    // Reset Psi booleans and effort counters.
     var isPsi = false;
     document.getElementById("isWildPsi").checked = false;
     document.getElementById("wildEffort").value = 0;
     document.getElementById("isTrainedPsi").checked = false;
     document.getElementById("trainedEffort").value = 0;
+
     // Check every focus field (1 to 6)
     for (var num = 1; num < 7; num++){
         var focus = document.getElementById("Foci" + num); // get the focus select field element.
-        var index = -1;
+        var index = -1; // Reset indexer variable.
         // Cycle through every foci subset.
         for (var i = 0; i < opGroup.length; i++) {
-            var groupIndex = opGroup[i]; // Get foci array category name.
+            var groupIndex = opGroup[i]; // Get foci array subset category name.
             index = getIndex(fociList[0][groupIndex], focus.value); // Get array index if foci matches data array entry.
             
             // Check if match index is found.
             if (index > -1) { 
                 
                 var focusLevel = parseInt(document.getElementById("FociLevel"+num).value);
-                // Check for psi foci
-                    
-                     // Check hidden element to indicate psionic focus is present.
+                // Check for psi foci and update hidden elements.
                     if(focus.value==="wildPsi"){
                         document.getElementById("isWildPsi").checked = true;
                         document.getElementById("wildEffort").value = focusLevel;
@@ -5011,26 +5014,29 @@ function checkFoci(){
                         isPsi = true;
                     }
 
-                var bonusSkill = fociList[0][groupIndex][index].bonus; // get focus description
-                var focusSkillField = document.getElementsByName("fociSkill" + num)[0];
-                var focusSkillRow = document.getElementsByName("fociSkillRow" + num)[0];
+                var bonusSkill = fociList[0][groupIndex][index].bonus; // get focus skill bonus from foci data array.
+                var focusSkillField = document.getElementsByName("fociSkill" + num)[0]; // Get focus skill select field from Skill table
+                var focusSkillRow = document.getElementsByName("fociSkillRow" + num)[0]; // Get row containing the relevant focus skill select field from Skill table
                 var selectedOption = focusSkillField.value; // Store previously selected option value.
-                
+
                 //focusSkillField.value = "empty"; // Remove foci skill selection
                 removeOptions(focusSkillField); // Depopulate foci skill select field options.
                 focusSkillRow.style.display = 'table-cell';
                 if ((bonusSkill === "anyCombat") && (focusLevel > 0)){
-                    // Populate Starting Psi Skill Select Tables
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
-optionTablePartial("Psychic Skills",skillList[0]["Combat Skills"],"#" + focusSkillField.id);
+                    // Populate Starting Skill Select Tables
+                    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
+                    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#" + focusSkillField.id);
+                    focusSkillField.value = selectedOption;
                 }
                 else if((bonusSkill === "anyNormal") && (focusLevel > 0)){
                     optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
-                    optionTablePartial("Psychic Skills",skillList[0]["Non-Combat Skills"],"#" + focusSkillField.id);
+                    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#" + focusSkillField.id);
+                    focusSkillField.value = selectedOption;
                 }
                 else if(bonusSkill === "anyPsi"  && (focusLevel > 0)){
                     optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#" + focusSkillField.id);
                     optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#" + focusSkillField.id);
+                    focusSkillField.value = selectedOption;
                 }
                 else{
                     selectOptionTable(skillList,"#" + focusSkillField.id);
@@ -5038,19 +5044,12 @@ optionTablePartial("Psychic Skills",skillList[0]["Combat Skills"],"#" + focusSki
                     focusSkillField.value = bonusSkill;
                     }
                     else{
-                        // Remove slected option if no longer valied choice.
+                        // Remove selected option if no longer valid choice.
                         if (!SelectHasValue(focusSkillField, selectedOption)){
                             focusSkillField.value = "empty"; // Remove foci skill selection
-                            console.log("PING!");
                         }
                     }
                     focusSkillRow.style.display = 'none';
-                }
-                
-                // Remove slected option if no longer valied choice.
-                if (!SelectHasValue(focusSkillField, selectedOption)){
-                    focusSkillField.value = "empty"; // Remove foci skill selection
-                    console.log("PONG!");
                 }
                 
 
