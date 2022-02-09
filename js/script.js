@@ -202,6 +202,7 @@ function overwriteRows(deleteRowIndex,id,targetRow,targetRemove,targetStorage,ta
 
 // Update readied and stowed and grafted item limit
 function updateMaxCarry(){
+    var strVal = document.getElementById("strScore").value;
     document.getElementById("maxReady").value = parseInt(Math.floor(strVal/2));
     var graftLimit = document.getElementById("maxGrafted");
     graftLimit.value = parseInt(Math.floor(strVal/2));
@@ -4419,7 +4420,7 @@ function save_character(){
 
 // Functions for reading character from disk
 function load_character(e) {
-    for (var repeat = 0; repeat < 2; reapeat++){
+    for (var repeat = 0; repeat < 2; repeat++){
   // Autosave character
   if ($("#autosave").prop("checked") == true) {
     save_character();
