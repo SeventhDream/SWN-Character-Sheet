@@ -1181,19 +1181,27 @@ function focusInfo(childID, selectID) {
 // Updates learning/growth bonus skill modifiers
 function updateSkillBonus(id) {
     clearSkillBonuses(); // Reset all skill bonuses
-    
+    var FociSP = 0;
     var level = parseInt(document.getElementById("playerLevel").value); // Get player level
     var limit = Math.min(4,(1+Math.floor(level/3))); // Calculate max skill level limit.
     var selection = document.getElementById(id);
     // cycle through all character creation initial skill fields
     for (var skillID = 1; skillID < 17; skillID++) {
         var match = document.getElementById("initSkill" + skillID).value; // Get level value of current indexed skill field
-
+        if ((skillID > 9) && (skillID < 16)){
+            var isStartingFoci = document.getElementById("isStartingFoci" + skillID).checked;
+        }
         if (match != "empty"){
             // Set skill field value.
+            if ((skillID < 10) || isStartingFoci || (skillID > 15)){
             document.getElementById(match + "BonusScore").value = parseInt(document.getElementById(match + "BonusScore").value) + 1;
+            }
+            else{
+                FociSP = FociSP + 3; // Convert Foci to 3 SP
+            }
         }
     }
+    document.getElementById("fociSPBonus").value = FociSP;
     if(selection.value !== "empty"){
         updateSkill(selection.value);
     }
@@ -1202,7 +1210,7 @@ function updateSkillBonus(id) {
     }
     
     updateMaxEffort();
-
+    updateSkillPoolSize();
     selection.setAttribute("data-previous", selection.value)
 
 }
@@ -1249,12 +1257,13 @@ function clearSkillBonuses() {
 
 // Update maximum skill point pool.
 function updateSkillPoolSize() {
+    var fociSPBonus = parseInt(document.getElementById("fociSPBonus").value);
     var maxSP = 3*parseInt(document.getElementById("playerLevel").value - 1);
     if ((document.getElementById("playerClass").value === "expert")||(document.getElementById("playerClass").value === "adventurerEP")||(document.getElementById("playerClass").value === "adventurerEW")||(document.getElementById("playerClass").value === "adventurerETAI")){
         maxSP += 1*parseInt(document.getElementById("playerLevel").value - 1);
     }
     
-    document.getElementById("maxSP").value = maxSP;
+    document.getElementById("maxSP").value = maxSP + fociSPBonus;
 }
 
 // Update Selected Player Skill Score Value.
@@ -1350,7 +1359,9 @@ function updateSkillPool() {
     // Calculate skill point SP cost.
     for (i = 0; i < skillList.length; i++) {
         var skillBaseValue = parseInt(document.getElementById(skillList[i] + "BaseScore").value);
-        for (cost = skillBaseValue; cost > -1; cost--) {
+        var skillBonusValue = parseInt(document.getElementById(skillList[i] + "BonusScore").value);
+
+        for (cost = parseInt(skillBaseValue + skillBonusValue); cost > (skillBonusValue-1); cost--) {
             skillCost = skillCost + cost + 1;
         }
     }
