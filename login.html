@@ -3,10 +3,40 @@
 
 <head>
     <link rel="stylesheet" href="./css/reset.css">
+    <script type="text/javascript" src="https://sdk.userbase.com/2/userbase.js"></script>
 </head>
 
 <body>
-    <a href="./index.html"><button type="button">Click Me!</button></a>
     
+    <!-- Auth View -->
+  <div id="auth-view">
+    <h1>Create an account</h1>
+    <form id="signup-form">
+      <input id="signup-username" type="text" required placeholder="Username">
+      <input id="signup-password" type="password" required placeholder="Password">
+      <input type="submit" value="Create an account">
+    </form>
+    <div id="signup-error"></div>
+  </div>
+
+  <!-- application code -->
+  <script type="text/javascript">
+    userbase.init({ appId: 'cb733a2c-a27f-4807-848b-c075c4ce8f31' })
+
+    function handleSignUp(e) {
+    e.preventDefault()
+
+    const username = document.getElementById('signup-username').value
+    const password = document.getElementById('signup-password').value
+
+    userbase.signUp({ username, password, rememberMe: 'none' })
+      .then((user) => alert('You signed up!'))
+      .catch((e) => document.getElementById('signup-error').innerHTML = e)
+  }
+
+  document.getElementById('signup-form').addEventListener('submit', handleSignUp)
+</script>
+
+
 </body>
     </html>

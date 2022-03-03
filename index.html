@@ -14,11 +14,42 @@
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <script type="text/javascript" src="https://sdk.userbase.com/2/userbase.js"></script>
     <link href="./fontawesome/css/all.css" rel="stylesheet">
 </head>
 
 <body>
+
+        <!-- Auth View -->
+    <div id="auth-view">
+            <h4 class="lightBlue">Login</h4>
+        <form id="login-form">
+        <li><input id="login-username" type="string" required placeholder="Username"></li>
+        <li><input id="login-password" type="password" required placeholder="Password"></li>
+        <li><input type="button" value="Sign in" name="loginSubmit"></li>
+        </form>
+        <div id="login-error" class="lightBlue"></div>
+
+        <h4 class="lightBlue">Create an account</h4>
+        <form id="signup-form">
+        <li><input id="signup-username" type="string" required placeholder="Username"></li>
+        <li><input id="signup-password" type="password" required placeholder="Password"></li>
+        <li><input type="button" value="Create an account" name="signUpSubmit"></li>
+        </form>
+        <div id="signup-error" class="lightBlue" ></div>
+        
+    </div>
+
+    
+    <script type="text/javascript">
+ 
+    
+</script>
+
+
+<div id="db-loading"><h2>Loading to-dos...</h2></div>
+<div class="lightBlue" id="db-error"></div>
+
     <div class="overlay"></div>
     <div class="landscape"><h2>Please Use Landscape Mode</h2></div>
     <!--Loading Screen-->
@@ -39,9 +70,12 @@
         
         <!--Container-->
         <div class="box">
+
+               
             <!--Tab Header-->
             <div class="tab" id="tabUI">
-                <h2 class="pageTitle">SWN Dynamic Character Sheet</h2>
+                <h2 class="pageTitle">SWN Dynamic Character Sheet [v1.1]</h2>
+                <li><h6 name="userID" class="lightBlue">USERNAME HERE</h6></li>
                 <div class="tabButtons">
                 <button type="button" id="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" id="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><button type="button" id="rulesTabOpen" class="tablinks" onclick="openTab(event, 'rulesTab')">Cheatsheet</button></a>
                 </div>
@@ -1141,10 +1175,11 @@
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesLang.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesLang"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesLang" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
@@ -1154,10 +1189,11 @@
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesGoal.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesGoal"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesGoal" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
@@ -1167,10 +1203,11 @@
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesAchieve.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesAchieve"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesAchieve" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
@@ -1183,35 +1220,45 @@
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
                                         
-                                        <body onload="init(playerNotes.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotes"></textarea>
-                                        </body>
+
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotes" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
                             </table>
                             
                             <h2>Vehicle/Robot Details</h2>
+
+                         
+                                        
+
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesBots.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesBots"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesBots" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
                             </table>
+                  
+
                             
                             <h2>Starship Details</h2>
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesShip.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesShip"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesShip" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
@@ -1223,10 +1270,11 @@
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesAssets.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesAssets"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesAssets" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
@@ -1236,10 +1284,11 @@
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesAlias.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesAlias"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesAlias" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>
@@ -1249,10 +1298,11 @@
                             <table>
                                 <tr style="display: table-row;" class="infoPanel">
                                     <td colspan="2">
-                                        
-                                        <body onload="init(playerNotesContacts.id);">
-                                            <textarea class="noteBox" rows="1" style="height:1em;" id="playerNotesContacts"></textarea>
-                                        </body>
+                                    
+                                            <div class="grow-wrap">
+                                                <textarea name="text" id="playerNotesContacts" onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                                            </div>
+
                                     </td>
                                     
                                 </tr>

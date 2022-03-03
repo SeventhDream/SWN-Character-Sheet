@@ -306,7 +306,7 @@ function addItemRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
-    resizeTextarea();
+    
     $("#removeItem"+rowNum).on("click", function(e) {
      e.stopImmediatePropagation();
 });
@@ -333,7 +333,7 @@ function removeItemRow(deleteButtonID,id){
     }
     rowNum--;
     }
-    resizeTextarea();
+    
 }
 
 // Reset item quantity to '1' when a new item is selected in Equipment List.
@@ -398,7 +398,7 @@ function addWeaponRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
-    resizeTextarea();
+    
     
 }
 
@@ -412,7 +412,7 @@ function removeWeaponRow(deleteButtonID,id){
 
     weaponRowNum--;
     }
-    resizeTextarea();
+    
 }
 
 // Reset weapon quantity to '1' when a new weapon is selected in weapon List.
@@ -481,7 +481,7 @@ function addMeleeRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
-    resizeTextarea();
+    
 }
 
 // Remove one row from the melee weapon table.
@@ -493,7 +493,7 @@ function removeMeleeRow(deleteButtonID,id){
     calculateEncumberance();
     meleeRowNum--;
     }
-    resizeTextarea();
+    
 }
 
 // Reset melee quantity to '1' when a new melee is selected in melee List.
@@ -561,7 +561,7 @@ function addArmourRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
-    resizeTextarea();
+    
 }
 
 // Remove one row from the armour inventory table.
@@ -573,7 +573,7 @@ function removeArmourRow(deleteButtonID,id){
     calculateEncumberance();
     armourRowNum--;
     }
-    resizeTextarea();
+    
 }
 
 // Reset armour quantity to '1' when a new armour is selected in armour List.
@@ -689,7 +689,7 @@ function addDroneRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
-    resizeTextarea();
+    
 }
 
 // Remove one row from the drone inventory table.
@@ -701,7 +701,7 @@ function removeDroneRow(deleteButtonID,id){
     calculateEncumberance();
     droneRowNum--;
     }
-    resizeTextarea();
+    
 }
 
 // Reset drone quantity to '1' when a new drone is selected in drone List.
@@ -748,7 +748,7 @@ function removePsiRow(deleteButtonID,id){
 
     rowNumPsi--;
     }
-    resizeTextarea();
+    
 }
 
 // Populate Psi Abilities technique value fields and description.
@@ -838,7 +838,7 @@ function removeRoutineRow(deleteButtonID,id){
 
     rowNumRoutine--;
     }
-    resizeTextarea();
+    
 }
 
 // List of all psychic techniques
@@ -1010,7 +1010,7 @@ function addShellRow(){
         $(this).height(0);
         $(this).height(this.scrollHeight);
     });
-    resizeTextarea();
+    
 }
 
 // Remove one row from Shell inventory table.
@@ -4245,55 +4245,6 @@ $(".bounding-box").css("background-image", "url(" + imageUrl + ")");
 
 //#region 11. Auto-Size Textarea
 
-var observe;
-
-if (window.attachEvent) {
-    observe = function (element, event, handler) {
-        element.attachEvent("on" + event, handler);
-    };
-} else {
-    observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-function init(id) {
-    var text = document.getElementById(id);
-    function resize() {
-        var scrollLeft = window.pageXOffset ||
-      (document.documentElement || document.body.parentNode || document.body).scrollLeft;
-
-      var scrollTop  = window.pageYOffset ||
-      (document.documentElement || document.body.parentNode || document.body).scrollTop;
-
-      var prevHeight = text.style.height.slice(0, -2);
-      text.style.height = "auto";
-      var nextHeight = text.scrollHeight;
-      text.style.height = text.scrollHeight + 'px';
-      window.scrollTo(scrollLeft, scrollTop + (nextHeight - prevHeight));
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize() {
-        window.setTimeout(resize, 0);
-    }
-    observe(text, "change", resize);
-    observe(text, "cut", delayedResize);
-    observe(text, "paste", delayedResize);
-    observe(text, "drop", delayedResize);
-    observe(text, "keydown", delayedResize);
-
-    text.focus();
-    text.select();
-    resize();
-}
-
-// Resize all visible textarea elements to height of contents.
-function resizeTextarea(){
-    $('textarea').each(function(){
-        $(this).height(0);
-        $(this).height($(this)[0].scrollHeight );
-    });
-}
-
 //#endregion
 
 // ================================================================================
@@ -4682,10 +4633,6 @@ function openTab(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " active";
     
-  // Resize visible textareas to scroll height.
-    $('textarea').each(function(){
-        $(this).height($(this)[0].scrollHeight );
-    });
 }
 //#endregion
 
@@ -4717,23 +4664,30 @@ $(document).ready(function () {
     $('.tablinks').click(function(e){e.preventDefault();}).click();
     hideTabs();
     typeWriter();
-    var delayInMilliseconds = 4500; //4.5 seconds
+    var delayInMilliseconds = 0; //4.5 seconds
  setTimeout(function() {
   //your code to be executed after delay second
      $('#loading').hide();
      
-    $(".message").text("WECOME BACK USER#404\n---\nARE YOU READY TO BEGIN?");
-                $(".messageHeader").text("E.I.N.S.");
-                openAlert();
-    document.getElementById("tabUI").style.display = "flex";
-document.getElementById("defaultOpen").click();
+    //$(".message").text("WECOME BACK USER#404\n---\nARE YOU READY TO BEGIN?");
+                //$(".messageHeader").text("E.I.N.S.");
+               // openAlert();
+    //document.getElementById("tabUI").style.display = "flex";
+//document.getElementById("defaultOpen").click();
     
 //updateBaseSkills();
+
+//application code
+userbase.init({ appId: 'cb733a2c-a27f-4807-848b-c075c4ce8f31' })
+
+
+
+document.getElementById('db-loading').style.display = 'none'
+document.getElementsByName('loginSubmit')[0].addEventListener('click', handleLogin)
+document.getElementsByName('signUpSubmit')[0].addEventListener('click', handleSignUp)
+
 charImage("./img/Default_Avatar.webp");
-$('textarea').on('keyup keypress click', function() {
-        $(this).height(0);
-        $(this).height(this.scrollHeight);
-    });    
+   
     
 $(".randomGrowth").hide();
 $(".backgroundSkill").hide();
@@ -5131,3 +5085,54 @@ function removeOptions(parent) {
     $(".customAlert").css("display", "inline");
     document.getElementsByClassName("overlay")[0].style.display = "block";
 } 
+
+// Handles login form submission
+function handleLogin(e) {
+    console.log("Login");
+e.preventDefault()
+
+const username = document.getElementById('login-username').value
+const password = document.getElementById('login-password').value
+
+userbase.signIn({ username, password, rememberMe: 'none' })
+.then((user) => showTodos(username))
+.catch((e) => document.getElementById('login-error').innerHTML = e)
+
+}
+// Handles signup form submission
+function handleSignUp(e) {
+    console.log("Signup");
+e.preventDefault()
+
+const username = document.getElementById('signup-username').value 
+const password = document.getElementById('signup-password').value
+
+userbase.signUp({ username, password, rememberMe: 'none' })
+.then((user) => showTodos(username))
+.catch((e) => document.getElementById('signup-error').innerHTML = e)
+console.log("loading");
+
+}
+// Reveal Character Sheet and Hide Login/Signup/Loading Elements.
+function showTodos(username) {
+    $(".message").text("WECOME BACK "+ username + "\n---\nARE YOU READY TO BEGIN?");
+$(".messageHeader").text("E.I.N.S.");
+openAlert();
+document.getElementById('auth-view').style.display = 'none' // Hide login
+document.getElementById("tabUI").style.display = "flex"; // Reveal charsheet header tabs
+document.getElementById("defaultOpen").click(); // trigger click event.
+document.getElementsByName("userID")[0].innerHTML = "Current User: " + username;
+document.getElementById('username').innerHTML = username // 
+console.log("loading");
+
+document.getElementById('db-error').innerText = ''
+
+userbase.openDatabase({ databaseName: 'charData', changeHandler })
+.catch((e) => document.getElementById('db-error').innerText = e)
+
+}
+//Hides Loading Element.
+function changeHandler(items) {
+
+document.getElementById('db-loading').style.display = 'none'
+}

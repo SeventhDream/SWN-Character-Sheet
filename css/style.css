@@ -439,6 +439,44 @@ optgroup {
     animation: none;
 }
 
+.lightBlue {
+  color: #00FFFF !important;
+}
+
+#auth-view {
+  display: block;
+  top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    position: absolute;
+  max-width: 50%;
+  min-width: 300px !important;
+  min-height: 20%;
+  height: fit-content;
+    max-height: 90vh;
+ overflow-x: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  background: black;
+    border: 5px solid #8B0000;
+    font-size: 15px;
+    text-align: center;
+    z-index: 900;
+}
+
+#auth-view h4{
+  margin: 0 auto;
+}
+
+
+
+#auth-view input {
+
+  width: 200px !important;
+ margin-left: -20px !important;
+  margin-bottom: 5px;
+}
+
 .helpPanel b, #rulesTab b{
     color: white !important;
 }
@@ -836,7 +874,8 @@ input[id$="Score"] {
 }
 
 .noteBox {
-    min-height: 1em;
+    min-height: 5em;
+    resize: none;
     width: 100%;
 }
 
@@ -970,6 +1009,8 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     
   }
   
+
+
   .sidepanel a{
 
     text-decoration: none;
@@ -1142,4 +1183,50 @@ input[type='range'].strainSlide::-webkit-slider-runnable-track{
     html{
       font-size: 90%;
     }
+  }
+
+  h6[name="userID"]{
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .grow-wrap {
+    /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
+    display: grid;
+  }
+  .grow-wrap::after {
+    /* Note the weird space! Needed to preventy jumpy behavior */
+    content: attr(data-replicated-value) " ";
+  
+    /* This is how textarea text behaves */
+    white-space: pre-wrap;
+  
+    /* Hidden from view, clicks, and screen readers */
+    visibility: hidden;
+  }
+  .grow-wrap > textarea {
+    /* You could leave this, but after a user resizes, then it ruins the auto sizing */
+    resize: none;
+  
+    /* Firefox shows scrollbar on growth, you can hide like this. */
+    overflow: hidden;
+  }
+  .grow-wrap > textarea,
+  .grow-wrap::after {
+    /* Identical styling required!! */
+    border: 1px solid black;
+    padding: 0.5rem;
+    font: inherit;
+  
+    /* Place on top of each other */
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  
+  body {
+    margin: 2rem;
+    font: 1rem/1.4 system-ui, sans-serif;
+  }
+  
+  label {
+    display: block;
   }
