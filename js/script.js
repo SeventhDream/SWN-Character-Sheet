@@ -4214,6 +4214,7 @@ function classInfo(childID, selectID) {
                 document.getElementById("initSkill9").value = "empty"; // clear true AI skill
                 $(".isAI").hide();
                 $(".isRandom").show();
+                $(".isAISkill").hide();
                 
             }
             isGrowth("isGrowthCheck",".randomGrowth");
