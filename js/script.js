@@ -1186,7 +1186,7 @@ function updateSkillBonus(id) {
     var limit = Math.min(4,(1+Math.floor(level/3))); // Calculate max skill level limit.
     var selection = document.getElementById(id);
     // cycle through all character creation initial skill fields
-    for (var skillID = 1; skillID < 17; skillID++) {
+    for (var skillID = 1; skillID < 18; skillID++) {
         var match = document.getElementById("initSkill" + skillID).value; // Get level value of current indexed skill field
         if ((skillID > 9) && (skillID < 16)){
             var isStartingFoci = document.getElementById("isStartingFoci" + skillID).checked;
@@ -1205,7 +1205,7 @@ function updateSkillBonus(id) {
     if(selection.value !== "empty"){
         updateSkill(selection.value);
     }
-    else if(selection.getAttribute("data-previous") !== "empty"){
+     if(selection.getAttribute("data-previous") !== "empty"){
         updateSkill(selection.getAttribute("data-previous"));
     }
     
@@ -1954,7 +1954,7 @@ var backgroundList = [
                 title: "[True AI]",
                 value: "trueAI",
                 desc: "ai",
-                bonus: "any"
+                bonus: "program"
             }
         ]
     }
@@ -4130,6 +4130,14 @@ function BackInfo(childID, selectID) {
     var title = backgroundList[0]["Select a Background"][index].title; // Get background title
     document.getElementById("initSkill4").value = "empty"; // Clear background skill fields.
         document.getElementById("initSkill7").value = "empty"; //^
+        document.getElementById("initSkill17").value = "empty"; // Clear True AI skill fields.
+        document.getElementById("initSkill17").onchange();
+        //Check if True AI background is selected.
+        if (match === 'trueAI'){
+
+            document.getElementById("initSkill17").value = "fix"; // Set True AI skill bonus.
+            document.getElementById("initSkill17").onchange();
+        }
         // Check if selected background allows any skill pick.
     if (backgroundList[0]["Select a Background"][index].bonus === "any") {
         $(".backgroundSkill").show(); // Show 'any' background skill select field
@@ -4770,6 +4778,10 @@ optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill8");
 optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill9");
 optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill9");
 optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill9");
+
+optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill17");
+optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill17");
+optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill17");
     
     
     
