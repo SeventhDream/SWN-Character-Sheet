@@ -1954,7 +1954,7 @@ var backgroundList = [
                 title: "[True AI]",
                 value: "trueAI",
                 desc: "ai",
-                bonus: "program"
+                bonus: "none"
             }
         ]
     }
@@ -4135,8 +4135,8 @@ function BackInfo(childID, selectID) {
         //Check if True AI background is selected.
         if (match === 'trueAI'){
 
-            document.getElementById("initSkill17").value = "fix"; // Set True AI skill bonus.
-            document.getElementById("initSkill17").onchange();
+            //document.getElementById("initSkill17").value = "fix"; // Set True AI skill bonus.
+            //document.getElementById("initSkill17").onchange();
         }
         // Check if selected background allows any skill pick.
     if (backgroundList[0]["Select a Background"][index].bonus === "any") {
@@ -4165,9 +4165,11 @@ function classInfo(childID, selectID) {
             var info = classList[0][opGroup[i]][index].desc;
              var title = classList[0][opGroup[i]][index].title;
                     
-            // document.getElementById("initSkill8").value = "empty"; // clear background skill
+            document.getElementById("initSkill8").value = "empty"; // clear background skill
+            document.getElementById("initSkill8").onchange();
                  
-
+            document.getElementById("initSkill9").value = "empty";
+                 document.getElementById("initSkill9").onchange();
             
             var playerClass = classList[0][opGroup[i]][index].value; // Get selected class.
             
@@ -4202,8 +4204,11 @@ function classInfo(childID, selectID) {
                 $(".isAI").show();
                 var skill = "fix";
                 document.getElementById("initSkill8").value = skill;
+                document.getElementById("initSkill8").onchange();
                  document.getElementById("initSkill9").value = "program";
+                 document.getElementById("initSkill9").onchange();
                 $(".isAISkill").show();
+                document.getElementById("isGrowthCheck").checked = true;
                 $(".isRandom").hide();
             }
             else{
