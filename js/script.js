@@ -4208,7 +4208,6 @@ function classInfo(childID, selectID) {
                  document.getElementById("initSkill9").value = "program";
                  document.getElementById("initSkill9").onchange();
                 $(".isAISkill").show();
-                document.getElementById("isGrowthCheck").checked = true;
                 $(".isRandom").hide();
             }
             else{
