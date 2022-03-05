@@ -941,12 +941,12 @@ function addRoutineRow(){
     rowNumRoutine++;
 }
 
-// Update available Core Routines based one player level and class.
+// Update available Core Routines based on player level/2 rounded up and true AI class.
 function updateCoreRoutines(){
     if ($("#playerClass").val() === "trueAI"){
     for (var i = 0; i < 12; i++){
         
-        if(parseInt($("#CoreRoutine"+i+"Level").val()) <= parseInt($("#playerLevel").val())){
+        if(parseInt($("#CoreRoutine"+i+"Level").val()) <= Math.ceil((parseInt($("#playerLevel").val()))/2)){
             $("#CoreRoutine"+i).show();
             
         }
