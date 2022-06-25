@@ -1,5 +1,6 @@
 //#region 1. Attribute Automation
-
+var DBName = "";
+var DBItems = [];
 // Convert attribute scores into modifiers.
 function updateModifiers(attributeID) {
     // Get relevant attribute score
@@ -18,7 +19,7 @@ function updateModifiers(attributeID) {
         modValue = 2;
     }
     // Update relevant modifier value.
-    document.getElementById(attributeID + "Mod").value = modValue;
+    document.getElementsByName(attributeID + "Mod")[0].value = modValue;
 
     updateSaves();
     updateAttrBonus(attributeID); 
@@ -27,7 +28,17 @@ function updateModifiers(attributeID) {
     updateMaxProcessing();
     updateAC();
 }
-
+document.onclick = function(){
+    $(".button").on('keydown', function(event) {
+        if (event.key == "Enter") event.preventDefault();
+    });
+    $(".nosubmit").on('keydown', function(event) {
+        if (event.key == "Enter") event.preventDefault();
+    });
+    $(".ibtnDel").on('keydown', function(event) {
+        if (event.key == "Enter") event.preventDefault();
+    });
+}
 // Only allow one growth checkbox option to be ticked per row  (Character Creation).
 function checkGrowthBonus(checkID, bonusVal) {
     if (bonusVal === 1) {
@@ -107,12 +118,12 @@ function updateAttrBonus(attributeID) {
 function updateSaves() {
     // Get player level and attribute modifiers.
     var playerLevel = parseInt(document.getElementById("playerLevel").value);
-    var strMod = parseInt(document.getElementById("strMod").value);
-    var dexMod = parseInt(document.getElementById("dexMod").value);
-    var conMod = parseInt(document.getElementById("conMod").value);
-    var intMod = parseInt(document.getElementById("intMod").value);
-    var wisMod = parseInt(document.getElementById("wisMod").value);
-    var chaMod = parseInt(document.getElementById("chaMod").value);
+    var strMod = parseInt(document.getElementsByName("strMod")[0].value);
+    var dexMod = parseInt(document.getElementsByName("dexMod")[0].value);
+    var conMod = parseInt(document.getElementsByName("conMod")[0].value);
+    var intMod = parseInt(document.getElementsByName("intMod")[0].value);
+    var wisMod = parseInt(document.getElementsByName("wisMod")[0].value);
+    var chaMod = parseInt(document.getElementsByName("chaMod")[0].value);
     // Calculate physical save.
     document.getElementById("physicalSave").value =
         16 - strMod - playerLevel - conMod;
@@ -282,8 +293,7 @@ function storageColour(idNum){
     
     }
 
-//#region 2.1 Item Inventory Automation
-
+//#region 2.1 Item Inventory Automatio
 
 // Generate a new item table row.
 function addItemRow(){
@@ -291,13 +301,13 @@ function addItemRow(){
     var newChild =  $("<tr id='itemChildRow"+rowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Item Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance();"/><datalist id="itemList' + rowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" /></td>';
-        cols += '<td><input value="-" name="minusOne'+rowNum+'" readonly type="button" class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange="populateItem('+rowNum+'); calculateEncumberance();" class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
-        cols += '<td><input type="string"  id="itemPrice' + rowNum + '"/></td>';
-        cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance();" value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
-        cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance(); storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Item Info" data-name="" data-desc="" id="itemInfo'+rowNum+'"></i><input type="text" class="nosubmit" id="itemName' + rowNum + '" list="itemList' + rowNum + '" data-idNum="'+ rowNum + '" onchange="addOneItem('+rowNum+'); populateItem('+rowNum+'); calculateEncumberance(); "/><datalist id="itemList' + rowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="itemNotes' + rowNum + '" onchange=""/></td>';
+        cols += '<td><input value="-" name="minusOne'+rowNum+'" readonly type="button" class="button" onclick="decrement(itemQuantity'+rowNum+'.id)"><input type="number" value="0" min="0" onchange=" calculateEncumberance(); " class="storage" id="itemQuantity' + rowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(itemQuantity'+rowNum+'.id)"></td>';
+        cols += '<td><input type="string"  onchange="" id="itemPrice' + rowNum + '"/></td>';
+        cols += '<td><input type="number" id="itemWeight' + rowNum + '" onchange="calculateEncumberance(); " value="0" /><input type="checkbox" onchange="calculateEncumberance();" id="isBulk' + rowNum + '" value="false" title="Bulk Item?"></td>';
+        cols += '<td><select id="itemStorage' + rowNum + '" onchange="calculateEncumberance();  storageColour(itemStorage'+rowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png" name="removeItem'+rowNum+'" data-rownum="'+rowNum+'" class="ibtnDel" onclick="removeItemRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#equipmentTable").append(newRow);
          selectOptionTable(equipmentList,"#itemList" + rowNum);
@@ -314,6 +324,7 @@ function addItemRow(){
 
         document.getElementById("equipmentTable").setAttribute("data-counter",rowNum);
         $("[name='counterItem']").val(rowNum);
+        document.getElementsByName("counterItem")[0].dispatchEvent(new Event('change'));
     
     rowNum++;
 }
@@ -327,6 +338,7 @@ function removeItemRow(deleteButtonID,id){
         
     document.getElementById("itemRow"+parseInt(rowNum-1)).remove();
     $("[name='counterItem']").val(parseInt(rowNum-2));
+    document.getElementsByName("counterItem")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
         if (rowNum > 2){
 
@@ -373,16 +385,16 @@ function addWeaponRow(){
     var newChild =  $("<tr id='weaponChildRow"+weaponRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Weapon Info" data-name="" data-desc="" id="weaponInfo'+weaponRowNum+'"></i><input type="text" id="weaponName' + weaponRowNum + '" list="weaponList' + weaponRowNum + '" data-idNum="'+ weaponRowNum + '" onchange="addOneWeapon('+weaponRowNum+'); populateWeapon('+weaponRowNum+'); calculateEncumberance();"/><datalist id="weaponList' + weaponRowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="weaponNotes' + weaponRowNum + '" /></td>';
-    cols += '<td><input type="string" value="" id="weaponDamage'+weaponRowNum+'"></td>';
-    cols += '<td><input type="number" value="0" id="weaponShortRange'+weaponRowNum+'">/<input type="number" value="0" id="weaponLongRange'+weaponRowNum+'"></td>';
-    cols += '<td><input type="number" value="" id="weaponAmmoCurrent'+weaponRowNum+'">/<input type="number" value="0" id="weaponAmmoMax'+weaponRowNum+'"></td>';
-        cols += '<td><input value="-" name="minusOne'+weaponRowNum+'" readonly type="button" class="button" onclick="decrement(weaponQuantity'+weaponRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateWeapon('+weaponRowNum+'); calculateEncumberance();" class="storage" id="weaponQuantity' + weaponRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(weaponQuantity'+weaponRowNum+'.id)"></td>';
-        cols += '<td><input type="string"  id="weaponPrice' + weaponRowNum + '"/></td>';
-        cols += '<td><input type="number" id="weaponWeight' + weaponRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
-        cols += '<td><select id="weaponStorage' + weaponRowNum + '" onchange="calculateEncumberance(); storageColour(weaponStorage'+weaponRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeWeapon'+weaponRowNum+'" class="ibtnDel" data-rownum="'+weaponRowNum+'" onclick="removeWeaponRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Weapon Info" data-name="" data-desc="" id="weaponInfo'+weaponRowNum+'"></i><input type="text" class="nosubmit"  id="weaponName' + weaponRowNum + '" list="weaponList' + weaponRowNum + '" data-idNum="'+ weaponRowNum + '" onchange="addOneWeapon('+weaponRowNum+'); populateWeapon('+weaponRowNum+');  calculateEncumberance();"/><datalist id="weaponList' + weaponRowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" class="notes" onchange="" type="string" id="weaponNotes' + weaponRowNum + '" /></td>';
+    cols += '<td><input type="string" value="" onchange="" id="weaponDamage'+weaponRowNum+'"></td>';
+    cols += '<td><input type="number" value="0" onchange="" id="weaponShortRange'+weaponRowNum+'">/<input type="number" value="0" onchange="" id="weaponLongRange'+weaponRowNum+'"></td>';
+    cols += '<td><input type="number" value="" onchange="" id="weaponAmmoCurrent'+weaponRowNum+'">/<input type="number" value="0" onchange="" id="weaponAmmoMax'+weaponRowNum+'"></td>';
+        cols += '<td><input value="-" name="minusOne'+weaponRowNum+'" readonly type="button" class="button" onclick="decrement(weaponQuantity'+weaponRowNum+'.id)"><input type="number" value="0" min="0" onchange="  calculateEncumberance();" class="storage" id="weaponQuantity' + weaponRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(weaponQuantity'+weaponRowNum+'.id)"></td>';
+        cols += '<td><input type="string"  onchange="" id="weaponPrice' + weaponRowNum + '"/></td>';
+        cols += '<td><input type="number" id="weaponWeight' + weaponRowNum + '" onchange="calculateEncumberance(); " value="0" /></td>';
+        cols += '<td><select id="weaponStorage' + weaponRowNum + '" onchange=" calculateEncumberance(); storageColour(weaponStorage'+weaponRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeWeapon'+weaponRowNum+'" class="ibtnDel" data-rownum="'+weaponRowNum+'" onclick="removeWeaponRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#weaponTable").append(newRow);
     
@@ -390,6 +402,7 @@ function addWeaponRow(){
         activateRow();
         document.getElementById("weaponTable").setAttribute("data-counter",weaponRowNum);
         $("[name='counterWeapon']").val(weaponRowNum);
+        document.getElementsByName("counterWeapon")[0].dispatchEvent(new Event('change'));
         
 
     weaponRowNum++;
@@ -408,6 +421,7 @@ function removeWeaponRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"weaponRow","removeWeapon","#weaponStorage",weaponRowNum);
     document.getElementById("weaponRow"+parseInt(weaponRowNum-1)).remove();
     $("[name='counterWeapon']").val(parseInt(weaponRowNum-2));
+    document.getElementsByName("counterWeapon")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
 
     weaponRowNum--;
@@ -457,15 +471,15 @@ function addMeleeRow(){
     var newChild =  $("<tr id='meleeChildRow"+meleeRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Weapon Info" data-name="" data-desc="" id="meleeInfo'+meleeRowNum+'"></i><input type="text" id="meleeName' + meleeRowNum + '" list="meleeList' + meleeRowNum + '" data-idNum="'+ meleeRowNum + '" onchange="addOneMelee('+meleeRowNum+'); populateMelee('+meleeRowNum+'); calculateEncumberance();"/><datalist id="meleeList' + meleeRowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="meleeNotes' + meleeRowNum + '" /></td>';
-    cols += '<td><input type="string" value="" id="meleeDamage'+meleeRowNum+'"></td>';
-    cols += '<td><input type="string" value="0" id="meleeShock'+meleeRowNum+'"></td>';
-        cols += '<td><input value="-" name="minusOne'+meleeRowNum+'" readonly type="button" class="button" onclick="decrement(meleeQuantity'+meleeRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateMelee('+meleeRowNum+'); calculateEncumberance();" class="storage" id="meleeQuantity' + meleeRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(meleeQuantity'+meleeRowNum+'.id)"></td>';
-        cols += '<td><input type="string"  id="meleePrice' + meleeRowNum + '"/></td>';
-        cols += '<td><input type="number" id="meleeWeight' + meleeRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
-        cols += '<td><select id="meleeStorage' + meleeRowNum + '" onchange="calculateEncumberance(); storageColour(meleeStorage'+meleeRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeMelee'+meleeRowNum+'" class="ibtnDel" data-rownum="'+meleeRowNum+'" onclick="removeMeleeRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Weapon Info" data-name="" data-desc="" id="meleeInfo'+meleeRowNum+'"></i><input type="text" class="nosubmit"  id="meleeName' + meleeRowNum + '" list="meleeList' + meleeRowNum + '" data-idNum="'+ meleeRowNum + '" onchange="addOneMelee('+meleeRowNum+');  populateMelee('+meleeRowNum+'); calculateEncumberance();"/><datalist id="meleeList' + meleeRowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" class="notes" onchange="" type="string" id="meleeNotes' + meleeRowNum + '" /></td>';
+    cols += '<td><input type="string" value="" onchange="" id="meleeDamage'+meleeRowNum+'"></td>';
+    cols += '<td><input type="string" value="0" onchange="" id="meleeShock'+meleeRowNum+'"></td>';
+        cols += '<td><input value="-" name="minusOne'+meleeRowNum+'" readonly type="button" class="button" onclick="decrement(meleeQuantity'+meleeRowNum+'.id)"><input type="number" value="0" min="0" onchange=" calculateEncumberance();" class="storage" id="meleeQuantity' + meleeRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(meleeQuantity'+meleeRowNum+'.id)"></td>';
+        cols += '<td><input type="string" onchange="" id="meleePrice' + meleeRowNum + '"/></td>';
+        cols += '<td><input type="number" id="meleeWeight' + meleeRowNum + '" onchange="calculateEncumberance(); " value="0" /></td>';
+        cols += '<td><select id="meleeStorage' + meleeRowNum + '" onchange="calculateEncumberance();  storageColour(meleeStorage'+meleeRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeMelee'+meleeRowNum+'" class="ibtnDel" data-rownum="'+meleeRowNum+'" onclick="removeMeleeRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#meleeTable").append(newRow);
     
@@ -473,6 +487,7 @@ function addMeleeRow(){
         activateRow();
         document.getElementById("meleeTable").setAttribute("data-counter",meleeRowNum);
         $("[name='counterMelee']").val(meleeRowNum);
+        document.getElementsByName("counterMelee")[0].dispatchEvent(new Event('change'));
         
 
     meleeRowNum++;
@@ -490,6 +505,7 @@ function removeMeleeRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"meleeRow","removeMelee","#meleeStorage",meleeRowNum);
     document.getElementById("meleeRow"+parseInt(meleeRowNum-1)).remove();
     $("[name='counterMelee']").val(parseInt(meleeRowNum-2));
+    document.getElementsByName("counterMelee")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
     meleeRowNum--;
     }
@@ -537,15 +553,15 @@ function addArmourRow(){
     var newChild =  $("<tr id='armourChildRow"+armourRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Armour Info" data-name="" data-desc="" id="armourInfo'+armourRowNum+'"></i><input type="text" id="armourName' + armourRowNum + '" list="armourList' + armourRowNum + '" data-idNum="'+ armourRowNum + '" onchange="addOneArmour('+armourRowNum+'); populateArmour('+armourRowNum+'); calculateEncumberance(); updateAC();"/><datalist id="armourList' + armourRowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="text" id="armourNotes' + armourRowNum + '" /></td>';
-    cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="AC' + armourRowNum +'"></td>';
-    cols += '<td><input type="number" value="0" onchange="calculateEncumberance(); updateAC();" id="shieldBonus' + armourRowNum +'"></td>';
-        cols += '<td><input value="-" name="minusOne'+armourRowNum+'" readonly type="button" class="button" onclick="decrement(armourQuantity'+armourRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateArmour('+armourRowNum+'); calculateEncumberance();" class="storage" id="armourQuantity' + armourRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(armourQuantity'+armourRowNum+'.id)"></td>';
-        cols += '<td><input type="string"  id="armourPrice' + armourRowNum + '"/></td>';
-        cols += '<td><input type="number" id="armourWeight' + armourRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
-        cols += '<td><select id="armourStorage' + armourRowNum + '" onchange="calculateEncumberance(); updateAC(); storageColour(armourStorage'+armourRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeArmour'+armourRowNum+'" class="ibtnDel" data-rownum="'+armourRowNum+'" onclick="removeArmourRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Armour Info" data-name="" data-desc="" id="armourInfo'+armourRowNum+'"></i><input type="text" class="nosubmit"  id="armourName' + armourRowNum + '" list="armourList' + armourRowNum + '" data-idNum="'+ armourRowNum + '" onchange="addOneArmour('+armourRowNum+'); populateArmour('+armourRowNum+');  calculateEncumberance(); updateAC();"/><datalist id="armourList' + armourRowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" class="notes" onchange="" type="text" id="armourNotes' + armourRowNum + '" /></td>';
+    cols += '<td><input type="number" value="0" onchange="calculateEncumberance();  updateAC();" id="AC' + armourRowNum +'"></td>';
+    cols += '<td><input type="number" value="0" onchange="calculateEncumberance();  updateAC();" id="shieldBonus' + armourRowNum +'"></td>';
+        cols += '<td><input value="-" name="minusOne'+armourRowNum+'" readonly type="button" class="button" onclick="decrement(armourQuantity'+armourRowNum+'.id)"><input type="number" value="0" min="0" onchange=" calculateEncumberance();" class="storage" id="armourQuantity' + armourRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(armourQuantity'+armourRowNum+'.id)"></td>';
+        cols += '<td><input type="string"  onchange="" id="armourPrice' + armourRowNum + '"/></td>';
+        cols += '<td><input type="number" id="armourWeight' + armourRowNum + '" onchange="calculateEncumberance(); " value="0" /></td>';
+        cols += '<td><select id="armourStorage' + armourRowNum + '" onchange="calculateEncumberance();  updateAC(); storageColour(armourStorage'+armourRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Grafted</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeArmour'+armourRowNum+'" class="ibtnDel" data-rownum="'+armourRowNum+'" onclick="removeArmourRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#armourTable").append(newRow);
     
@@ -553,7 +569,7 @@ function addArmourRow(){
         activateRow();
         document.getElementById("armourTable").setAttribute("data-counter",armourRowNum);
         $("[name='counterArmour']").val(armourRowNum);
-        
+        document.getElementsByName("counterArmour")[0].dispatchEvent(new Event('change'));
 
     armourRowNum++;
 
@@ -570,6 +586,7 @@ function removeArmourRow(deleteButtonID,id){
          overwriteRows(deleteButtonID,id,"armourRow","removeArmour","#armourStorage",armourRowNum);
     document.getElementById("armourRow"+parseInt(armourRowNum-1)).remove();
     $("[name='counterArmour']").val(parseInt(armourRowNum-2));
+    document.getElementsByName("counterArmour")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
     armourRowNum--;
     }
@@ -646,7 +663,7 @@ function updateAC(){
         $("#ACBonus").val(minAC + parseInt(document.getElementById("dexMod").value));
     }
     else{
-        $("#ACBonus").val(ac + shieldBonus + parseInt(document.getElementById("dexMod").value));
+        $("#ACBonus").val(ac + shieldBonus + parseInt(document.getElementsByName("dexMod")[0].value));
     }
 }
 //#endregion
@@ -659,21 +676,21 @@ function addDroneRow(){
     var newChild =  $("<tr id='droneChildRow"+droneRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Drone Info" data-name="" data-desc="" id="droneInfo'+droneRowNum+'"></i><input type="text" id="droneName' + droneRowNum + '" list="droneList' + droneRowNum + '" data-idNum="'+ droneRowNum + '" onchange="addOneDrone('+droneRowNum+'); populateDrone('+droneRowNum+'); calculateEncumberance();"/><datalist id="droneList' + droneRowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="droneNotes' + droneRowNum + '" /></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Drone Info" data-name="" data-desc="" id="droneInfo'+droneRowNum+'"></i><input type="text" class="nosubmit"  id="droneName' + droneRowNum + '" list="droneList' + droneRowNum + '" data-idNum="'+ droneRowNum + '" onchange="addOneDrone('+droneRowNum+');  populateDrone('+droneRowNum+'); calculateEncumberance();"/><datalist id="droneList' + droneRowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" onchange="" class="notes" type="string" id="droneNotes' + droneRowNum + '" /></td>';
     
-    cols += '<td><input type="string"  id="dronePrice' + droneRowNum + '"/></td>';
-    cols += '<td><input type="number"  id="droneFittings' + droneRowNum + '"/></td>';
-    cols += '<td><input type="number"  id="droneAC' + droneRowNum + '"/></td>';
-    cols += '<td><input value="-" name="minusOne'+droneRowNum+'" readonly type="button" class="button" onclick="decrement(droneQuantity'+droneRowNum+'.id)"><input type="number" value="0" min="0" onchange="populateDrone('+droneRowNum+'); calculateEncumberance();" class="storage" id="droneQuantity' + droneRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(droneQuantity'+droneRowNum+'.id)"></td>';
+    cols += '<td><input type="string"  onchange="" id="dronePrice' + droneRowNum + '"/></td>';
+    cols += '<td><input type="number"  onchange="" id="droneFittings' + droneRowNum + '"/></td>';
+    cols += '<td><input type="number" onchange="" id="droneAC' + droneRowNum + '"/></td>';
+    cols += '<td><input value="-" name="minusOne'+droneRowNum+'" readonly type="button" class="button" onclick="decrement(droneQuantity'+droneRowNum+'.id)"><input type="number" value="0" min="0" onchange=" calculateEncumberance();" class="storage" id="droneQuantity' + droneRowNum + '"/><input value="+" readonly type="button" class="button" onclick="increment(droneQuantity'+droneRowNum+'.id)"></td>';
         
-        cols += '<td><input type="number" id="droneWeight' + droneRowNum + '" onchange="calculateEncumberance();" value="0" /></td>';
-    cols += '<td><input type="number"  id="droneHP' + droneRowNum + '"/></td>';
-    cols += '<td><input type="string"  id="droneRange' + droneRowNum + '"/></td>';
+        cols += '<td><input type="number" id="droneWeight' + droneRowNum + '" onchange="calculateEncumberance(); " value="0" /></td>';
+    cols += '<td><input type="number"  onchange="" id="droneHP' + droneRowNum + '"/></td>';
+    cols += '<td><input type="string"  onchange="" id="droneRange' + droneRowNum + '"/></td>';
     
         
-        cols += '<td><select id="droneStorage' + droneRowNum + '" onchange="calculateEncumberance(); storageColour(droneStorage'+droneRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeDrone'+droneRowNum+'" class="ibtnDel" data-rownum="'+droneRowNum+'" onclick="removeDroneRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><select id="droneStorage' + droneRowNum + '" onchange="calculateEncumberance();  storageColour(droneStorage'+droneRowNum+')" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeDrone'+droneRowNum+'" class="ibtnDel" data-rownum="'+droneRowNum+'" onclick="removeDroneRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#droneTable").append(newRow);
     
@@ -681,6 +698,7 @@ function addDroneRow(){
         activateRow();
         document.getElementById("droneTable").setAttribute("data-counter",droneRowNum);
         $("[name='counterDrone']").val(droneRowNum);
+        document.getElementsByName("counterDrone")[0].dispatchEvent(new Event('change'));
         
 
     droneRowNum++;
@@ -698,6 +716,7 @@ function removeDroneRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"droneRow","removeDrone","#droneStorage",droneRowNum);
     document.getElementById("droneRow"+parseInt(droneRowNum-1)).remove();
     $("[name='counterDrone']").val(parseInt(droneRowNum-2));
+    document.getElementsByName("counterDrone")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
     droneRowNum--;
     }
@@ -745,6 +764,8 @@ function removePsiRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"psiRow","removePsi","#psiStorage",rowNumPsi);
     document.getElementById("psiRow"+parseInt(rowNumPsi-1)).remove();
     $("[name='counterPsi']").val(parseInt(rowNumPsi-2));
+    document.getElementsByName("counterPsi")[0].dispatchEvent(new Event('change'));
+
 
     rowNumPsi--;
     }
@@ -801,7 +822,7 @@ function updateEffortPool(){
     for (var i = 1; i <= parseInt(document.getElementById("counterPsi").value); i++){
         effortPool = effortPool - document.getElementById("psiCommit"+ i).value;     
     }
-    effortPool = effortPool - (parseInt(document.getElementById("biopsiCoreEffort").value) + parseInt(document.getElementById("metapsiCoreEffort").value) + parseInt(document.getElementById("precogCoreEffort").value) + parseInt(document.getElementById("telekinesisCoreEffort").value) + parseInt(document.getElementById("telepathCoreEffort").value) + parseInt(document.getElementById("teleportCoreEffort").value));
+    effortPool = effortPool - (parseInt(document.getElementsByName("biopsiCoreEffort")[0].value) + parseInt(document.getElementsByName("metapsiCoreEffort")[0].value) + parseInt(document.getElementsByName("precogCoreEffort")[0].value) + parseInt(document.getElementsByName("telekinesisCoreEffort")[0].value) + parseInt(document.getElementsByName("telepathCoreEffort")[0].value) + parseInt(document.getElementsByName("teleportCoreEffort")[0].value));
     document.getElementById("currentEP").value = effortPool; // update current Effort Pool.
 }
 
@@ -810,16 +831,17 @@ function addPsiRow(){
      var newRow = $("<tr id='psiRow"+rowNumPsi+"' value ='"+rowNumPsi+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+')"/><datalist id="psiList' + rowNumPsi + '"></datalist></td>';
-        cols += '<td><input value="-" name="minusOne'+rowNumPsi+'" readonly type="button" class="button" onclick="decrement(psiCommit'+rowNumPsi+'.id)"><input type="number" value="0" min="0" max="99" onchange="populatePsi('+rowNumPsi+'); updateEffortPool();" id="psiCommit' + rowNumPsi + '" readonly/><input value="+" readonly type="button" class="button" onclick="increment(psiCommit'+rowNumPsi+'.id)"></td>';
-        cols += '<td><input type="string" value="-" min="0" onchange="populatePsi('+rowNumPsi+');" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" class="nosubmit"  id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+'); "/><datalist id="psiList' + rowNumPsi + '"></datalist></td>';
+        cols += '<td><input value="-" name="minusOne'+rowNumPsi+'" readonly type="button" class="button" onclick="decrement(psiCommit'+rowNumPsi+'.id)"><input type="number" value="0" min="0" max="99" onchange=" updateEffortPool();" id="psiCommit' + rowNumPsi + '" readonly/><input value="+" readonly type="button" class="button" onclick="increment(psiCommit'+rowNumPsi+'.id)"></td>';
+        cols += '<td><input type="string" value="-" min="0" onchange="" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#psiTable").append(newRow);      
          selectOptionTable(psiTechniqueList,"#psiList" + rowNumPsi);
         activateRow();
         document.getElementById("psiTable").setAttribute("data-counter",rowNumPsi);
         $("[name='counterPsi']").val(rowNumPsi);
+        document.getElementsByName("counterPsi")[0].dispatchEvent(new Event('change'));
 
     rowNumPsi++;
 }
@@ -834,6 +856,7 @@ function removeRoutineRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"routineRow","removeRoutine","",rowNumRoutine);
     document.getElementById("routineRow"+parseInt(rowNumRoutine-1)).remove();
     $("[name='counterRoutine']").val(parseInt(rowNumRoutine-2));
+    document.getElementsByName("counterRoutine")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
 
     rowNumRoutine--;
@@ -924,11 +947,11 @@ function addRoutineRow(){
      var newRow = $("<tr id='routineRow"+rowNumRoutine+"' value ='"+rowNumRoutine+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="routineInfo'+rowNumRoutine+'"></i><input type="text" id="routineName' + rowNumRoutine + '" list="routineList' + rowNumRoutine + '" data-idNum="'+ rowNumRoutine + '" onchange="populateRoutine('+rowNumRoutine+')"/><datalist id="routineList' + rowNumRoutine + '"></datalist></td>';
-        cols += '<td><input type="number" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineCommit' + rowNumRoutine + '" readonly/></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="routineInfo'+rowNumRoutine+'"></i><input type="text" class="nosubmit"  id="routineName' + rowNumRoutine + '" list="routineList' + rowNumRoutine + '" data-idNum="'+ rowNumRoutine + '" onchange="populateRoutine('+rowNumRoutine+'); "/><datalist id="routineList' + rowNumRoutine + '"></datalist></td>';
+        cols += '<td><input type="number" value="0" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineCommit' + rowNumRoutine + '" readonly/></td>';
     cols += '<td><input type="string" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineAction' + rowNumRoutine + '" readonly/></td>';
         
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#routineTable").append(newRow);
         
@@ -936,6 +959,7 @@ function addRoutineRow(){
         activateRow();
         document.getElementById("equipmentTable").setAttribute("data-counter",rowNumRoutine);
         $("[name='counterRoutine']").val(rowNumRoutine);
+        document.getElementsByName("counterRoutine")[0].dispatchEvent(new Event('change'));
         
 
     rowNumRoutine++;
@@ -984,17 +1008,17 @@ function addShellRow(){
     var newChild =  $("<tr id='shellChildRow"+shellRowNum+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="shellInfo'+shellRowNum+'"></i><input type="text" id="shellName' + shellRowNum + '" list="shellList' + shellRowNum + '" data-idNum="'+ shellRowNum + '" onchange="populateShell('+shellRowNum+'); updateAC();"/><datalist id="shellList' + shellRowNum + '"></datalist></td>';
-    cols += '<td><textarea rows="1" style="height:1em;" class="notes" type="string" id="shellNotes' + shellRowNum + '" /></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="shellInfo'+shellRowNum+'"></i><input type="text" class="nosubmit"  id="shellName' + shellRowNum + '" list="shellList' + shellRowNum + '" data-idNum="'+ shellRowNum + '" onchange="populateShell('+shellRowNum+');  updateAC();"/><datalist id="shellList' + shellRowNum + '"></datalist></td>';
+    cols += '<td><textarea rows="1" style="height:1em;" onchange="" class="notes" type="string" id="shellNotes' + shellRowNum + '" /></td>';
    
-    cols += '<td><input type="number" value="0" onchange=" updateShellStats();" id="shellStrMod' + shellRowNum +'"></td>';
-    cols += '<td><input type="number" value="0" onchange=" updateShellStats();" id="shellDexMod' + shellRowNum +'"></td>';
-    cols += '<td><input type="number" value="0" onchange=" updateShellStats();" id="shellConMod' + shellRowNum +'"></td>';
-     cols += '<td><input type="number" value="0" onchange="updateAC(); updateShellStats();" id="shellAC' + shellRowNum +'"></td>';
+    cols += '<td><input type="number" value="0" onchange=" updateShellStats(); " id="shellStrMod' + shellRowNum +'"></td>';
+    cols += '<td><input type="number" value="0" onchange=" updateShellStats(); " id="shellDexMod' + shellRowNum +'"></td>';
+    cols += '<td><input type="number" value="0" onchange=" updateShellStats(); " id="shellConMod' + shellRowNum +'"></td>';
+     cols += '<td><input type="number" value="0" onchange="updateAC(); updateShellStats(); " id="shellAC' + shellRowNum +'"></td>';
     
-        cols += '<td><input type="string"  id="shellPrice' + shellRowNum + '"/></td>';
-        cols += '<td><select id="shellStorage' + shellRowNum + '" onchange="updateAC(); updateShellStats(); storageColour(shellStorage'+shellRowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png" id="removeShell'+shellRowNum+'" class="ibtnDel" data-rownum="'+shellRowNum+'" onclick="removeShellRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="string" onchange="" id="shellPrice' + shellRowNum + '"/></td>';
+        cols += '<td><select id="shellStorage' + shellRowNum + '" onchange="updateAC();  updateShellStats(); storageColour(shellStorage'+shellRowNum+');" class="storage"> <option>-</option> <option>Readied</option> <option>Backpack</option><option>Storage</option></select></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeShell'+shellRowNum+'" class="ibtnDel" data-rownum="'+shellRowNum+'" onclick="removeShellRow(this.dataset.rownum,this.id);" value="-"></td>';
         newRow.append(cols);
         $("#shellTable").append(newRow);
     
@@ -1002,6 +1026,7 @@ function addShellRow(){
         activateRow();
         document.getElementById("shellTable").setAttribute("data-counter",shellRowNum);
         $("[name='counterShell']").val(shellRowNum);
+        document.getElementsByName("counterShell")[0].dispatchEvent(new Event('change'));
         
 
     shellRowNum++;
@@ -1019,6 +1044,7 @@ function removeShellRow(deleteButtonID,id){
         overwriteRows(deleteButtonID,id,"shellRow","removeShell","#shellStorage",shellRowNum);
     document.getElementById("shellRow"+parseInt(shellRowNum-1)).remove();
     $("[name='counterShell']").val(parseInt(shellRowNum-2));
+    document.getElementsByName("counterShell")[0].dispatchEvent(new Event('change'));
     calculateEncumberance();
 
     shellRowNum--;
@@ -4279,6 +4305,7 @@ function increment(id) {
     // Trigger associated 'onchange' action if exists.
     if (document.getElementById(id).getAttribute("onchange") != null) {
         document.getElementById(id).onchange();
+        document.getElementById(id).dispatchEvent(new Event('change'))
     }
 }
 
@@ -4296,6 +4323,7 @@ function decrement(id) {
     // Trigger associated 'onchange' action if exists.
     if (document.getElementById(id).getAttribute("onchange") != null) {
         document.getElementById(id).onchange();
+        document.getElementById(id).dispatchEvent(new Event('change'))
     }
 }
 //#endregion
@@ -4320,7 +4348,15 @@ window.alert = function (msg, callback) {
 // Add listener for when our confirmation button is clicked.
 $(function () {
     
-    $("#closeAlert").click(function () {
+    $('input[name="closeAlert"]').click(function () {
+        $(".customAlert").css("animation", "fadeOut 0.3s linear");
+        setTimeout(function () {
+            $(".customAlert").css("animation", "none");
+            $(".customAlert").css("display", "none");
+            document.getElementsByClassName("overlay")[0].style.display = "none";
+        }, 300);
+    });
+    $('input[name="warningSubmit"]').click(function () {
         $(".customAlert").css("animation", "fadeOut 0.3s linear");
         setTimeout(function () {
             $(".customAlert").css("animation", "none");
@@ -4334,6 +4370,11 @@ $(function () {
 // ================================================================================
 
 //#region 14. Save & Load Character Data
+
+
+
+
+
 
 // Save player data from all unique-ID elements to a '.swn' text file and download to local disk. 
 function save_character(){
@@ -4365,7 +4406,9 @@ function save_character(){
       }
     }
   }
+  console.log("data: " + data);
     data = JSON.stringify(data[formIdentifier], null, 2);
+   
   type = 'application/json';
     
 
@@ -4402,6 +4445,7 @@ function load_character(e) {
   }
 
   // Load character
+
   var file = e.target.files[0];
   if (!file) {
     return;
@@ -4414,11 +4458,12 @@ function load_character(e) {
     var contents = e.target.result;
 
     // Set size of dynamic Inventory tables
-    var savedData = JSON.parse(contents);
+    var items = JSON.parse(contents);
+    console.log("items: " + JSON.parse(contents));
     while (rowNum > 1) {
       removeItemRow();
     }
-    while (parseInt($("[name='counterItem']").val()) < parseInt(savedData.counter)) {
+    while (parseInt($("[name='counterItem']").val()) < parseInt(items.counter)) {
         addItemRow();
     }
       
@@ -4426,7 +4471,7 @@ function load_character(e) {
     while (weaponRowNum > 1) {
       removeWeaponRow();
     }
-    while (parseInt($("[name='counterWeapon']").val()) < parseInt(savedData.counterWeapon)) {
+    while (parseInt($("[name='counterWeapon']").val()) < parseInt(items.counterWeapon)) {
         addWeaponRow();
     }
       
@@ -4434,7 +4479,7 @@ function load_character(e) {
     while (meleeRowNum > 1) {
       removeMeleeRow();
     }
-    while (parseInt($("[name='counterMelee']").val()) < parseInt(savedData.counterMelee)) {
+    while (parseInt($("[name='counterMelee']").val()) < parseInt(items.counterMelee)) {
         addMeleeRow();
     } 
       
@@ -4442,7 +4487,7 @@ function load_character(e) {
     while (armourRowNum > 1) {
       removeArmourRow();
     }
-    while (parseInt($("[name='counterArmour']").val()) < parseInt(savedData.counterArmour)) {
+    while (parseInt($("[name='counterArmour']").val()) < parseInt(items.counterArmour)) {
         addArmourRow();
     } 
       
@@ -4450,7 +4495,7 @@ function load_character(e) {
       while (rowNumPsi > 1) {
       removePsiRow();
     }
-    while (parseInt($("[name='counterPsi']").val()) < parseInt(savedData.counterPsi)) {
+    while (parseInt($("[name='counterPsi']").val()) < parseInt(items.counterPsi)) {
         addPsiRow();
     }
       
@@ -4458,7 +4503,7 @@ function load_character(e) {
       while (rowNumRoutine > 1) {
       removeRoutineRow();
     }
-    while (parseInt($("[name='counterRoutine']").val()) < parseInt(savedData.counterRoutine)) {
+    while (parseInt($("[name='counterRoutine']").val()) < parseInt(items.counterRoutine)) {
         addRoutineRow();
     }
       
@@ -4466,7 +4511,7 @@ function load_character(e) {
       while (shellRowNum > 1) {
       removeShellRow();
     }
-    while (parseInt($("[name='counterShell']").val()) < parseInt(savedData.counterShell)) {
+    while (parseInt($("[name='counterShell']").val()) < parseInt(items.counterShell)) {
         addShellRow();
     }
       
@@ -4474,7 +4519,7 @@ function load_character(e) {
       while (droneRowNum > 1) {
       removeDroneRow();
     }
-    while (parseInt($("[name='counterDrone']").val()) < parseInt(savedData.counterDrone)) {
+    while (parseInt($("[name='counterDrone']").val()) < parseInt(items.counterDrone)) {
         addDroneRow();
     }
 
@@ -4489,15 +4534,15 @@ function load_character(e) {
     let formElements = form.elements;
 
     // Display file content
-    savedData = JSON.parse(contents); // get and parse the saved data from localStorage
+    items = JSON.parse(contents); // get and parse the saved data from localStorage
     for (const element of formElements) {
-      if (element.id in savedData) {
+      if (element.id in items) {
         if (element.type == 'checkbox') {
 
-          var checked = (savedData[element.id] == 'checked');
+          var checked = (items[element.id] == 'checked');
           $(element).prop("checked", checked);
         } else {
-          element.value = savedData[element.id]; 
+          element.value = items[element.id]; 
             element.dispatchEvent(new Event('input', { bubbles: true }));
             
             if (element.getAttribute("onchange") != null) {
@@ -4638,15 +4683,130 @@ function hideTabs(){
   }
 }
 
+// Hide all character sheet tab contents. 
+function hidePages(){
+    var i;
+    // Get all elements with class="tabcontent" and hide them
+  var pagecontent = document.getElementsByClassName("pagecontent");
+  for (i = 0; i < pagecontent.length; i++) {
+    pagecontent[i].style.display = "none";
+  }
+  document.getElementsByName("tabUI")[0].style.display = "none"; // Hide C
+  // Get all elements with class="tablinks" and remove the class "active"
+  var pagelinks = document.getElementsByClassName("pagelinks");
+  for (i = 0; i < pagelinks.length; i++) {
+    pagelinks[i].className = pagelinks[i].className.replace(" active", "");
+  }
+}
+
 // Reveal selected tab contents and hide all other tabs' contents.
-function openTab(evt, cityName) {
+function openTab(evt, tabName) {
   hideTabs();
 
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
+  document.getElementsByName(tabName)[0].style.display = "block";
   evt.currentTarget.className += " active";
     
 }
+var lastClick = 0;
+var delay = 20;
+// function updateCharData(id){
+//     console.log(id);
+//     if (lastClick >= (Date.now() - delay))
+//     return;
+//   lastClick = Date.now();
+
+//     console.log("updating: " + id);
+//     var element = document.getElementById(id);
+//     var index = -1;
+//     for (var i = 0; i < DBItems.length; i++){
+//         console.log("DBItem: " + DBItems[i].itemId)
+//         if (DBItems[i].itemId === id){
+//             index = i;
+//             i = DBItems.length;
+//         }
+//     }
+//     if (index == -1){
+//         if (element.type == 'checkbox') {
+          
+//             var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
+//             if (!(typeof checked === 'string' || checked instanceof String)){
+//                 console.log(checked)
+//             }
+    
+//             userbase.insertItem({
+//                 databaseName: DBName,
+//                 item: { "value": checked },
+//                 itemId: element.id
+//               }).then(() => {
+//                 // item inserted
+//                 console.log(element.id + " inserted");
+//               }).catch((e) => console.error(e))
+//           } else {
+//             var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
+//             if (!(typeof element.value === 'string' || element.value instanceof String)){
+//                 console.log(element.value)
+//             }
+    
+//               var id = element.id
+//               var value = element.value;
+//             userbase.insertItem({
+//                 databaseName: DBName,
+//                 item: { 'value': value },
+//                 itemId: id
+//               }).then(() => {
+//                 // item inserted
+//                 console.log(element.id + " inserted2");
+//               }).catch((e) => console.error(e))
+//           }
+
+// } else {
+//     if (element.type == 'checkbox') {
+          
+//         var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
+//         if (!(typeof checked === 'string' || checked instanceof String)){
+//             console.log(checked)
+//         }
+
+//         userbase.updateItem({
+//             databaseName: DBName,
+//             item: { "value": checked },
+//             itemId: element.id
+//           }).then(() => {
+//             // item inserted
+//             console.log(element.id);
+//           }).catch((e) => console.error(e))
+//       } else {
+//         var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
+//         if (!(typeof element.value === 'string' || element.value instanceof String)){
+//             console.log(element.value)
+//         }
+
+//           var id = element.id
+//           var value = element.value;
+//         userbase.updateItem({
+//             databaseName: DBName,
+//             item: { 'value': value },
+//             itemId: id
+//           }).then(() => {
+//             // item inserted
+//             console.log(element.id);
+//           }).catch((e) => console.error(e))
+//       }
+// }
+// }
+
+function openPage(evt, menuName) {
+    hidePages();
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementsByName(menuName)[0].style.display = "inline-block";
+    if (menuName == "charactersheet"){
+        document.getElementsByName("tabUI")[0].style.display = "flex"; // show sheet tabs
+    }
+    evt.currentTarget.className += " active";
+      
+  }
 //#endregion
 
 // ================================================================================
@@ -4669,18 +4829,47 @@ function loadSector(url){
 // ================================================================================
 
 //#region 18. Initialise Page State
+// function addTodoHandler(e) {
+//     e.preventDefault()
 
+//     const todo = document.getElementById('add-todo').value
+
+//     userbase.insertItem({ databaseName: 'charData', item: { 'todo': todo }})
+//       .then(() => document.getElementById('add-todo').value = '')
+//       .catch((e) => document.getElementById('add-todo-error').innerHTML = e)
+//   }
+
+//   function saveHandler(e,data) {
+//     e.preventDefault()
+
+//     userbase.insertItem({ databaseName: 'charData', item: { 'character': data }, itemId: data})
+//       .catch((e) => document.getElementById('save-error').innerHTML = e)
+//   }
 // Initialise page on ready.
 $(document).ready(function () {
-
+    let formElements = form.elements;
+    
+  for (const element of formElements) {
+    if (element.id.length > 0) {
+        // console.log("add event to: " + element.id)
+        element.addEventListener(
+            'change',
+            function() {  },
+            false
+         );
+    }
+}
     $('.ibtnDel').click(function(e){e.preventDefault();}).click();
     $('.tablinks').click(function(e){e.preventDefault();}).click();
+    hidePages();
+    $('.background').show();
+    $('.inputField').hide();
     hideTabs();
-    typeWriter();
+    //typeWriter();
     var delayInMilliseconds = 0; //4.5 seconds
  setTimeout(function() {
   //your code to be executed after delay second
-     $('#loading').hide();
+     $('div[name="loading"]').hide();
      
     //$(".message").text("WECOME BACK USER#404\n---\nARE YOU READY TO BEGIN?");
                 //$(".messageHeader").text("E.I.N.S.");
@@ -4693,11 +4882,13 @@ $(document).ready(function () {
 //application code
 userbase.init({ appId: 'cb733a2c-a27f-4807-848b-c075c4ce8f31' })
 
-
-
-document.getElementById('db-loading').style.display = 'none'
+document.getElementsByClassName('sideMenuPanel')[0].style.display = 'none'
+console.log(document.getElementsByName('db-loading')[0]);
+//document.getElementsByName('db-loading')[0].style.display = 'none'
 document.getElementsByName('loginSubmit')[0].addEventListener('click', handleLogin)
 document.getElementsByName('signUpSubmit')[0].addEventListener('click', handleSignUp)
+console.log(document.getElementsByName("abcd")[0]);
+//document.getElementsByName("abcd")[0].addEventListener('submit', addTodoHandler)
 
 charImage("./img/Default_Avatar.webp");
    
@@ -4889,15 +5080,15 @@ for(i=1;i<6;i++){
      
     
         // Extendable Tables
-    $("#addrow").on("click", addItemRow);
-    $("#addrowpsi").on("click", addPsiRow);
-    $("#addrow-weapon").on("click", addWeaponRow);
-     $("#addrow-melee").on("click", addMeleeRow);
-    $("#addrow-armour").on("click", addArmourRow);
+    $(".addrow").on("click", addItemRow);
+    $(".addrowpsi").on("click", addPsiRow);
+    $(".addrow-weapon").on("click", addWeaponRow);
+     $(".addrow-melee").on("click", addMeleeRow);
+    $(".addrow-armour").on("click", addArmourRow);
     
-    $("#addrow-routine").on("click", addRoutineRow);
-    $("#addrow-shell").on("click", addShellRow);
-    $("#addrow-drone").on("click", addDroneRow);
+    $(".addrow-routine").on("click", addRoutineRow);
+    $(".addrow-shell").on("click", addShellRow);
+    $(".addrow-drone").on("click", addDroneRow);
 
     // Add Alert Info box on info button click.
     $(".interactInfo").click(function () {
@@ -4928,7 +5119,7 @@ function handleForm(event) { event.preventDefault(); }
 form.addEventListener('submit', handleForm);
 
 var i = 0;
-var speed = 0.001;
+var speed = 0.0005;
  // Load up message
 var bootMessage = 'Boot Sequence Initialised...\n|Enabling /etc/fstab swaps                              [ OK ]\n|INIT: Entering runlevel: 3                                   \n|Entering non-interactive startup                             \n|Applying Intel CPU microcode update:                   [ OK ]\n|Checking for hardware changes                          [ OK ]\n|Bringing up interface eth0:                            [ OK ]\n|Determining IP information for eth0... done.                 \n\n|Staring auditd:                                        [ OK ]\n|Starting restorecond:                                  [ OK ]\n|Starting system logger:                                [ OK ]\n|Starting kernel logger:                                [ OK ]\n|Starting irqbalance:                                   [ OK ]\n|Starting mcstransd:                                    [ OK ]\n|Starting portmap:                                      [ OK ]\n|Starting settroubleshootd:                             [ OK ]\n|Starting NFS statd:                                    [ OK ]\n|Starting mdmonitor:                                    [ OK ]\n|Starting RPC idmapd:                                   [ OK ]\n|Starting system message bus:                           [ OK ]\n|Starting Bluetooth Services:                           [ OK ]\n|Starting other filesystems:                            [ OK ]\n|Starting PC/SC smart card daemon (pcscd):              [ OK ]\n|Starting hidd:                                         [ OK ]\nBoot Sequence Successful!\nStatus:...ONLINE\n\nVERFIYING USER CREDENTIALS...\nUSER IDENTIFIED\n"WELCOME"';
 
@@ -4939,9 +5130,8 @@ function typeWriter() {
     var consoleText = document.getElementsByClassName("bootLang")[0];
   if (i < messageLength) {
     consoleText.innerHTML += bootMessage.charAt(i);
-    consoleText.innerHTML += bootMessage.charAt(i+1);
-      consoleText.innerHTML += bootMessage.charAt(i+2);
-    i +=3;
+
+    i += 1;
     setTimeout(typeWriter, speed);
       
   }
@@ -4958,7 +5148,7 @@ function clearSelection(){
 
 // Navigate to relevant help text paragraph
 function navigateToHelpText(targetId){
-    var targetTab = document.getElementById("helpTabOpen");
+    var targetTab = document.getElementsByName("helpTabOpen")[0];
     targetTab.click();
     
     var target = document.getElementsByName(targetId)[0];
@@ -5062,7 +5252,45 @@ function SelectHasValue(select, value) {
         return false;
     }
 }
+function checkCharName(){
+    console.log("PING")
+    var charName = document.getElementById("playerName").value
+    if(charName === ""){
+        $(".message").text("Please Enter A Name!");
+                $(".messageHeader").text("New Character");
+                $('.inputField').show();
+                openAlert();
+            
+    }
+}
 
+function submitWarningName(){
+    var newName = document.getElementsByName("warningInput")[0].value
+            document.getElementById("playerName").value = newName;
+            document.getElementById("playerName").innerHTML = newName;
+            document.getElementById("playerName").onchange();
+            $('.inputField').hide();
+}
+function findItemVal(id){
+var index = -1;
+for (var i=0; i < DBItems.length; i++){
+    // console.log(DBItems[i].itemId);
+    if(DBItems[i].itemId == id){
+        index = i;
+    }
+}
+    if (index !== -1){
+        console.log("item value: " + DBItems[index].item.value);
+        return DBItems[index].item.value;
+    }
+    else{
+        console.log("SEARCH FAILED")
+        return index
+    }
+    
+
+
+}
  // Clear select options list.
 function removeOptions(parent) {
     while (parent.firstChild) {
@@ -5077,7 +5305,9 @@ function removeOptions(parent) {
     document.getElementsByClassName("tab")[0].style.width = "calc(100% - 200px)";
     document.getElementsByClassName("background")[0].style.width = "calc(100% - 200px)";
   }
-  
+  function updateHeaderName(charName){
+    document.getElementsByClassName('pageTitle')[0].innerText = charName;
+  }
   function menuClose() {
     document.getElementById("myMenuBar").style.width = "0px";
     document.getElementsByClassName("tab")[0].style.marginLeft = "0px";
@@ -5102,7 +5332,7 @@ function removeOptions(parent) {
     $(".customAlert").css("display", "inline");
     document.getElementsByClassName("overlay")[0].style.display = "block";
 } 
-
+var user = "";
 // Handles login form submission
 function handleLogin(e) {
     console.log("Login");
@@ -5110,46 +5340,571 @@ e.preventDefault()
 
 const username = document.getElementById('login-username').value
 const password = document.getElementById('login-password').value
-
+user = username;
 userbase.signIn({ username, password, rememberMe: 'none' })
-.then((user) => showTodos(username))
+.then((user) => ShowPage(username))
 .catch((e) => document.getElementById('login-error').innerHTML = e)
 
 }
 // Handles signup form submission
 function handleSignUp(e) {
     console.log("Signup");
-e.preventDefault()
+e.preventDefault();
 
 const username = document.getElementById('signup-username').value 
 const password = document.getElementById('signup-password').value
-
+user = username;
 userbase.signUp({ username, password, rememberMe: 'none' })
-.then((user) => showTodos(username))
+.then((user) => ShowPage(username))
 .catch((e) => document.getElementById('signup-error').innerHTML = e)
 console.log("loading");
 
 }
+var characterNames = [];
 // Reveal Character Sheet and Hide Login/Signup/Loading Elements.
-function showTodos(username) {
-    $(".message").text("WECOME BACK "+ username + "\n---\nARE YOU READY TO BEGIN?");
-$(".messageHeader").text("E.I.N.S.");
-openAlert();
-document.getElementById('auth-view').style.display = 'none' // Hide login
-document.getElementById("tabUI").style.display = "flex"; // Reveal charsheet header tabs
-document.getElementById("defaultOpen").click(); // trigger click event.
-document.getElementsByName("userID")[0].innerHTML = "Current User: " + username;
-document.getElementById('username').innerHTML = username // 
+function ShowPage(username) {
+
 console.log("loading");
 
-document.getElementById('db-error').innerText = ''
+//document.getElementsByName('db-error')[0].innerText = ''
+//document.getElementsByName('characters')[0].innerText = ''
+  //document.getElementsByName('db-loading')[0].style.display = 'block' // reveal 
+  document.getElementsByClassName('sideMenuPanel')[0].style.display = 'block' // Reveal side menu
+// console.log("OPENING DATABASE");
+// userbase.openDatabase({ databaseName: 'charData', changeHandler })
+// .catch((e) => document.getElementById('db-error').innerText = e)
 
-userbase.openDatabase({ databaseName: 'charData', changeHandler })
-.catch((e) => document.getElementById('db-error').innerText = e)
+// $(".message").text("WECOME BACK "+ username + "\n---\nARE YOU READY TO BEGIN?");
+// $(".messageHeader").text("E.I.N.S.");
+// openAlert();
+document.getElementById('auth-view').style.display = 'none' // Hide login
+openPage(event,'charactersheet'); // Open the characters list page.
+//document.getElementsByName("tabUI")[0].style.display = "none"; // Reveal charsheet header tabs
+document.getElementsByName("defaultOpen")[0].click(); // trigger click event.
+document.getElementsByName("userID")[0].innerHTML = "Current User: " + username;
+// Get list of all linked character databases
+document.getElementsByName("db-loading")[0].style.display = 'none';
+//userbase.getDatabases().then((databases) => {
+//     console.log("getting data");
+    
+//     DBChangeHandler(databases);
+  
+  
 
+//   }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
+
+  
 }
-//Hides Loading Element.
-function changeHandler(items) {
+// function DBChangeHandler(databases){
+//     const charactersList = document.getElementsByName('charactersList')[0]
+//     if (databases.length === 0) {
+//         console.log('empty');
+//       charactersList.innerText = 'Nothing to see here! \n \n Click "New Character" below to make a new entry!'
+//     } else {
+//         console.log(databases);
+//         console.log(databases.databases.length);
+//       // clear the list
+//       document.getElementsByName('characters')[0].innerHTML = ''
+//       // render all the character databases
+//       for (let i = 0; i < databases.databases.length; i++) {
+//           console.log('adding item')
+//             // build the todo delete button
+//     const charDelete = document.createElement('button')
+//     charDelete.innerHTML = 'X'
+//     charDelete.value = 'X';
+//     charDelete.style.display = 'inline-block'
+//     charDelete.onclick = () => {
+//       userbase.modifyDatabasePermissions({
+//           databaseName: databases.databases[i].databaseName,
+//           username: user,
+//           revoke: true
+//         }).then(() => {
+//           // User no longer has access to the database
+//         }).catch((e) => console.error(e))
+//     }
+//    // load button
+//     const charLoad = document.createElement('button')
+//     charLoad.innerHTML = 'Load'
+//     charLoad.style.display = 'inline-block'
+//     charLoad.onclick = () => {
+//       openPage(event, 'charactersheet');
+//       openTab(event, 'bioTab');
+//       userbase.openDatabase({
+//           databaseName: databases.databases[i].databaseName,
+//           changeHandler: function (items) {
+//               console.log(items);
+//               DBItems = items;
+//               DBName = databases.databases[i].databaseName;
+           
+// /* refactor DBItems ->
+//  val DBItemds = {
+//      "item1": "item value",
+//      "item2": "item 2 value",
+//  }
 
-document.getElementById('db-loading').style.display = 'none'
-}
+// ie: items.forEach(i=>{DBItems[i.id]=i.value})
+
+// */ 
+
+//           }
+//         }).then(() => {
+//           // the database can now be used
+//            // update your application state with the database items
+//            for (var repeat = 0; repeat < 2; repeat++){
+          
+//             while (rowNum > 1) {
+//               removeItemRow();
+//             }
+//             while (parseInt($("[name='counterItem']").val()) < parseInt(findItemVal('counter'))) {
+//                 addItemRow();
+//             }
+              
+//               // Set size of dynamic Weapon tables
+//             while (weaponRowNum > 1) {
+//               removeWeaponRow();
+//             }
+//             while (parseInt($("[name='counterWeapon']").val()) < parseInt(findItemVal('counterWeapon'))) {
+//                 addWeaponRow();
+//             }
+              
+//             // Set size of dynamic Melee tables
+//             while (meleeRowNum > 1) {
+//               removeMeleeRow();
+//             }
+//             while (parseInt($("[name='counterMelee']").val()) < parseInt(findItemVal('counterMelee'))) {
+//                 addMeleeRow();
+//             } 
+              
+//                // Set size of dynamic Armour tables
+//             while (armourRowNum > 1) {
+//               removeArmourRow();
+//             }
+//             while (parseInt($("[name='counterArmour']").val()) < parseInt(findItemVal('counterArmour'))) {
+//                 addArmourRow();
+//             } 
+              
+//               // Set size of dynamic psi technique tables
+//               while (rowNumPsi > 1) {
+//               removePsiRow();
+//             }
+//             while (parseInt($("[name='counterPsi']").val()) < parseInt(findItemVal('counterPsi'))) {
+//                 addPsiRow();
+//             }
+              
+//               // Set size of dynamic routine tables
+//               while (rowNumRoutine > 1) {
+//               removeRoutineRow();
+//             }
+//             while (parseInt($("[name='counterRoutine']").val()) < parseInt(findItemVal('counterRoutine'))) {
+//                 addRoutineRow();
+//             }
+              
+//               // Set size of dynamic shell tables
+//               while (shellRowNum > 1) {
+//               removeShellRow();
+//             }
+//             while (parseInt($("[name='counterShell']").val()) < parseInt(findItemVal('counterShell'))) {
+//                 addShellRow();
+//             }
+              
+//                // Set size of dynamic drone tables
+//               while (droneRowNum > 1) {
+//               removeDroneRow();
+//             }
+//             while (parseInt($("[name='counterDrone']").val()) < parseInt(findItemVal('counterDrone'))) {
+//                 addDroneRow();
+//             }
+        
+           
+           
+            
+//             // Prepare form data for JSON format
+//             const formId = "charsheet";
+//             var url = location.href;
+//             const formIdentifier = `${url} ${formId}`;
+//             let form = document.querySelector(`#${formId}`);
+//             let formElements = form.elements;
+        
+//             // Display file content
+            
+//             for (const element of formElements) {
+//               for (var i=0; i<DBItems.length; i++){
+//                   var savedData = DBItems[i].itemId;
+//               if (element.id == savedData) {
+//                   console.log("PONG");
+//                 if (element.type == 'checkbox') {
+        
+//                   var checked = (DBItems[i].item.value == 'checked');
+//                   $(element).prop("checked", checked);
+//                 } else {
+//                   element.value = DBItems[i].item.value; 
+//                     element.dispatchEvent(new Event('input', { bubbles: true }));
+                    
+//                     if (element.getAttribute("onchange") != null) {
+//                 element.onchange();
+//             }
+//                     if ($(element).is('textarea')){
+        
+//                          $(element).height(0);
+        
+//                 $(element).attr('style', 'height: auto !important');
+        
+//                     }
+//                     $(element.id).change();
+//                     $(element.id).trigger("change");
+//                 }
+//               }
+//           }
+            
+//         }
+//           };
+
+//             updateLevel();
+//             var skillNameList = [
+//                 "admin",
+//                 "connect",
+//                 "exert",
+//                 "fix",
+//                 "heal",
+//                 "know",
+//                 "lead",
+//                 "notice",
+//                 "perform",
+//                 "pilot",
+//                 "program",
+//                 "punch",
+//                 "shoot",
+//                 "sneak",
+//                 "stab",
+//                 "survive",
+//                 "talk",
+//                 "trade",
+//                 "work",
+//                 "biopsi",
+//                 "metapsi",
+//                 "precog",
+//                 "telekinesis",
+//                 "telepath",
+//                 "teleport",
+//                 "custom1",
+//                 "custom2"
+//             ];
+//             for (var i = 0; i < skillNameList.length; i++){
+//                 updateSkill(skillNameList[i]);
+                
+//             }
+//         }).catch((e) => console.error(e))
+//     }
+    
+  
+//         // build the todo label
+//         const charLabel = document.createElement('label')
+//         charLabel.innerHTML = databases.databases[i].databaseName;
+        
+//         // append the todo item to the list
+//         const charItem = document.createElement('div')
+//         charItem.appendChild(charDelete)
+//         charItem.appendChild(charLoad)
+//         charItem.appendChild(charLabel)
+//         document.getElementsByName('characters')[0].appendChild(charItem)
+//         console.log('child added');
+//       }
+//       console.log('populated database list');
+//     }
+// }
+var savedItems = [];
+// //Hides Loading Element.
+// function changeHandler(databases) {
+
+// document.getElementsByName('db-loading')[0].style.display = 'none'
+// const charactersList = document.getElementsByName('characters')[0]
+
+//   if (databases.databases.length === 0) {
+//     charactersList.innerText = 'Nothing to see here! \n \n Click "New Character" below to make a new entry!'
+//   } else {
+//     // clear the list
+//     charactersList.innerHTML = ''
+//     // render all the character databases
+//     for (let i = 0; i < databases.databases.length; i++) {
+        
+//           // build the todo delete button
+//   const charDelete = document.createElement('button')
+//   charDelete.innerHTML = 'X'
+//   charDelete.value = 'X';
+//   charDelete.style.display = 'inline-block'
+//   charDelete.onclick = () => {
+//     userbase.modifyDatabasePermissions({
+//         databaseName: databases.databases[i].databaseName,
+//         username: user,
+//         revoke: true
+//       }).then(() => {
+//         // User no longer has access to the database
+//       }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
+//   }
+//  // load button
+//   const charLoad = document.createElement('button')
+//   charLoad.innerHTML = 'Load'
+//   charLoad.style.display = 'inline-block'
+//   charload.onclick = () => {
+//     openPage(event, 'charactersheet');
+//     openTab(event, 'bioTab');
+//     userbase.openDatabase({
+//         databaseName: databases.databases[i].databaseName,
+//         changeHandler: function (items) {
+//             DBName = databases.databases[i].databaseName;
+//             DBItems = items;
+//           // update your application state with the database items
+//           for (var repeat = 0; repeat < 2; repeat++){
+        
+//             while (rowNum > 1) {
+//               removeItemRow();
+//             }
+//             while (parseInt($("[name='counterItem']").val()) < parseInt(findItemVal('counter'))) {
+//                 addItemRow();
+//             }
+              
+//               // Set size of dynamic Weapon tables
+//             while (weaponRowNum > 1) {
+//               removeWeaponRow();
+//             }
+//             while (parseInt($("[name='counterWeapon']").val()) < parseInt(findItemVal('counterWeapon'))) {
+//                 addWeaponRow();
+//             }
+              
+//             // Set size of dynamic Melee tables
+//             while (meleeRowNum > 1) {
+//               removeMeleeRow();
+//             }
+//             while (parseInt($("[name='counterMelee']").val()) < parseInt(findItemVal('counterMelee'))) {
+//                 addMeleeRow();
+//             } 
+              
+//                // Set size of dynamic Armour tables
+//             while (armourRowNum > 1) {
+//               removeArmourRow();
+//             }
+//             while (parseInt($("[name='counterArmour']").val()) < parseInt(findItemVal('counterArmour'))) {
+//                 addArmourRow();
+//             } 
+              
+//               // Set size of dynamic psi technique tables
+//               while (rowNumPsi > 1) {
+//               removePsiRow();
+//             }
+//             while (parseInt($("[name='counterPsi']").val()) < parseInt(findItemVal('counterPsi'))) {
+//                 addPsiRow();
+//             }
+              
+//               // Set size of dynamic routine tables
+//               while (rowNumRoutine > 1) {
+//               removeRoutineRow();
+//             }
+//             while (parseInt($("[name='counterRoutine']").val()) < parseInt(findItemVal('counterRoutine'))) {
+//                 addRoutineRow();
+//             }
+              
+//               // Set size of dynamic shell tables
+//               while (shellRowNum > 1) {
+//               removeShellRow();
+//             }
+//             while (parseInt($("[name='counterShell']").val()) < parseInt(findItemVal('counterShell'))) {
+//                 addShellRow();
+//             }
+              
+//                // Set size of dynamic drone tables
+//               while (droneRowNum > 1) {
+//               removeDroneRow();
+//             }
+//             while (parseInt($("[name='counterDrone']").val()) < parseInt(findItemVal('counterDrone'))) {
+//                 addDroneRow();
+//             }
+        
+           
+           
+            
+//             // Prepare form data for JSON format
+//             const formId = "charsheet";
+//             var url = location.href;
+//             const formIdentifier = `${url} ${formId}`;
+//             let form = document.querySelector(`#${formId}`);
+//             let formElements = form.elements;
+        
+//             // Display file content
+            
+//             for (const element of formElements) {
+//               if (element.id in items) {
+//                 if (element.type == 'checkbox') {
+        
+//                   var checked = (items[element.id] == 'checked');
+//                   $(element).prop("checked", checked);
+//                 } else {
+//                   element.value = items[element.id]; 
+//                     element.dispatchEvent(new Event('input', { bubbles: true }));
+                    
+//                     if (element.getAttribute("onchange") != null) {
+//                 element.onchange();
+//             }
+//                     if ($(element).is('textarea')){
+        
+//                          $(element).height(0);
+        
+//                 $(element).attr('style', 'height: auto !important');
+        
+//                     }
+//                     $(element.id).change();
+//                     $(element.id).trigger("change");
+//                 }
+//               }
+            
+//         }
+//           };
+//           reader.readAsText(file);
+//             updateLevel();
+//             var skillNameList = [
+//                 "admin",
+//                 "connect",
+//                 "exert",
+//                 "fix",
+//                 "heal",
+//                 "know",
+//                 "lead",
+//                 "notice",
+//                 "perform",
+//                 "pilot",
+//                 "program",
+//                 "punch",
+//                 "shoot",
+//                 "sneak",
+//                 "stab",
+//                 "survive",
+//                 "talk",
+//                 "trade",
+//                 "work",
+//                 "biopsi",
+//                 "metapsi",
+//                 "precog",
+//                 "telekinesis",
+//                 "telepath",
+//                 "teleport",
+//                 "custom1",
+//                 "custom2"
+//             ];
+//             for (var i = 0; i < skillNameList.length; i++){
+//                 updateSkill(skillNameList[i]);
+                
+//             }
+//         }
+//       }).then(() => {
+//         // the database can now be used
+//       }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
+//   }
+  
+
+//       // build the todo label
+//       const charLabel = document.createElement('label')
+//       charLabel.innerHTML = items[i].itemId;
+      
+//       // append the todo item to the list
+//       const charItem = document.createElement('div')
+//       charItem.appendChild(charDelete)
+//       charItem.appendChild(charLoad)
+//       charItem.appendChild(charLabel)
+//       charactersList.appendChild(charItem)
+      
+//     }
+//   }
+// }
+// function sendData(delay, element, name) {
+
+//     return new Promise((resolve,reject)=>{
+
+//         if (element.id.length > 0) {
+
+//             if (element.type == 'checkbox') {
+
+//                 var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
+//                 if (!(typeof checked === 'string' || checked instanceof String)) {
+//                     console.log(checked)
+//                 }
+
+//                 setTimeout(() => {
+//                     userbase.insertItem({
+//                         databaseName: name,
+//                         item: { "value": checked },
+//                         itemId: element.id
+//                     }).then(resolve).catch(reject)                        
+//                 }, delay*50);
+
+//             } else {
+//                 var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
+//                 if (!(typeof element.value === 'string' || element.value instanceof String)) {
+//                     console.log(element.value)
+//                 }
+
+//                 setTimeout(() => {
+//                     var id = element.id
+//                     var value = element.value;
+//                     userbase.insertItem({
+//                         databaseName: name,
+//                         item: { 'value': value },
+//                         itemId: id
+//                     }).then(resolve).catch(reject)
+
+//                 }, delay * 50);
+
+//             }
+//         } else resolve("no element id");
+//     });
+// }
+
+function makeid(length) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < length; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+      text = String(text);
+    return text;
+  }
+
+// // Open new database to store character data.
+// function createNewChar(name) {
+//     console.log(`Creating character ${name}!`);
+//     DBName = name
+
+//     $('div[name="loading"]').show();
+//     $('form[name="charsheet"]').hide();
+//     document.getElementsByClassName("bootLang")[0].innerHTML = '';
+//     i = 0;
+//     typeWriter();
+//     userbase.openDatabase({
+//         databaseName: name,
+//         isActive: true,
+//         changeHandler: function (items) {
+//             // update your application state with the database items
+//         }
+//     }).then(() => {
+//         console.log("sending data to db")
+//         // the database can now be used
+//         document.getElementById("playerName").value = name
+//         document.getElementById("playerName").dispatchEvent(new Event('change'));
+
+//         let formElements = form.elements;
+//         let prmoises = []
+//         for (const element of formElements) {
+//             prmoises.push(sendData(prmoises.length, element, name));
+//         }
+//         console.log(prmoises)
+//         return Promise.all(prmoises)
+//     }).then(() => {
+//         userbase.getDatabases().then((databases) => {
+//             DBChangeHandler(databases);
+//         }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
+//     }).then(() => {
+//             $('div[name="loading"]').hide();
+//             $('form[name="charsheet"]').show();
+//             console.log("!!!!!!!!!!")
+//         })
+//         .catch((e) => console.error(e))
+
+// }
