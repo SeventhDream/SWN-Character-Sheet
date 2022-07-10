@@ -64,7 +64,7 @@
                
             <!--Tab Header-->
             <div class="tab" name="tabUI">
-                <h2 class="pageTitle">SWN Dynamic Character Sheet [v1.2.0]</h2>
+                <h2 class="pageTitle">SWN Dynamic Character Sheet [v1.2.1]</h2>
                 
                 <div class="tabButtons">
                 <button type="button" name="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" name="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><button type="button" name="rulesTabOpen" class="tablinks" onclick="openTab(event, 'rulesTab')">Cheatsheet</button></a>
@@ -264,6 +264,10 @@
                                         </tr>
                                         <tr class="isAI">
                                             <td colspan="6">AI Skill:<select id="initSkill17" value="" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="psiFocusSkill1">Psi Focus Skill:<select id="initSkill18" data-previous="empty" onchange=" updateSkillBonus(this.id);"></select>
                                             </td>
                                         </tr>
                                     </tr>
@@ -1676,6 +1680,7 @@
 
             <!--Foci Skill points counter-->
             <input id="fociSPBonus" type="hidden" value="0"/>
+            <input id="psiFociSPBonus" type="hidden" value="0"/>
         </main>
         
     </form>

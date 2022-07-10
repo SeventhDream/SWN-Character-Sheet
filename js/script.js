@@ -1212,7 +1212,7 @@ function updateSkillBonus(id) {
     var limit = Math.min(4,(1+Math.floor(level/3))); // Calculate max skill level limit.
     var selection = document.getElementById(id);
     // cycle through all character creation initial skill fields
-    for (var skillID = 1; skillID < 18; skillID++) {
+    for (var skillID = 1; skillID < 19; skillID++) {
         var match = document.getElementById("initSkill" + skillID).value; // Get level value of current indexed skill field
         if ((skillID > 9) && (skillID < 16)){
             var isStartingFoci = document.getElementById("isStartingFoci" + skillID).checked;
@@ -1285,11 +1285,12 @@ function clearSkillBonuses() {
 function updateSkillPoolSize() {
     var fociSPBonus = parseInt(document.getElementById("fociSPBonus").value);
     var maxSP = 3*parseInt(document.getElementById("playerLevel").value - 1);
+    var psiFocusSPBonus = parseInt(document.getElementById("psiFociSPBonus").value);
     if ((document.getElementById("playerClass").value === "expert")||(document.getElementById("playerClass").value === "adventurerEP")||(document.getElementById("playerClass").value === "adventurerEW")||(document.getElementById("playerClass").value === "adventurerETAI")){
         maxSP += 1*parseInt(document.getElementById("playerLevel").value - 1);
     }
     
-    document.getElementById("maxSP").value = maxSP + fociSPBonus;
+    document.getElementById("maxSP").value = maxSP + fociSPBonus + psiFocusSPBonus;
 }
 
 // Update Selected Player Skill Score Value.
@@ -4208,10 +4209,10 @@ function classInfo(childID, selectID) {
 
         $(".classSkill2").hide();
         if (document.getElementById("isWildPsi").checked === false){
-            $(".classSkill1").show();
+            $(".psiFocusSkill1").show();
         }
         else{
-            $(".classSkill1").hide();
+            $(".psiFocusSkill1").hide();
         }
         $(".isPsi").show();
     }
@@ -4220,6 +4221,7 @@ function classInfo(childID, selectID) {
                  document.getElementById("initSkill6").value = "empty"; // clear psi skill 2
                 $(".classSkill1").hide();
                 $(".classSkill2").hide();
+                $(".psiFocusSkill1").hide();
                 $(".isPsi").hide();
             }
             
@@ -4905,6 +4907,7 @@ $(".isPsi").hide();
 $(".isAI").hide();
 $(".classSkill1").hide();
 $(".classSkill2").hide();
+$(".psiFocusSkill1").hide();
 
 for (var i = 1; i < 12; i++){
     $("#coreRoutine"+i+"Desc").val(routineCoreTechniques[i-1].desc);
@@ -4963,6 +4966,9 @@ optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#initSkill5"
 
 optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill6");
 optionTablePartial("Psionic Skills",skillList[0]["Psychic Skills"],"#initSkill6");
+
+optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill18");
+optionTablePartial("Psionic Skills",skillList[0]["Psychic Skills"],"#initSkill18");
 
 optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill7");
 optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill7");
@@ -5192,6 +5198,12 @@ function checkFoci(){
                         document.getElementById("isTrainedPsi").checked = true;
                         document.getElementById("trainedEffort").value = focusLevel;
                         isPsi = true;
+                        if (focusLevel > 1){
+                            document.getElementById("psiFociSPBonus").value = 1; 
+                        }
+                        else{
+                            document.getElementById("psiFociSPBonus").value = 0;
+                        }
                     }
 
                 var bonusSkill = fociList[0][groupIndex][index].bonus; // get focus skill bonus from foci data array.
