@@ -1213,13 +1213,16 @@ function updateSkillBonus(id) {
     var selection = document.getElementById(id);
     // cycle through all character creation initial skill fields
     for (var skillID = 1; skillID < 19; skillID++) {
+       // console.log("initSkill" + skillID);
         var match = document.getElementById("initSkill" + skillID).value; // Get level value of current indexed skill field
         if ((skillID > 9) && (skillID < 16)){
             var isStartingFoci = document.getElementById("isStartingFoci" + skillID).checked;
         }
+       // console.log("match  = " + match);
         if (match != "empty"){
             // Set skill field value.
             if ((skillID < 10) || isStartingFoci || (skillID > 15)){
+               // console.log(match);
             document.getElementById(match + "BonusScore").value = parseInt(document.getElementById(match + "BonusScore").value) + 1;
             }
             else{
@@ -1980,8 +1983,8 @@ var backgroundList = [
             {
                 title: "[True AI]",
                 value: "trueAI",
-                desc: "ai",
-                bonus: "none"
+                desc: "Every AI gets Program-0 and Fix-0 skills as automatic picks. An AI also gets three additional Any Skill picks. As usual, picking the same skill twice gives them level-1 in it instead of level-0. At this point, they should decide what their AI was originally built to do, or what purpose it was designed for. This original purpose serves as the AI’s “background” and will help indicate when a skill check would be unnecessary; a traffic control AI isn’t going to need to roll to navigate a traffic jam, for instance. PC AIs will have no mental blocks or imperatives unless the player thinks they would be fun",
+                bonus: "empty"
             }
         ]
     }
@@ -4408,7 +4411,6 @@ function save_character(){
       }
     }
   }
-  console.log("data: " + data);
     data = JSON.stringify(data[formIdentifier], null, 2);
    
   type = 'application/json';
@@ -4461,7 +4463,7 @@ function load_character(e) {
 
     // Set size of dynamic Inventory tables
     var items = JSON.parse(contents);
-    console.log("items: " + JSON.parse(contents));
+
     while (rowNum > 1) {
       removeItemRow();
     }
@@ -4713,16 +4715,16 @@ function openTab(evt, tabName) {
 var lastClick = 0;
 var delay = 20;
 // function updateCharData(id){
-//     console.log(id);
+
 //     if (lastClick >= (Date.now() - delay))
 //     return;
 //   lastClick = Date.now();
 
-//     console.log("updating: " + id);
+
 //     var element = document.getElementById(id);
 //     var index = -1;
 //     for (var i = 0; i < DBItems.length; i++){
-//         console.log("DBItem: " + DBItems[i].itemId)
+
 //         if (DBItems[i].itemId === id){
 //             index = i;
 //             i = DBItems.length;
@@ -4733,7 +4735,7 @@ var delay = 20;
           
 //             var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //             if (!(typeof checked === 'string' || checked instanceof String)){
-//                 console.log(checked)
+
 //             }
     
 //             userbase.insertItem({
@@ -4742,12 +4744,12 @@ var delay = 20;
 //                 itemId: element.id
 //               }).then(() => {
 //                 // item inserted
-//                 console.log(element.id + " inserted");
+//                // console.log(element.id + " inserted");
 //               }).catch((e) => console.error(e))
 //           } else {
 //             var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //             if (!(typeof element.value === 'string' || element.value instanceof String)){
-//                 console.log(element.value)
+//                // console.log(element.value)
 //             }
     
 //               var id = element.id
@@ -4758,7 +4760,7 @@ var delay = 20;
 //                 itemId: id
 //               }).then(() => {
 //                 // item inserted
-//                 console.log(element.id + " inserted2");
+//                // console.log(element.id + " inserted2");
 //               }).catch((e) => console.error(e))
 //           }
 
@@ -4767,7 +4769,7 @@ var delay = 20;
           
 //         var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //         if (!(typeof checked === 'string' || checked instanceof String)){
-//             console.log(checked)
+//            // console.log(checked)
 //         }
 
 //         userbase.updateItem({
@@ -4776,12 +4778,12 @@ var delay = 20;
 //             itemId: element.id
 //           }).then(() => {
 //             // item inserted
-//             console.log(element.id);
+//            // console.log(element.id);
 //           }).catch((e) => console.error(e))
 //       } else {
 //         var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //         if (!(typeof element.value === 'string' || element.value instanceof String)){
-//             console.log(element.value)
+//            // console.log(element.value)
 //         }
 
 //           var id = element.id
@@ -4792,7 +4794,7 @@ var delay = 20;
 //             itemId: id
 //           }).then(() => {
 //             // item inserted
-//             console.log(element.id);
+//            // console.log(element.id);
 //           }).catch((e) => console.error(e))
 //       }
 // }
@@ -4853,7 +4855,7 @@ $(document).ready(function () {
     
   for (const element of formElements) {
     if (element.id.length > 0) {
-        // console.log("add event to: " + element.id)
+        //// console.log("add event to: " + element.id)
         element.addEventListener(
             'change',
             function() {  },
@@ -4885,11 +4887,11 @@ $(document).ready(function () {
 userbase.init({ appId: 'cb733a2c-a27f-4807-848b-c075c4ce8f31' })
 
 document.getElementsByClassName('sideMenuPanel')[0].style.display = 'none'
-console.log(document.getElementsByName('db-loading')[0]);
+
 //document.getElementsByName('db-loading')[0].style.display = 'none'
 document.getElementsByName('loginSubmit')[0].addEventListener('click', handleLogin)
 document.getElementsByName('signUpSubmit')[0].addEventListener('click', handleSignUp)
-console.log(document.getElementsByName("abcd")[0]);
+
 //document.getElementsByName("abcd")[0].addEventListener('submit', addTodoHandler)
 
 charImage("./img/Default_Avatar.webp");
@@ -5265,7 +5267,7 @@ function SelectHasValue(select, value) {
     }
 }
 function checkCharName(){
-    console.log("PING")
+   // console.log("PING")
     var charName = document.getElementById("playerName").value
     if(charName === ""){
         $(".message").text("Please Enter A Name!");
@@ -5286,17 +5288,17 @@ function submitWarningName(){
 function findItemVal(id){
 var index = -1;
 for (var i=0; i < DBItems.length; i++){
-    // console.log(DBItems[i].itemId);
+    //// console.log(DBItems[i].itemId);
     if(DBItems[i].itemId == id){
         index = i;
     }
 }
     if (index !== -1){
-        console.log("item value: " + DBItems[index].item.value);
+       // console.log("item value: " + DBItems[index].item.value);
         return DBItems[index].item.value;
     }
     else{
-        console.log("SEARCH FAILED")
+       // console.log("SEARCH FAILED")
         return index
     }
     
@@ -5347,7 +5349,7 @@ function removeOptions(parent) {
 var user = "";
 // Handles login form submission
 function handleLogin(e) {
-    console.log("Login");
+   // console.log("Login");
 e.preventDefault()
 
 const username = document.getElementById('login-username').value
@@ -5360,7 +5362,7 @@ userbase.signIn({ username, password, rememberMe: 'none' })
 }
 // Handles signup form submission
 function handleSignUp(e) {
-    console.log("Signup");
+   // console.log("Signup");
 e.preventDefault();
 
 const username = document.getElementById('signup-username').value 
@@ -5382,7 +5384,7 @@ console.log("loading");
 //document.getElementsByName('characters')[0].innerText = ''
   //document.getElementsByName('db-loading')[0].style.display = 'block' // reveal 
   document.getElementsByClassName('sideMenuPanel')[0].style.display = 'block' // Reveal side menu
-// console.log("OPENING DATABASE");
+//// console.log("OPENING DATABASE");
 // userbase.openDatabase({ databaseName: 'charData', changeHandler })
 // .catch((e) => document.getElementById('db-error').innerText = e)
 
@@ -5397,7 +5399,7 @@ document.getElementsByName("userID")[0].innerHTML = "Current User: " + username;
 // Get list of all linked character databases
 document.getElementsByName("db-loading")[0].style.display = 'none';
 //userbase.getDatabases().then((databases) => {
-//     console.log("getting data");
+//    // console.log("getting data");
     
 //     DBChangeHandler(databases);
   
@@ -5410,16 +5412,16 @@ document.getElementsByName("db-loading")[0].style.display = 'none';
 // function DBChangeHandler(databases){
 //     const charactersList = document.getElementsByName('charactersList')[0]
 //     if (databases.length === 0) {
-//         console.log('empty');
+//        // console.log('empty');
 //       charactersList.innerText = 'Nothing to see here! \n \n Click "New Character" below to make a new entry!'
 //     } else {
-//         console.log(databases);
-//         console.log(databases.databases.length);
+//        // console.log(databases);
+//        // console.log(databases.databases.length);
 //       // clear the list
 //       document.getElementsByName('characters')[0].innerHTML = ''
 //       // render all the character databases
 //       for (let i = 0; i < databases.databases.length; i++) {
-//           console.log('adding item')
+//          // console.log('adding item')
 //             // build the todo delete button
 //     const charDelete = document.createElement('button')
 //     charDelete.innerHTML = 'X'
@@ -5444,7 +5446,7 @@ document.getElementsByName("db-loading")[0].style.display = 'none';
 //       userbase.openDatabase({
 //           databaseName: databases.databases[i].databaseName,
 //           changeHandler: function (items) {
-//               console.log(items);
+//              // console.log(items);
 //               DBItems = items;
 //               DBName = databases.databases[i].databaseName;
            
@@ -5543,7 +5545,7 @@ document.getElementsByName("db-loading")[0].style.display = 'none';
 //               for (var i=0; i<DBItems.length; i++){
 //                   var savedData = DBItems[i].itemId;
 //               if (element.id == savedData) {
-//                   console.log("PONG");
+//                  // console.log("PONG");
 //                 if (element.type == 'checkbox') {
         
 //                   var checked = (DBItems[i].item.value == 'checked');
@@ -5619,9 +5621,9 @@ document.getElementsByName("db-loading")[0].style.display = 'none';
 //         charItem.appendChild(charLoad)
 //         charItem.appendChild(charLabel)
 //         document.getElementsByName('characters')[0].appendChild(charItem)
-//         console.log('child added');
+//        // console.log('child added');
 //       }
-//       console.log('populated database list');
+//      // console.log('populated database list');
 //     }
 // }
 var savedItems = [];
@@ -5836,7 +5838,7 @@ var savedItems = [];
 
 //                 var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //                 if (!(typeof checked === 'string' || checked instanceof String)) {
-//                     console.log(checked)
+//                    // console.log(checked)
 //                 }
 
 //                 setTimeout(() => {
@@ -5850,7 +5852,7 @@ var savedItems = [];
 //             } else {
 //                 var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //                 if (!(typeof element.value === 'string' || element.value instanceof String)) {
-//                     console.log(element.value)
+//                    // console.log(element.value)
 //                 }
 
 //                 setTimeout(() => {
@@ -5881,7 +5883,7 @@ function makeid(length) {
 
 // // Open new database to store character data.
 // function createNewChar(name) {
-//     console.log(`Creating character ${name}!`);
+//    // console.log(`Creating character ${name}!`);
 //     DBName = name
 
 //     $('div[name="loading"]').show();
@@ -5896,7 +5898,7 @@ function makeid(length) {
 //             // update your application state with the database items
 //         }
 //     }).then(() => {
-//         console.log("sending data to db")
+//        // console.log("sending data to db")
 //         // the database can now be used
 //         document.getElementById("playerName").value = name
 //         document.getElementById("playerName").dispatchEvent(new Event('change'));
@@ -5906,7 +5908,7 @@ function makeid(length) {
 //         for (const element of formElements) {
 //             prmoises.push(sendData(prmoises.length, element, name));
 //         }
-//         console.log(prmoises)
+//        // console.log(prmoises)
 //         return Promise.all(prmoises)
 //     }).then(() => {
 //         userbase.getDatabases().then((databases) => {
@@ -5915,7 +5917,7 @@ function makeid(length) {
 //     }).then(() => {
 //             $('div[name="loading"]').hide();
 //             $('form[name="charsheet"]').show();
-//             console.log("!!!!!!!!!!")
+//            // console.log("!!!!!!!!!!")
 //         })
 //         .catch((e) => console.error(e))
 
