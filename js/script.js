@@ -1831,7 +1831,7 @@ var classList = [
 ];
 
 // List of backgrounds
-var backgroundList = [
+const backgroundList = [
     {
         "Select a Background": [
             {
