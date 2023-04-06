@@ -64,7 +64,7 @@
                
             <!--Tab Header-->
             <div class="tab" name="tabUI">
-                <h2 class="pageTitle">SWN Dynamic Character Sheet [v2.0.2]</h2>
+                <h2 class="pageTitle">SWN Dynamic Character Sheet [v2.0.3]</h2>
                 
                 <div class="tabButtons">
                 <button type="button" name="defaultOpen" class="tablinks" onclick="openTab(event, 'bioTab')">Profile</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'abilityTab')">Abilities</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'inventoryTab')">Inventory</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'notesTab')">Notes</button><!----><button type="button" class="tablinks" onclick="openTab(event, 'mapTab')">Map</button><!----><button type="button" name="helpTabOpen" class="tablinks" onclick="openTab(event, 'helpTab')">Help</button><!----><button type="button" name="rulesTabOpen" class="tablinks" onclick="openTab(event, 'rulesTab')">Cheatsheet</button></a>
@@ -578,7 +578,7 @@
                                         <input type="number" value="10" min="10" max="15" id="strScore" onchange="updateModifiers('str'); updateMaxCarry()" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(strScore.id);">
                                     </td>
-                                    <td><input type="number" value="0" name="strMod" class="noWrite" readonly></td>
+                                    <td><input type="number" value="0" name="strMod" id="strMod" class="noWrite" readonly></td>
                                 </tr>
                                 <tr>
                                     
@@ -588,7 +588,7 @@
                                         <input type="number" value="10" min="10" max="15" id="dexScore" onchange="updateModifiers('dex')" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(dexScore.id);">
                                     </td>
-                                    <td><input type="number" value="0" name="dexMod" class="noWrite" readonly></td>
+                                    <td><input type="number" value="0" name="dexMod" id="dexMod" class="noWrite" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>Constitution:</td>
@@ -597,7 +597,7 @@
                                         <input type="number" value="10" min="10" max="15" id="conScore" onchange="updateModifiers('con'); updateStrainMax(this.value)" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(conScore.id);">
                                     </td>
-                                    <td><input type="number" value="0" name="conMod" class="noWrite" readonly></td>
+                                    <td><input type="number" value="0" name="conMod" id="conMod" class="noWrite" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>Intelligence:</td>
@@ -606,7 +606,7 @@
                                         <input type="number" value="10" min="10" max="15" id="intScore" onchange="updateModifiers('int')" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(intScore.id);">
                                     </td>
-                                    <td><input type="number" value="0" name="intMod" class="noWrite" readonly></td>
+                                    <td><input type="number" value="0" name="intMod" id="intMod" class="noWrite" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>Wisdom:</td>
@@ -615,7 +615,7 @@
                                         <input type="number" value="10" min="10" max="15" id="wisScore" onchange="updateModifiers('wis')" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(wisScore.id);">
                                     </td>
-                                    <td><input type="number" value="0" name="wisMod" class="noWrite" readonly></td>
+                                    <td><input type="number" value="0" name="wisMod" id="wisMod" class="noWrite" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>Charisma:</td>
@@ -624,7 +624,7 @@
                                         <input type="number" value="10" min="10" max="15" id="chaScore" onchange="updateModifiers('cha')" data-bonus="0" class="growthBonus" data-growth="0" readonly>
                                         <input value="+" type="button" class="button" readonly onclick="increment(chaScore.id);">
                                     </td>
-                                    <td><input type="number" value="0" name="chaMod" class="noWrite" readonly></td>
+                                    <td><input type="number" value="0" name="chaMod" id="chaMod" class="noWrite" readonly></td>
                                 </tr>
                             </table>
                             <br>

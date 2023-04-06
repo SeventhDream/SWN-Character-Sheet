@@ -799,19 +799,29 @@ function populatePsi(id){
 // Adjust Maximum Psionic Effort pool value.
 function updateMaxEffort(){
     var maxEffort = Math.max(parseInt($("#metapsiScore").val()),0);
+    console.log("maxEffort1 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#biopsiScore").val()),0));
+    console.log("maxEffort2 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#precogScore").val()),0));
+    console.log("maxEffort3 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telekinesisScore").val()),0));
+    console.log("maxEffort4 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telepathScore").val()),0));
+    console.log("maxEffort5 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#teleportScore").val()),0));
-    maxEffort = Math.max(maxEffort + 1 + Math.max($("#wisMod").val(),$("#conMod").val()),1);
+    console.log("maxEffort6 = " + maxEffort);
+    maxEffort = Math.max((maxEffort + 1 + Math.max($("#wisMod").val(),$("#conMod").val())),1);
+    console.log("wisMod = " + $("#wisMod").val());
+    console.log("conMod = " + $("#conMod").val());
     if (!document.getElementById("isWildPsi").checked){
         var trainedBonus = parseInt(document.getElementById("trainedEffort").value);
         $("#maxEP").val(parseInt(maxEffort + trainedBonus));
+        console.log(parseInt(maxEffort + trainedBonus));
     }
     else{
         var wildBonus = parseInt(document.getElementById("wildEffort").value);
         $("#maxEP").val(wildBonus);
+        console.log(wildBonus);
     }
 }
 
@@ -4208,11 +4218,13 @@ function classInfo(childID, selectID) {
         $(".classSkill1").show();
                 $(".isPsi").show();
                 $(".classSkill2").show();
+                updateMaxEffort();
     } else if ((playerClass === "adventurerEP")||(playerClass === "adventurerPW")||(playerClass === "adventurerPTAI")||document.getElementById("psiFocus").checked){
-
+        updateMaxEffort();
         $(".classSkill2").hide();
         if (document.getElementById("isWildPsi").checked === false){
             $(".psiFocusSkill1").show();
+              
         }
         else{
             $(".psiFocusSkill1").hide();
