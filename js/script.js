@@ -787,8 +787,8 @@ function populatePsi(id){
         index = getIndex(psiTechniqueList[0][groupIndex], match);
         if (index > -1) {
             var currentPsi = psiTechniqueList[0][opGroup[i]][index];
-            psiInfo.setAttribute('data-name', psiField.value); // Store armour name
-            psiInfo.setAttribute('data-desc', currentPsi.desc); // Store armour description
+            psiInfo.setAttribute('data-name', psiField.value); // Store psi name
+            psiInfo.setAttribute('data-desc', currentPsi.desc); // Store psi description
             psiEffortCommited.max = currentPsi.limit;
             psiAction.value = currentPsi.action;
             return;
@@ -799,29 +799,29 @@ function populatePsi(id){
 // Adjust Maximum Psionic Effort pool value.
 function updateMaxEffort(){
     var maxEffort = Math.max(parseInt($("#metapsiScore").val()),0);
-    console.log("maxEffort1 = " + maxEffort);
+ //console.log("maxEffort1 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#biopsiScore").val()),0));
-    console.log("maxEffort2 = " + maxEffort);
+ //console.log("maxEffort2 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#precogScore").val()),0));
-    console.log("maxEffort3 = " + maxEffort);
+ //console.log("maxEffort3 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telekinesisScore").val()),0));
-    console.log("maxEffort4 = " + maxEffort);
+ //console.log("maxEffort4 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#telepathScore").val()),0));
-    console.log("maxEffort5 = " + maxEffort);
+ //console.log("maxEffort5 = " + maxEffort);
     maxEffort = Math.max(maxEffort,Math.max(parseInt($("#teleportScore").val()),0));
-    console.log("maxEffort6 = " + maxEffort);
+ //console.log("maxEffort6 = " + maxEffort);
     maxEffort = Math.max((maxEffort + 1 + Math.max($("#wisMod").val(),$("#conMod").val())),1);
-    console.log("wisMod = " + $("#wisMod").val());
-    console.log("conMod = " + $("#conMod").val());
+ //console.log("wisMod = " + $("#wisMod").val());
+ //console.log("conMod = " + $("#conMod").val());
     if (!document.getElementById("isWildPsi").checked){
         var trainedBonus = parseInt(document.getElementById("trainedEffort").value);
         $("#maxEP").val(parseInt(maxEffort + trainedBonus));
-        console.log(parseInt(maxEffort + trainedBonus));
+     //console.log(parseInt(maxEffort + trainedBonus));
     }
     else{
         var wildBonus = parseInt(document.getElementById("wildEffort").value);
         $("#maxEP").val(wildBonus);
-        console.log(wildBonus);
+     //console.log(wildBonus);
     }
 }
 
@@ -841,10 +841,10 @@ function addPsiRow(){
      var newRow = $("<tr id='psiRow"+rowNumPsi+"' value ='"+rowNumPsi+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" class="nosubmit"  id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+'); "/><datalist id="psiList' + rowNumPsi + '"></datalist></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="psiInfo'+rowNumPsi+'"></i><input type="text" class="nosubmit"  id="psiName' + rowNumPsi + '" list="psiList' + rowNumPsi + '" data-idNum="'+ rowNumPsi + '" onchange="populatePsi('+rowNumPsi+'); updateSkillPool();"/><datalist id="psiList' + rowNumPsi + '"></datalist><input type="checkbox" onchange="updateSkillPool();" id="isTrained'+rowNumPsi+'"></td>';
         cols += '<td><input value="-" name="minusOne'+rowNumPsi+'" readonly type="button" class="button" onclick="decrement(psiCommit'+rowNumPsi+'.id)"><input type="number" value="0" min="0" max="99" onchange=" updateEffortPool();" id="psiCommit' + rowNumPsi + '" readonly/><input value="+" readonly type="button" class="button" onclick="increment(psiCommit'+rowNumPsi+'.id)"></td>';
         cols += '<td><input type="string" value="-" min="0" onchange="" id="psiAction' + rowNumPsi + '" class="noWrite" readonly/></td>';
-        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removePsi'+rowNumPsi+'" class="ibtnDel" data-rownum="'+rowNumPsi+'" onclick="removePsiRow(this.dataset.rownum,this.id); updateSkillPool();" value="-"></td>';
         newRow.append(cols);
         $("#psiTable").append(newRow);      
          selectOptionTable(psiTechniqueList,"#psiList" + rowNumPsi);
@@ -1309,6 +1309,7 @@ function updateSkillPoolSize() {
 // Update Selected Player Skill Score Value.
 function updateSkill(id) {
     var currentSkill = document.getElementById(id+"Score"); // Get skill input field.
+
     var skillBaseValue = parseInt(document.getElementById(id + "BaseScore").value); // Get skill Base Score
     var skillBonusValue = parseInt(document.getElementById(id + "BonusScore").value); // Get Skill Bonus Score
     var level = parseInt(document.getElementById("playerLevel").value);
@@ -1328,6 +1329,7 @@ function updateSkill(id) {
         // Show relevant Psi Core Techniques.
          if ((currentSkill.id === "teleportScore") || (currentSkill.id === "telepathScore") || (currentSkill.id === "telekinesisScore") || (currentSkill.id === "biopsiScore") || (currentSkill.id === "metapsiScore") || (currentSkill.id === "precogScore")){
              $("#"+currentSkill.getAttribute("data-psi") + "CoreTechnique").hide();
+           //console.log("Hiding " + $("#"+currentSkill.getAttribute("data-psi") + "CoreTechnique").id);
          }
     } else {
         document.getElementById(id + "Score").style.display = "inline-block";
@@ -1381,9 +1383,16 @@ function updateSkillPool() {
     // Reset cost counters
     var attrCost = 0;
     var skillCost = 0;
+    var psiCost = 0;
+    var opGroup = Object.getOwnPropertyNames(psiTechniqueList[0]);
+    var index = -1;
+    var psiField = "";
+    var techniqueName = "";
     var i = 0;
     var cost = 0;
-    
+    var psiLength = parseInt($("[name='counterPsi']").val());
+    var groupIndex = ""
+    var isTrained  = false;
     // Calculate attribute bonus SP cost.
     for (i = 0; i < attributeList.length; i++) {
         var attrBonus = parseInt(
@@ -1406,7 +1415,27 @@ function updateSkillPool() {
         }
     }
 
-    document.getElementById("usedSP").value = attrCost + skillCost;
+    //Calculate Psychic Technique SP cost
+        for (i = 1; i < (psiLength+1); i++){
+          //console.log("row: " + i);
+            psiField = document.getElementById("psiName" + i); // Get technique select element for given row.
+            techniqueName = psiField.value; // Get name of technique.
+            isTrained = document.getElementById("isTrained" + i).checked;
+            for (var j = 0; j < opGroup.length; j++) {
+                
+                groupIndex = opGroup[j];
+              //console.log("Indexing " + groupIndex);
+                index = getIndex(psiTechniqueList[0][groupIndex], techniqueName);
+                if (index > -1 && !isTrained) {
+                    psiCost = psiCost + parseInt(psiTechniqueList[0][opGroup[j]][index].lvl);
+                    
+                  //console.log(psiField.value + " SP cost  = " + parseInt(psiTechniqueList[0][opGroup[j]][index].lvl));
+                  //console.log("total Psi SP cost: " + psiCost);
+                    j = opGroup.length;
+                }
+            }
+        }
+    document.getElementById("usedSP").value = attrCost + skillCost + psiCost;
 }
 
 
@@ -1738,6 +1767,13 @@ var fociList = [
             }
         ],
         Origin_Foci: [
+            {
+                title: "Alien",
+                value: "alien",
+                desc:
+                    "You aren't human",
+                    bonus: "anyNormal"
+            },
             {
                 title: "VI Android",
                 value: "androidVI",
@@ -2675,7 +2711,7 @@ var psiTechniqueList = [{
         },
         {
             value: "Force Puppetry",
-            title: "[telekinesis,lvl-4]",
+            title: "[telepathy,lvl-4]",
             desc: "- As a Main Action, the telekinetic can Commit Effort for the day to suborn a visible target’s mobility, whether robotic, vehicular, or human, provided it’s no larger than a ground car.\n- A sapient victim can make a Mental saving throw to resist the psychic onslaught; on a failure, they lose control of their physical actions.\n- If not piloted by the telekinetic, the target remains motionless or continues in its current direction of travel.\n- If the telekinetic spends a Main Action to control them, they can be made to perform any physical activity that is not directly suicidal, using the psychic’s skill levels and hit bonus for any attacks or skill checks they might make.\n- The puppetry lasts until the end of the scene until the target leaves the psychic’s sight, or until a sapient target believes that their action or inaction is about to get them killed.\n- The psychic’s control is fine enough to achieve even very delicate physical motions, but it is not good enough to control the target’s speech, though it can keep them silent.",
             lvl: 4,
             action: "Main Action (Day)",
@@ -4307,10 +4343,9 @@ $(".bounding-box").css("background-image", "url(" + imageUrl + ")");
 
 //#region 12. Increment Buttons
 
-// Increment associated value.
+// Increment associated value by 1.
 function increment(id) {
     // Get current value and constraint.
-
     var currentValue = parseInt(document.getElementById(id).value);
     var max = parseInt(document.getElementById(id).getAttribute("max"));
     // Check if constraint is satisfied.
@@ -5212,8 +5247,10 @@ function checkFoci(){
                         document.getElementById("isTrainedPsi").checked = true;
                         document.getElementById("trainedEffort").value = focusLevel;
                         isPsi = true;
-                        if (focusLevel > 1){
-                            document.getElementById("psiFociSPBonus").value = 1; 
+                        if (focusLevel > 0){
+                          //console.log(document.getElementById("playerLevel"));
+                            document.getElementById("psiFociSPBonus").value = (parseInt(document.getElementById("playerLevel").value)-1); 
+                          //console.log(parseInt(document.getElementById("playerLevel").value)-1);
                         }
                         else{
                             document.getElementById("psiFociSPBonus").value = 0;
@@ -5265,6 +5302,7 @@ function checkFoci(){
                 
                 document.getElementById("psiFocus").checked = isPsi;
                 classInfo("classDesc","playerClass"); // Call function to update abiltiies.
+                updateSkillPoolSize();
                 
 }
 
@@ -5934,3 +5972,4 @@ function makeid(length) {
 //         .catch((e) => console.error(e))
 
 // }
+
