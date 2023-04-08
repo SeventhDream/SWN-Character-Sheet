@@ -1,3 +1,14 @@
+//#region 0. Global Variables
+var characterData = []; // Stores character variable data for saving/loading between sessions 
+var newCharacterData = [];
+var characterFields = [];
+var user = "";
+var savedItems = [];
+
+//#endregion
+
+// ================================================================================
+
 //#region 1. Attribute Automation
 var DBName = "";
 var DBItems = [];
@@ -152,6 +163,7 @@ function updateBaseStats() {
     currentAttribute.setAttribute("value", currentAttribute.value); // Update attribute score.
     currentAttribute.setAttribute("min", attributeBase + growthBonus); // Attribute cannot be decremented below base value.
     currentAttribute.setAttribute("max", attributeBase + growthBonus + 5); // Attribute cannot be incremented above basevalue + 5.
+    currentAttribute.onchange(); // Trigger onchange event.
     updateModifiers(attrList[i]); // Call update to associated modifier.
 }
     updateMaxCarry();
@@ -914,7 +926,7 @@ var routineCoreTechniques = [
     },
     {
         title: "Multifactor Prediction",
-        desc: "Commit Processing for the day as an On Turn and predict events up to ten minutes in the future.\n-  Unless your prediction is physically impossible or the people involved in it would not conceivably behave in that way, they will carry out your prediction to the letter.\n-  If used in combat or a situation of physical danger, the increased chaos limits the prediction to one round into the future.\n- This Routine can be run only once per scene."
+        desc: "Commit Processing for the day as an On Turn and predict events up to ten minutes in the future.\n- Unless your prediction is physically impossible or the people involved in it would not conceivably behave in that way, they will carry out your prediction to the letter.\n-  If used in combat or a situation of physical danger, the increased chaos limits the prediction to one round into the future.\n- This Routine can be run only once per scene."
     },
     {
         title: "Will of the Machine",
@@ -937,9 +949,8 @@ function populateRoutine(id){
         index = getIndex(routineTechniqueList[0][groupIndex], match);
         if (index > -1) {
             var currentRoutine = routineTechniqueList[0][opGroup[i]][index];
-            routineInfo.setAttribute('data-name', routineField.value); // Store armour name
-            routineInfo.setAttribute('data-desc', currentRoutine.desc); // Store armour description
-            routineProcessing.value = currentRoutine.effort;
+            routineInfo.setAttribute('data-name', routineField.value); // Store routine name
+            routineInfo.setAttribute('data-desc', currentRoutine.desc); // Store routine description
             routineAction.value = currentRoutine.action;
             return;
         }
@@ -957,11 +968,11 @@ function addRoutineRow(){
      var newRow = $("<tr id='routineRow"+rowNumRoutine+"' value ='"+rowNumRoutine+"'>");
         var cols = "";
 
-        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="routineInfo'+rowNumRoutine+'"></i><input type="text" class="nosubmit"  id="routineName' + rowNumRoutine + '" list="routineList' + rowNumRoutine + '" data-idNum="'+ rowNumRoutine + '" onchange="populateRoutine('+rowNumRoutine+'); "/><datalist id="routineList' + rowNumRoutine + '"></datalist></td>';
-        cols += '<td><input type="number" value="0" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineCommit' + rowNumRoutine + '" readonly/></td>';
-    cols += '<td><input type="string" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+'); calculateEncumberance();" id="routineAction' + rowNumRoutine + '" readonly/></td>';
+        cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Technique Info" data-name="" data-desc="" id="routineInfo'+rowNumRoutine+'"></i><input type="text" class="nosubmit"  id="routineName' + rowNumRoutine + '" list="routineList' + rowNumRoutine + '" data-idNum="'+ rowNumRoutine + '" onchange="populateRoutine('+rowNumRoutine+'); updateSkillPool();"/><datalist id="routineList' + rowNumRoutine + '"></datalist></td>';
+        cols += '<td><input value="-" name="minusOne'+rowNumRoutine+'" readonly type="button" class="button" onclick="decrement(routineCommit'+rowNumRoutine+'.id)"><input type="number" value="0" min="0" onchange="populateRoutine('+rowNumRoutine+'); " id="routineCommit' + rowNumRoutine + '" readonly/></td>';
+    cols += '<td><input type="string" value="-" min="0" onchange="populateRoutine('+rowNumRoutine+');" id="routineAction' + rowNumRoutine + '" readonly/></td>';
         
-        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id);" value="-"></td>';
+        cols += '<td><input type="image" src="./img/Trash_Icon.png"  name="removeRoutine'+rowNumRoutine+'" class="ibtnDel" data-rownum="'+rowNumRoutine+'" onclick="removeRoutineRow(this.dataset.rownum,this.id); updateSkillPool();" value="-"></td>';
         newRow.append(cols);
         $("#routineTable").append(newRow);
         
@@ -978,31 +989,33 @@ function addRoutineRow(){
 // Update available Core Routines based on player level/2 rounded up and true AI class.
 function updateCoreRoutines(){
     if ($("#playerClass").val() === "trueAI"){
+
     for (var i = 0; i < 12; i++){
-        
-        if(parseInt($("#CoreRoutine"+i+"Level").val()) <= Math.ceil((parseInt($("#playerLevel").val()))/2)){
-            $("#CoreRoutine"+i).show();
-            
+      //console.log($("[name='CoreRoutine"+i+"Level']"));
+        if(parseInt($("[name='CoreRoutine"+i+"Level']").val()) <= Math.max(Math.ceil((parseInt($("#playerLevel").val()))/2),1)){
+            $("[name='CoreRoutine"+i+"']").show();
+
         }
         else{
-            $("#CoreRoutine"+i).hide();
-            $("#CoreRoutine"+i+"Child").hide();
+            $("[name='CoreRoutine"+i+"']").hide();
+            $("[name='CoreRoutine"+i+"Child']").hide();
+
         }
     }
     }
     else if (($("#playerClass").val() === "adventurerETAI")||($("#playerClass").val() === "adventurerPTAI")||($("#playerClass").val() === "adventurerPTAI")||($("#playerClass").val() === "adventurerWTAI")){
         
-       for (var j = 0; j < 12; j++){    
-        if((parseInt($("#CoreRoutine"+j+"Level").val()) <= Math.floor(parseInt($("#playerLevel").val())/2))&&(parseInt($("#playerLevel").val())< 7)&&($("#CoreRoutine"+j+"Level").val() < 3)){
-            $("#CoreRoutine"+j).show();
+       for (var i = 0; i < 12; i++){    
+        if((parseInt($("[name='CoreRoutine"+i+"Level']").val()) <= Math.floor(parseInt($("#playerLevel").val())/2))&&(parseInt($("#playerLevel").val())< 7)&&(parseInt($("[name='CoreRoutine"+i+"Level']").val() < 3))){
+            $("[name='CoreRoutine"+i+"']").show();
             
         }
-        else if((parseInt($("#CoreRoutine"+j+"Level").val()) < 4) && (parseInt($("#playerLevel").val() ) > 6)){
-            $("#CoreRoutine"+j).show();
+        else if((parseInt($("[name='CoreRoutine"+i+"Level']").val()) < 4) && (parseInt($("#playerLevel").val() ) > 6)){
+            $("[name='CoreRoutine"+i+"']").show();
         }
         else{
-            $("#CoreRoutine"+j).hide();
-            $("#CoreRoutine"+j+"Child").hide();
+            $("[name='CoreRoutine"+i+"']").hide();
+            $("[name='CoreRoutine"+i+"Child']").hide();
         }
     } 
     }
@@ -1015,7 +1028,7 @@ function updateCoreRoutines(){
 // Add one row to Shell inventory table.
 function addShellRow(){
      var newRow = $("<tr id='shellRow"+shellRowNum+"' value ='"+shellRowNum+"'>");
-    var newChild =  $("<tr id='shellChildRow"+shellRowNum+"'>");
+    //var newChild =  $("<tr id='shellChildRow"+shellRowNum+"'>");
         var cols = "";
 
         cols += '<td><i class="fa fa-info-circle interactInfo" title="Get Skill Info" data-name="" data-desc="" id="shellInfo'+shellRowNum+'"></i><input type="text" class="nosubmit"  id="shellName' + shellRowNum + '" list="shellList' + shellRowNum + '" data-idNum="'+ shellRowNum + '" onchange="populateShell('+shellRowNum+');  updateAC();"/><datalist id="shellList' + shellRowNum + '"></datalist></td>';
@@ -1229,7 +1242,7 @@ function updateSkillBonus(id) {
             var isStartingFoci = document.getElementById("isStartingFoci" + skillID).checked;
         }
        // console.log("match  = " + match);
-        if (match != "empty"){
+        if ((match != "empty") && (match != "")){
             // Set skill field value.
             if ((skillID < 10) || isStartingFoci || (skillID > 15)){
                // console.log(match);
@@ -1242,6 +1255,8 @@ function updateSkillBonus(id) {
     }
     document.getElementById("fociSPBonus").value = FociSP;
     if(selection.value !== "empty"){
+        console.log("updateSkillBonus - selection = " + selection.id);
+        console.log("updateSkillBonus - selection value = " + selection.value);
         updateSkill(selection.value);
     }
      if(selection.getAttribute("data-previous") !== "empty"){
@@ -1311,6 +1326,8 @@ function updateSkill(id) {
     var currentSkill = document.getElementById(id+"Score"); // Get skill input field.
 
     var skillBaseValue = parseInt(document.getElementById(id + "BaseScore").value); // Get skill Base Score
+    console.log(id);
+    console.log("updateSkill - skillBaseValue " + skillBaseValue);
     var skillBonusValue = parseInt(document.getElementById(id + "BonusScore").value); // Get Skill Bonus Score
     var level = parseInt(document.getElementById("playerLevel").value);
 
@@ -1345,7 +1362,60 @@ function updateSkill(id) {
     updateMaxEffort();
 }
 
-
+function isTrue(sheetData, checkID){
+    if(sheetData == "on"){
+        document.getElementById(checkID).checked = true;
+    }
+    else{
+        document.getElementById(checkID).checked = false;
+    }
+}
+// Update Character Creation Initial SKills
+function updateInitSkills(){
+    console.log(characterFields.IsGrowth)
+    isTrue(characterFields.IsGrowth, "isGrowthCheck");
+    document.getElementById("isGrowthCheck").onchange();
+    document.getElementById("initSkill1").value = characterFields.LearnSkill1;
+    document.getElementById("initSkill1").onchange();
+    document.getElementById("initSkill2").value = characterFields.LearnSkill2;
+    document.getElementById("initSkill2").onchange();
+    document.getElementById("initSkill3").value = characterFields.GrowthSkill;
+    document.getElementById("initSkill3").onchange();
+    document.getElementById("initSkill4").value = characterFields.BackgroundSkill1;
+    console.log("updateInitSkills - initSkill5 value = " + document.getElementById("initSkill5").value);
+    document.getElementById("initSkill4").onchange();
+    document.getElementById("initSkill5").value = characterFields.PsiSkill1;
+    console.log("updateInitSkills - initSkill5 value = " + document.getElementById("initSkill5").value);
+    document.getElementById("initSkill5").onchange();
+ 
+    
+    document.getElementById("initSkill6").value = characterFields.PsiSkill2;
+    document.getElementById("initSkill6").onchange();
+    document.getElementById("initSkill7").value = characterFields.BackgroundSkill2;
+    document.getElementById("initSkill7").onchange();
+    document.getElementById("initSkill8").value = characterFields.AISkill1;
+    document.getElementById("initSkill8").onchange();
+    document.getElementById("initSkill9").value = characterFields.AISkill2;
+    document.getElementById("initSkill9").onchange();
+    document.getElementById("initSkill10").value = characterFields.fociSkill1;
+    document.getElementById("initSkill10").onchange();
+    document.getElementById("initSkill11").value = characterFields.fociSkill2;
+    document.getElementById("initSkill11").onchange();
+    document.getElementById("initSkill12").value = characterFields.fociSkill3;
+    document.getElementById("initSkill12").onchange();
+    document.getElementById("initSkill13").value = characterFields.fociSkill4;
+    document.getElementById("initSkill13").onchange();
+    document.getElementById("initSkill14").value = characterFields.fociSkill5;
+    document.getElementById("initSkill14").onchange();
+    document.getElementById("initSkill15").value = characterFields.fociSkill6;
+    document.getElementById("initSkill15").onchange();
+    document.getElementById("initSkill16").value = characterFields.InterestSkill;
+    document.getElementById("initSkill16").onchange();
+    document.getElementById("initSkill17").value = characterFields.AISkill;
+    document.getElementById("initSkill17").onchange();
+    document.getElementById("initSkill18").value = characterFields.PsiFociSkill;
+    document.getElementById("initSkill18").onchange();
+}
 
 // Tracks and calculates how many skill points have been spent by the player.
 function updateSkillPool() {
@@ -1386,11 +1456,13 @@ function updateSkillPool() {
     var psiCost = 0;
     var opGroup = Object.getOwnPropertyNames(psiTechniqueList[0]);
     var index = -1;
-    var psiField = "";
-    var techniqueName = "";
+    var routineCost = 0;
+    var field = "";
+    var itemName = "";
     var i = 0;
     var cost = 0;
     var psiLength = parseInt($("[name='counterPsi']").val());
+    var routineLength = parseInt($("[name='counterRoutine']").val());
     var groupIndex = ""
     var isTrained  = false;
     // Calculate attribute bonus SP cost.
@@ -1418,14 +1490,14 @@ function updateSkillPool() {
     //Calculate Psychic Technique SP cost
         for (i = 1; i < (psiLength+1); i++){
           //console.log("row: " + i);
-            psiField = document.getElementById("psiName" + i); // Get technique select element for given row.
-            techniqueName = psiField.value; // Get name of technique.
+            field = document.getElementById("psiName" + i); // Get technique select element for given row.
+            itemName = field.value; // Get name of technique.
             isTrained = document.getElementById("isTrained" + i).checked;
             for (var j = 0; j < opGroup.length; j++) {
                 
                 groupIndex = opGroup[j];
               //console.log("Indexing " + groupIndex);
-                index = getIndex(psiTechniqueList[0][groupIndex], techniqueName);
+                index = getIndex(psiTechniqueList[0][groupIndex], itemName);
                 if (index > -1 && !isTrained) {
                     psiCost = psiCost + parseInt(psiTechniqueList[0][opGroup[j]][index].lvl);
                     
@@ -1435,15 +1507,58 @@ function updateSkillPool() {
                 }
             }
         }
-    document.getElementById("usedSP").value = attrCost + skillCost + psiCost;
+
+        //Calculate AI Peripheral Routine SP cost
+        opGroup = Object.getOwnPropertyNames(routineTechniqueList[0]);
+        for (i = 1; i < (routineLength+1); i++){
+            //console.log("row: " + i);
+              field = document.getElementById("routineName" + i); // Get technique select element for given row.
+              itemName = field.value; // Get name of technique.
+            //console.log(itemName);
+              for (var j = 0; j < opGroup.length; j++) {
+                  groupIndex = opGroup[j];
+              //console.log("Indexing " + groupIndex);
+                  index = getIndex(routineTechniqueList[0][groupIndex], itemName);
+                  if (index > -1) {
+                      routineCost = routineCost + parseInt(routineTechniqueList[0][opGroup[j]][index].lvl);
+                  //console.log(field.value + " SP cost  = " + parseInt(routineTechniqueList[0][opGroup[j]][index].lvl));
+                  //console.log("total Routine SP cost: " + routineCost);
+                      j = opGroup.length;
+                  }
+              }
+          }
+
+    document.getElementById("usedSP").value = attrCost + skillCost + psiCost + routineCost;
 }
 
+// Populate skill base and bonus scores from Sheet data
+function updateSkillData(){
+    var baseSkills = document.querySelectorAll('input[id$="BaseScore"]');
+    for (i =0; i < baseSkills.length; i++){
+        console.log(baseSkills[i].value + " = " + characterFields[baseSkills[i].name])
+        baseSkills[i].value = characterFields[baseSkills[i].name];
+        baseSkills[i].onchange();
+    }
+    // var bonusSkills = document.querySelectorAll('input[id$="BonusScore"]');
+    // for (i =0; i < baseSkills.length; i++){
+    //     bonusSkills[i].value = characterFields[bonusSkills[i].name];
+    //     bonusSkills[i].onchange();
+    // }
+
+    updateSkillPool();
+    updateMaxEffort();
+}
 
 //#endregion
 
 // ================================================================================
 
 //#region 6. Level & XP Automation
+
+function updateXP(){
+    document.getElementById("playerXP").value = characterFields.XP // update XP value
+    updateLevel(); // Calculate player level from XP
+}
 
 // Adjust player level according to current XP.
 function updateLevel() {
@@ -1538,6 +1653,23 @@ function checkDeath(id){
         $(".messageHeader").text("FLATLINED!" + ":");
         openAlert();
     }    
+}
+
+function updateHP(){
+
+    document.getElementById("playerHP").value = characterFields.MaxHP; // Update current character maximum HP value
+    document.getElementById("playerHP").onchange(); // Trigger onchange event.
+    document.getElementById("hpRange").value = characterFields.HP; // Update current character HP value
+    document.getElementById("hpRange").oninput(); // Trigger onchange event.
+    document.getElementById("playerTempHP").value = characterFields.MaxTempHP;
+    document.getElementById("playerTempHP").onchange();
+    document.getElementById("tempHpRange").value = parseInt(characterFields.TempHP);
+    document.getElementById("tempHpRange").oninput();
+    document.getElementById("strainRange").value = characterFields.Strain; // Update current character HP value
+
+    document.getElementById("strainRange").oninput();
+    console.log("temp HP: " + characterFields.TempHP);
+   
 }
 
 //#endregion
@@ -2250,16 +2382,88 @@ var routineTechniqueList = [{
             action: "-"
     }
     ],
-    "Biopsionics":[
-        
+    "Peripheral Routines":[
+        {
+            value: "Augmented Targeting",
+            title: "[On Turn (Scene), lvl-1]",
+            desc: "- Commit Processing for the scene as an On Turn before attacking a non-sentient target.\n- Your ability to integrate physical predictions with environmental readings ensures that your attack will inevitably hit the target for maximum damage.\n- Note that animals and vehicles piloted by sentient pilots are not valid targets.",
+            lvl: "1",
+            action: "On Turn (Scene)",
+            limit: 0
+        },
+        {
+            value: "Metadimensional Cognition Access",
+            title: "[Passive, lvl-1]",
+            desc: "- You have learned how to adjust your metadimensional cognitive patterns to cooperate with allied telepaths.\n- You are now a valid target for the Telepathy discipline from friendly psychics.\n- You need not Commit Processing to use this ability, as it is always in effect.",
+            lvl: "1",
+            action: "Passive",
+            limit: 0
+        },
+        {
+            value: "Overclock Cognition",
+            title: "[On Turn (Day), lvl-1]",
+            desc: "- Commit Processing for the day as an On Turn.\n- For the rest of the scene, either your Wisdom or Intelligence modifier is increased by +1, up to a maximum of +3.\n- A given attribute can be boosted only once in any scene. This doesn’t alter your maximum Processing score.",
+            lvl: "1",
+            action: "On Turn (Day)",
+            limit: 1
+        },
+        {
+            value: "Emergency Maintenance",
+            title: "[On turn (Day), lvl-2]",
+            desc: "- Commit Processing for the day as an On Turn to immediately recover 2 hit points per character level as you engage emergency repair functionality.\n- You can use this ability only once per round.",
+            lvl: "2",
+            action: "On Turn (Day)",
+            limit: 1
+        },
+        {
+            value: "Sensor Ghost",
+            title: "[On turn (Scene), lvl-2]",
+            desc: "- Commit Processing for the scene as an On Turn.\n- For the rest of the scene, you are invisible to “dumb” sensor hardware such as motion detectors, laser tripwires, radar, or other automated sensors.\n- A sentient creature watching a monitor or otherwise actually studying readings can realize that something is wrong, however.",
+            lvl: "2",
+            action: "On Turn (Scene)",
+            limit: 0
+        },
+        {
+            value: "Augmented Cognition",
+            title: "[On turn (Day), lvl-3]",
+            desc: "- Commit Processing for the day as an On Turn.\n- Your Intelligence attribute becomes 18 for the rest of the day, but your maximum Processing is unaffected.",
+            lvl: "3",
+            action: "On Turn (Day)",
+            limit: 0
+        },
+        {
+            value: "Hack Control",
+            title: "[Move (Scene), lvl-3]",
+            desc: "- Commit Processing for the scene as a Move action and target a visible expert system robot, drone, vehicle, or automated device no larger than a gravflyer.\n- Give it one command it is physically capable of carrying out, even if it violates its programming.\n- The device will carry out this command on its next available action.\n- If you acquire the Will of the Machine Routine, you are refunded this Routine purchase.",
+            lvl: "3",
+            action: "On Turn (Scene)",
+            limit: 1
+        },
+        {
+            value: "Remote Power Sink",
+            title: "[Main Action (Scene), lvl-3]",
+            desc: "- Commit Processing for the scene as a Main Action and target a visible piece of equipment powered by a Type A cell or the equivalent.\n- Its power is immediately drained.\n- Only the most professional targets will realize that their device is powerless before they next try to use it unless the depowering has obvious results.",
+            lvl: "3",
+            action: "Main Action (Scene)",
+            limit: 1
+        },
+        {
+            value: "Core Manifestation",
+            title: "[Main Action(Day), lvl-4]",
+            desc: "- Commit Processing for the day as a Main Action to create a forcefield construct equivalent to a Box armature using only your intrinsic quantum core power, manifesting it at full hit points.\n- This ability can only be used when your core is not attached to a functioning armature, and if the force construct is reduced to zero hit points, you must make a Mental saving throw or your core is destroyed as well.",
+            lvl: "4",
+            action: "Main Action (Day)",
+            limit: 1
+        }
     ]
+  
 }];
 
 // List of Psychic Techniques
 var psiTechniqueList = [{
     "Select Technique":[
         {
-        value: "-",
+            value: "-",
             name: "empty",
             desc: "",
             lvl: "0",
@@ -4202,19 +4406,23 @@ function BackInfo(childID, selectID) {
     var match = document.getElementById(selectID).value; // Get selected background value.
     var data = backgroundList[0]["Select a Background"]; // Get background data array list. 
     var index = getIndex(data, match); // Find matching background in data array
+    if (index == -1){
+        document.getElementById("playerBackground").value = "-"; 
+        index = 0; // Treat input as no background selected.
+    }
     var info = backgroundList[0]["Select a Background"][index].desc; // Get background description
     var title = backgroundList[0]["Select a Background"][index].title; // Get background title
     document.getElementById("initSkill4").value = "empty"; // Clear background skill fields.
-        document.getElementById("initSkill7").value = "empty"; //^
-        document.getElementById("initSkill17").value = "empty"; // Clear True AI skill fields.
-        document.getElementById("initSkill17").onchange();
-        //Check if True AI background is selected.
-        if (match === 'trueAI'){
+    document.getElementById("initSkill7").value = "empty"; //^
+    document.getElementById("initSkill17").value = "empty"; // Clear True AI skill fields.
+    document.getElementById("initSkill17").onchange();
+    //Check if True AI background is selected.
+    if (match === 'trueAI'){
 
-            //document.getElementById("initSkill17").value = "fix"; // Set True AI skill bonus.
-            //document.getElementById("initSkill17").onchange();
-        }
-        // Check if selected background allows any skill pick.
+        //document.getElementById("initSkill17").value = "fix"; // Set True AI skill bonus.
+        //document.getElementById("initSkill17").onchange();
+    }
+    // Check if selected background allows any skill pick.
     if (backgroundList[0]["Select a Background"][index].bonus === "any") {
         $(".backgroundSkill").show(); // Show 'any' background skill select field
     } else {
@@ -4228,6 +4436,7 @@ function BackInfo(childID, selectID) {
     document.getElementById(childID).setAttribute("data-name",title); // Store backgorund title.
 
     clearSelection(); // clear text selection
+    
 }
 
 // Updates class abilities and associated skill points, foci points, and attack bonuses.
@@ -4422,11 +4631,6 @@ $(function () {
 // ================================================================================
 
 //#region 14. Save & Load Character Data
-
-
-
-
-
 
 // Save player data from all unique-ID elements to a '.swn' text file and download to local disk. 
 function save_character(){
@@ -4656,6 +4860,103 @@ function load_character(e) {
 
 // Attach load_character function to relevant button.
 document.getElementById('buttonload').addEventListener('change', load_character);
+
+// Loads all character sheet data from Google Sheets on page load.
+function loadSheet(){
+    var file = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2TBejgtgKNndXUGPNGcvjRnd3O5l5IDkY5_i3zLYdjjdhYXFCe2_TUDyn3Wz7Q_fjetFuJxEICHf/pub?gid=0&single=true&output=csv" // Link to Google Sheet.
+
+     Papa.parse(file, {
+        download: true, // Download data from sheet
+        header: true, // populate header values from 1st data row
+        // Call function after data download is complete
+        complete: function (results) {
+            characterData = results.data; // Store all spreadsheet data
+            
+            populateData(characterData); 
+
+        }
+        
+    })
+}
+
+// Populates character sheet fields from stored character data
+function populateData(data) {
+    var playerList; 
+    var uniquePlayers = [];
+  //console.log(data);
+    // Loop through all character data rows
+    for (var i = 0; i < data.length; i++){
+        // Check if uniquePlayers doesn't include the indexed player name for the row
+        // console.log("i = " + i);
+        // console.log(data[i].playerName);
+        if (!uniquePlayers.includes(data[i].playerName)){
+            uniquePlayers.push(data[i].playerName); // add unique playername to array.
+            playerList += '<option>' + data[i].playerName + '</option>' // Add player name to the Player option list. 
+            document.getElementById("players").innerHTML = playerList; // Update player option list.
+            loadPlayer();
+        }
+    }
+}
+
+// Populate character list for specific player
+function loadPlayer() {
+var selectedPlayer = document.getElementById("playerSelect").value; // Get player Select element. 
+var playerCharacters;
+// Loop through all characters in stored data 
+
+for (var i = 0; i < characterData.length; i++){
+    // Check if character belongs to selected Player
+    if (characterData[i].playerName == selectedPlayer){
+        playerCharacters += '<option>' + characterData[i].characterName + '</option>'; // Add character name to character option list.
+    }
+}
+document.getElementById("characterSelect").value = ""; // Clear character name input select field.
+document.getElementById("characters").innerHTML = playerCharacters; // Update character option list.
+loadCharacter(); 
+
+}
+
+// Fill in character value fields for selected character.
+function loadCharacter() {
+    if (!$(this).prop("disabled")){
+    var selectedPlayer = document.getElementById("playerSelect").value;
+    var selectedCharacter = document.getElementById("characterSelect").value;
+  for (var i = 0; i < characterData.length; i++) {
+    if ((characterData[i].playerName == selectedPlayer)&&(characterData[i].characterName == selectedCharacter)){
+        characterFields = characterData[i];
+      console.log(characterFields);
+        updateXP(); // Fill in player character XP value.
+        updateBio(); // Fill in character name field.
+        updateHP(); // Fill in HP Slider
+        updateInitSkills(); // Fill ini initial Skill Select Fields.
+        updateSkillData();
+        break;
+    }
+  }
+}
+}
+
+function saveData() {
+    if (document.getElementById("characterSelect").value !== "" && !$('#saveBtn').prop("disabled")){
+        document.getElementById("saveBtn").disabled = true;
+        document.getElementById("loadBtn").disabled = true;
+    var formData = new FormData(document.getElementById("charsheet"));
+    fetch('https://script.google.com/macros/s/AKfycbxRPMhMnp8m7O-KqKvo34gMUpK5N-do23pBsXpysisnD7le_3vJ_QSG14sq6bylGg_x/exec',
+    {
+    method: 'post',
+    body: formData
+    })
+    var delayInMilliseconds = 5000; //1 second
+
+setTimeout(function() {
+  //your code to be executed after 1 second
+  loadSheet();
+  document.getElementById("saveBtn").disabled = false;
+        document.getElementById("loadBtn").disabled = false;
+}, delayInMilliseconds);
+    }
+}
+
 //#endregion
 
 // ================================================================================
@@ -4663,15 +4964,19 @@ document.getElementById('buttonload').addEventListener('change', load_character)
 //#region 15. Slider Automation
 
 //Slider Automation
+var tempHpSlider = document.getElementById("tempHpRange");
+var tempHpDisp = document.getElementById("currentTempHP");
 var hpSlider = document.getElementById("hpRange");
 var hpDisp = document.getElementById("currentHP");
 var strainSlider = document.getElementById("strainRange");
 var strainDisp = document.getElementById("currentStrain");
 hpDisp.innerHTML = hpSlider.value;
+tempHpDisp.innerHTML = tempHpSlider.value;
 strainDisp.innerHTML = strainSlider.value;
 
 // Update slider maximum value to match input max value.
 function update(value,target,disp){
+    console.log("value: " + value + " target: " + target + " disp: " + disp);
     var targetSlider = document.getElementById(target);
     var targetDisp = document.getElementById(disp);
     targetSlider.max = value;
@@ -4685,7 +4990,7 @@ hpSlider.oninput = function() {
   hpDisp.innerHTML = this.value;
     var deathBox = $("#deathSaveBox");
     var bleedOut = document.getElementById("deathBox1");
-    if (this.value == 0){
+    if ((this.value == 0)&&tempHpSlider.value == 0){
         deathBox.show();
     }
     else{
@@ -4694,6 +4999,13 @@ hpSlider.oninput = function() {
         deathBox.hide();
     }
 };
+
+tempHpSlider.oninput = function() {
+    console.log("tempHpDisp.innerHTML BEFORE = " + tempHpDisp.innerHTML);
+    console.log("tempHpSlider = " + this.value);
+    tempHpDisp.innerHTML = this.value;
+    console.log("tempHpDisp.innerHTML BEFORE = " + tempHpDisp.innerHTML);
+  };
 
 // Update strain counter display to match Strain slider value.
 strainSlider.oninput = function() {
@@ -4705,7 +5017,7 @@ strainSlider.oninput = function() {
 // Update max strain value to match Con Score.
 function updateStrainMax(val){
     var maxStrain = document.getElementById("strainMax");
-    maxStrain.innerHTML = val;
+    //maxStrain.innerHTML = val;
     maxStrain.value = val;
     if (maxStrain.getAttribute("onchange") != null) {
        maxStrain.onchange();
@@ -4791,12 +5103,12 @@ var delay = 20;
 //                 itemId: element.id
 //               }).then(() => {
 //                 // item inserted
-//                // console.log(element.id + " inserted");
+
 //               }).catch((e) => console.error(e))
 //           } else {
 //             var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //             if (!(typeof element.value === 'string' || element.value instanceof String)){
-//                // console.log(element.value)
+
 //             }
     
 //               var id = element.id
@@ -4807,7 +5119,7 @@ var delay = 20;
 //                 itemId: id
 //               }).then(() => {
 //                 // item inserted
-//                // console.log(element.id + " inserted2");
+
 //               }).catch((e) => console.error(e))
 //           }
 
@@ -4816,7 +5128,7 @@ var delay = 20;
           
 //         var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
 //         if (!(typeof checked === 'string' || checked instanceof String)){
-//            // console.log(checked)
+
 //         }
 
 //         userbase.updateItem({
@@ -4898,9 +5210,10 @@ function loadSector(url){
 //   }
 // Initialise page on ready.
 $(document).ready(function () {
+    loadSheet();
     let formElements = form.elements;
     
-  for (const element of formElements) {
+    for (const element of formElements) {
     if (element.id.length > 0) {
         //// console.log("add event to: " + element.id)
         element.addEventListener(
@@ -4909,7 +5222,7 @@ $(document).ready(function () {
             false
          );
     }
-}
+    }
     $('.ibtnDel').click(function(e){e.preventDefault();}).click();
     $('.tablinks').click(function(e){e.preventDefault();}).click();
     hidePages();
@@ -4918,130 +5231,130 @@ $(document).ready(function () {
     hideTabs();
     //typeWriter();
     var delayInMilliseconds = 0; //4.5 seconds
- setTimeout(function() {
-  //your code to be executed after delay second
-     $('div[name="loading"]').hide();
-     
+    setTimeout(function() {
+    //your code to be executed after delay second
+    $('div[name="loading"]').hide();
+        
     //$(".message").text("WECOME BACK USER#404\n---\nARE YOU READY TO BEGIN?");
-                //$(".messageHeader").text("E.I.N.S.");
-               // openAlert();
-    //document.getElementById("tabUI").style.display = "flex";
-//document.getElementById("defaultOpen").click();
+                    //$(".messageHeader").text("E.I.N.S.");
+                // openAlert();
+        //document.getElementById("tabUI").style.display = "flex";
+    //document.getElementById("defaultOpen").click();
+        
+    //updateBaseSkills();
+
+    //application code
+    userbase.init({ appId: 'cb733a2c-a27f-4807-848b-c075c4ce8f31' })
+
+    document.getElementsByClassName('sideMenuPanel')[0].style.display = 'none'
+
+    //document.getElementsByName('db-loading')[0].style.display = 'none'
+    document.getElementsByName('loginSubmit')[0].addEventListener('click', handleLogin)
+    document.getElementsByName('signUpSubmit')[0].addEventListener('click', handleSignUp)
+
+    //document.getElementsByName("abcd")[0].addEventListener('submit', addTodoHandler)
+
+    charImage("./img/Default_Avatar.webp");
     
-//updateBaseSkills();
+        
+    $(".randomGrowth").hide();
+    $(".backgroundSkill").hide();
+    $("#biopsiCoreTechnique").hide();
+    $("#metapsiCoreTechnique").hide();
+    $("#precogCoreTechnique").hide();
+    $("#telekinesisCoreTechnique").hide();
+    $("#telepathCoreTechnique").hide();
+    $("#teleportCoreTechnique").hide();
+    $(".isPsi").hide();
+    $(".isAI").hide();
+    $(".classSkill1").hide();
+    $(".classSkill2").hide();
+    $(".psiFocusSkill1").hide();
 
-//application code
-userbase.init({ appId: 'cb733a2c-a27f-4807-848b-c075c4ce8f31' })
-
-document.getElementsByClassName('sideMenuPanel')[0].style.display = 'none'
-
-//document.getElementsByName('db-loading')[0].style.display = 'none'
-document.getElementsByName('loginSubmit')[0].addEventListener('click', handleLogin)
-document.getElementsByName('signUpSubmit')[0].addEventListener('click', handleSignUp)
-
-//document.getElementsByName("abcd")[0].addEventListener('submit', addTodoHandler)
-
-charImage("./img/Default_Avatar.webp");
-   
-    
-$(".randomGrowth").hide();
-$(".backgroundSkill").hide();
-$("#biopsiCoreTechnique").hide();
-$("#metapsiCoreTechnique").hide();
-$("#precogCoreTechnique").hide();
-$("#telekinesisCoreTechnique").hide();
-$("#telepathCoreTechnique").hide();
-$("#teleportCoreTechnique").hide();
-$(".isPsi").hide();
-$(".isAI").hide();
-$(".classSkill1").hide();
-$(".classSkill2").hide();
-$(".psiFocusSkill1").hide();
-
-for (var i = 1; i < 12; i++){
-    $("#coreRoutine"+i+"Desc").val(routineCoreTechniques[i-1].desc);
-    $("#CoreRoutine"+i).hide();
-}
-    
-updateCoreRoutines();
-
-// Populate Class Select Table
-selectOptionTable(classList, "#playerClass");
-
-// Populate Background Select Table
-selectOptionTable(backgroundList, "#playerBackground");
-
-// Populate Attribute Growth Select Tables
-selectOptionTable(attrList, "#growthStat1");
-selectOptionTable(attrList, "#growthStat2");
-selectOptionTable(attrList, "#growthStat3");    
-    
-// Populate Foci Select Tables.
-selectOptionTable(fociList, "#Foci1");
-selectOptionTable(fociList, "#Foci2");
-selectOptionTable(fociList, "#Foci3");
-selectOptionTable(fociList, "#Foci4");
-selectOptionTable(fociList, "#Foci5");
-selectOptionTable(fociList, "#Foci6");
-
-selectOptionTable(skillList,"#initSkill10");
-selectOptionTable(skillList,"#initSkill11");
-selectOptionTable(skillList,"#initSkill12");
-selectOptionTable(skillList,"#initSkill13");
-selectOptionTable(skillList,"#initSkill14");
-selectOptionTable(skillList,"#initSkill15");
-selectOptionTable(skillList,"#initSkill16");
-    
-// Populate Skill Learning Select Tables
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill1");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill1");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill1");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill2");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill2");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill2");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill3");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill3");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill3");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill4");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill4");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill4");
-
-// Populate Starting Psi Skill Select Tables
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill5");
-optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#initSkill5");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill6");
-optionTablePartial("Psionic Skills",skillList[0]["Psychic Skills"],"#initSkill6");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill18");
-optionTablePartial("Psionic Skills",skillList[0]["Psychic Skills"],"#initSkill18");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill7");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill7");
-    
-    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill8");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill8");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill8");
-    
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill9");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill9");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill9");
-
-optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill17");
-optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill17");
-optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill17");
-    
-    
-    
-for(i=1;i<6;i++){
-    var element = document.getElementById("deathBox"+i);
-    if(element.getAttribute("onchange") !== null){
-    element.onchange();
+    for (var i = 1; i < 12; i++){
+        $("#coreRoutine"+i+"Desc").val(routineCoreTechniques[i-1].desc);
+        $("#CoreRoutine"+i).hide();
     }
-}
+        
+    updateCoreRoutines();
+
+    // Populate Class Select Table
+    selectOptionTable(classList, "#playerClass");
+
+    // Populate Background Select Table
+    selectOptionTable(backgroundList, "#playerBackground");
+
+    // Populate Attribute Growth Select Tables
+    selectOptionTable(attrList, "#growthStat1");
+    selectOptionTable(attrList, "#growthStat2");
+    selectOptionTable(attrList, "#growthStat3");    
+        
+    // Populate Foci Select Tables.
+    selectOptionTable(fociList, "#Foci1");
+    selectOptionTable(fociList, "#Foci2");
+    selectOptionTable(fociList, "#Foci3");
+    selectOptionTable(fociList, "#Foci4");
+    selectOptionTable(fociList, "#Foci5");
+    selectOptionTable(fociList, "#Foci6");
+
+    selectOptionTable(skillList,"#initSkill10");
+    selectOptionTable(skillList,"#initSkill11");
+    selectOptionTable(skillList,"#initSkill12");
+    selectOptionTable(skillList,"#initSkill13");
+    selectOptionTable(skillList,"#initSkill14");
+    selectOptionTable(skillList,"#initSkill15");
+    selectOptionTable(skillList,"#initSkill16");
+        
+    // Populate Skill Learning Select Tables
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill1");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill1");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill1");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill2");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill2");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill2");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill3");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill3");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill3");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill4");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill4");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill4");
+
+    // Populate Starting Psi Skill Select Tables
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill5");
+    optionTablePartial("Psychic Skills",skillList[0]["Psychic Skills"],"#initSkill5");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill6");
+    optionTablePartial("Psionic Skills",skillList[0]["Psychic Skills"],"#initSkill6");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill18");
+    optionTablePartial("Psionic Skills",skillList[0]["Psychic Skills"],"#initSkill18");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill7");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill7");
+        
+        optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill8");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill8");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill8");
+        
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill9");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill9");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill9");
+
+    optionTablePartial("Select a Skill",skillList[0]["Select a Skill"],"#initSkill17");
+    optionTablePartial("Non-Combat Skills",skillList[0]["Non-Combat Skills"],"#initSkill17");
+    optionTablePartial("Combat Skills",skillList[0]["Combat Skills"],"#initSkill17");
+        
+        
+        
+    for(i=1;i<6;i++){
+        var element = document.getElementById("deathBox"+i);
+        if(element.getAttribute("onchange") !== null){
+        element.onchange();
+        }
+    }
      window.addEventListener("beforeunload", function(evt) {
     
         // Cancel the event (if necessary)
@@ -5201,6 +5514,8 @@ function clearSelection(){
 
 // ================================================================================
 
+//#region 19. Miscellaneous Functions
+
 // Navigate to relevant help text paragraph
 function navigateToHelpText(targetId){
     var targetTab = document.getElementsByName("helpTabOpen")[0];
@@ -5316,24 +5631,34 @@ function SelectHasValue(select, value) {
         return false;
     }
 }
-function checkCharName(){
-   // console.log("PING")
-    var charName = document.getElementById("playerName").value
-    if(charName === ""){
-        $(".message").text("Please Enter A Name!");
-                $(".messageHeader").text("New Character");
-                $('.inputField').show();
-                openAlert();
+// function checkCharName(){
+//    // console.log("PING")
+//     var charName = document.getElementById("playerName").value
+//     if(charName === ""){
+//         $(".message").text("Please Enter A Name!");
+//                 $(".messageHeader").text("New Character");
+//                 $('.inputField').show();
+//                 openAlert();
             
-    }
-}
+//     }
+// }
 
-function submitWarningName(){
-    var newName = document.getElementsByName("warningInput")[0].value
-            document.getElementById("playerName").value = newName;
-            document.getElementById("playerName").innerHTML = newName;
-            document.getElementById("playerName").onchange();
-            $('.inputField').hide();
+function updateBio(){
+            document.getElementById("playerName").value = characterFields.characterName; // Fill character name field
+            document.getElementsByClassName('pageTitle')[0].innerText = characterFields.characterName.toUpperCase(); // Fill Header with character name in all caps.
+            document.getElementById("playerSpecies").value = characterFields.Species; // Fill character species field.
+            document.getElementById("playerBackground").value = characterFields.Background; // Fill character Background field.
+          //console.log(characterFields.Background);
+            document.getElementById("playerBackground").onchange(); // Trigger onchange event
+            document.getElementById("playerClass").value = characterFields.Class; // Fill character class field.
+            document.getElementById("playerClass").onchange(); // Trigger onchange event
+            document.getElementById("playerHomeworld").value = characterFields.Homeworld; // Fill character Homeworld field.
+            document.getElementById("playerEmployer").value = characterFields.Employer; // Fill character Homeworld field.
+            document.getElementById("charPic").value = characterFields.ImageURL; // Fill URL link for character image/avatar.
+            document.getElementById("charPic").onchange(); // Trigger onchange event.
+
+
+
 }
 function findItemVal(id){
 var index = -1;
@@ -5368,9 +5693,6 @@ function removeOptions(parent) {
     document.getElementsByClassName("background")[0].style.marginLeft = "200px";
     document.getElementsByClassName("tab")[0].style.width = "calc(100% - 200px)";
     document.getElementsByClassName("background")[0].style.width = "calc(100% - 200px)";
-  }
-  function updateHeaderName(charName){
-    document.getElementsByClassName('pageTitle')[0].innerText = charName;
   }
   function menuClose() {
     document.getElementById("myMenuBar").style.width = "0px";
@@ -5459,468 +5781,6 @@ document.getElementsByName("db-loading")[0].style.display = 'none';
 
   
 }
-// function DBChangeHandler(databases){
-//     const charactersList = document.getElementsByName('charactersList')[0]
-//     if (databases.length === 0) {
-//        // console.log('empty');
-//       charactersList.innerText = 'Nothing to see here! \n \n Click "New Character" below to make a new entry!'
-//     } else {
-//        // console.log(databases);
-//        // console.log(databases.databases.length);
-//       // clear the list
-//       document.getElementsByName('characters')[0].innerHTML = ''
-//       // render all the character databases
-//       for (let i = 0; i < databases.databases.length; i++) {
-//          // console.log('adding item')
-//             // build the todo delete button
-//     const charDelete = document.createElement('button')
-//     charDelete.innerHTML = 'X'
-//     charDelete.value = 'X';
-//     charDelete.style.display = 'inline-block'
-//     charDelete.onclick = () => {
-//       userbase.modifyDatabasePermissions({
-//           databaseName: databases.databases[i].databaseName,
-//           username: user,
-//           revoke: true
-//         }).then(() => {
-//           // User no longer has access to the database
-//         }).catch((e) => console.error(e))
-//     }
-//    // load button
-//     const charLoad = document.createElement('button')
-//     charLoad.innerHTML = 'Load'
-//     charLoad.style.display = 'inline-block'
-//     charLoad.onclick = () => {
-//       openPage(event, 'charactersheet');
-//       openTab(event, 'bioTab');
-//       userbase.openDatabase({
-//           databaseName: databases.databases[i].databaseName,
-//           changeHandler: function (items) {
-//              // console.log(items);
-//               DBItems = items;
-//               DBName = databases.databases[i].databaseName;
-           
-// /* refactor DBItems ->
-//  val DBItemds = {
-//      "item1": "item value",
-//      "item2": "item 2 value",
-//  }
-
-// ie: items.forEach(i=>{DBItems[i.id]=i.value})
-
-// */ 
-
-//           }
-//         }).then(() => {
-//           // the database can now be used
-//            // update your application state with the database items
-//            for (var repeat = 0; repeat < 2; repeat++){
-          
-//             while (rowNum > 1) {
-//               removeItemRow();
-//             }
-//             while (parseInt($("[name='counterItem']").val()) < parseInt(findItemVal('counter'))) {
-//                 addItemRow();
-//             }
-              
-//               // Set size of dynamic Weapon tables
-//             while (weaponRowNum > 1) {
-//               removeWeaponRow();
-//             }
-//             while (parseInt($("[name='counterWeapon']").val()) < parseInt(findItemVal('counterWeapon'))) {
-//                 addWeaponRow();
-//             }
-              
-//             // Set size of dynamic Melee tables
-//             while (meleeRowNum > 1) {
-//               removeMeleeRow();
-//             }
-//             while (parseInt($("[name='counterMelee']").val()) < parseInt(findItemVal('counterMelee'))) {
-//                 addMeleeRow();
-//             } 
-              
-//                // Set size of dynamic Armour tables
-//             while (armourRowNum > 1) {
-//               removeArmourRow();
-//             }
-//             while (parseInt($("[name='counterArmour']").val()) < parseInt(findItemVal('counterArmour'))) {
-//                 addArmourRow();
-//             } 
-              
-//               // Set size of dynamic psi technique tables
-//               while (rowNumPsi > 1) {
-//               removePsiRow();
-//             }
-//             while (parseInt($("[name='counterPsi']").val()) < parseInt(findItemVal('counterPsi'))) {
-//                 addPsiRow();
-//             }
-              
-//               // Set size of dynamic routine tables
-//               while (rowNumRoutine > 1) {
-//               removeRoutineRow();
-//             }
-//             while (parseInt($("[name='counterRoutine']").val()) < parseInt(findItemVal('counterRoutine'))) {
-//                 addRoutineRow();
-//             }
-              
-//               // Set size of dynamic shell tables
-//               while (shellRowNum > 1) {
-//               removeShellRow();
-//             }
-//             while (parseInt($("[name='counterShell']").val()) < parseInt(findItemVal('counterShell'))) {
-//                 addShellRow();
-//             }
-              
-//                // Set size of dynamic drone tables
-//               while (droneRowNum > 1) {
-//               removeDroneRow();
-//             }
-//             while (parseInt($("[name='counterDrone']").val()) < parseInt(findItemVal('counterDrone'))) {
-//                 addDroneRow();
-//             }
-        
-           
-           
-            
-//             // Prepare form data for JSON format
-//             const formId = "charsheet";
-//             var url = location.href;
-//             const formIdentifier = `${url} ${formId}`;
-//             let form = document.querySelector(`#${formId}`);
-//             let formElements = form.elements;
-        
-//             // Display file content
-            
-//             for (const element of formElements) {
-//               for (var i=0; i<DBItems.length; i++){
-//                   var savedData = DBItems[i].itemId;
-//               if (element.id == savedData) {
-//                  // console.log("PONG");
-//                 if (element.type == 'checkbox') {
-        
-//                   var checked = (DBItems[i].item.value == 'checked');
-//                   $(element).prop("checked", checked);
-//                 } else {
-//                   element.value = DBItems[i].item.value; 
-//                     element.dispatchEvent(new Event('input', { bubbles: true }));
-                    
-//                     if (element.getAttribute("onchange") != null) {
-//                 element.onchange();
-//             }
-//                     if ($(element).is('textarea')){
-        
-//                          $(element).height(0);
-        
-//                 $(element).attr('style', 'height: auto !important');
-        
-//                     }
-//                     $(element.id).change();
-//                     $(element.id).trigger("change");
-//                 }
-//               }
-//           }
-            
-//         }
-//           };
-
-//             updateLevel();
-//             var skillNameList = [
-//                 "admin",
-//                 "connect",
-//                 "exert",
-//                 "fix",
-//                 "heal",
-//                 "know",
-//                 "lead",
-//                 "notice",
-//                 "perform",
-//                 "pilot",
-//                 "program",
-//                 "punch",
-//                 "shoot",
-//                 "sneak",
-//                 "stab",
-//                 "survive",
-//                 "talk",
-//                 "trade",
-//                 "work",
-//                 "biopsi",
-//                 "metapsi",
-//                 "precog",
-//                 "telekinesis",
-//                 "telepath",
-//                 "teleport",
-//                 "custom1",
-//                 "custom2"
-//             ];
-//             for (var i = 0; i < skillNameList.length; i++){
-//                 updateSkill(skillNameList[i]);
-                
-//             }
-//         }).catch((e) => console.error(e))
-//     }
-    
-  
-//         // build the todo label
-//         const charLabel = document.createElement('label')
-//         charLabel.innerHTML = databases.databases[i].databaseName;
-        
-//         // append the todo item to the list
-//         const charItem = document.createElement('div')
-//         charItem.appendChild(charDelete)
-//         charItem.appendChild(charLoad)
-//         charItem.appendChild(charLabel)
-//         document.getElementsByName('characters')[0].appendChild(charItem)
-//        // console.log('child added');
-//       }
-//      // console.log('populated database list');
-//     }
-// }
-var savedItems = [];
-// //Hides Loading Element.
-// function changeHandler(databases) {
-
-// document.getElementsByName('db-loading')[0].style.display = 'none'
-// const charactersList = document.getElementsByName('characters')[0]
-
-//   if (databases.databases.length === 0) {
-//     charactersList.innerText = 'Nothing to see here! \n \n Click "New Character" below to make a new entry!'
-//   } else {
-//     // clear the list
-//     charactersList.innerHTML = ''
-//     // render all the character databases
-//     for (let i = 0; i < databases.databases.length; i++) {
-        
-//           // build the todo delete button
-//   const charDelete = document.createElement('button')
-//   charDelete.innerHTML = 'X'
-//   charDelete.value = 'X';
-//   charDelete.style.display = 'inline-block'
-//   charDelete.onclick = () => {
-//     userbase.modifyDatabasePermissions({
-//         databaseName: databases.databases[i].databaseName,
-//         username: user,
-//         revoke: true
-//       }).then(() => {
-//         // User no longer has access to the database
-//       }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
-//   }
-//  // load button
-//   const charLoad = document.createElement('button')
-//   charLoad.innerHTML = 'Load'
-//   charLoad.style.display = 'inline-block'
-//   charload.onclick = () => {
-//     openPage(event, 'charactersheet');
-//     openTab(event, 'bioTab');
-//     userbase.openDatabase({
-//         databaseName: databases.databases[i].databaseName,
-//         changeHandler: function (items) {
-//             DBName = databases.databases[i].databaseName;
-//             DBItems = items;
-//           // update your application state with the database items
-//           for (var repeat = 0; repeat < 2; repeat++){
-        
-//             while (rowNum > 1) {
-//               removeItemRow();
-//             }
-//             while (parseInt($("[name='counterItem']").val()) < parseInt(findItemVal('counter'))) {
-//                 addItemRow();
-//             }
-              
-//               // Set size of dynamic Weapon tables
-//             while (weaponRowNum > 1) {
-//               removeWeaponRow();
-//             }
-//             while (parseInt($("[name='counterWeapon']").val()) < parseInt(findItemVal('counterWeapon'))) {
-//                 addWeaponRow();
-//             }
-              
-//             // Set size of dynamic Melee tables
-//             while (meleeRowNum > 1) {
-//               removeMeleeRow();
-//             }
-//             while (parseInt($("[name='counterMelee']").val()) < parseInt(findItemVal('counterMelee'))) {
-//                 addMeleeRow();
-//             } 
-              
-//                // Set size of dynamic Armour tables
-//             while (armourRowNum > 1) {
-//               removeArmourRow();
-//             }
-//             while (parseInt($("[name='counterArmour']").val()) < parseInt(findItemVal('counterArmour'))) {
-//                 addArmourRow();
-//             } 
-              
-//               // Set size of dynamic psi technique tables
-//               while (rowNumPsi > 1) {
-//               removePsiRow();
-//             }
-//             while (parseInt($("[name='counterPsi']").val()) < parseInt(findItemVal('counterPsi'))) {
-//                 addPsiRow();
-//             }
-              
-//               // Set size of dynamic routine tables
-//               while (rowNumRoutine > 1) {
-//               removeRoutineRow();
-//             }
-//             while (parseInt($("[name='counterRoutine']").val()) < parseInt(findItemVal('counterRoutine'))) {
-//                 addRoutineRow();
-//             }
-              
-//               // Set size of dynamic shell tables
-//               while (shellRowNum > 1) {
-//               removeShellRow();
-//             }
-//             while (parseInt($("[name='counterShell']").val()) < parseInt(findItemVal('counterShell'))) {
-//                 addShellRow();
-//             }
-              
-//                // Set size of dynamic drone tables
-//               while (droneRowNum > 1) {
-//               removeDroneRow();
-//             }
-//             while (parseInt($("[name='counterDrone']").val()) < parseInt(findItemVal('counterDrone'))) {
-//                 addDroneRow();
-//             }
-        
-           
-           
-            
-//             // Prepare form data for JSON format
-//             const formId = "charsheet";
-//             var url = location.href;
-//             const formIdentifier = `${url} ${formId}`;
-//             let form = document.querySelector(`#${formId}`);
-//             let formElements = form.elements;
-        
-//             // Display file content
-            
-//             for (const element of formElements) {
-//               if (element.id in items) {
-//                 if (element.type == 'checkbox') {
-        
-//                   var checked = (items[element.id] == 'checked');
-//                   $(element).prop("checked", checked);
-//                 } else {
-//                   element.value = items[element.id]; 
-//                     element.dispatchEvent(new Event('input', { bubbles: true }));
-                    
-//                     if (element.getAttribute("onchange") != null) {
-//                 element.onchange();
-//             }
-//                     if ($(element).is('textarea')){
-        
-//                          $(element).height(0);
-        
-//                 $(element).attr('style', 'height: auto !important');
-        
-//                     }
-//                     $(element.id).change();
-//                     $(element.id).trigger("change");
-//                 }
-//               }
-            
-//         }
-//           };
-//           reader.readAsText(file);
-//             updateLevel();
-//             var skillNameList = [
-//                 "admin",
-//                 "connect",
-//                 "exert",
-//                 "fix",
-//                 "heal",
-//                 "know",
-//                 "lead",
-//                 "notice",
-//                 "perform",
-//                 "pilot",
-//                 "program",
-//                 "punch",
-//                 "shoot",
-//                 "sneak",
-//                 "stab",
-//                 "survive",
-//                 "talk",
-//                 "trade",
-//                 "work",
-//                 "biopsi",
-//                 "metapsi",
-//                 "precog",
-//                 "telekinesis",
-//                 "telepath",
-//                 "teleport",
-//                 "custom1",
-//                 "custom2"
-//             ];
-//             for (var i = 0; i < skillNameList.length; i++){
-//                 updateSkill(skillNameList[i]);
-                
-//             }
-//         }
-//       }).then(() => {
-//         // the database can now be used
-//       }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
-//   }
-  
-
-//       // build the todo label
-//       const charLabel = document.createElement('label')
-//       charLabel.innerHTML = items[i].itemId;
-      
-//       // append the todo item to the list
-//       const charItem = document.createElement('div')
-//       charItem.appendChild(charDelete)
-//       charItem.appendChild(charLoad)
-//       charItem.appendChild(charLabel)
-//       charactersList.appendChild(charItem)
-      
-//     }
-//   }
-// }
-// function sendData(delay, element, name) {
-
-//     return new Promise((resolve,reject)=>{
-
-//         if (element.id.length > 0) {
-
-//             if (element.type == 'checkbox') {
-
-//                 var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
-//                 if (!(typeof checked === 'string' || checked instanceof String)) {
-//                    // console.log(checked)
-//                 }
-
-//                 setTimeout(() => {
-//                     userbase.insertItem({
-//                         databaseName: name,
-//                         item: { "value": checked },
-//                         itemId: element.id
-//                     }).then(resolve).catch(reject)                        
-//                 }, delay*50);
-
-//             } else {
-//                 var checked = ($(element).prop("checked") ? 'checked' : 'unchecked');
-//                 if (!(typeof element.value === 'string' || element.value instanceof String)) {
-//                    // console.log(element.value)
-//                 }
-
-//                 setTimeout(() => {
-//                     var id = element.id
-//                     var value = element.value;
-//                     userbase.insertItem({
-//                         databaseName: name,
-//                         item: { 'value': value },
-//                         itemId: id
-//                     }).then(resolve).catch(reject)
-
-//                 }, delay * 50);
-
-//             }
-//         } else resolve("no element id");
-//     });
-// }
-
 function makeid(length) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -5931,45 +5791,16 @@ function makeid(length) {
     return text;
   }
 
-// // Open new database to store character data.
-// function createNewChar(name) {
-//    // console.log(`Creating character ${name}!`);
-//     DBName = name
+  function FindIDSuffix(selectorTag, prefix) {
+    var items = [];
+    var myPosts = document.getElementsByTagName(selectorTag);
+    for (var i = 0; i < myPosts.length; i++) {
+        if (myPosts[i].id.lastIndexOf(prefix, 0) === 0) {
+            items.push(myPosts[i]);
+        }
+    }
+    return items;
+}
 
-//     $('div[name="loading"]').show();
-//     $('form[name="charsheet"]').hide();
-//     document.getElementsByClassName("bootLang")[0].innerHTML = '';
-//     i = 0;
-//     typeWriter();
-//     userbase.openDatabase({
-//         databaseName: name,
-//         isActive: true,
-//         changeHandler: function (items) {
-//             // update your application state with the database items
-//         }
-//     }).then(() => {
-//        // console.log("sending data to db")
-//         // the database can now be used
-//         document.getElementById("playerName").value = name
-//         document.getElementById("playerName").dispatchEvent(new Event('change'));
-
-//         let formElements = form.elements;
-//         let prmoises = []
-//         for (const element of formElements) {
-//             prmoises.push(sendData(prmoises.length, element, name));
-//         }
-//        // console.log(prmoises)
-//         return Promise.all(prmoises)
-//     }).then(() => {
-//         userbase.getDatabases().then((databases) => {
-//             DBChangeHandler(databases);
-//         }).catch((e) => document.getElementsByName('db-error')[0].innerText = e)
-//     }).then(() => {
-//             $('div[name="loading"]').hide();
-//             $('form[name="charsheet"]').show();
-//            // console.log("!!!!!!!!!!")
-//         })
-//         .catch((e) => console.error(e))
-
-// }
+//#endregion
 
